@@ -1,0 +1,106 @@
+/* Review aids shared by every prototype page: the floating bar that steps between
+   concepts, and the notice shown when a link would leave the prototype (review.js).
+   Neither is part of any design and neither ever ships. */
+
+.pt-switch {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    max-width: calc(100% - 24px);
+    padding: 4px;
+    overflow-x: auto;
+    border-radius: 999px;
+    background: rgba(16, 16, 16, 0.92);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.18),
+        0 0 0 1px rgba(255, 255, 255, 0.14) inset;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    scrollbar-width: none;
+    transform: translateX(-50%);
+    backdrop-filter: blur(8px);
+}
+
+.pt-switch a {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0;
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 150ms ease, background-color 150ms ease;
+}
+
+.pt-switch a:hover,
+.pt-switch a:focus-visible {
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+}
+
+.pt-switch a[aria-current="page"] {
+    background: #fff;
+    color: #101010;
+}
+
+/* Previous and next: the two links a reviewer needs most, so they are outlined. */
+.pt-switch a[rel="prev"],
+.pt-switch a[rel="next"] {
+    margin-inline: 4px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+    color: #fff;
+}
+
+.pt-notice {
+    position: fixed;
+    bottom: 64px;
+    left: 50%;
+    z-index: 1100;
+    width: max-content;
+    max-width: min(560px, calc(100% - 24px));
+    margin: 0;
+    padding: 12px 18px;
+    border-radius: 14px;
+    background: rgba(16, 16, 16, 0.95);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0;
+    text-align: left;
+    text-transform: none;
+    color: #fff;
+    transform: translateX(-50%);
+}
+
+.pt-notice[hidden] {
+    display: none;
+}
+
+.pt-notice a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    white-space: nowrap;
+}
+
+/* Sections that nav links scroll to clear each concept's fixed header. */
+[data-proto-section] {
+    scroll-margin-top: 88px;
+}
+
+@media (max-width: 640px) {
+    .pt-switch a {
+        padding: 0 10px;
+    }
+}

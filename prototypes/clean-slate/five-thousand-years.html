@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex,nofollow" />
+        <meta
+            name="description"
+            content="Feldar is a writing app for novelists, the newest in a long line of writing tools. It plans, drafts and revises with you in blue. You accept what stays."
+        />
+        <title>Concept D: 5,000 years - Feldar</title>
+
+        <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@1,600&family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Grenze+Gotisch:wght@500&family=Hanken+Grotesk:wght@400;500;600&family=IM+Fell+English&family=Special+Elite&family=VT323&display=swap"
+        />
+
+        <link rel="stylesheet" href="../switcher.css" />
+        <link rel="stylesheet" href="styles/five-thousand-years.css" />
+    </head>
+    <body>
+        <svg class="fy-sprite" aria-hidden="true" width="0" height="0">
+            <symbol id="fy-tool-tablet" viewBox="0 0 48 48">
+                <rect x="9" y="7" width="30" height="34" rx="7" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <path d="M15 15l7 3-7 3zM26 15l7 3-7 3zM15 27l7 3-7 3zM26 27l7 3-7 3z" fill="currentColor" />
+            </symbol>
+            <symbol id="fy-tool-scroll" viewBox="0 0 48 48">
+                <path d="M13 12h22v24H13z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+                <path d="M12 8v32M36 8v32" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
+                <path d="M19 19h10M19 24h10M19 29h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </symbol>
+            <symbol id="fy-tool-quill" viewBox="0 0 48 48">
+                <path d="M39 7C24 9 13 20 11 37c11-2 23-11 28-30z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+                <path d="M8 41l17-19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            </symbol>
+            <symbol id="fy-tool-type" viewBox="0 0 48 48">
+                <path d="M14 9h20v30H14z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+                <path d="M14 15h20" stroke="currentColor" stroke-width="2" />
+                <path d="M20 33l4-12 4 12M21.5 29h5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            </symbol>
+            <symbol id="fy-tool-key" viewBox="0 0 48 48">
+                <circle cx="24" cy="21" r="13" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <circle cx="24" cy="21" r="8" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M24 34v8M17 42h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            </symbol>
+            <symbol id="fy-tool-screen" viewBox="0 0 48 48">
+                <rect x="7" y="9" width="34" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <rect x="14" y="18" width="7" height="9" fill="currentColor" />
+                <path d="M17 41h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            </symbol>
+            <symbol id="fy-tool-caret" viewBox="0 0 48 48">
+                <path d="M24 9v30M17 9h14M17 39h14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+            </symbol>
+            <symbol id="fy-tool-board" viewBox="0 0 48 48">
+                <rect x="6" y="9" width="15" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <rect x="27" y="9" width="15" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <rect x="16" y="29" width="16" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <path d="M13.5 20v4.5H34.5V20M24 24.5V29" fill="none" stroke="currentColor" stroke-width="2" />
+            </symbol>
+        </svg>
+
+        <header class="fy-bar" data-bar>
+            <a class="fy-logo" href="/" aria-label="Feldar home">
+                <img src="../../assets/logo-nav.svg" alt="Feldar" width="59" height="17" />
+            </a>
+            <nav class="fy-nav" aria-label="Main">
+                <a href="/features">Features</a>
+                <a href="/compare">Compare</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/blog">Blog</a>
+                <a href="/download">Download</a>
+            </nav>
+            <div class="fy-bar-actions">
+                <a class="fy-bar-login" href="/login" rel="nofollow">Log in</a>
+                <a class="fy-bar-cta" href="/login" rel="nofollow">Start writing free</a>
+            </div>
+        </header>
+
+        <nav class="fy-rail" aria-label="Eras" data-rail>
+            <a href="#clay" data-rail-link="clay">3300 BCE</a>
+            <a href="#papyrus" data-rail-link="papyrus">2500 BCE</a>
+            <a href="#codex" data-rail-link="codex">1200</a>
+            <a href="#press" data-rail-link="press">1450</a>
+            <a href="#typewriter" data-rail-link="typewriter">1874</a>
+            <a href="#screen" data-rail-link="screen">1978</a>
+            <a href="#today" data-rail-link="today">Today</a>
+        </nav>
+
+        <main>
+            <section class="fy-hero">
+                <p class="fy-kicker">Feldar, a writing app for novelists</p>
+                <h1 class="fy-headline">The tools keep changing. <em>The writer never has.</em></h1>
+                <p class="fy-lede">Clay, papyrus, parchment, type, keys, screens. Each one changed how a book gets made, and left the writing to the writer. Feldar is the newest in the line. It plans, drafts and revises with you, in blue, and nothing stays unless you accept it.</p>
+                <div class="fy-actions">
+                    <a class="fy-button" href="/login" rel="nofollow">Start writing free</a>
+                    <a class="fy-button fy-button--quiet" href="/download">Download for Mac</a>
+                </div>
+                <p class="fy-note">Free to start. 500 credits, no credit card.</p>
+
+                <ol class="fy-line" aria-label="Writing tools through the ages">
+                    <li><a href="#clay"><svg viewBox="0 0 48 48" width="48" height="48"><use href="#fy-tool-tablet" /></svg><span class="fy-line-name">Clay</span><span class="fy-line-date">c. 3300 BCE</span></a></li>
+                    <li><a href="#papyrus"><svg viewBox="0 0 48 48" width="48" height="48"><use href="#fy-tool-scroll" /></svg><span class="fy-line-name">Papyrus</span><span class="fy-line-date">c. 2500 BCE</span></a></li>
+                    <li><a href="#codex"><svg viewBox="0 0 48 48" width="48" height="48"><use href="#fy-tool-quill" /></svg><span class="fy-line-name">Quill</span><span class="fy-line-date">c. 1200</span></a></li>
+                    <li><a href="#press"><svg viewBox="0 0 48 48" width="48" height="48"><use href="#fy-tool-type" /></svg><span class="fy-line-name">Type</span><span class="fy-line-date">c. 1450</span></a></li>
+                    <li><a href="#typewriter"><svg viewBox="0 0 48 48" width="48" height="48"><use href="#fy-tool-key" /></svg><span class="fy-line-name">Keys</span><span class="fy-line-date">1874</span></a></li>
+                    <li><a href="#screen"><svg viewBox="0 0 48 48" width="48" height="48"><use href="#fy-tool-screen" /></svg><span class="fy-line-name">Screen</span><span class="fy-line-date">c. 1978</span></a></li>
+                    <li class="fy-line-now"><a href="#today"><svg viewBox="0 0 48 48" width="48" height="48"><use href="#fy-tool-caret" /></svg><span class="fy-line-name">Feldar</span><span class="fy-line-date">Today</span></a></li>
+                </ol>
+            </section>
+
+            <div class="fy-eras" data-eras>
+                <section class="fy-era fy-era--clay" id="clay" data-era="clay" data-tone="dark" aria-labelledby="clay-title">
+                    <div class="fy-era-text">
+                        <p class="fy-era-date"><span>about</span> 3300 BCE</p>
+                        <p class="fy-era-place">Sumer, southern Mesopotamia</p>
+                        <h2 class="fy-era-title" id="clay-title">Clay and a cut reed</h2>
+                        <h3 class="fy-gift">What it gave writers</h3>
+                        <p class="fy-gift-line">Marks that outlast the speaker.</p>
+                        <p class="fy-era-body">The first writing we know of was pressed into wet clay with a reed. The earliest tablets are accounts: grain, beer, livestock. The stories followed. The Epic of Gilgamesh survives on clay tablets.</p>
+                    </div>
+                    <div class="fy-stage" role="img" aria-label="The sentence I have a story to tell, pressed into a clay tablet between rows of wedge marks, with a reed stylus beside it" data-reveal>
+                        <div class="fy-tablet">
+                            <span class="fy-wedges"></span>
+                            <span class="fy-wedges fy-wedges--offset"></span>
+                            <p class="fy-tablet-line">I have a story to tell</p>
+                            <span class="fy-wedges fy-wedges--offset"></span>
+                            <span class="fy-wedges"></span>
+                        </div>
+                        <span class="fy-stylus"></span>
+                    </div>
+                </section>
+
+                <section class="fy-era fy-era--papyrus" id="papyrus" data-era="papyrus" aria-labelledby="papyrus-title">
+                    <div class="fy-era-text">
+                        <p class="fy-era-date"><span>about</span> 2500 BCE</p>
+                        <p class="fy-era-place">Egypt</p>
+                        <h2 class="fy-era-title" id="papyrus-title">Papyrus and ink</h2>
+                        <h3 class="fy-gift">What it gave writers</h3>
+                        <p class="fy-gift-line">Room for something long.</p>
+                        <p class="fy-era-body">Sheets of papyrus were pasted end to end into rolls and written on with a reed pen. A text could now run for as long as it needed to.</p>
+                    </div>
+                    <div class="fy-stage" role="img" aria-label="The same sentence written in brown ink on a papyrus roll that unrolls from both ends" data-reveal>
+                        <div class="fy-roll">
+                            <span class="fy-roll-end"></span>
+                            <div class="fy-roll-sheet">
+                                <p class="fy-roll-line">I have a story to tell.</p>
+                                <span class="fy-roll-script"></span>
+                            </div>
+                            <span class="fy-roll-end"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="fy-era fy-era--codex" id="codex" data-era="codex" aria-labelledby="codex-title">
+                    <div class="fy-era-text">
+                        <p class="fy-era-date"><span>about</span> 1200</p>
+                        <p class="fy-era-place">A scriptorium in Europe</p>
+                        <h2 class="fy-era-title" id="codex-title">Parchment, a quill and a margin</h2>
+                        <h3 class="fy-gift">What it gave writers</h3>
+                        <p class="fy-gift-line">Pages to turn, and margins to argue in.</p>
+                        <p class="fy-era-body">Bound pages had replaced the scroll, and readers wrote back in the margins. Those notes are called glosses. Scribes added their own: complaints about the cold, and the occasional snail.</p>
+                    </div>
+                    <div class="fy-stage" role="img" aria-label="The same sentence in gothic script on a ruled parchment page, opening with a blue and gold initial, with a note and a snail in the margin" data-reveal>
+                        <div class="fy-leaf">
+                            <p class="fy-leaf-rubric">Here begins</p>
+                            <p class="fy-leaf-line"><span class="fy-initial">I</span> have a story to tell.</p>
+                            <span class="fy-leaf-rules"></span>
+                            <p class="fy-leaf-gloss">who is telling?</p>
+                            <svg class="fy-snail" viewBox="0 0 64 40" width="64" height="40">
+                                <path d="M4 34c8 2 30 2 44 0 6-1 9-6 9-12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                                <path d="M57 22l3-9M53 22l-1-9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+                                <path d="M30 32c-9 0-15-6-15-14S21 5 29 5s13 6 13 13-5 11-11 11-9-4-9-9 3-8 7-8 6 3 6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="fy-era fy-era--press" id="press" data-era="press" aria-labelledby="press-title">
+                    <div class="fy-era-text">
+                        <p class="fy-era-date"><span>about</span> 1450</p>
+                        <p class="fy-era-place">Mainz</p>
+                        <h2 class="fy-era-title" id="press-title">Movable type</h2>
+                        <h3 class="fy-gift">What it gave writers</h3>
+                        <p class="fy-gift-line">The same book in many hands.</p>
+                        <p class="fy-era-body">Gutenberg's press set a page in metal type and printed it again and again. A book no longer had to be copied out to be read somewhere else.</p>
+                    </div>
+                    <div class="fy-stage" role="img" aria-label="A row of metal type, its letters reversed, pressing the same sentence onto a sheet of paper" data-reveal>
+                        <div class="fy-press">
+                            <div class="fy-forme">
+                                <span>I</span><span class="fy-sort-space"></span><span>h</span><span>a</span><span>v</span><span>e</span><span class="fy-sort-space"></span><span>a</span><span class="fy-sort-space"></span><span>s</span><span>t</span><span>o</span><span>r</span><span>y</span><span class="fy-sort-space"></span><span>t</span><span>o</span><span class="fy-sort-space"></span><span>t</span><span>e</span><span>l</span><span>l</span><span>.</span>
+                            </div>
+                            <div class="fy-proof">
+                                <p class="fy-proof-line">I have a story to tell.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="fy-era fy-era--typewriter" id="typewriter" data-era="typewriter" data-tone="dark" aria-labelledby="typewriter-title">
+                    <div class="fy-era-text">
+                        <p class="fy-era-date">1874</p>
+                        <p class="fy-era-place">A desk with good light</p>
+                        <h2 class="fy-era-title" id="typewriter-title">The typewriter</h2>
+                        <h3 class="fy-gift">What it gave writers</h3>
+                        <p class="fy-gift-line">A draft that keeps up with a thought.</p>
+                        <p class="fy-era-body">The first commercially successful typewriter went on sale in 1874, and its QWERTY layout is still under your fingers. A mistake still meant typing the page again.</p>
+                    </div>
+                    <div class="fy-stage" role="img" aria-label="The same sentence typed on a sheet of paper in a typewriter, above a row of round keys" data-reveal>
+                        <div class="fy-typer">
+                            <div class="fy-typer-sheet">
+                                <p class="fy-typer-line">I have a story to tell.</p>
+                            </div>
+                            <span class="fy-typer-roller"></span>
+                            <div class="fy-typer-keys">
+                                <span>Q</span><span>W</span><span>E</span><span>R</span><span>T</span><span>Y</span><span>U</span><span>I</span><span>O</span><span>P</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="fy-era fy-era--screen" id="screen" data-era="screen" data-tone="dark" aria-labelledby="screen-title">
+                    <div class="fy-era-text">
+                        <p class="fy-era-date"><span>about</span> 1978</p>
+                        <p class="fy-era-place">A desk with a power socket</p>
+                        <h2 class="fy-era-title" id="screen-title">The word processor</h2>
+                        <h3 class="fy-gift">What it gave writers</h3>
+                        <p class="fy-gift-line">Revision without retyping.</p>
+                        <p class="fy-era-body">Word processors reached writers' desks in the late 1970s. Cut, paste and undo made a draft something to reshape, not something to type again.</p>
+                    </div>
+                    <div class="fy-stage" role="img" aria-label="The same sentence in green text on an old monitor, with a block cursor blinking after it" data-reveal>
+                        <div class="fy-crt">
+                            <div class="fy-crt-screen">
+                                <p class="fy-crt-status"><span>STORY.TXT</span><span>Ln 1 Col 24</span><span>INSERT</span></p>
+                                <p class="fy-crt-line">I have a story to tell.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="fy-crowd" aria-labelledby="crowd-title">
+                    <div class="fy-crowd-text">
+                        <h2 class="fy-crowd-title" id="crowd-title">Then the desk got crowded.</h2>
+                        <p>A document for the chapter. An outline in a notes app. A spreadsheet of characters. A chat window for ideas, and a grammar checker in another tab. The tools multiplied, and the story got scattered between them.</p>
+                        <p class="fy-crowd-turn">Feldar puts them back on one page.</p>
+                    </div>
+                    <div class="fy-desk" role="img" aria-label="Five separate windows, a document, an outline, a character sheet, a chat and a grammar checker, slide together into one workspace with a page, an Outline, a Canvas, Lens and Checks" data-reveal>
+                        <div class="fy-win fy-win--page"><span class="fy-win-old">chapter-7-FINAL-v3.docx</span><span class="fy-win-new">The page</span></div>
+                        <div class="fy-win fy-win--outline"><span class="fy-win-old">Outline (notes app)</span><span class="fy-win-new">Outline</span></div>
+                        <div class="fy-win fy-win--canvas"><span class="fy-win-old">characters.xlsx</span><span class="fy-win-new">Canvas</span></div>
+                        <div class="fy-win fy-win--lens"><span class="fy-win-old">Chat, tab 14</span><span class="fy-win-new">Lens and Chat</span></div>
+                        <div class="fy-win fy-win--checks"><span class="fy-win-old">Grammar checker</span><span class="fy-win-new">Checks</span></div>
+                    </div>
+                </section>
+
+                <section class="fy-era fy-era--today" id="today" data-era="today" aria-labelledby="today-title">
+                    <div class="fy-era-text">
+                        <p class="fy-era-date">Today</p>
+                        <p class="fy-era-place">Your desk</p>
+                        <h2 class="fy-era-title" id="today-title">Feldar</h2>
+                        <h3 class="fy-gift">What it gives writers</h3>
+                        <p class="fy-gift-line">Help when you ask, in a colour that isn't yours.</p>
+                        <p class="fy-era-body">Feldar plans, drafts and revises with you. What it writes arrives in blue and waits. Accept it, ask for another take with Revise, or Dismiss it. The sentence is still yours to finish.</p>
+                        <a class="fy-button fy-button--blue" href="/login" rel="nofollow">Start writing free</a>
+                    </div>
+                    <div class="fy-stage fy-stage--live" data-reveal>
+                        <div class="fy-sheet" data-ink-demo>
+                            <p class="fy-sheet-head"><span>The Winter Ledger</span><span>Chapter One</span></p>
+                            <p class="fy-sheet-text">
+                                I have a story to tell.
+                                <span class="fy-ink" data-ink-continuation>
+                                    <span data-ink-variant>It begins with a ledger, and two pounds paid on the first of every month to someone called M.P.</span>
+                                    <span data-ink-variant hidden>It starts in a hard winter, with a dead man's ledger and a debt nobody will explain.</span>
+                                    <span data-ink-variant hidden>It is about an orchard, a daughter who came home, and a column of sums that never missed a month.</span>
+                                </span>
+                            </p>
+                            <div class="fy-sheet-actions" data-ink-review>
+                                <button type="button" data-ink-action="accept">Accept</button>
+                                <button type="button" data-ink-action="revise">Revise</button>
+                                <button type="button" data-ink-action="dismiss">Dismiss</button>
+                            </div>
+                            <div class="fy-sheet-actions" data-ink-idle hidden>
+                                <button type="button" data-ink-action="suggest" data-ink-after="dismissed">Continue from here</button>
+                                <button type="button" data-ink-action="suggest" data-ink-after="accepted">Start over</button>
+                            </div>
+                            <p
+                                class="fy-sheet-status"
+                                role="status"
+                                data-ink-status
+                                data-accepted="Accepted. That line is yours now."
+                                data-dismissed="Dismissed. The page is as you left it."
+                            ></p>
+                        </div>
+                        <p class="fy-demo-note">Demo. These words were written by hand for this page. In Feldar they come from your book.</p>
+                    </div>
+                </section>
+            </div>
+
+            <section class="fy-gifts" aria-labelledby="gifts-title" data-proto-section="features">
+                <h2 class="fy-section-title" id="gifts-title">Every tool left a gift. Feldar keeps them on one desk.</h2>
+                <p class="fy-section-lede">What five thousand years of writing tools worked out, and where each one lives in Feldar.</p>
+                <div class="fy-gift-grid">
+                    <a class="fy-card fy-card--clay" href="/blog/provenance">
+                        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><use href="#fy-tool-tablet" /></svg>
+                        <p class="fy-card-from">From clay: marks that last</p>
+                        <h3>Writing record</h3>
+                        <p>A private record of which words you typed and which came through Feldar, with the days and hours you worked.</p>
+                    </a>
+                    <a class="fy-card fy-card--papyrus" href="/features/scenes">
+                        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><use href="#fy-tool-scroll" /></svg>
+                        <p class="fy-card-from">From the roll: room for something long</p>
+                        <h3>Outline, Generate scenes, Draft Page</h3>
+                        <p>Plan a chapter as scenes, then write it yourself or ask for a first pass at the length you set.</p>
+                    </a>
+                    <a class="fy-card fy-card--codex" href="/features">
+                        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><use href="#fy-tool-quill" /></svg>
+                        <p class="fy-card-from">From the margin: someone to argue with</p>
+                        <h3>Lens and Checks</h3>
+                        <p>Six readers beside your page, and five editing passes that mark what they find with a fix to accept or discard.</p>
+                    </a>
+                    <a class="fy-card fy-card--press" href="/novel-writing-software">
+                        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><use href="#fy-tool-type" /></svg>
+                        <p class="fy-card-from">From the press: copies</p>
+                        <h3>Library, import and export</h3>
+                        <p>Every book on one shelf. Bring a manuscript in, or take it out, as Word, PDF, Markdown or plain text.</p>
+                    </a>
+                    <a class="fy-card fy-card--typewriter" href="/ai-for-novelists">
+                        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><use href="#fy-tool-key" /></svg>
+                        <p class="fy-card-from">From the typewriter: keeping up</p>
+                        <h3>Continue from here</h3>
+                        <p>When the next line will not come, ask at the caret. The lines arrive in blue, in the voice of your own pages.</p>
+                    </a>
+                    <a class="fy-card fy-card--screen" href="/ai-for-novelists">
+                        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><use href="#fy-tool-screen" /></svg>
+                        <p class="fy-card-from">From the word processor: revision</p>
+                        <h3>Polish, Deepen, Enhance</h3>
+                        <p>Select a passage and ask for a rewrite, or say what you want with Instruct. Every added word comes back marked.</p>
+                    </a>
+                    <a class="fy-card fy-card--today" href="/features/canvas">
+                        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><use href="#fy-tool-board" /></svg>
+                        <p class="fy-card-from">And one thing none of them had</p>
+                        <h3>The Canvas</h3>
+                        <p>A board of linked cards for your characters, places, objects and plot beats. It sits beside the page, and Feldar reads it before it writes.</p>
+                    </a>
+                </div>
+                <p class="fy-gifts-more">Also in the workspace: Voice &amp; Style, which takes a sample of your prose, and a choice of six models from GPT-6 and Claude 5.5. <a href="/features">All features</a></p>
+            </section>
+
+            <section class="fy-real" aria-labelledby="real-title">
+                <h2 class="fy-section-title" id="real-title">This is the newest tool.</h2>
+                <p class="fy-section-lede">The real app, with one novel running through every shot: The Winter Ledger.</p>
+                <div class="fy-real-grid">
+                    <figure class="fy-shot fy-shot--wide">
+                        <video
+                            data-loop
+                            muted
+                            loop
+                            playsinline
+                            preload="none"
+                            width="1440"
+                            height="900"
+                            poster="../../assets/demo/loop-continue-blue-poster.jpg"
+                            aria-label="The caret menu opens at the end of a page, Continue from here is chosen, and new lines arrive in blue before being accepted"
+                        >
+                            <source src="../../assets/demo/loop-continue-blue.webm" type="video/webm" />
+                            <source src="../../assets/demo/loop-continue-blue.mp4" type="video/mp4" />
+                        </video>
+                        <figcaption>Continue from here. The new lines are blue until you accept them.</figcaption>
+                    </figure>
+                    <figure class="fy-shot">
+                        <picture>
+                            <source type="image/avif" srcset="../../assets/product/outline-scenes-1200.avif 1200w, ../../assets/product/outline-scenes-2000.avif 2000w" sizes="(min-width: 1000px) 560px, 92vw" />
+                            <source type="image/webp" srcset="../../assets/product/outline-scenes-1200.webp 1200w, ../../assets/product/outline-scenes-2000.webp 2000w" sizes="(min-width: 1000px) 560px, 92vw" />
+                            <img src="../../assets/product/outline-scenes-1200.webp" width="1200" height="750" loading="lazy" alt="An empty chapter beside its outline of five generated scenes, each with a title and a short description" />
+                        </picture>
+                        <figcaption>The Outline, a moment after Generate scenes.</figcaption>
+                    </figure>
+                    <figure class="fy-shot">
+                        <picture>
+                            <source type="image/avif" srcset="../../assets/product/canvas-board-1200.avif 1200w, ../../assets/product/canvas-board-2000.avif 2000w" sizes="(min-width: 1000px) 560px, 92vw" />
+                            <source type="image/webp" srcset="../../assets/product/canvas-board-1200.webp 1200w, ../../assets/product/canvas-board-2000.webp 2000w" sizes="(min-width: 1000px) 560px, 92vw" />
+                            <img src="../../assets/product/canvas-board-1200.webp" width="1200" height="750" loading="lazy" alt="A story board of character, place, object and plot cards, with labelled lines linking the main character to the others" />
+                        </picture>
+                        <figcaption>The Canvas, with the main character's relations labelled.</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="fy-doubt" aria-labelledby="doubt-title">
+                <h2 class="fy-section-title" id="doubt-title">Every new tool had its doubters.</h2>
+                <p class="fy-section-lede">They were right to ask. The answer was always in what the tool left to the writer.</p>
+                <div class="fy-doubt-grid">
+                    <article class="fy-doubter fy-doubter--clay">
+                        <p class="fy-doubter-when">About 370 BCE, on writing itself</p>
+                        <h3>It will make people forgetful</h3>
+                        <p>In Plato's Phaedrus, Socrates tells of a king who warned that writing would weaken memory. Plato wrote the warning down.</p>
+                    </article>
+                    <article class="fy-doubter fy-doubter--codex">
+                        <p class="fy-doubter-when">1492, on the printing press</p>
+                        <h3>Print will not last like parchment</h3>
+                        <p>The abbot Johannes Trithemius wrote In Praise of Scribes to defend copying by hand. He had it printed.</p>
+                    </article>
+                    <article class="fy-doubter fy-doubter--typewriter">
+                        <p class="fy-doubter-when">1882, on the typewriter</p>
+                        <h3>The machine changes the mind</h3>
+                        <p>Nietzsche, typing on an early machine, wrote: "Our writing tools are also working on our thoughts."</p>
+                    </article>
+                </div>
+                <div class="fy-rules">
+                    <h3 class="fy-rules-title">The doubts about AI are fair too. So Feldar's keeps to four rules.</h3>
+                    <ol>
+                        <li><strong>Nothing goes in unless you accept it.</strong> Suggestions wait in blue or in a card. Dismiss one and the page is as you left it.</li>
+                        <li><strong>It never trains on your writing.</strong> Your manuscript is not used to train AI models.</li>
+                        <li><strong>You own what you write.</strong> Export the whole book whenever you like.</li>
+                        <li><strong>It shows its work.</strong> Blue lines and the Writing record say which words came from where.</li>
+                    </ol>
+                    <a class="fy-text-link" href="/ai-for-novelists">AI for novelists</a>
+                </div>
+            </section>
+
+            <section class="fy-plans" aria-labelledby="plans-title" data-proto-section="pricing compare">
+                <h2 class="fy-section-title" id="plans-title">Start free. Pay when you write more.</h2>
+                <p class="fy-section-lede">Every plan has the same workspace. Writing, planning and organizing never use credits.</p>
+                <div class="fy-plan-grid">
+                    <article class="fy-plan fy-plan--start">
+                        <h3>Starter</h3>
+                        <p class="fy-plan-price">Free</p>
+                        <p>500 credits to try everything. No credit card.</p>
+                        <a class="fy-button fy-button--blue" href="/login" rel="nofollow">Start writing free</a>
+                    </article>
+                    <article class="fy-plan">
+                        <h3>Core</h3>
+                        <p class="fy-plan-price">$20 <span>a month</span></p>
+                        <p>20,000 credits a month for regular drafting and revision.</p>
+                    </article>
+                    <article class="fy-plan">
+                        <h3>Pro</h3>
+                        <p class="fy-plan-price">$40 <span>a month</span></p>
+                        <p>45,000 credits a month, and more premium model use.</p>
+                    </article>
+                    <article class="fy-plan">
+                        <h3>Ultra</h3>
+                        <p class="fy-plan-price">$200 <span>a month</span></p>
+                        <p>250,000 credits a month for large manuscripts.</p>
+                    </article>
+                </div>
+                <p class="fy-plans-more"><a class="fy-text-link" href="/pricing">Plans in full</a> <span>Coming from another tool?</span> <a href="/compare/scrivener">Scrivener</a> <a href="/compare/sudowrite">Sudowrite</a> <a href="/compare/novelcrafter">Novelcrafter</a> <a href="/compare/plottr">Plottr</a> <a href="/compare">All comparisons</a></p>
+            </section>
+
+            <section class="fy-faq" aria-labelledby="faq-title">
+                <h2 class="fy-section-title" id="faq-title">Questions writers ask first</h2>
+                <div class="fy-faq-list">
+                    <details open>
+                        <summary>Does Feldar write the book for me?</summary>
+                        <p>No. It writes when you ask, in blue or in a card, and nothing stays until you accept it.</p>
+                    </details>
+                    <details>
+                        <summary>Does Feldar train AI on my writing?</summary>
+                        <p>No. Your manuscript never trains AI models, and what you write in Feldar is yours.</p>
+                    </details>
+                    <details>
+                        <summary>Is Feldar free?</summary>
+                        <p>To start, yes. Starter is free with 500 credits and no credit card. Writing, planning and organizing never use credits. Paid plans start at $20 a month.</p>
+                    </details>
+                    <details>
+                        <summary>Can I bring in a manuscript I have already started?</summary>
+                        <p>Yes, as a Word, PDF, Markdown or plain-text file of up to 20 MB.</p>
+                    </details>
+                    <details>
+                        <summary>Does Feldar work on Windows?</summary>
+                        <p>In the browser, yes. The desktop app is for Mac only for now.</p>
+                    </details>
+                    <details>
+                        <summary>Can I take my novel out again?</summary>
+                        <p>Yes. Export the whole book or chosen pages as Word, PDF, Markdown or plain text.</p>
+                    </details>
+                </div>
+            </section>
+
+            <section class="fy-close" aria-labelledby="close-title">
+                <h2 class="fy-headline fy-headline--close" id="close-title">Take your place <em>in the long line.</em></h2>
+                <p class="fy-lede">Five thousand years of writers got here before you. The page is open.</p>
+                <div class="fy-actions">
+                    <a class="fy-button" href="/login" rel="nofollow">Start writing free</a>
+                    <a class="fy-button fy-button--quiet" href="/download">Download for Mac</a>
+                </div>
+                <p class="fy-note">Free to start. 500 credits, no credit card.</p>
+            </section>
+        </main>
+
+        <footer class="fy-foot">
+            <a class="fy-logo" href="/" aria-label="Feldar home">
+                <img src="../../assets/logo-nav.svg" alt="Feldar" width="59" height="17" loading="lazy" />
+            </a>
+            <nav class="fy-foot-links" aria-label="Footer">
+                <div>
+                    <p class="fy-kicker">Product</p>
+                    <a href="/features">Features</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/download">Download</a>
+                    <a href="/changelog">Changelog</a>
+                </div>
+                <div>
+                    <p class="fy-kicker">For writers</p>
+                    <a href="/novel-writing-software">Novel writing software</a>
+                    <a href="/ai-for-novelists">AI for novelists</a>
+                    <a href="/guides/how-to-outline-a-novel">Outline a novel</a>
+                    <a href="/tools">Free tools</a>
+                </div>
+                <div>
+                    <p class="fy-kicker">Company</p>
+                    <a href="/about">About</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/terms">Terms of Use</a>
+                    <a href="/privacy">Privacy Policy</a>
+                </div>
+            </nav>
+        </footer>
+
+        <nav class="pt-switch" aria-label="Prototypes">
+            <a href="../index.html">All concepts</a>
+            <a href="night-studio.html" rel="prev" aria-label="Previous concept: Night studio">‹ Prev</a>
+            <a href="manuscript.html" title="Manuscript">A</a>
+            <a href="index-cards.html" title="Index cards">B</a>
+            <a href="night-studio.html" title="Night studio">C</a>
+            <a href="five-thousand-years.html" aria-current="page">D · 5,000 years</a>
+            <a href="clay.html" title="Clay">E</a>
+            <a href="scriptorium.html" title="Scriptorium">F</a>
+            <a href="typewriter.html" title="Typewriter">G</a>
+            <a href="then-and-now.html" title="Then and now">H</a>
+            <a href="ledger.html" title="The novel's ledger">I</a>
+            <a href="desk.html" title="The writer's desk">J</a>
+            <a href="clay.html" rel="next" aria-label="Next concept: Clay">Next ›</a>
+        </nav>
+
+        <script type="module" src="scripts/five-thousand-years.js"></script>
+        <script type="module" src="../review.js"></script>
+    </body>
+</html>

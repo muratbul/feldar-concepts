@@ -1,0 +1,1861 @@
+/* Concept D, 5,000 years: a scroll down the line of writing tools, from the clay tablet
+   to Feldar. One sentence is carried through every era and drawn in that era's
+   material; each era section sets its own colours through custom properties. The
+   artwork is all CSS and inline SVG. Self-contained: nothing here comes from the live
+   site's styles. */
+
+:root {
+    --fy-paper: #fbf6ec;
+    --fy-ink: #17130e;
+    --fy-soft: #5b5246;
+    --fy-rule: #e2d8c6;
+    --fy-blue: #2b55e0;
+    --fy-display: "Fraunces", Georgia, serif;
+    --fy-sans: "Hanken Grotesk", system-ui, sans-serif;
+    --fy-gutter: clamp(20px, 5vw, 72px);
+    --fy-measure: 1240px;
+    --fy-inline: max(var(--fy-gutter), calc((100% - var(--fy-measure)) / 2));
+    --fy-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+    --fy-wedge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='16' viewBox='0 0 34 16'%3E%3Cpath d='M3 2l11 6-11 6z' fill='%236e391f'/%3E%3Cpath d='M14 8h15' stroke='%236e391f' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--fy-paper);
+    color: var(--fy-ink);
+    font-family: var(--fy-sans);
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ol,
+ul,
+figure {
+    margin: 0;
+}
+
+ol,
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+}
+
+img,
+video,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+img,
+video {
+    height: auto;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+:focus-visible {
+    outline: 2px solid var(--fy-blue);
+    outline-offset: 3px;
+}
+
+.fy-sprite {
+    position: absolute;
+}
+
+/* ---------- Top bar ----------
+   A frosted strip that takes dark or light ink from the era passing beneath it. */
+
+.fy-bar {
+    --bar-ink: var(--fy-ink);
+    --bar-tint: rgba(251, 246, 236, 0.72);
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    column-gap: 24px;
+    height: 64px;
+    padding: 0 var(--fy-gutter);
+    background: var(--bar-tint);
+    color: var(--bar-ink);
+    font-size: 15px;
+    font-weight: 500;
+    backdrop-filter: blur(14px);
+    transition: background-color 300ms ease, color 300ms ease;
+}
+
+.fy-bar.is-on-dark {
+    --bar-ink: #fff;
+    --bar-tint: rgba(10, 10, 10, 0.5);
+}
+
+.fy-bar a {
+    text-decoration: none;
+}
+
+.fy-logo {
+    display: inline-flex;
+    justify-self: start;
+}
+
+.fy-bar.is-on-dark .fy-logo img {
+    filter: invert(1);
+}
+
+.fy-nav {
+    display: flex;
+    gap: 28px;
+}
+
+.fy-bar-actions {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    gap: 20px;
+}
+
+.fy-bar-cta {
+    padding: 8px 16px;
+    border: 1.5px solid var(--bar-ink);
+    border-radius: 999px;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+.fy-bar-cta:hover {
+    background: var(--bar-ink);
+    color: var(--fy-paper);
+}
+
+.fy-bar.is-on-dark .fy-bar-cta:hover {
+    color: #000;
+}
+
+/* ---------- Era rail ----------
+   White and blended by difference, so it reads dark on the light eras and light on the
+   dark ones without knowing which is behind it. */
+
+.fy-rail {
+    position: fixed;
+    z-index: 30;
+    color: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+}
+
+.fy-rail a {
+    pointer-events: auto;
+    text-decoration: none;
+}
+
+.fy-rail {
+    top: 50%;
+    right: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 300ms ease;
+}
+
+.fy-rail.is-visible {
+    opacity: 1;
+}
+
+.fy-rail:not(.is-visible) a {
+    pointer-events: none;
+}
+
+.fy-rail a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.45;
+    transition: opacity 200ms ease;
+}
+
+.fy-rail a::after {
+    content: "";
+    width: 14px;
+    height: 2px;
+    background: currentColor;
+    transition: width 200ms ease;
+}
+
+.fy-rail a:hover,
+.fy-rail a[aria-current] {
+    opacity: 1;
+}
+
+.fy-rail a[aria-current]::after {
+    width: 34px;
+}
+
+/* ---------- Shared pieces ---------- */
+
+.fy-kicker {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fy-soft);
+}
+
+.fy-headline {
+    max-width: 11em;
+    font-family: var(--fy-display);
+    font-size: clamp(3rem, 8.6vw, 8.25rem);
+    font-weight: 620;
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+}
+
+.fy-headline em {
+    font-weight: 420;
+}
+
+.fy-lede {
+    max-width: 36em;
+    font-size: clamp(1.125rem, 1.5vw, 1.35rem);
+    line-height: 1.5;
+    color: var(--fy-soft);
+    text-wrap: pretty;
+}
+
+.fy-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.fy-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    padding: 0 26px;
+    border: 2px solid var(--fy-ink);
+    border-radius: 999px;
+    background: var(--fy-ink);
+    color: var(--fy-paper);
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.fy-button:hover {
+    transform: translateY(-2px);
+}
+
+.fy-button--quiet {
+    background: transparent;
+    color: var(--fy-ink);
+}
+
+.fy-button--blue {
+    border-color: var(--fy-blue);
+    background: var(--fy-blue);
+    color: #fff;
+}
+
+.fy-note {
+    font-size: 15px;
+    color: var(--fy-soft);
+}
+
+.fy-text-link {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
+}
+
+.fy-text-link::after {
+    content: " \2192";
+}
+
+.fy-section-title {
+    max-width: 16em;
+    font-family: var(--fy-display);
+    font-size: clamp(2.25rem, 4.8vw, 4.25rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+}
+
+.fy-section-lede {
+    max-width: 34em;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: var(--fy-soft);
+}
+
+/* ---------- Hero ---------- */
+
+.fy-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    padding: clamp(140px, 16vw, 200px) var(--fy-inline) clamp(56px, 7vw, 96px);
+}
+
+/* The line of tools: every stop is a link to its era. */
+.fy-line {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    width: 100%;
+    margin-top: clamp(40px, 6vw, 80px);
+}
+
+.fy-line::before {
+    content: "";
+    position: absolute;
+    top: 37px;
+    right: 7%;
+    left: 7%;
+    border-top: 2px dashed var(--fy-rule);
+}
+
+.fy-line a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.fy-line svg {
+    width: 76px;
+    height: 76px;
+    margin-bottom: 10px;
+    padding: 16px;
+    border: 2px solid var(--fy-ink);
+    border-radius: 50%;
+    background: var(--fy-paper);
+    transition: transform 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+
+.fy-line a:hover svg,
+.fy-line a:focus-visible svg {
+    background: var(--fy-ink);
+    color: var(--fy-paper);
+    transform: translateY(-6px) rotate(-6deg);
+}
+
+.fy-line-name {
+    font-family: var(--fy-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.fy-line-date {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fy-soft);
+}
+
+.fy-line-now svg {
+    border-color: var(--fy-blue);
+    color: var(--fy-blue);
+}
+
+.fy-line-now a:hover svg,
+.fy-line-now a:focus-visible svg {
+    background: var(--fy-blue);
+    color: #fff;
+}
+
+.fy-line-now .fy-line-name {
+    color: var(--fy-blue);
+}
+
+/* ---------- Eras: shared frame ---------- */
+
+.fy-era,
+.fy-crowd {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    column-gap: clamp(32px, 6vw, 96px);
+    align-items: center;
+    min-height: 100vh;
+    padding: 128px var(--fy-inline);
+    background: var(--era-bg);
+    color: var(--era-ink);
+}
+
+/* Each era opens with a short fade from the colour of the one before it. */
+.fy-era::before,
+.fy-crowd::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 180px;
+    background: linear-gradient(var(--era-from), transparent);
+    pointer-events: none;
+}
+
+.fy-era-text {
+    position: relative;
+}
+
+/* Room for the era rail beside the artwork. */
+@media (min-width: 1101px) {
+    .fy-era,
+    .fy-crowd {
+        padding-right: calc(var(--fy-inline) + 72px);
+    }
+}
+
+.fy-era-date {
+    font-family: var(--fy-display);
+    font-size: clamp(3.75rem, 9.5vw, 8.75rem);
+    font-weight: 800;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+}
+
+.fy-era-date span {
+    display: block;
+    margin-bottom: 0.3em;
+    font-size: 0.2em;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--era-soft);
+}
+
+.fy-era-place {
+    margin-top: 22px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--era-soft);
+}
+
+.fy-era-title {
+    margin-top: 10px;
+    font-family: var(--fy-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+}
+
+.fy-gift {
+    margin-top: 36px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--era-soft);
+}
+
+.fy-gift-line {
+    margin-top: 6px;
+    font-family: var(--fy-display);
+    font-size: clamp(1.35rem, 2vw, 1.7rem);
+    font-style: italic;
+    line-height: 1.25;
+}
+
+.fy-era-body {
+    max-width: 30em;
+    margin-top: 18px;
+    color: var(--era-soft);
+}
+
+.fy-era-text .fy-button {
+    margin-top: 32px;
+}
+
+.fy-stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 440px;
+}
+
+/* ---------- I. Clay ---------- */
+
+.fy-era--clay {
+    --era-from: var(--fy-paper);
+    --era-bg: #3b2418;
+    --era-ink: #f3e0c8;
+    --era-soft: #cfae8e;
+}
+
+.fy-tablet {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    width: min(100%, 520px);
+    aspect-ratio: 5 / 4;
+    padding: 36px 46px;
+    border-radius: 46% 54% 50% 50% / 9% 11% 10% 12%;
+    background: radial-gradient(120% 90% at 28% 18%, #d39062 0%, #b56c44 45%, #93502f 100%);
+    box-shadow:
+        inset 0 3px 2px rgba(255, 235, 210, 0.4),
+        inset 0 -24px 40px rgba(60, 25, 10, 0.35),
+        0 44px 60px rgba(0, 0, 0, 0.5);
+    transform: rotate(-2deg);
+}
+
+.fy-tablet::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--fy-grain);
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.fy-wedges {
+    height: 16px;
+    background: var(--fy-wedge) 0 50% / 34px 16px repeat-x;
+    filter: drop-shadow(0 1px 0 rgba(255, 225, 195, 0.45));
+    transition: clip-path 900ms steps(14);
+}
+
+.fy-wedges--offset {
+    background-position-x: 17px;
+}
+
+.fy-tablet-line {
+    padding: 10px 0;
+    font-family: "Cinzel", "Times New Roman", serif;
+    font-size: clamp(1.3rem, 2.5vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+    color: #6e391f;
+    text-shadow:
+        0 1px 0 rgba(255, 225, 195, 0.5),
+        0 -1px 1px rgba(40, 15, 5, 0.55);
+    transition: opacity 600ms ease 700ms, transform 600ms ease 700ms;
+}
+
+.fy-stylus {
+    position: absolute;
+    right: 7%;
+    bottom: 4%;
+    width: 15px;
+    height: 220px;
+    border-radius: 7px 7px 1px 1px;
+    background: linear-gradient(90deg, #b99d62, #f2deae 45%, #9c8250);
+    box-shadow: 8px 12px 16px rgba(0, 0, 0, 0.4);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
+    transform: rotate(36deg);
+    transition: transform 900ms ease;
+}
+
+.fy-motion .fy-stage:not(.is-inview) .fy-wedges {
+    clip-path: inset(0 100% 0 0);
+}
+
+.fy-stage.is-inview .fy-wedges {
+    clip-path: inset(0);
+}
+
+.fy-stage.is-inview .fy-wedges:nth-child(2) { transition-delay: 150ms; }
+.fy-stage.is-inview .fy-wedges:nth-child(4) { transition-delay: 1100ms; }
+.fy-stage.is-inview .fy-wedges:nth-child(5) { transition-delay: 1250ms; }
+
+.fy-motion .fy-stage:not(.is-inview) .fy-tablet-line {
+    opacity: 0;
+    transform: scale(1.06);
+}
+
+.fy-motion .fy-stage:not(.is-inview) .fy-stylus {
+    transform: translate(-80px, -60px) rotate(36deg);
+}
+
+/* ---------- II. Papyrus ---------- */
+
+.fy-era--papyrus {
+    --era-from: #3b2418;
+    --era-bg: #e3c98f;
+    --era-ink: #33220d;
+    --era-soft: #6a4f29;
+}
+
+.fy-roll {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: min(100%, 600px);
+}
+
+.fy-roll-end {
+    flex: 0 0 36px;
+    margin-block: -16px;
+    border-radius: 18px;
+    background: linear-gradient(90deg, #85642f, #d8ba78 40%, #f3dda6 56%, #94733d);
+    box-shadow: 0 20px 26px rgba(70, 45, 10, 0.35);
+}
+
+.fy-roll-sheet {
+    flex: 0 1 100%;
+    min-width: 0;
+    overflow: hidden;
+    padding: 60px 40px 52px;
+    background:
+        repeating-linear-gradient(90deg, rgba(120, 88, 38, 0.14) 0 1px, transparent 1px 7px),
+        repeating-linear-gradient(0deg, rgba(120, 88, 38, 0.12) 0 1px, transparent 1px 5px),
+        #efdcab;
+    box-shadow: inset 0 0 44px rgba(120, 85, 30, 0.3);
+    transition: flex-basis 1200ms cubic-bezier(0.2, 0.7, 0.2, 1), padding 1200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.fy-motion .fy-stage:not(.is-inview) .fy-roll-sheet {
+    flex-basis: 0;
+    padding-inline: 0;
+}
+
+.fy-roll-line {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(1.6rem, 3.3vw, 2.7rem);
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #43280f;
+    white-space: nowrap;
+}
+
+/* Three more lines of pretend script, as dashed ink rules. */
+.fy-roll-script,
+.fy-roll-script::before,
+.fy-roll-script::after {
+    border-top: 2px dashed rgba(67, 40, 15, 0.45);
+}
+
+.fy-roll-script {
+    position: relative;
+    display: block;
+    height: 40px;
+    margin-top: 28px;
+}
+
+.fy-roll-script::before,
+.fy-roll-script::after {
+    content: "";
+    position: absolute;
+    left: 0;
+}
+
+.fy-roll-script::before {
+    top: 16px;
+    right: 12%;
+}
+
+.fy-roll-script::after {
+    top: 34px;
+    right: 34%;
+}
+
+/* ---------- III. Codex ---------- */
+
+.fy-era--codex {
+    --era-from: #e3c98f;
+    --era-bg: #f4e9cb;
+    --era-ink: #2a2018;
+    --era-soft: #6b5a41;
+}
+
+.fy-leaf {
+    position: relative;
+    width: min(100%, 520px);
+    padding: 46px 118px 54px 52px;
+    border: 1px solid #cdb98a;
+    outline: 3px double #b5321f;
+    outline-offset: -14px;
+    background: #fcf4dc;
+    box-shadow:
+        0 34px 50px -22px rgba(70, 50, 20, 0.45),
+        inset 0 0 70px rgba(160, 120, 60, 0.2);
+}
+
+.fy-leaf-rubric {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #b5321f;
+}
+
+.fy-leaf-line {
+    margin-top: 12px;
+    font-family: "Grenze Gotisch", Georgia, serif;
+    font-size: clamp(1.7rem, 3vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.22;
+}
+
+.fy-initial {
+    float: left;
+    display: grid;
+    place-items: center;
+    width: 1.2em;
+    height: 1.2em;
+    margin: 0.04em 0.22em 0 0;
+    border: 3px solid #c9a227;
+    background:
+        radial-gradient(circle 2px at 5px 5px, #f0d77a 98%, transparent) 0 0 / 12px 12px,
+        #1e3fa6;
+    color: #f0d77a;
+    font-size: 2.3em;
+    line-height: 1;
+    box-shadow: 0 0 0 3px #fcf4dc, 0 0 0 4px #1e3fa6;
+}
+
+.fy-stage.is-inview .fy-initial {
+    animation: fy-gild 1600ms ease-out 300ms both;
+}
+
+@keyframes fy-gild {
+    0% { filter: brightness(0.7) saturate(0.6); }
+    45% { filter: brightness(1.5) saturate(1.3); }
+    100% { filter: none; }
+}
+
+.fy-leaf-rules {
+    display: block;
+    clear: both;
+    height: 118px;
+    margin-top: 22px;
+    background: repeating-linear-gradient(180deg, transparent 0 22px, rgba(120, 90, 50, 0.38) 22px 23px);
+}
+
+.fy-leaf-gloss {
+    position: absolute;
+    top: 104px;
+    right: 26px;
+    width: 76px;
+    padding-left: 8px;
+    border-left: 1px solid #b5321f;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.1;
+    color: #8a2a1b;
+    transform: rotate(3deg);
+}
+
+.fy-snail {
+    position: absolute;
+    right: 28px;
+    bottom: 34px;
+    color: #3e7c5a;
+    transition: transform 2400ms ease-out 400ms, opacity 400ms ease 400ms;
+}
+
+.fy-motion .fy-stage:not(.is-inview) .fy-snail {
+    opacity: 0;
+    transform: translateX(-90px);
+}
+
+/* ---------- IV. Press ---------- */
+
+.fy-era--press {
+    --era-from: #f4e9cb;
+    --era-bg: #f7f3ea;
+    --era-ink: #141414;
+    --era-soft: #57514a;
+}
+
+.fy-press {
+    display: grid;
+    justify-items: center;
+    width: min(100%, 600px);
+}
+
+/* Real type reads right to left and back to front, so the row and each letter are flipped. */
+.fy-forme {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    gap: 2px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    background: #2a2a2d;
+    box-shadow: 0 18px 26px rgba(0, 0, 0, 0.32);
+    font-family: "IM Fell English", Georgia, serif;
+    font-size: clamp(0.8rem, 1.75vw, 1.4rem);
+}
+
+.fy-forme span {
+    display: grid;
+    place-items: center;
+    width: 1.02em;
+    height: 1.75em;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #dcdce1, #9a9aa2);
+    color: #36363c;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+    transform: scaleX(-1);
+}
+
+.fy-forme .fy-sort-space {
+    height: 1.35em;
+    background: linear-gradient(180deg, #86868d, #6c6c73);
+}
+
+.fy-proof {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+    padding: 58px 28px 66px;
+    border: 1px solid #ddd5c4;
+    background: #fffdf7;
+    box-shadow: 0 34px 44px -26px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+/* Registration marks in the corners of the sheet. */
+.fy-proof::before,
+.fy-proof::after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    width: 16px;
+    height: 16px;
+    background:
+        linear-gradient(#c4321f, #c4321f) 50% 0 / 1.5px 100% no-repeat,
+        linear-gradient(#c4321f, #c4321f) 0 50% / 100% 1.5px no-repeat;
+}
+
+.fy-proof::before { left: 16px; }
+.fy-proof::after { right: 16px; }
+
+.fy-proof-line {
+    font-family: "IM Fell English", Georgia, serif;
+    font-size: clamp(1.6rem, 3.3vw, 2.7rem);
+    line-height: 1.2;
+    color: #111;
+}
+
+.fy-motion .fy-stage:not(.is-inview) .fy-proof-line {
+    opacity: 0;
+}
+
+.fy-stage.is-inview .fy-forme {
+    animation: fy-press 1500ms ease-in-out both;
+}
+
+.fy-stage.is-inview .fy-proof-line {
+    animation: fy-print 1500ms linear both;
+}
+
+@keyframes fy-press {
+    0%, 100% { transform: translateY(0); }
+    40%, 55% { transform: translateY(96px); }
+}
+
+@keyframes fy-print {
+    0%, 45% { opacity: 0; }
+    55%, 100% { opacity: 1; }
+}
+
+/* ---------- V. Typewriter ---------- */
+
+.fy-era--typewriter {
+    --era-from: #f7f3ea;
+    --era-bg: #1f302d;
+    --era-ink: #eaf1ec;
+    --era-soft: #a8beb5;
+}
+
+.fy-typer {
+    display: grid;
+    justify-items: center;
+    width: min(100%, 560px);
+}
+
+.fy-typer-sheet {
+    width: 84%;
+    padding: 78px 34px 38px;
+    border-radius: 3px 3px 0 0;
+    background: #fdfbf5;
+    box-shadow: 0 -12px 34px rgba(0, 0, 0, 0.3);
+}
+
+.fy-typer-line,
+.fy-crt-line {
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+}
+
+.fy-typer-line {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: clamp(1.05rem, 2.2vw, 1.65rem);
+    color: #1c1c1c;
+}
+
+.fy-typer-roller {
+    width: 98%;
+    height: 32px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #454545, #0d0d0d 62%, #2c2c2c);
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.45);
+}
+
+.fy-typer-keys {
+    display: flex;
+    gap: clamp(5px, 1vw, 11px);
+    margin-top: 34px;
+}
+
+.fy-typer-keys span {
+    display: grid;
+    place-items: center;
+    width: clamp(26px, 3.6vw, 44px);
+    aspect-ratio: 1;
+    border: 3px solid #0d0d0d;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fffaf0, #e3d8c0);
+    box-shadow: 0 5px 0 #060606;
+    font-size: clamp(10px, 1.1vw, 13px);
+    font-weight: 600;
+    color: #111;
+}
+
+/* Typed lines appear a character at a time: the clip steps across the line. */
+.fy-motion .fy-stage:not(.is-inview) .fy-typer-line,
+.fy-motion .fy-stage:not(.is-inview) .fy-crt-line {
+    clip-path: inset(0 100% 0 0);
+}
+
+.fy-stage.is-inview .fy-typer-line,
+.fy-stage.is-inview .fy-crt-line {
+    animation: fy-type 2300ms steps(23) 300ms both;
+}
+
+@keyframes fy-type {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 -1em 0 0); }
+}
+
+.fy-stage.is-inview .fy-typer-keys span {
+    animation: fy-strike 260ms ease-in-out both;
+}
+
+.fy-stage.is-inview .fy-typer-keys span:nth-child(1) { animation-delay: 500ms; }
+.fy-stage.is-inview .fy-typer-keys span:nth-child(2) { animation-delay: 1500ms; }
+.fy-stage.is-inview .fy-typer-keys span:nth-child(3) { animation-delay: 800ms; }
+.fy-stage.is-inview .fy-typer-keys span:nth-child(4) { animation-delay: 1700ms; }
+.fy-stage.is-inview .fy-typer-keys span:nth-child(5) { animation-delay: 1200ms; }
+.fy-stage.is-inview .fy-typer-keys span:nth-child(6) { animation-delay: 1900ms; }
+.fy-stage.is-inview .fy-typer-keys span:nth-child(7) { animation-delay: 2100ms; }
+.fy-stage.is-inview .fy-typer-keys span:nth-child(8) { animation-delay: 300ms; }
+.fy-stage.is-inview .fy-typer-keys span:nth-child(9) { animation-delay: 1000ms; }
+.fy-stage.is-inview .fy-typer-keys span:nth-child(10) { animation-delay: 2300ms; }
+
+@keyframes fy-strike {
+    50% {
+        box-shadow: 0 1px 0 #060606;
+        transform: translateY(4px);
+    }
+}
+
+/* ---------- VI. Word processor ---------- */
+
+.fy-era--screen {
+    --era-from: #1f302d;
+    --era-bg: #070b08;
+    --era-ink: #dcffe5;
+    --era-soft: #86bd95;
+}
+
+.fy-crt {
+    position: relative;
+    width: min(100%, 560px);
+    padding: 26px 26px 56px;
+    border-radius: 28px;
+    background: linear-gradient(180deg, #dad1bd, #b7ac94);
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.55),
+        0 44px 60px rgba(0, 0, 0, 0.7);
+}
+
+.fy-crt::after {
+    content: "";
+    position: absolute;
+    right: 34px;
+    bottom: 22px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #57e27c;
+    box-shadow: 0 0 10px #57e27c;
+}
+
+.fy-crt-screen {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    padding: 18px 22px;
+    overflow: hidden;
+    border-radius: 20px / 24px;
+    background: radial-gradient(120% 100% at 50% 40%, #0e2c18, #041008 72%);
+    box-shadow: inset 0 0 44px rgba(0, 0, 0, 0.9);
+    font-family: "VT323", "Courier New", monospace;
+    color: #62ff8a;
+    text-shadow: 0 0 8px rgba(98, 255, 138, 0.7);
+}
+
+.fy-crt-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 3px);
+    pointer-events: none;
+}
+
+.fy-crt-status {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(98, 255, 138, 0.38);
+    font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+    opacity: 0.85;
+}
+
+.fy-crt-line {
+    margin-top: 26px;
+    font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+    line-height: 1.1;
+}
+
+.fy-crt-line::after {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.85em;
+    margin-left: 0.12em;
+    background: currentColor;
+    box-shadow: 0 0 8px rgba(98, 255, 138, 0.7);
+    vertical-align: -0.08em;
+    animation: fy-blink 1000ms steps(2, jump-none) infinite;
+}
+
+@keyframes fy-blink {
+    to { opacity: 0; }
+}
+
+/* ---------- Interlude: the crowded desk ----------
+   Five separate windows start scattered and settle into the panels of one workspace.
+   The settled layout is the default; the scattered one applies only until the artwork
+   scrolls into view. */
+
+.fy-crowd {
+    --era-from: #070b08;
+    --era-bg: #e9e6df;
+    --era-ink: var(--fy-ink);
+    --era-soft: var(--fy-soft);
+    min-height: 90vh;
+}
+
+.fy-crowd-text {
+    position: relative;
+}
+
+.fy-crowd-title {
+    font-family: var(--fy-display);
+    font-size: clamp(2.5rem, 5.6vw, 5rem);
+    font-weight: 620;
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+}
+
+.fy-crowd-text p {
+    max-width: 30em;
+    margin-top: 24px;
+    color: var(--fy-soft);
+}
+
+.fy-crowd-text .fy-crowd-turn {
+    font-family: var(--fy-display);
+    font-size: 1.6rem;
+    font-style: italic;
+    line-height: 1.25;
+    color: var(--fy-blue);
+}
+
+.fy-desk {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 600px);
+    aspect-ratio: 6 / 5;
+}
+
+.fy-win {
+    position: absolute;
+    display: grid;
+    align-content: start;
+    padding: 34px 14px 14px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(43, 85, 224, 0.28),
+        0 14px 30px rgba(20, 40, 120, 0.12);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.25;
+    transition:
+        inset 1100ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        rotate 1100ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-radius 1100ms ease,
+        box-shadow 1100ms ease;
+}
+
+/* Window buttons, then a few lines of content. */
+.fy-win::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 34px;
+    height: 8px;
+    background:
+        radial-gradient(circle 4px at 4px 4px, #e26d5a 97%, transparent),
+        radial-gradient(circle 4px at 17px 4px, #e8b44b 97%, transparent),
+        radial-gradient(circle 4px at 30px 4px, #6fbf73 97%, transparent);
+    opacity: 0;
+    transition: opacity 600ms ease;
+}
+
+.fy-win::after {
+    content: "";
+    height: 100%;
+    min-height: 40px;
+    margin-top: 12px;
+    background: repeating-linear-gradient(180deg, #e7e9f0 0 6px, transparent 6px 16px);
+}
+
+.fy-win-old,
+.fy-win-new {
+    grid-area: 1 / 1;
+    transition: opacity 600ms ease 300ms;
+}
+
+.fy-win-old {
+    opacity: 0;
+    color: var(--fy-soft);
+}
+
+.fy-win-new {
+    color: var(--fy-blue);
+}
+
+.fy-win--outline { inset: 0 76% 0 0; }
+.fy-win--page { inset: 0 26% 0 25%; }
+.fy-win--canvas { inset: 0 0 67.5% 75%; }
+.fy-win--lens { inset: 33.75% 0 33.75% 75%; }
+.fy-win--checks { inset: 67.5% 0 0 75%; }
+
+.fy-motion .fy-desk:not(.is-inview) .fy-win::before {
+    opacity: 1;
+}
+
+.fy-motion .fy-desk:not(.is-inview) .fy-win {
+    border-radius: 12px;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.1),
+        0 18px 34px rgba(0, 0, 0, 0.2);
+}
+
+.fy-motion .fy-desk:not(.is-inview) .fy-win-old { opacity: 1; }
+.fy-motion .fy-desk:not(.is-inview) .fy-win-new { opacity: 0; }
+
+.fy-motion .fy-desk:not(.is-inview) .fy-win--page { inset: 8% 40% 44% 6%; rotate: -5deg; }
+.fy-motion .fy-desk:not(.is-inview) .fy-win--outline { inset: 0 4% 68% 54%; rotate: 6deg; }
+.fy-motion .fy-desk:not(.is-inview) .fy-win--canvas { inset: 54% 54% 10% 0; rotate: 4deg; }
+.fy-motion .fy-desk:not(.is-inview) .fy-win--lens { inset: 38% 4% 28% 48%; rotate: -4deg; }
+.fy-motion .fy-desk:not(.is-inview) .fy-win--checks { inset: 72% 26% 0 32%; rotate: 8deg; }
+
+/* ---------- VII. Today ---------- */
+
+.fy-era--today {
+    --era-from: #e9e6df;
+    --era-bg: #f4f7ff;
+    --era-ink: #111827;
+    --era-soft: #525e73;
+}
+
+.fy-era--today .fy-era-date,
+.fy-era--today .fy-era-title {
+    color: var(--fy-blue);
+}
+
+.fy-stage--live {
+    align-content: center;
+    justify-items: center;
+}
+
+.fy-sheet {
+    width: min(100%, 560px);
+    padding: 28px 34px 26px;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(20, 40, 120, 0.08),
+        0 34px 60px -26px rgba(30, 60, 160, 0.4);
+    transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.fy-motion .fy-stage--live:not(.is-inview) .fy-sheet {
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+.fy-sheet [hidden] {
+    display: none;
+}
+
+.fy-sheet-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a93a6;
+}
+
+.fy-sheet-text {
+    margin-top: 22px;
+    font-size: clamp(1.2rem, 1.9vw, 1.5rem);
+    line-height: 1.55;
+    color: #111827;
+}
+
+/* Feldar's ink: blue until it is accepted. */
+.fy-ink {
+    color: var(--fy-blue);
+    transition: color 400ms ease;
+}
+
+.fy-ink.is-accepted {
+    color: inherit;
+}
+
+.fy-sheet-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.fy-sheet-actions button {
+    height: 40px;
+    padding: 0 18px;
+    border: 1.5px solid #cdd5e7;
+    border-radius: 999px;
+    background: #fff;
+    color: #111827;
+    font-size: 15px;
+    font-weight: 600;
+    transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.fy-sheet-actions button:hover {
+    border-color: var(--fy-blue);
+}
+
+.fy-sheet-actions button:first-child {
+    border-color: var(--fy-blue);
+    background: var(--fy-blue);
+    color: #fff;
+}
+
+.fy-sheet-status {
+    min-height: 1.5em;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #525e73;
+}
+
+.fy-demo-note {
+    width: min(100%, 560px);
+    margin-top: 16px;
+    font-size: 13px;
+    color: #6b768a;
+}
+
+/* ---------- The gifts: one card per tool, in that tool's colours ---------- */
+
+.fy-gifts,
+.fy-real,
+.fy-doubt,
+.fy-plans,
+.fy-faq {
+    padding: clamp(88px, 11vw, 160px) var(--fy-inline) 0;
+}
+
+.fy-gift-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 48px;
+}
+
+.fy-card {
+    display: flex;
+    grid-column: span 4;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 300px;
+    padding: 28px;
+    border-radius: 22px;
+    background: var(--card-bg);
+    color: var(--card-ink);
+    text-decoration: none;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.fy-card:hover,
+.fy-card:focus-visible {
+    box-shadow: 0 24px 40px -18px rgba(0, 0, 0, 0.35);
+    transform: translateY(-6px) rotate(-0.6deg);
+}
+
+.fy-card svg {
+    margin-bottom: auto;
+}
+
+.fy-card-from {
+    margin-top: 40px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+
+.fy-card h3 {
+    margin-top: 8px;
+    font-family: var(--fy-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.fy-card p:last-child {
+    margin-top: 10px;
+    font-size: 16.5px;
+    line-height: 1.45;
+    opacity: 0.88;
+}
+
+.fy-card--clay { --card-bg: #b0643d; --card-ink: #fff3e3; }
+.fy-card--papyrus { --card-bg: #e3c98f; --card-ink: #33220d; }
+.fy-card--codex { --card-bg: #f4e9cb; --card-ink: #2a2018; box-shadow: inset 0 0 0 2px #b5321f; }
+.fy-card--press { --card-bg: #fff; --card-ink: #141414; box-shadow: inset 0 0 0 2px #141414; }
+.fy-card--typewriter { --card-bg: #1f302d; --card-ink: #eaf1ec; }
+.fy-card--screen { --card-bg: #070b08; --card-ink: #7dff9d; }
+
+.fy-card--today {
+    --card-bg: var(--fy-blue);
+    --card-ink: #fff;
+    grid-column: 1 / -1;
+    min-height: 240px;
+}
+
+.fy-card--today p:last-child {
+    max-width: 38em;
+}
+
+.fy-gifts-more {
+    max-width: 44em;
+    margin-top: 28px;
+    color: var(--fy-soft);
+}
+
+.fy-gifts-more a {
+    color: var(--fy-ink);
+    font-weight: 600;
+}
+
+/* ---------- The real app ---------- */
+
+.fy-real-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.fy-shot--wide {
+    grid-column: 1 / -1;
+}
+
+.fy-shot img,
+.fy-shot video {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--fy-rule);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 34px 60px -30px rgba(40, 30, 10, 0.4);
+}
+
+.fy-shot figcaption {
+    margin-top: 14px;
+    font-size: 15px;
+    color: var(--fy-soft);
+}
+
+/* ---------- Doubters and rules ---------- */
+
+.fy-doubt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 48px;
+}
+
+.fy-doubter {
+    padding: 28px;
+    border-radius: 22px;
+    background: var(--card-bg);
+    color: var(--card-ink);
+}
+
+.fy-doubter--clay { --card-bg: #3b2418; --card-ink: #f3e0c8; }
+.fy-doubter--codex { --card-bg: #f4e9cb; --card-ink: #2a2018; }
+.fy-doubter--typewriter { --card-bg: #1f302d; --card-ink: #eaf1ec; }
+
+.fy-doubter-when {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+
+.fy-doubter h3 {
+    margin-top: 28px;
+    font-family: var(--fy-display);
+    font-size: 1.75rem;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+}
+
+.fy-doubter p:last-child {
+    margin-top: 12px;
+    font-size: 16.5px;
+    opacity: 0.88;
+}
+
+.fy-rules {
+    margin-top: 16px;
+    padding: clamp(28px, 4vw, 56px);
+    border-radius: 22px;
+    background: var(--fy-blue);
+    color: #fff;
+}
+
+.fy-rules-title {
+    max-width: 18em;
+    font-family: var(--fy-display);
+    font-size: clamp(1.75rem, 3vw, 2.6rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+
+.fy-rules ol {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    margin: 36px 0 32px;
+    counter-reset: rule;
+}
+
+.fy-rules li {
+    padding-top: 16px;
+    border-top: 2px solid rgba(255, 255, 255, 0.5);
+    counter-increment: rule;
+    font-size: 16.5px;
+    line-height: 1.45;
+}
+
+.fy-rules li::before {
+    content: counter(rule);
+    display: block;
+    margin-bottom: 8px;
+    font-family: var(--fy-display);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.fy-rules strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 18px;
+}
+
+.fy-rules :focus-visible {
+    outline-color: #fff;
+}
+
+/* ---------- Plans and questions ---------- */
+
+.fy-plan-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 48px;
+}
+
+.fy-plan {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 28px;
+    border: 2px solid var(--fy-ink);
+    border-radius: 22px;
+}
+
+.fy-plan h3 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.fy-plan-price {
+    font-family: var(--fy-display);
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+}
+
+.fy-plan-price span {
+    font-family: var(--fy-sans);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--fy-soft);
+}
+
+.fy-plan p:not(.fy-plan-price) {
+    color: var(--fy-soft);
+}
+
+.fy-plan .fy-button {
+    height: 44px;
+    margin-top: auto;
+    padding: 0 20px;
+    font-size: 15px;
+}
+
+.fy-plan--start {
+    border-color: var(--fy-blue);
+    background: #f4f7ff;
+}
+
+.fy-plans-more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-top: 28px;
+    font-size: 16px;
+}
+
+.fy-plans-more span {
+    margin-left: auto;
+    color: var(--fy-soft);
+}
+
+.fy-faq-list {
+    max-width: 860px;
+    margin-top: 40px;
+    border-top: 2px solid var(--fy-ink);
+}
+
+.fy-faq details {
+    border-bottom: 1px solid var(--fy-rule);
+}
+
+.fy-faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--fy-display);
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.fy-faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.fy-faq summary::after {
+    content: "+";
+    flex-shrink: 0;
+    font-family: var(--fy-sans);
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.fy-faq details[open] summary::after {
+    content: "\2212";
+}
+
+.fy-faq details p {
+    max-width: 38em;
+    padding-bottom: 24px;
+    color: var(--fy-soft);
+}
+
+/* ---------- Close and footer ---------- */
+
+.fy-close {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: clamp(104px, 14vw, 200px) var(--fy-inline);
+    text-align: center;
+}
+
+.fy-headline--close {
+    max-width: 9em;
+    font-size: clamp(3rem, 8vw, 7.25rem);
+}
+
+.fy-headline--close em {
+    display: block;
+    color: var(--fy-blue);
+}
+
+.fy-close .fy-actions {
+    justify-content: center;
+}
+
+.fy-foot {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    gap: 40px;
+    padding: 48px var(--fy-inline) 120px;
+    border-top: 1px solid var(--fy-rule);
+}
+
+.fy-foot-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+}
+
+.fy-foot-links div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.fy-foot-links .fy-kicker {
+    margin-bottom: 6px;
+}
+
+.fy-foot-links a {
+    text-decoration: none;
+}
+
+.fy-foot-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+    .fy-rail {
+        display: none;
+    }
+
+    .fy-rules ol,
+    .fy-plan-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fy-card {
+        grid-column: span 6;
+    }
+}
+
+@media (max-width: 860px) {
+    .fy-nav,
+    .fy-bar-login {
+        display: none;
+    }
+
+    .fy-bar {
+        grid-template-columns: 1fr auto;
+    }
+
+    .fy-era,
+    .fy-crowd {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 48px;
+        min-height: 0;
+        padding-block: 104px 88px;
+    }
+
+    .fy-stage {
+        min-height: 0;
+    }
+
+    /* The line of tools becomes a strip to swipe along. */
+    .fy-line {
+        display: flex;
+        gap: 22px;
+        margin-inline: calc(var(--fy-gutter) * -1);
+        padding: 8px var(--fy-gutter);
+        overflow-x: auto;
+        scrollbar-width: none;
+        width: auto;
+        align-self: stretch;
+    }
+
+    .fy-line::before {
+        content: none;
+    }
+
+    .fy-line li {
+        flex: 0 0 auto;
+    }
+
+    .fy-doubt-grid,
+    .fy-real-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .fy-plans-more span {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    body {
+        font-size: 17px;
+    }
+
+    .fy-card {
+        grid-column: 1 / -1;
+        min-height: 0;
+    }
+
+    .fy-card-from {
+        margin-top: 28px;
+    }
+
+    .fy-rules ol,
+    .fy-plan-grid,
+    .fy-foot,
+    .fy-foot-links {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .fy-tablet {
+        padding: 28px 30px;
+    }
+
+    .fy-stylus {
+        height: 150px;
+    }
+
+    .fy-leaf {
+        padding: 36px 96px 44px 34px;
+    }
+
+    .fy-roll-sheet {
+        padding: 44px 22px 40px;
+    }
+
+    .fy-typer-sheet {
+        padding: 56px 18px 30px;
+    }
+
+    .fy-win {
+        font-size: 11px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

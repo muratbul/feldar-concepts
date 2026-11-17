@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex,nofollow" />
+        <meta
+            name="description"
+            content="Feldar is a writing app for novelists. Your words stay in black, its suggestions arrive in blue, and the margin answers with six readers and five checks."
+        />
+        <title>Concept F: Scriptorium - Feldar</title>
+
+        <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Grenze+Gotisch:wght@400..700&display=swap"
+        />
+
+        <link rel="stylesheet" href="../switcher.css" />
+        <link rel="stylesheet" href="styles/scriptorium.css" />
+    </head>
+    <body>
+        <svg class="sc-sprite" aria-hidden="true" focusable="false">
+            <defs>
+                <path id="sc-ivy" d="M0 0C-9-4-13-14-8-22C-5-27 0-30 0-30C0-30 5-27 8-22C13-14 9-4 0 0Z" />
+            </defs>
+            <symbol id="sc-spray" viewBox="0 0 260 80">
+                <path class="sc-art-stem" d="M0 46C34 22 70 20 104 32S170 50 204 34S240 8 256 14" />
+                <path class="sc-art-stem" d="M60 27c2-12 10-18 20-20M104 32c4 12 14 18 26 18M170 42c2-12 10-20 22-22M204 34c8 8 18 10 28 6" />
+                <use href="#sc-ivy" class="sc-art-red" transform="translate(80 7) rotate(50) scale(0.62)" />
+                <use href="#sc-ivy" class="sc-art-green" transform="translate(130 50) rotate(120) scale(0.62)" />
+                <use href="#sc-ivy" class="sc-art-green" transform="translate(192 20) rotate(48) scale(0.62)" />
+                <use href="#sc-ivy" class="sc-art-red" transform="translate(232 40) rotate(104) scale(0.62)" />
+                <circle class="sc-art-gold" cx="34" cy="29" r="5" />
+                <circle class="sc-art-gold" cx="142" cy="41" r="5" />
+                <circle class="sc-art-gold" cx="252" cy="13" r="5" />
+            </symbol>
+            <symbol id="sc-sprig" viewBox="0 0 120 28">
+                <path class="sc-art-stem" d="M6 14c18-12 36-12 54 0s36 12 54 0" />
+                <use href="#sc-ivy" class="sc-art-red" transform="translate(30 6) rotate(-62) scale(0.42)" />
+                <use href="#sc-ivy" class="sc-art-green" transform="translate(90 22) rotate(118) scale(0.42)" />
+                <circle class="sc-art-gold" cx="60" cy="14" r="4.5" />
+                <circle class="sc-art-gold" cx="6" cy="14" r="3.5" />
+                <circle class="sc-art-gold" cx="114" cy="14" r="3.5" />
+            </symbol>
+            <symbol id="sc-paw" viewBox="0 0 40 44">
+                <ellipse cx="20" cy="30" rx="11" ry="9" />
+                <circle cx="7" cy="17" r="4.5" />
+                <circle cx="15.5" cy="8" r="4.5" />
+                <circle cx="25" cy="8" r="4.5" />
+                <circle cx="33" cy="17" r="4.5" />
+            </symbol>
+            <symbol id="sc-manicule" viewBox="0 0 64 34">
+                <path class="sc-art-body" d="M46 6H31c-3 0-5-1-7-2H6c-5 0-5 8 0 8h14c-3 2-4 4-4 7c0 6 5 9 12 9h18z" />
+                <path class="sc-art-red" d="M46 3h15v28H46z" />
+                <path class="sc-art-gold-line" d="M51 4v26" />
+            </symbol>
+        </svg>
+
+        <header class="sc-head">
+            <div class="sc-head-inner">
+                <a class="sc-logo" href="/" aria-label="Feldar home">
+                    <img src="../../assets/logo.svg" alt="Feldar" width="156" height="45" />
+                </a>
+                <button class="sc-menu-button" type="button" aria-expanded="false" aria-controls="sc-menu" data-menu-button>Menu</button>
+                <nav class="sc-menu" id="sc-menu" aria-label="Main" data-menu>
+                    <a href="/features">Features</a>
+                    <a href="/compare">Compare</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/download">Download</a>
+                    <a class="sc-menu-login" href="/login" rel="nofollow">Log in</a>
+                </nav>
+                <a class="sc-button sc-button--small" href="/login" rel="nofollow">Start writing free</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="sc-wrap sc-hero">
+                <div class="sc-leaf sc-folio">
+                    <svg class="sc-spray sc-spray--head" aria-hidden="true"><use href="#sc-spray" /></svg>
+                    <svg class="sc-spray sc-spray--foot" aria-hidden="true"><use href="#sc-spray" /></svg>
+
+                    <p class="sc-rubric">A writing app for novelists</p>
+                    <h1 class="sc-title" aria-label="Your words in black. Ours in the precious blue.">
+                        <span class="sc-initial sc-gilt"><span class="sc-initial-ground"><span class="sc-initial-letter sc-gilt-text">Y</span></span></span><span class="sc-title-line">our words in black.</span>
+                        <span class="sc-title-line sc-blue">Ours in the precious blue.</span>
+                    </h1>
+
+                    <div class="sc-hero-body">
+                        <div class="sc-hero-text">
+                            <p class="sc-lede">Feldar keeps your chapters, scene plans and story world beside the page. When you ask for help, what it writes arrives in blue, and it stays only if you accept it. The novel never leaves your hand.</p>
+                            <div class="sc-actions">
+                                <a class="sc-button" href="/login" rel="nofollow">Start writing free</a>
+                                <a class="sc-button sc-button--plain" href="/download">Download for Mac</a>
+                            </div>
+                            <p class="sc-terms">Free to start. 500 credits, no credit card.</p>
+                        </div>
+                        <aside class="sc-gloss sc-gloss--scribe">
+                            <button class="sc-creature sc-creature--rabbit" type="button" aria-pressed="false" aria-label="A rabbit at a writing desk, working with a quill" data-creature>
+                                <svg viewBox="0 0 220 180" aria-hidden="true">
+                                    <path class="sc-art-line" d="M40 152h58M50 152l-6 24M88 152l6 24" />
+                                    <path class="sc-art-line" d="M160 108v66M142 174h36" />
+                                    <path class="sc-art-umber" d="M124 106l72-17l3 10l-72 17z" />
+                                    <path class="sc-art-vellum" d="M136 99l46-11l2 8l-46 11z" />
+                                    <path class="sc-art-blue-line" d="M143 101l18-4.2M145 106l28-6.6" />
+                                    <circle class="sc-art-body" cx="42" cy="134" r="9" />
+                                    <path class="sc-art-body" d="M52 152q-10-42 16-60q24-10 36 12q8 24-8 48z" />
+                                    <g class="sc-rabbit-ears">
+                                        <path class="sc-art-body" d="M84 64q-12-34-2-46q10 8 12 44z" />
+                                        <path class="sc-art-body" d="M98 62q2-34 14-42q6 14-4 46z" />
+                                    </g>
+                                    <circle class="sc-art-body" cx="96" cy="80" r="20" />
+                                    <circle class="sc-art-ink" cx="104" cy="76" r="2.6" />
+                                    <path class="sc-art-line" d="M113 84l4 2l-4 3" />
+                                    <path class="sc-art-body" d="M94 110q22-2 38-7l3 8q-18 9-40 9z" />
+                                    <g class="sc-rabbit-quill">
+                                        <path class="sc-art-vellum" d="M137 105q8-30 34-52q4 22-22 50z" />
+                                        <path class="sc-art-line" d="M137 105l30-46" />
+                                    </g>
+                                </svg>
+                            </button>
+                            <p>Ultramarine, the deep blue of illuminated books, was ground from lapis lazuli and could cost as much as gold. We keep ours for one thing: the words Feldar suggests.</p>
+                        </aside>
+                    </div>
+
+                    <div class="sc-basdepage">
+                        <button class="sc-creature sc-creature--duel" type="button" aria-pressed="false" aria-label="A snail squaring up to a knight" data-creature>
+                            <svg viewBox="0 0 360 150" aria-hidden="true">
+                                <path class="sc-art-stem" d="M4 136c40-10 80 8 120 0s80-10 120 0s76 6 112-2" />
+                                <use href="#sc-ivy" class="sc-art-green" transform="translate(190 134) rotate(24) scale(0.55)" />
+                                <use href="#sc-ivy" class="sc-art-red" transform="translate(322 136) rotate(-24) scale(0.55)" />
+                                <g class="sc-snail">
+                                    <path class="sc-art-body" d="M22 130q-4-12 16-14h70q14 0 18-14l5-18q3-8 10-5q6 3 4 12l-9 30q-3 9-14 9z" />
+                                    <g class="sc-snail-stalks">
+                                        <path class="sc-art-line" d="M134 82l-6-18M141 81l6-17" />
+                                        <circle class="sc-art-ink" cx="128" cy="62" r="3.5" />
+                                        <circle class="sc-art-ink" cx="147" cy="62" r="3.5" />
+                                    </g>
+                                    <circle class="sc-art-red" cx="74" cy="98" r="34" />
+                                    <path class="sc-art-gold-line" d="M74 100c0-5 8-5 8 1c0 10-17 10-17-2c0-15 27-15 27 2c0 20-38 20-38-4" />
+                                </g>
+                                <g class="sc-knight">
+                                    <path class="sc-art-line" d="M262 106l-6 26h-8M280 106l6 26h8" />
+                                    <path class="sc-art-green" d="M254 64h34l6 44h-46z" />
+                                    <path class="sc-art-gold-line" d="M251 92h40" />
+                                    <circle class="sc-art-steel" cx="271" cy="46" r="15" />
+                                    <path class="sc-art-line" d="M257 46h17" />
+                                    <path class="sc-art-red" d="M271 31c2-12 14-14 18-6c-8-2-12 2-12 8z" />
+                                    <g class="sc-knight-sword">
+                                        <path class="sc-art-blade" d="M238 72L188 56" />
+                                        <path class="sc-art-gold-line" d="M232 62l-4 15" />
+                                    </g>
+                                    <path class="sc-art-red" d="M228 68h26v20q0 14-13 20q-13-6-13-20z" />
+                                    <circle class="sc-art-gold" cx="241" cy="84" r="4.5" />
+                                </g>
+                            </svg>
+                        </button>
+                        <p class="sc-gloss sc-gloss--jest">The margins of 13th and 14th century books are full of jokes: snails fighting knights, rabbits behaving like people. Ours are no different. Try the snail.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sc-wrap sc-section" aria-labelledby="ink-title">
+                <div class="sc-section-head">
+                    <p class="sc-rubric">The blue ink</p>
+                    <h2 class="sc-heading" id="ink-title">It writes in blue. You decide what stays.</h2>
+                </div>
+                <div class="sc-ink">
+                    <div class="sc-ink-text">
+                        <p>Feldar does not write until you ask. When it does, its words are set apart from yours, in the one colour we save for it.</p>
+                        <h3 class="sc-subhead">Continue from here</h3>
+                        <p>Stuck at the end of a paragraph? Hover over the caret and choose Continue from here. The next lines arrive in blue.</p>
+                        <h3 class="sc-subhead">Accept, Revise, Dismiss</h3>
+                        <p>Accept keeps the lines and they turn black, like the rest of your page. Revise asks for another take. Dismiss leaves the page as it was.</p>
+                        <a class="sc-more" href="/ai-for-novelists">AI for novelists</a>
+                        <p class="sc-gloss sc-gloss--inline">Gold leaf made a page catch the light, which is what "illuminated" means. Move your pointer across this one.</p>
+                    </div>
+
+                    <div class="sc-demo" data-ink-demo>
+                        <div class="sc-leaf sc-leaf--ruled sc-demo-leaf">
+                            <p class="sc-running"><span>The Winter Ledger</span><span>Chapter Two</span></p>
+                            <p>The ledger lay open on the kitchen table where her father had left it, the ribbon still marking March. Nell turned back a page, then another. Two pounds, on the first of every month, to M.P.</p>
+                            <p class="sc-suggestion" data-suggestion>
+                                <span data-take>She ran her finger down the column and found no month without it, not in the year of the flood, not in the year her mother died.</span>
+                                <span data-take hidden>She ran a finger down the column. Not one month was missing.</span>
+                            </p>
+                            <p class="sc-suggestion" data-suggestion hidden>
+                                <span data-take>Whoever M.P. was, her father had paid them before he paid the rates.</span>
+                                <span data-take hidden>Whoever M.P. was, they had been paid first, every single time.</span>
+                            </p>
+                            <p class="sc-suggestion" data-suggestion hidden>
+                                <span data-take>Outside, the first frost of the winter was settling on the low rows, and nobody had lit the fires.</span>
+                                <span data-take hidden>Outside, frost was settling on the low rows, and the fires were not lit.</span>
+                            </p>
+                        </div>
+                        <div class="sc-demo-bar">
+                            <div class="sc-choices" data-review>
+                                <button class="sc-choice sc-choice--keep" type="button" data-ink="accept">Accept</button>
+                                <button class="sc-choice" type="button" data-ink="revise">Revise</button>
+                                <button class="sc-choice" type="button" data-ink="dismiss">Dismiss</button>
+                            </div>
+                            <div class="sc-choices" data-idle hidden>
+                                <button class="sc-choice sc-choice--keep" type="button" data-ink="continue">Continue from here</button>
+                                <button class="sc-choice" type="button" data-ink="restart" hidden>Start over</button>
+                            </div>
+                            <p
+                                class="sc-demo-status"
+                                role="status"
+                                data-status
+                                data-accepted="Accepted. Those lines are yours now, in black."
+                                data-revised="Another take on the same lines."
+                                data-dismissed="Dismissed. The page is as you left it."
+                            ></p>
+                        </div>
+                        <p class="sc-demo-caption">Demo. These words were written by hand for this page. In Feldar they come from your book.</p>
+                    </div>
+                </div>
+            </section>
+
+            <svg class="sc-divider" aria-hidden="true"><use href="#sc-sprig" /></svg>
+
+            <section class="sc-wrap sc-section" aria-labelledby="margin-title">
+                <div class="sc-section-head">
+                    <p class="sc-rubric">The margin</p>
+                    <h2 class="sc-heading" id="margin-title">The margin is where a book gets better.</h2>
+                    <p class="sc-intro">Readers and teachers once wrote their commentary in the margins. These notes are called glosses. In Feldar the margin answers when you ask: Lens puts six readers beside your page, and Checks marks what it finds with a fix to accept or discard.</p>
+                </div>
+
+                <div class="sc-readers" role="group" aria-label="Choose a reader from Lens" data-readers>
+                    <button class="sc-roundel" type="button" aria-pressed="true" data-reader="critic">
+                        <span class="sc-roundel-ring sc-gilt">
+                            <svg viewBox="0 0 64 64" aria-hidden="true">
+                                <rect width="64" height="64" fill="#c2311d" />
+                                <path class="sc-art-umber" d="M15 38c-4-22 38-22 34 0l-4-8H19z" />
+                                <circle class="sc-art-body" cx="32" cy="36" r="15" />
+                                <path class="sc-art-line" d="M22 29l8 3M42 29l-8 3M27 44q5-3 10 0" />
+                                <circle class="sc-art-ink" cx="27" cy="35" r="1.8" />
+                                <circle class="sc-art-ink" cx="37" cy="35" r="1.8" />
+                            </svg>
+                        </span>
+                        Critic
+                    </button>
+                    <button class="sc-roundel" type="button" aria-pressed="false" data-reader="cheerleader">
+                        <span class="sc-roundel-ring sc-gilt">
+                            <svg viewBox="0 0 64 64" aria-hidden="true">
+                                <rect width="64" height="64" fill="#d9a93a" />
+                                <path class="sc-art-line" d="M32 6v8M12 14l6 6M52 14l-6 6M5 34h8M59 34h-8M10 54l7-5M54 54l-7-5" />
+                                <circle class="sc-art-body" cx="32" cy="36" r="15" />
+                                <path class="sc-art-line" d="M24 39q8 10 16 0" />
+                                <circle class="sc-art-ink" cx="27" cy="33" r="1.8" />
+                                <circle class="sc-art-ink" cx="37" cy="33" r="1.8" />
+                                <circle cx="22" cy="40" r="2.6" fill="#c2311d" />
+                                <circle cx="42" cy="40" r="2.6" fill="#c2311d" />
+                            </svg>
+                        </span>
+                        Cheerleader
+                    </button>
+                    <button class="sc-roundel" type="button" aria-pressed="false" data-reader="poet">
+                        <span class="sc-roundel-ring sc-gilt">
+                            <svg viewBox="0 0 64 64" aria-hidden="true">
+                                <rect width="64" height="64" fill="#3e7c5a" />
+                                <circle class="sc-art-body" cx="32" cy="36" r="15" />
+                                <use href="#sc-ivy" class="sc-art-leafgold" transform="translate(17 30) rotate(-28) scale(0.42)" />
+                                <use href="#sc-ivy" class="sc-art-leafgold" transform="translate(20 22) rotate(8) scale(0.42)" />
+                                <use href="#sc-ivy" class="sc-art-leafgold" transform="translate(47 30) rotate(28) scale(0.42)" />
+                                <use href="#sc-ivy" class="sc-art-leafgold" transform="translate(44 22) rotate(-8) scale(0.42)" />
+                                <path class="sc-art-line" d="M24 31q3-2 6 0M34 31q3-2 6 0" />
+                                <circle class="sc-art-ink" cx="32" cy="43" r="2.6" />
+                            </svg>
+                        </span>
+                        Poet
+                    </button>
+                    <button class="sc-roundel" type="button" aria-pressed="false" data-reader="editor">
+                        <span class="sc-roundel-ring sc-gilt">
+                            <svg viewBox="0 0 64 64" aria-hidden="true">
+                                <rect width="64" height="64" fill="#6b4a2e" />
+                                <circle class="sc-art-body" cx="30" cy="36" r="15" />
+                                <path class="sc-art-line" d="M21 29h7M33 27l7 2M25 44h10" />
+                                <circle class="sc-art-ink" cx="25" cy="34" r="1.8" />
+                                <circle class="sc-art-ink" cx="35" cy="34" r="1.8" />
+                                <path class="sc-art-vellum" d="M44 46q2-22 14-36q4 16-8 36z" />
+                                <path class="sc-art-line" d="M44 50l12-36" />
+                            </svg>
+                        </span>
+                        Editor
+                    </button>
+                    <button class="sc-roundel" type="button" aria-pressed="false" data-reader="plotter">
+                        <span class="sc-roundel-ring sc-gilt">
+                            <svg viewBox="0 0 64 64" aria-hidden="true">
+                                <rect width="64" height="64" fill="#8e2415" />
+                                <path class="sc-art-green" d="M17 30q15-20 30 0z" />
+                                <circle class="sc-art-body" cx="32" cy="38" r="14" />
+                                <path class="sc-art-line" d="M26 44q6 4 12 0" />
+                                <circle class="sc-art-ink" cx="27" cy="37" r="1.8" />
+                                <circle class="sc-art-ink" cx="37" cy="37" r="1.8" />
+                                <path class="sc-art-gold-line" d="M52 8l-6 16M52 8l6 16M48 18h8" />
+                            </svg>
+                        </span>
+                        Plotter
+                    </button>
+                    <button class="sc-roundel" type="button" aria-pressed="false" data-reader="reader">
+                        <span class="sc-roundel-ring sc-gilt">
+                            <svg viewBox="0 0 64 64" aria-hidden="true">
+                                <rect width="64" height="64" fill="#2c5a43" />
+                                <circle class="sc-art-body" cx="32" cy="30" r="15" />
+                                <path class="sc-art-line" d="M23 25q4-3 7 0M34 25q4-3 7 0" />
+                                <circle class="sc-art-ink" cx="27" cy="29" r="1.8" />
+                                <circle class="sc-art-ink" cx="37" cy="29" r="1.8" />
+                                <path class="sc-art-vellum" d="M10 38q12-6 22 0q10-6 22 0v18q-12-6-22 0q-10-6-22 0z" />
+                                <path class="sc-art-line" d="M32 38v18" />
+                            </svg>
+                        </span>
+                        Reader
+                    </button>
+                </div>
+
+                <div class="sc-commentary">
+                    <aside class="sc-margin sc-margin--checks" data-check>
+                        <p class="sc-rubric">Checks <span class="sc-rubric-detail">Tighten word choice</span></p>
+                        <p class="sc-ai">"Very, very cold" can be one plain word. Try: <span class="sc-ai-fix">bitter</span>.</p>
+                        <div class="sc-choices" data-check-choices>
+                            <button class="sc-choice sc-choice--keep" type="button" data-check-action="accept">Accept</button>
+                            <button class="sc-choice" type="button" data-check-action="discard">Discard</button>
+                        </div>
+                        <button class="sc-choice" type="button" data-check-action="reset" hidden>Mark it again</button>
+                        <p
+                            class="sc-demo-status"
+                            role="status"
+                            data-check-status
+                            data-accepted="Fix accepted. The line is yours, with one word changed."
+                            data-discarded="Discarded. The line stays as you wrote it."
+                        ></p>
+                    </aside>
+
+                    <div class="sc-leaf sc-leaf--ruled sc-commentary-leaf">
+                        <p class="sc-running"><span>The Winter Ledger</span><span>Chapter Three</span></p>
+                        <p>Daniel was in the cider house when she found him, rolling the empty casks into a line along the wall. He did not stop. He said it would be <span class="sc-slip" data-check-mark data-state="open"><span data-check-original>very, very cold</span><span data-check-fix hidden>bitter</span></span> tonight, and that the Foxwhelps in the bottom rows would feel it first.</p>
+                        <p>Nell set the ledger down on the press between them, open at the column of two pounds, and waited.</p>
+                    </div>
+
+                    <aside class="sc-margin sc-margin--lens">
+                        <svg class="sc-manicule" aria-hidden="true"><use href="#sc-manicule" /></svg>
+                        <p class="sc-rubric">Lens <span class="sc-rubric-detail" data-reader-name>Critic</span></p>
+                        <div aria-live="polite">
+                            <p class="sc-ai" data-gloss="critic">The casks are doing the work here. Daniel keeps his hands busy so he need not look at her. Trust that, and cut one of his two remarks about the weather.</p>
+                            <p class="sc-ai" data-gloss="cheerleader" hidden>She sets the ledger down and waits. That silence is the bravest thing Nell has done so far. More of this, please.</p>
+                            <p class="sc-ai" data-gloss="poet" hidden>Listen to "rolling the empty casks into a line along the wall". The rhythm is the work itself. Leave it exactly as it is.</p>
+                            <p class="sc-ai" data-gloss="editor" hidden>"He did not stop" is strong. The sentence after it says the same thing at twice the length. One clause about the frost is enough.</p>
+                            <p class="sc-ai" data-gloss="plotter" hidden>This is the first time the ledger and Daniel share a room. Whatever he says next has to set up the scene at Pryce's Gate.</p>
+                            <p class="sc-ai" data-gloss="reader" hidden>I want to know what is in that column, and I think Daniel already does. I would turn the page here.</p>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="sc-pair">
+                    <div>
+                        <h3 class="sc-subhead">Lens</h3>
+                        <p>Six readers for your page: Critic, Cheerleader, Poet, Editor, Plotter and Reader. Ask one by name, let them debate, or choose an audience and get Reader reactions, with markers in the margin of your manuscript.</p>
+                    </div>
+                    <div>
+                        <h3 class="sc-subhead">Checks</h3>
+                        <p>Five passes over the page. Each issue is marked in the manuscript with a fix, and opening Checks changes nothing by itself.</p>
+                        <ol class="sc-passes">
+                            <li>Fix critical mistakes</li>
+                            <li>Improve accuracy and clarity</li>
+                            <li>Tighten word choice</li>
+                            <li>Smooth dialogue transitions</li>
+                            <li>Clarify character perspectives</li>
+                        </ol>
+                    </div>
+                </div>
+                <a class="sc-more" href="/features">All features</a>
+            </section>
+
+            <svg class="sc-divider" aria-hidden="true"><use href="#sc-sprig" /></svg>
+
+            <section class="sc-wrap sc-section" aria-labelledby="seven-title" data-proto-section="features">
+                <div class="sc-section-head">
+                    <p class="sc-rubric">The rest of the workspace</p>
+                    <h2 class="sc-heading" id="seven-title">Seven illuminations.</h2>
+                    <p class="sc-intro">What sits around the page while you write: the plan, the story world, your voice, the model, the record and the shelf.</p>
+                </div>
+                <div class="sc-seven">
+                    <article class="sc-panel">
+                        <span class="sc-drop sc-gilt" aria-hidden="true"><span class="sc-drop-ground sc-drop-ground--red">
+                            <svg viewBox="0 0 24 24"><path class="sc-art-pale-line" d="M4 7h2M9 7h11M4 12h2M9 12h11M4 17h2M9 17h11" /></svg>
+                            <span class="sc-drop-letter sc-gilt-text">O</span>
+                        </span></span>
+                        <h3 class="sc-panel-title">Outline and Draft Page</h3>
+                        <p>Say what happens next and Generate scenes lays the chapter out as scenes you can edit, reorder or replace. Write it yourself, or press Draft Page for a first pass at the length you set.</p>
+                        <a class="sc-more" href="/features/scenes">How scene planning works</a>
+                    </article>
+                    <article class="sc-panel">
+                        <span class="sc-drop sc-gilt" aria-hidden="true"><span class="sc-drop-ground sc-drop-ground--green">
+                            <svg viewBox="0 0 24 24"><path class="sc-art-pale-line" d="M3 4h7v5H3zM14 4h7v5h-7zM8.5 15h7v5h-7zM10 6.5h4M7 9l3.5 6M17 9l-3.5 6" /></svg>
+                            <span class="sc-drop-letter sc-gilt-text">C</span>
+                        </span></span>
+                        <h3 class="sc-panel-title">The Canvas</h3>
+                        <p>A board of cards for your story world: Character, Location, Plot, Item, Faction and Note, joined by relations you label. Branch grows a new card from the one you select.</p>
+                        <a class="sc-more" href="/features/canvas">How the Canvas works</a>
+                    </article>
+                    <article class="sc-panel">
+                        <span class="sc-drop sc-gilt" aria-hidden="true"><span class="sc-drop-ground sc-drop-ground--umber">
+                            <svg viewBox="0 0 24 24"><path class="sc-art-pale-line" d="M12 3l8 6l-8 12L4 9zM4 9h16M9 9l3 12l3-12M9 9l3-6l3 6" /></svg>
+                            <span class="sc-drop-letter sc-gilt-text">P</span>
+                        </span></span>
+                        <h3 class="sc-panel-title">Polish, Deepen, Enhance</h3>
+                        <p>Select a passage and choose a rewrite, or say what you want with Instruct. Every added word comes back marked, and Apply is yours to press.</p>
+                        <a class="sc-more" href="/ai-for-novelists">AI for novelists</a>
+                    </article>
+                    <article class="sc-panel">
+                        <span class="sc-drop sc-gilt" aria-hidden="true"><span class="sc-drop-ground sc-drop-ground--madder">
+                            <svg viewBox="0 0 24 24"><path class="sc-art-pale-line" d="M4 16c0-6 5-9 10-7l4-3l-1 5c1 5-3 9-8 8zM9 19l-2 3M12 19l1 3M18 3v4M21 4l-1.5 3" /></svg>
+                            <span class="sc-drop-letter sc-gilt-text">V</span>
+                        </span></span>
+                        <h3 class="sc-panel-title">Voice &amp; Style</h3>
+                        <p>Paste at least 600 words of your own prose and Feldar writes toward them. As the book grows, it follows the book.</p>
+                        <a class="sc-more" href="/ai-for-novelists">AI for novelists</a>
+                    </article>
+                    <article class="sc-panel">
+                        <span class="sc-drop sc-gilt" aria-hidden="true"><span class="sc-drop-ground sc-drop-ground--green">
+                            <svg viewBox="0 0 24 24"><path class="sc-art-pale-line" d="M6 7.5a1.5 1.5 0 1 0 .1 0zM12 7.5a1.5 1.5 0 1 0 .1 0zM18 7.5a1.5 1.5 0 1 0 .1 0zM6 14.5a1.5 1.5 0 1 0 .1 0zM12 14.5a1.5 1.5 0 1 0 .1 0zM18 14.5a1.5 1.5 0 1 0 .1 0z" /></svg>
+                            <span class="sc-drop-letter sc-gilt-text">M</span>
+                        </span></span>
+                        <h3 class="sc-panel-title">Models</h3>
+                        <p>GPT-6 Astra, Sol and Luna, and Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5. Set one per feature or switch in Chat. Which you can use depends on your plan.</p>
+                        <a class="sc-more" href="/pricing">Models by plan</a>
+                    </article>
+                    <article class="sc-panel">
+                        <span class="sc-drop sc-gilt" aria-hidden="true"><span class="sc-drop-ground sc-drop-ground--red">
+                            <svg viewBox="0 0 24 24"><path class="sc-art-pale-line" d="M12 3a6.5 6.5 0 1 0 .1 0zM12 6.5a3 3 0 1 0 .1 0zM8 14l-3 7l3.5-1.5L10 22l2-6M16 14l3 7l-3.5-1.5L14 22l-2-6" /></svg>
+                            <span class="sc-drop-letter sc-gilt-text">W</span>
+                        </span></span>
+                        <h3 class="sc-panel-title">Writing record</h3>
+                        <p>A private account of which words you typed and which came through Feldar, with active days, time and the models used.</p>
+                        <a class="sc-more" href="/blog/provenance">Why Feldar records provenance</a>
+                    </article>
+                    <article class="sc-panel">
+                        <span class="sc-drop sc-gilt" aria-hidden="true"><span class="sc-drop-ground sc-drop-ground--umber">
+                            <svg viewBox="0 0 24 24"><path class="sc-art-pale-line" d="M3 21h18M5 21V8h4v13M10 21V5h4v16M15 21V10h4v11" /></svg>
+                            <span class="sc-drop-letter sc-gilt-text">L</span>
+                        </span></span>
+                        <h3 class="sc-panel-title">Library</h3>
+                        <p>Every book gets a cover. Import Word, PDF, Markdown or plain text up to 20 MB a file, and export the whole book or chosen pages in the same four formats.</p>
+                        <a class="sc-more" href="/novel-writing-software">Novel writing software</a>
+                    </article>
+                </div>
+            </section>
+
+            <svg class="sc-divider" aria-hidden="true"><use href="#sc-sprig" /></svg>
+
+            <section class="sc-wrap sc-section" aria-labelledby="plates-title">
+                <div class="sc-section-head">
+                    <p class="sc-rubric">Plates</p>
+                    <h2 class="sc-heading" id="plates-title">The book today.</h2>
+                    <p class="sc-intro">Bound pages replaced the scroll in the Roman world by about the 4th century. For the next thousand years books were copied by hand, on parchment, with quill pens, often in a monastery's writing room, the scriptorium. This is the writing room now. These are captures of the app itself, not drawings of it.</p>
+                </div>
+                <div class="sc-plates">
+                    <figure class="sc-plate sc-plate--wide">
+                        <video
+                            data-loop
+                            muted
+                            loop
+                            playsinline
+                            preload="none"
+                            width="1440"
+                            height="900"
+                            poster="../../assets/demo/loop-continue-blue-poster.jpg"
+                            aria-label="The caret menu opens at the end of a page, Continue from here is chosen, and new lines arrive in blue before being accepted"
+                        >
+                            <source src="../../assets/demo/loop-continue-blue.webm" type="video/webm" />
+                            <source src="../../assets/demo/loop-continue-blue.mp4" type="video/mp4" />
+                        </video>
+                        <figcaption><span class="sc-rubric">Plate I</span> Continue from here, at the end of a page. The new lines are blue until accepted.</figcaption>
+                    </figure>
+                    <figure class="sc-plate">
+                        <picture>
+                            <source type="image/avif" srcset="../../assets/product/canvas-board-1200.avif 1200w, ../../assets/product/canvas-board-2000.avif 2000w" sizes="(min-width: 900px) 540px, 90vw" />
+                            <source type="image/webp" srcset="../../assets/product/canvas-board-1200.webp 1200w, ../../assets/product/canvas-board-2000.webp 2000w" sizes="(min-width: 900px) 540px, 90vw" />
+                            <img src="../../assets/product/canvas-board-1200.webp" width="1200" height="750" loading="lazy" alt="A story board of character, place, object and plot cards, with labelled lines linking the main character to the others" />
+                        </picture>
+                        <figcaption><span class="sc-rubric">Plate II</span> The Canvas for The Winter Ledger, with one character's relations labelled.</figcaption>
+                    </figure>
+                    <figure class="sc-plate">
+                        <picture>
+                            <source type="image/avif" srcset="../../assets/product/lens-chat-1200.avif 1200w, ../../assets/product/lens-chat-2000.avif 2000w" sizes="(min-width: 900px) 540px, 90vw" />
+                            <source type="image/webp" srcset="../../assets/product/lens-chat-1200.webp 1200w, ../../assets/product/lens-chat-2000.webp 2000w" sizes="(min-width: 900px) 540px, 90vw" />
+                            <img src="../../assets/product/lens-chat-1200.webp" width="1200" height="750" loading="lazy" alt="Two reader personas, a Critic and a Poet, giving feedback on the chapter in the chat beside the page" />
+                        </picture>
+                        <figcaption><span class="sc-rubric">Plate III</span> Lens: a Critic and a Poet answer on the same chapter.</figcaption>
+                    </figure>
+                </div>
+                <a class="sc-more" href="/demo">Watch the 67-second demo</a>
+            </section>
+
+            <svg class="sc-divider" aria-hidden="true"><use href="#sc-sprig" /></svg>
+
+            <section class="sc-wrap sc-section" aria-labelledby="rules-title">
+                <div class="sc-section-head">
+                    <p class="sc-rubric">House rules</p>
+                    <h2 class="sc-heading" id="rules-title">What the scribe's assistant will not do.</h2>
+                </div>
+                <ol class="sc-rules">
+                    <li>
+                        <h3 class="sc-rule-title">Write on your page unasked</h3>
+                        <p>Nothing goes in unless you accept it. Suggestions wait in blue or in a card.</p>
+                    </li>
+                    <li>
+                        <h3 class="sc-rule-title">Learn from your book</h3>
+                        <p>Feldar never trains AI models on your writing.</p>
+                    </li>
+                    <li>
+                        <h3 class="sc-rule-title">Claim your work</h3>
+                        <p>You own what you write, and you can export it whenever you like.</p>
+                    </li>
+                    <li>
+                        <h3 class="sc-rule-title">Hide its hand</h3>
+                        <p>Blue lines and the Writing record show which words came from where.</p>
+                    </li>
+                </ol>
+                <a class="sc-more" href="/ai-for-novelists">AI for novelists</a>
+            </section>
+
+            <svg class="sc-divider" aria-hidden="true"><use href="#sc-sprig" /></svg>
+
+            <section class="sc-wrap sc-section" aria-labelledby="plans-title" data-proto-section="pricing">
+                <div class="sc-section-head">
+                    <p class="sc-rubric">Plans</p>
+                    <h2 class="sc-heading" id="plans-title">Start free. Pay when you write more.</h2>
+                    <p class="sc-intro">Every plan has the same workspace. Writing, planning and organizing never use credits. Rewrites, Chat, Checks, scenes and drafting do.</p>
+                </div>
+                <div class="sc-plans">
+                    <article class="sc-plan sc-plan--first">
+                        <span class="sc-seal" aria-hidden="true">Free</span>
+                        <h3 class="sc-plan-name">Starter</h3>
+                        <p class="sc-plan-price">Free</p>
+                        <p class="sc-plan-terms">500 credits to try everything. No credit card.</p>
+                        <a class="sc-button" href="/login" rel="nofollow">Start writing free</a>
+                    </article>
+                    <article class="sc-plan">
+                        <h3 class="sc-plan-name">Core</h3>
+                        <p class="sc-plan-price">$20 <span>a month</span></p>
+                        <p class="sc-plan-terms">20,000 credits a month, for regular drafting and revision.</p>
+                    </article>
+                    <article class="sc-plan">
+                        <h3 class="sc-plan-name">Pro</h3>
+                        <p class="sc-plan-price">$40 <span>a month</span></p>
+                        <p class="sc-plan-terms">45,000 credits a month and more premium model use.</p>
+                    </article>
+                    <article class="sc-plan">
+                        <h3 class="sc-plan-name">Ultra</h3>
+                        <p class="sc-plan-price">$200 <span>a month</span></p>
+                        <p class="sc-plan-terms">250,000 credits a month, for large manuscripts.</p>
+                    </article>
+                </div>
+                <a class="sc-more" href="/pricing">Plans in full</a>
+            </section>
+
+            <section class="sc-wrap sc-section sc-section--tight" aria-labelledby="elsewhere-title" data-proto-section="compare">
+                <div class="sc-section-head">
+                    <p class="sc-rubric">Compared</p>
+                    <h2 class="sc-heading sc-heading--small" id="elsewhere-title">Writing somewhere else today?</h2>
+                    <p class="sc-intro">Each tool is strongest at a different part of the job. These pages say where Feldar fits, and where the other app is the better choice.</p>
+                </div>
+                <ul class="sc-elsewhere">
+                    <li><a href="/compare/scrivener"><span class="sc-elsewhere-name">Feldar and Scrivener</span><span>Organizing and compiling a long manuscript</span></a></li>
+                    <li><a href="/compare/sudowrite"><span class="sc-elsewhere-name">Feldar and Sudowrite</span><span>AI drafting for fiction</span></a></li>
+                    <li><a href="/compare/novelcrafter"><span class="sc-elsewhere-name">Feldar and Novelcrafter</span><span>A story codex, and AI you connect yourself</span></a></li>
+                    <li><a href="/compare/plottr"><span class="sc-elsewhere-name">Feldar and Plottr</span><span>Timelines and plot outlines</span></a></li>
+                </ul>
+                <a class="sc-more" href="/compare">All comparisons</a>
+            </section>
+
+            <section class="sc-wrap sc-section" aria-labelledby="faq-title">
+                <div class="sc-section-head">
+                    <p class="sc-rubric">Questions</p>
+                    <h2 class="sc-heading" id="faq-title">Asked before the first page.</h2>
+                </div>
+                <div class="sc-faq">
+                    <details open>
+                        <summary>Does Feldar write the book for me?</summary>
+                        <p>No. It writes when you ask, in blue or in a card, and nothing stays unless you accept it.</p>
+                    </details>
+                    <details>
+                        <summary>Does Feldar train AI on my writing?</summary>
+                        <p>No. Your manuscript never trains AI models, and what you write is yours.</p>
+                    </details>
+                    <details>
+                        <summary>Is it free?</summary>
+                        <p>To start, yes. Starter is free with 500 credits and no credit card. Writing, planning and organizing never use credits. Paid plans start at $20 a month.</p>
+                    </details>
+                    <details>
+                        <summary>Can I bring a manuscript I have already started?</summary>
+                        <p>Yes. Import a Word, PDF, Markdown or plain-text file of up to 20 MB.</p>
+                    </details>
+                    <details>
+                        <summary>Does it work on Windows?</summary>
+                        <p>In the browser, yes. The desktop app is for Mac for now.</p>
+                    </details>
+                    <details>
+                        <summary>Can I take my novel out again?</summary>
+                        <p>Yes. Export the whole book or chosen pages as Word, PDF, Markdown or plain text.</p>
+                    </details>
+                </div>
+            </section>
+
+            <section class="sc-wrap sc-colophon" aria-labelledby="colophon-title" data-colophon>
+                <div class="sc-leaf sc-colophon-leaf">
+                    <p class="sc-rubric">Colophon</p>
+                    <h2 class="sc-heading" id="colophon-title">Here our page ends. Yours begins.</h2>
+                    <p class="sc-intro">Scribes left notes of their own in the margins and at the end of their books: about the cold, the bad ink, their aching hands. Ours is shorter. Chapter one is waiting.</p>
+                    <div class="sc-actions">
+                        <a class="sc-button" href="/login" rel="nofollow">Start writing free</a>
+                        <a class="sc-button sc-button--plain" href="/download">Download for Mac</a>
+                    </div>
+                    <p class="sc-terms">Free to start. 500 credits, no credit card.</p>
+                    <p class="sc-gloss sc-gloss--paws">A 15th century manuscript from Dubrovnik carries the inky paw prints of a cat that walked across the page. This one does too.</p>
+                    <svg class="sc-paws" viewBox="0 0 420 260" aria-hidden="true">
+                        <use href="#sc-paw" class="sc-paw" x="10" y="200" width="40" height="44" transform="rotate(38 30 222)" />
+                        <use href="#sc-paw" class="sc-paw" x="70" y="150" width="40" height="44" transform="rotate(46 90 172)" />
+                        <use href="#sc-paw" class="sc-paw" x="120" y="176" width="40" height="44" transform="rotate(40 140 198)" />
+                        <use href="#sc-paw" class="sc-paw" x="182" y="118" width="40" height="44" transform="rotate(50 202 140)" />
+                        <use href="#sc-paw" class="sc-paw" x="232" y="142" width="40" height="44" transform="rotate(42 252 164)" />
+                        <use href="#sc-paw" class="sc-paw" x="292" y="78" width="40" height="44" transform="rotate(52 312 100)" />
+                        <use href="#sc-paw" class="sc-paw" x="342" y="100" width="40" height="44" transform="rotate(44 362 122)" />
+                    </svg>
+                </div>
+            </section>
+        </main>
+
+        <footer class="sc-wrap sc-foot">
+            <a class="sc-logo" href="/" aria-label="Feldar home">
+                <img src="../../assets/logo.svg" alt="Feldar" width="156" height="45" loading="lazy" />
+            </a>
+            <nav class="sc-foot-links" aria-label="Footer">
+                <div>
+                    <p class="sc-rubric">Product</p>
+                    <a href="/features">Features</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/download">Download</a>
+                    <a href="/changelog">Changelog</a>
+                </div>
+                <div>
+                    <p class="sc-rubric">For writers</p>
+                    <a href="/novel-writing-software">Novel writing software</a>
+                    <a href="/ai-for-novelists">AI for novelists</a>
+                    <a href="/guides/how-to-outline-a-novel">Outline a novel</a>
+                    <a href="/tools">Free tools</a>
+                </div>
+                <div>
+                    <p class="sc-rubric">Company</p>
+                    <a href="/about">About</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/terms">Terms of Use</a>
+                    <a href="/privacy">Privacy Policy</a>
+                </div>
+            </nav>
+            <p class="sc-foot-note">Feldar LLC. Headings in red are called rubrics, from the Latin for red.</p>
+        </footer>
+
+        <nav class="pt-switch" aria-label="Prototypes">
+            <a href="../index.html">All concepts</a>
+            <a href="clay.html" rel="prev" aria-label="Previous concept: Clay">‹ Prev</a>
+            <a href="manuscript.html" title="Manuscript">A</a>
+            <a href="index-cards.html" title="Index cards">B</a>
+            <a href="night-studio.html" title="Night studio">C</a>
+            <a href="five-thousand-years.html" title="5,000 years">D</a>
+            <a href="clay.html" title="Clay">E</a>
+            <a href="scriptorium.html" aria-current="page">F · Scriptorium</a>
+            <a href="typewriter.html" title="Typewriter">G</a>
+            <a href="then-and-now.html" title="Then and now">H</a>
+            <a href="ledger.html" title="The novel's ledger">I</a>
+            <a href="desk.html" title="The writer's desk">J</a>
+            <a href="typewriter.html" rel="next" aria-label="Next concept: Typewriter">Next ›</a>
+        </nav>
+
+        <script type="module" src="scripts/scriptorium.js"></script>
+        <script type="module" src="../review.js"></script>
+    </body>
+</html>

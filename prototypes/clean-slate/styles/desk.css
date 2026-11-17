@@ -1,0 +1,1253 @@
+/* Concept J, The writer's desk: every tool a writer has reached for, on one desk, and
+   each one is a part of Feldar. The hero is an illustrated desk; every object is a
+   button that opens its feature, and the typewriter in the middle is the shared
+   component (components/typewriter.css), live. Nothing here comes from the live site. */
+
+:root {
+    --dk-wall: #c9d3c7;
+    --dk-wall-line: rgba(255, 255, 255, 0.07);
+    --dk-floor: #e4d6bf;
+    --dk-skirting: #f2eadb;
+    --dk-wood: #b9875a;
+    --dk-wood-light: #d3a375;
+    --dk-wood-deep: #7a5432;
+    --dk-paper: #fbf7ee;
+    --dk-card: #fffdf7;
+    --dk-ink: #1e1d1b;
+    --dk-soft: #545149;
+    --dk-rule: #e1d8c7;
+    --dk-blue: #2652d9;
+    --dk-blue-deep: #1c40ae;
+    --dk-brass: #b8923a;
+    --dk-cream-text: #f7ebdd;
+    --dk-display: "Young Serif", Georgia, serif;
+    --dk-text: "Albert Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --dk-measure: 1240px;
+    --dk-gutter: clamp(20px, 4vw, 48px);
+
+    --tw-enamel: #7c3a2e;
+    --tw-enamel-highlight: #9a4c3d;
+    --tw-enamel-deep: #55261e;
+    --tw-key: #f1e8d3;
+    --tw-sheet: #fffdf7;
+    --tw-carbon: var(--dk-ink);
+    --tw-blue: var(--dk-blue);
+    --tw-brass: var(--dk-brass);
+    --tw-text: var(--dk-text);
+    --tw-badge: var(--dk-text);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--dk-paper);
+    color: var(--dk-ink);
+    font-family: var(--dk-text);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ol,
+ul,
+figure {
+    margin: 0;
+}
+
+ol,
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+}
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+}
+
+/* Several parts set their own display, which would otherwise beat the attribute. */
+[hidden] {
+    display: none !important;
+}
+
+:focus-visible {
+    outline: 3px solid var(--dk-blue);
+    outline-offset: 3px;
+}
+
+.dk-defs {
+    position: absolute;
+}
+
+.dk-wrap {
+    width: min(100% - 2 * var(--dk-gutter), var(--dk-measure));
+    margin-inline: auto;
+}
+
+/* Text inside the desk drawings. */
+.dk-art-typed {
+    font-family: "Special Elite", "Courier New", monospace;
+    fill: #2a2723;
+}
+
+.dk-art-text {
+    font-family: var(--dk-text);
+    font-weight: 500;
+}
+
+.dk-art-bold {
+    font-family: var(--dk-text);
+    font-weight: 700;
+    fill: var(--dk-ink);
+}
+
+/* ---------- Buttons and links ---------- */
+
+.dk-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    padding: 0 24px;
+    border-radius: 999px;
+    background: var(--dk-blue);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 10px 20px -10px rgba(38, 82, 217, 0.7);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.dk-button:hover {
+    background: var(--dk-blue-deep);
+    transform: translateY(-1px);
+}
+
+.dk-button--quiet {
+    background: transparent;
+    box-shadow: inset 0 0 0 2px var(--dk-ink);
+    color: var(--dk-ink);
+}
+
+.dk-button--quiet:hover {
+    background: var(--dk-ink);
+    color: var(--dk-paper);
+}
+
+.dk-button--small {
+    height: 40px;
+    padding: 0 18px;
+    font-size: 0.9375rem;
+}
+
+.dk-link {
+    display: inline-block;
+    margin-top: 22px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
+}
+
+.dk-link::after {
+    content: " \2192";
+}
+
+.dk-link:hover {
+    color: var(--dk-blue);
+}
+
+/* ---------- Top bar ---------- */
+
+.dk-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 64px;
+    padding: 0 max(var(--dk-gutter), calc((100% - var(--dk-measure)) / 2));
+    background: rgba(201, 211, 199, 0.92);
+    border-bottom: 1px solid rgba(30, 29, 27, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.dk-logo {
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.dk-nav {
+    display: flex;
+    gap: 26px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dk-nav a,
+.dk-bar-login {
+    text-decoration: none;
+}
+
+.dk-nav a:hover,
+.dk-bar-login:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+}
+
+.dk-nav-login {
+    display: none;
+}
+
+.dk-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dk-menu-button {
+    display: none;
+    height: 40px;
+    padding: 0 14px;
+    border: 2px solid var(--dk-ink);
+    border-radius: 999px;
+    background: transparent;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* ---------- Hero: the room ---------- */
+
+.dk-hero {
+    background:
+        repeating-linear-gradient(90deg, var(--dk-wall-line) 0 2px, transparent 2px 46px),
+        var(--dk-wall);
+}
+
+.dk-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 24px 64px;
+    align-items: end;
+    padding: 30px 0 24px;
+}
+
+.dk-kicker {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dk-soft);
+}
+
+.dk-title {
+    margin-top: 12px;
+    font-family: var(--dk-display);
+    font-size: clamp(2.5rem, 4.6vw, 4.25rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+}
+
+.dk-lede {
+    font-size: 1.125rem;
+    line-height: 1.5;
+}
+
+.dk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.dk-note {
+    margin-top: 12px;
+    font-size: 0.875rem;
+    color: var(--dk-soft);
+}
+
+/* Only true where the whole desk is drawn. */
+.dk-hint {
+    display: none;
+    margin-top: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+@media (min-width: 1180px) {
+    .dk-hint {
+        display: block;
+    }
+}
+
+/* The desk. Narrow screens get the typewriter alone on a plank; from 1180px the full
+   scene is laid out in units of the scene's own width (1cqi = one hundredth of it). */
+.dk-scene {
+    width: min(100% - 2 * var(--dk-gutter), 560px);
+    margin: 0 auto;
+    padding: 8px 0 44px;
+}
+
+.dk-desk-top,
+.dk-apron,
+.dk-legs,
+.dk-object {
+    display: none;
+}
+
+.dk-scene .tw-machine {
+    position: relative;
+}
+
+.dk-scene .tw-machine::after {
+    content: "";
+    position: absolute;
+    right: -6%;
+    bottom: -14px;
+    left: -6%;
+    height: 16px;
+    border-radius: 4px;
+    background: linear-gradient(var(--dk-wood-light), var(--dk-wood) 60%, var(--dk-wood-deep));
+    box-shadow: 0 10px 18px -10px rgba(60, 40, 20, 0.6);
+}
+
+.dk-scene .tw-controls {
+    margin-top: 40px;
+}
+
+.dk-demo-note {
+    padding: 12px var(--dk-gutter);
+    border-top: 4px solid var(--dk-skirting);
+    background: var(--dk-floor);
+    font-size: 0.8125rem;
+    text-align: center;
+    color: var(--dk-soft);
+}
+
+@media (min-width: 1180px) {
+    .dk-scene {
+        position: relative;
+        width: min(100% - 2 * var(--dk-gutter), var(--dk-measure));
+        aspect-ratio: 100 / 54;
+        padding: 0;
+        container-type: inline-size;
+    }
+
+    .dk-desk-top {
+        position: absolute;
+        top: 34cqi;
+        right: 0;
+        left: 0;
+        z-index: 1;
+        display: block;
+        height: 7.4cqi;
+        border-radius: 0.6cqi 0.6cqi 0 0;
+        background: linear-gradient(180deg, #a9774c 0, #c99766 9%, var(--dk-wood-light) 46%, #c79563 100%);
+        box-shadow: 0 -0.3cqi 0.9cqi rgba(60, 40, 20, 0.18);
+    }
+
+    /* The lit front edge of the desk top. */
+    .dk-desk-top::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 0.6cqi;
+        background: #e2b588;
+    }
+
+    .dk-apron {
+        position: absolute;
+        top: 41.4cqi;
+        right: 1.2cqi;
+        left: 1.2cqi;
+        z-index: 1;
+        display: block;
+        height: 10.4cqi;
+        border-radius: 0 0 0.8cqi 0.8cqi;
+        background: linear-gradient(#83593a, var(--dk-wood-deep) 30%, #6c4a2c);
+        box-shadow: inset 0 0.4cqi 0.6cqi rgba(0, 0, 0, 0.25);
+    }
+
+    /* Two drawers, each with a brass pull. */
+    .dk-apron::before,
+    .dk-apron::after {
+        content: "";
+        position: absolute;
+        top: 1.6cqi;
+        width: 17cqi;
+        height: 7cqi;
+        border-radius: 0.5cqi;
+        background: radial-gradient(circle, #e2c278 0 0.7cqi, #8a6a26 0.75cqi 0.95cqi, transparent 1cqi) center / 100% 100% no-repeat;
+        box-shadow:
+            inset 0 0 0 0.25cqi rgba(255, 220, 180, 0.16),
+            inset 0 0.5cqi 0.8cqi rgba(0, 0, 0, 0.22);
+    }
+
+    .dk-apron::before {
+        left: 2.5cqi;
+    }
+
+    .dk-apron::after {
+        right: 2.5cqi;
+    }
+
+    .dk-legs {
+        position: absolute;
+        top: 51.8cqi;
+        right: 2.6cqi;
+        left: 2.6cqi;
+        display: block;
+        height: 2.2cqi;
+        background: linear-gradient(90deg, #6c4a2c 0 2.4cqi, transparent 2.4cqi calc(100% - 2.4cqi), #6c4a2c calc(100% - 2.4cqi));
+    }
+
+    .dk-object {
+        position: absolute;
+        top: calc(var(--y) * 1cqi);
+        left: calc(var(--x) * 1cqi);
+        z-index: 2;
+        display: block;
+        width: calc(var(--w) * 1cqi);
+        height: calc(var(--h) * 1cqi);
+        padding: 0;
+        border: 0;
+        border-radius: 0.6cqi;
+        background: none;
+        cursor: pointer;
+    }
+
+    .dk-object svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        transform-origin: 50% 100%;
+        transition: transform 200ms ease, filter 200ms ease;
+    }
+
+    .dk-object:hover,
+    .dk-object:focus-visible,
+    .dk-object[aria-pressed="true"] {
+        z-index: 4;
+    }
+
+    .dk-object:hover svg,
+    .dk-object:focus-visible svg,
+    .dk-object[aria-pressed="true"] svg {
+        filter:
+            drop-shadow(0 0.4cqi 0.5cqi rgba(40, 25, 10, 0.25))
+            drop-shadow(0 0 0.9cqi rgba(255, 246, 220, 0.9));
+        transform: translateY(-0.35cqi);
+    }
+
+    .dk-object:hover svg {
+        animation: dk-wobble 520ms ease;
+    }
+
+    /* A small brass marker on every object says it can be pressed. */
+    .dk-object::after {
+        content: "";
+        position: absolute;
+        top: -0.3cqi;
+        right: -0.3cqi;
+        width: 0.9cqi;
+        height: 0.9cqi;
+        border-radius: 50%;
+        background: var(--dk-brass);
+        box-shadow: 0 0 0 0.22cqi rgba(255, 248, 230, 0.85);
+        animation: dk-pulse 2400ms ease-out 1200ms 2;
+    }
+
+    .dk-object[aria-pressed="true"]::after {
+        background: var(--dk-ink);
+    }
+
+    .dk-label {
+        position: absolute;
+        bottom: calc(100% + 0.7cqi);
+        left: 50%;
+        z-index: 5;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: var(--dk-ink);
+        color: var(--dk-cream-text);
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.2;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, 0.3cqi);
+        transition: opacity 150ms ease, transform 150ms ease;
+    }
+
+    .dk-object--label-below .dk-label {
+        top: calc(100% + 0.7cqi);
+        bottom: auto;
+    }
+
+    .dk-object:hover .dk-label,
+    .dk-object:focus-visible .dk-label,
+    .dk-object[aria-pressed="true"] .dk-label {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+
+    .dk-object--tag:hover svg,
+    .dk-object--tag:focus-visible svg,
+    .dk-object--tag[aria-pressed="true"] svg {
+        transform: translateY(-0.35cqi) rotate(-3deg);
+    }
+
+    /* The live typewriter, standing on the desk top. Its controls are moved onto the
+       desk front: inside the rig 1cqi is a hundredth of the rig, and the rig is 34
+       hundredths of the scene, so one scene unit is about 2.94 rig units. */
+    .dk-scene .tw-rig {
+        position: absolute;
+        top: 2.2cqi;
+        left: 33cqi;
+        z-index: 3;
+        width: 34cqi;
+        margin: 0;
+    }
+
+    .dk-scene .tw-machine::after {
+        content: none;
+    }
+
+    .dk-scene .tw-controls {
+        position: absolute;
+        top: calc(100% + 9.4cqi);
+        left: 50%;
+        width: 159cqi;
+        margin: 0;
+        transform: translateX(-50%);
+    }
+
+    .dk-scene .tw-button,
+    .dk-scene .tw-ribbon {
+        min-height: 42px;
+        box-shadow: 0 4px 0 #000;
+    }
+
+    .dk-scene .tw-button {
+        padding: 0 16px;
+        font-size: 0.9375rem;
+    }
+
+    .dk-scene .tw-ribbon-label,
+    .dk-scene .tw-ribbon-half {
+        padding: 0 10px;
+    }
+
+    .dk-scene .tw-status {
+        color: var(--dk-cream-text);
+    }
+}
+
+@keyframes dk-wobble {
+    30% {
+        rotate: -1.4deg;
+    }
+
+    65% {
+        rotate: 1deg;
+    }
+}
+
+@keyframes dk-pulse {
+    0% {
+        box-shadow: 0 0 0 0.22cqi rgba(255, 248, 230, 0.85), 0 0 0 0 rgba(184, 146, 58, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0.22cqi rgba(255, 248, 230, 0.85), 0 0 0 1.4cqi rgba(184, 146, 58, 0);
+    }
+}
+
+/* ---------- Sections ---------- */
+
+.dk-section {
+    padding-top: 104px;
+}
+
+.dk-h2 {
+    font-family: var(--dk-display);
+    font-size: clamp(2.125rem, 3.6vw, 3.25rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+}
+
+.dk-h2--small {
+    font-size: clamp(1.625rem, 2.4vw, 2.125rem);
+}
+
+.dk-section-lede {
+    max-width: 38em;
+    margin-top: 14px;
+    font-size: 1.0625rem;
+    color: var(--dk-soft);
+}
+
+/* ---------- Around the desk: the index and the feature panels ---------- */
+
+.dk-around {
+    padding-top: 72px;
+}
+
+.dk-around-head {
+    display: grid;
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    gap: 32px 64px;
+    align-items: start;
+}
+
+.dk-index {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px 20px;
+}
+
+.dk-index-group {
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--dk-ink);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.dk-index-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    width: 100%;
+    padding: 11px 10px 11px 0;
+    border: 0;
+    border-bottom: 1px solid var(--dk-rule);
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 150ms ease, padding 150ms ease;
+}
+
+.dk-index-name {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.dk-index-object {
+    font-size: 0.8125rem;
+    color: var(--dk-soft);
+}
+
+.dk-index-entry:hover .dk-index-name {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+}
+
+.dk-index-entry[aria-pressed="true"] {
+    padding-left: 12px;
+    background: linear-gradient(90deg, #efe5cf, rgba(239, 229, 207, 0));
+    box-shadow: inset 3px 0 0 var(--dk-ink);
+}
+
+.dk-index-entry[aria-pressed="true"] .dk-index-name {
+    font-weight: 800;
+}
+
+.dk-panels {
+    margin-top: 36px;
+    padding: 40px;
+    border-radius: 24px;
+    background: var(--dk-card);
+    box-shadow:
+        0 0 0 1px rgba(60, 40, 20, 0.07),
+        0 28px 56px -36px rgba(60, 40, 20, 0.4);
+    scroll-margin: 88px 0 24px;
+}
+
+.dk-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 48px;
+    align-items: center;
+}
+
+.dk-panel-kicker {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dk-soft);
+}
+
+.dk-panel-kicker span {
+    color: var(--dk-ink);
+}
+
+.dk-panel-title {
+    margin-top: 10px;
+    font-family: var(--dk-display);
+    font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.08;
+}
+
+.dk-panel-promise {
+    margin-top: 10px;
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.dk-panel-label {
+    margin-top: 22px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dk-soft);
+}
+
+.dk-steps {
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+    counter-reset: step;
+}
+
+.dk-steps li {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+    font-size: 1rem;
+    line-height: 1.45;
+    counter-increment: step;
+}
+
+.dk-steps li::before {
+    content: counter(step);
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--dk-ink);
+    color: var(--dk-cream-text);
+    font-family: var(--dk-display);
+    font-size: 0.9375rem;
+    line-height: 1;
+}
+
+.dk-panel-good {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--dk-rule);
+    color: var(--dk-soft);
+}
+
+.dk-panel-good strong {
+    font-weight: 800;
+    color: var(--dk-ink);
+}
+
+.dk-panel-aside {
+    margin-top: 14px;
+    padding-left: 12px;
+    border-left: 2px solid var(--dk-brass);
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--dk-soft);
+}
+
+.dk-panel-shot img,
+.dk-panel-shot video {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(30, 29, 27, 0.08),
+        0 20px 40px -22px rgba(40, 30, 15, 0.5);
+}
+
+/* ---------- One chapter across the desk ---------- */
+
+.dk-chapter-steps {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 36px;
+    counter-reset: chapter;
+}
+
+.dk-chapter-steps li {
+    padding-top: 16px;
+    border-top: 2px solid var(--dk-ink);
+    counter-increment: chapter;
+}
+
+.dk-chapter-object {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dk-soft);
+}
+
+.dk-chapter-object::before {
+    content: counter(chapter) ". ";
+    color: var(--dk-ink);
+}
+
+.dk-chapter-name {
+    margin-top: 8px;
+    font-family: var(--dk-display);
+    font-size: 1.375rem;
+    line-height: 1.15;
+}
+
+.dk-chapter-steps li > p:last-child {
+    margin-top: 8px;
+    font-size: 0.9375rem;
+    color: var(--dk-soft);
+}
+
+/* ---------- House rules ---------- */
+
+.dk-rule-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 36px;
+    counter-reset: rule;
+}
+
+.dk-rule-list li {
+    padding: 24px;
+    border-radius: 18px;
+    background: var(--dk-wall);
+    counter-increment: rule;
+}
+
+.dk-rule-list li::before {
+    content: counter(rule);
+    display: block;
+    font-family: var(--dk-display);
+    font-size: 2.25rem;
+    line-height: 1;
+}
+
+.dk-rule-list h3 {
+    margin-top: 14px;
+    font-size: 1.125rem;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.dk-rule-list p {
+    margin-top: 6px;
+    font-size: 0.9375rem;
+    color: var(--dk-soft);
+}
+
+/* ---------- Plans and comparisons ---------- */
+
+.dk-plans {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 36px;
+}
+
+.dk-plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 26px;
+    border-radius: 18px;
+    background: var(--dk-card);
+    box-shadow: 0 0 0 1px rgba(60, 40, 20, 0.1);
+}
+
+.dk-plan h3 {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.dk-plan-price {
+    font-family: var(--dk-display);
+    font-size: 2.75rem;
+    line-height: 1;
+}
+
+.dk-plan-price span {
+    font-family: var(--dk-text);
+    font-size: 0.9375rem;
+    color: var(--dk-soft);
+}
+
+.dk-plan-terms {
+    color: var(--dk-soft);
+}
+
+.dk-plan .dk-button {
+    margin-top: auto;
+}
+
+.dk-plan--start {
+    background: #f2f5ff;
+    box-shadow: 0 0 0 2px var(--dk-blue);
+}
+
+.dk-plan-flag {
+    position: absolute;
+    top: -12px;
+    right: 18px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--dk-blue);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.dk-compare {
+    padding-top: 72px;
+}
+
+.dk-compare-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.dk-compare-links a {
+    display: inline-flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: var(--dk-card);
+    box-shadow: inset 0 0 0 1.5px var(--dk-ink);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+.dk-compare-links a:hover {
+    background: var(--dk-ink);
+    color: var(--dk-paper);
+}
+
+/* ---------- Questions ---------- */
+
+.dk-faq-list {
+    max-width: 860px;
+    margin-top: 32px;
+    border-top: 2px solid var(--dk-ink);
+}
+
+.dk-faq details {
+    border-bottom: 1px solid var(--dk-rule);
+}
+
+.dk-faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 0;
+    font-family: var(--dk-display);
+    font-size: 1.3125rem;
+    line-height: 1.25;
+    list-style: none;
+    cursor: pointer;
+}
+
+.dk-faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.dk-faq summary::after {
+    content: "+";
+    flex-shrink: 0;
+    font-family: var(--dk-text);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.dk-faq details[open] summary::after {
+    content: "\2212";
+}
+
+.dk-faq details p {
+    max-width: 40em;
+    padding-bottom: 22px;
+    color: var(--dk-soft);
+}
+
+/* ---------- Close and foot ---------- */
+
+.dk-close {
+    margin-top: 112px;
+    padding: 88px 0 96px;
+    background:
+        repeating-linear-gradient(90deg, var(--dk-wall-line) 0 2px, transparent 2px 46px),
+        var(--dk-wall);
+    text-align: center;
+}
+
+.dk-close-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dk-chair {
+    width: 96px;
+    height: auto;
+}
+
+.dk-close-title {
+    margin-top: 18px;
+    font-family: var(--dk-display);
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.01em;
+}
+
+.dk-close .dk-section-lede {
+    margin-inline: auto;
+    color: var(--dk-ink);
+}
+
+.dk-close .dk-actions {
+    justify-content: center;
+}
+
+.dk-foot {
+    padding: 48px 0 120px;
+    border-top: 1px solid var(--dk-rule);
+}
+
+.dk-foot-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    gap: 32px;
+}
+
+.dk-foot-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+}
+
+.dk-foot-links div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.dk-foot-title {
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dk-soft);
+}
+
+.dk-foot-links a {
+    text-decoration: none;
+}
+
+.dk-foot-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+}
+
+.dk-foot-note {
+    grid-column: 1 / -1;
+    font-size: 0.875rem;
+    color: var(--dk-soft);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+    .dk-around-head {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dk-panel {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+
+    .dk-chapter-steps {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: 28px;
+    }
+
+    .dk-rule-list,
+    .dk-plans {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 860px) {
+    .dk-intro {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 32px;
+    }
+
+    .dk-nav {
+        position: absolute;
+        top: 64px;
+        right: 0;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px var(--dk-gutter) 18px;
+        background: var(--dk-wall);
+        border-bottom: 1px solid rgba(30, 29, 27, 0.12);
+        font-size: 1.0625rem;
+    }
+
+    .dk-nav a {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(30, 29, 27, 0.1);
+    }
+
+    .dk-bar.is-open .dk-nav {
+        display: flex;
+    }
+
+    .dk-nav-login {
+        display: block;
+    }
+
+    .dk-bar-login {
+        display: none;
+    }
+
+    .dk-menu-button {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .dk-index {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    body {
+        font-size: 16px;
+    }
+
+    .dk-bar {
+        gap: 12px;
+    }
+
+    .dk-bar-actions {
+        gap: 8px;
+    }
+
+    .dk-panels {
+        padding: 22px 18px;
+        border-radius: 18px;
+    }
+
+    .dk-chapter-steps,
+    .dk-rule-list,
+    .dk-plans,
+    .dk-foot-inner,
+    .dk-foot-links {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dk-section {
+        padding-top: 80px;
+    }
+
+    .dk-close {
+        margin-top: 88px;
+    }
+}
+
+@media (max-width: 400px) {
+    .dk-bar .dk-button--small {
+        padding: 0 12px;
+        font-size: 0.875rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .dk-object:hover svg,
+    .dk-object:focus-visible svg,
+    .dk-object[aria-pressed="true"] svg {
+        transform: none;
+    }
+}

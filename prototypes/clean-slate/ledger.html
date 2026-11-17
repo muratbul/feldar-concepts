@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex,nofollow" />
+        <meta
+            name="description"
+            content="Feldar is a writing app for novelists. It keeps your novel's books, from scene plans to story world, and suggests in blue. Nothing stays unless you accept it."
+        />
+        <title>Concept I: The novel's ledger - Feldar</title>
+
+        <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@400;500;600;700&display=swap"
+        />
+
+        <link rel="stylesheet" href="../switcher.css" />
+        <link rel="stylesheet" href="styles/ledger.css" />
+
+        <!-- With script, the account book shows one entry at a time. Without it, every
+             entry is laid out in full, one after another. -->
+        <script>
+            document.documentElement.classList.add("lg-js");
+        </script>
+    </head>
+    <body>
+        <header class="lg-bar">
+            <a class="lg-logo" href="/" aria-label="Feldar home">
+                <img src="../../assets/logo-nav.svg" alt="Feldar" width="59" height="17" />
+            </a>
+            <nav class="lg-nav" aria-label="Main">
+                <a href="/features">Features</a>
+                <a href="/compare">Compare</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/blog">Blog</a>
+                <a href="/download">Download</a>
+            </nav>
+            <div class="lg-bar-actions">
+                <a class="lg-bar-login" href="/login" rel="nofollow">Log in</a>
+                <a class="lg-button lg-button--primary lg-button--small" href="/login" rel="nofollow">Start writing free</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="lg-wrap lg-hero">
+                <div class="lg-hero-text">
+                    <p class="lg-kicker">A writing app for novelists</p>
+                    <h1 class="lg-title">You write the novel. <em>Feldar keeps the books.</em></h1>
+                    <p class="lg-lede">A novel has accounts to keep: the scenes you planned, the people on your board, the lines still waiting for your yes, and which words are yours. Feldar keeps them beside the page, so you can get on with the writing.</p>
+                    <div class="lg-actions">
+                        <a class="lg-button lg-button--primary" href="/login" rel="nofollow">Start writing free</a>
+                        <a class="lg-button lg-button--quiet" href="/download">Download for Mac</a>
+                    </div>
+                    <p class="lg-note">Free to start. 500 credits, no credit card.</p>
+                </div>
+
+                <div class="lg-hero-object">
+                    <div class="lg-spread">
+                        <div class="lg-spread-head">
+                            <p class="lg-spread-title">The Winter Ledger <span>Accounts</span></p>
+                            <p class="lg-spread-meta"><span>Kept by Feldar</span><span class="lg-demo-tag">Demo figures</span></p>
+                        </div>
+                        <div class="lg-colheads" aria-hidden="true">
+                            <span>Account</span>
+                            <span>Kept by</span>
+                            <span>Balance</span>
+                        </div>
+                        <ul class="lg-rows" aria-label="Accounts for a sample novel, each kept by a Feldar feature">
+                            <li>
+                                <a class="lg-row" href="#entry-outline" data-account="plan" data-open-entry="outline">
+                                    <span class="lg-row-account">Scenes planned for chapter four</span>
+                                    <span class="lg-row-kept"><span class="lg-pill">Outline</span></span>
+                                    <span class="lg-row-balance">5</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="lg-row" href="#entry-draft" data-account="plan" data-open-entry="draft">
+                                    <span class="lg-row-account">Pages drafted from the plan</span>
+                                    <span class="lg-row-kept"><span class="lg-pill">Draft Page</span></span>
+                                    <span class="lg-row-balance">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="lg-row" href="#entry-canvas" data-account="plan" data-open-entry="canvas">
+                                    <span class="lg-row-account">People, places and things on the board</span>
+                                    <span class="lg-row-kept"><span class="lg-pill">The Canvas</span></span>
+                                    <span class="lg-row-balance">14</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="lg-row" href="#entry-continue" data-account="write" data-open-entry="continue">
+                                    <span class="lg-row-account">Lines waiting for your yes</span>
+                                    <span class="lg-row-kept"><span class="lg-pill">Continue from here</span></span>
+                                    <span class="lg-row-balance lg-row-balance--waiting">1</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="lg-row" href="#entry-rewrite" data-account="write" data-open-entry="rewrite">
+                                    <span class="lg-row-account">Passages reworked</span>
+                                    <span class="lg-row-kept"><span class="lg-pill">Polish, Deepen, Enhance</span></span>
+                                    <span class="lg-row-balance">3</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="lg-row" href="#entry-checks" data-account="revise" data-open-entry="checks">
+                                    <span class="lg-row-account">Marks waiting in revision</span>
+                                    <span class="lg-row-kept"><span class="lg-pill">Checks</span></span>
+                                    <span class="lg-row-balance">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="lg-row" href="#entry-lens" data-account="revise" data-open-entry="lens">
+                                    <span class="lg-row-account">Readers asked about chapter three</span>
+                                    <span class="lg-row-kept"><span class="lg-pill">Lens</span></span>
+                                    <span class="lg-row-balance">6</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="lg-row" href="#entry-record" data-account="keep" data-open-entry="record">
+                                    <span class="lg-row-account">Words entered</span>
+                                    <span class="lg-row-kept"><span class="lg-pill">Writing record</span></span>
+                                    <span class="lg-row-balance">8,375</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <p class="lg-total">
+                            <span class="lg-total-label">By your hand</span>
+                            <span class="lg-total-figure">92%</span>
+                        </p>
+                        <p class="lg-spread-note">7% through Feldar, 1% pasted. Demo figures for a sample novel.</p>
+                    </div>
+
+                    <figure class="lg-tablet">
+                        <div class="lg-tablet-clay" role="img" aria-label="A small clay tablet pressed with tally marks and wedges">
+                            <svg viewBox="0 0 180 140" width="180" height="140" aria-hidden="true" focusable="false">
+                                <defs>
+                                    <g id="lg-marks">
+                                        <path d="M30 26v26M38 26v26M46 26v26M54 26v26M24 48l38-18" />
+                                        <path d="M80 26v26M88 26v26M96 26v26M104 26v26M74 48l38-18" />
+                                        <path d="M128 26v26M136 26v26M144 26v26" />
+                                        <path d="M30 70l12 5-12 5zM42 75h14M66 70l12 5-12 5zM78 75h14M102 70l12 5-12 5zM114 75h14M138 70l12 5-12 5z" />
+                                        <path d="M30 98v24M38 98v24M46 98v24M54 98v24M24 118l38-16" />
+                                        <path d="M80 98v24M88 98v24M96 98v24" />
+                                    </g>
+                                </defs>
+                                <use href="#lg-marks" class="lg-marks-light" transform="translate(1 1.4)" />
+                                <use href="#lg-marks" class="lg-marks-deep" />
+                            </svg>
+                        </div>
+                    </figure>
+                    <p class="lg-object-caption">About 3300 BCE, in Sumer, people pressed the first writing we know of into wet clay. It was accounts: grain, beer and livestock.</p>
+                </div>
+            </section>
+
+            <section class="lg-wrap lg-section" id="accounts" aria-labelledby="accounts-title" data-proto-section="features">
+                <p class="lg-kicker">What Feldar does</p>
+                <h2 class="lg-h2" id="accounts-title">The accounts.</h2>
+                <p class="lg-intro">Twelve tools, filed in four accounts. Choose any entry to see what it does, how it works and what it looks like. Every picture is the real app, with one novel running through every shot: The Winter Ledger.</p>
+
+                <div class="lg-book" data-book>
+                    <div class="lg-tabs">
+                        <button type="button" class="lg-tab" data-account="plan" data-tab="outline" aria-label="Open the Plan account" aria-current="true">Plan</button>
+                        <button type="button" class="lg-tab" data-account="write" data-tab="continue" aria-label="Open the Write account">Write</button>
+                        <button type="button" class="lg-tab" data-account="revise" data-tab="checks" aria-label="Open the Revise account">Revise</button>
+                        <button type="button" class="lg-tab" data-account="keep" data-tab="record" aria-label="Open the Keep account">Keep</button>
+                    </div>
+
+                    <div class="lg-index" data-index>
+                        <p class="lg-index-head"><span>Index</span><span>12 entries</span></p>
+
+                        <div class="lg-account" data-account="plan">
+                            <p class="lg-account-head">Plan <span>Before the chapter</span></p>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-outline-button" aria-expanded="true" aria-controls="entry-outline" data-entry-button="outline">
+                                        <span class="lg-entry-num">01</span>
+                                        <span class="lg-entry-name">Outline and Generate scenes</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel is-open" id="entry-outline" role="region" aria-labelledby="entry-outline-button">
+                                    <p class="lg-panel-kicker"><span>Plan</span><span>Entry 01: Outline and Generate scenes</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">Plan a chapter as scenes before you write a word of it.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Knowing where a chapter is going before you start it.</p>
+                                            <a class="lg-link" href="/features/scenes">How scene planning works</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>Open the Outline beside any page.</li>
+                                                <li>Say what happens next, choose how many scenes, and press Generate scenes.</li>
+                                                <li>Edit, reorder, add or delete scenes until the plan is yours.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <video
+                                            data-loop
+                                            muted
+                                            loop
+                                            playsinline
+                                            preload="none"
+                                            width="1440"
+                                            height="900"
+                                            poster="../../assets/demo/loop-outline-scenes-poster.jpg"
+                                            aria-label="The Outline opens on an empty chapter, Generate scenes runs, and five scenes appear with titles and descriptions"
+                                        >
+                                            <source src="../../assets/demo/loop-outline-scenes.webm" type="video/webm" />
+                                            <source src="../../assets/demo/loop-outline-scenes.mp4" type="video/mp4" />
+                                        </video>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-draft-button" aria-expanded="false" aria-controls="entry-draft" data-entry-button="draft">
+                                        <span class="lg-entry-num">02</span>
+                                        <span class="lg-entry-name">Draft Page</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-draft" role="region" aria-labelledby="entry-draft-button">
+                                    <p class="lg-panel-kicker"><span>Plan</span><span>Entry 02: Draft Page</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">A first pass at the chapter, written from your scenes.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Getting past the blank page on a chapter you have already planned.</p>
+                                            <a class="lg-link" href="/features/scenes">Scenes to chapters</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>With scenes in the Outline, press Draft Page.</li>
+                                                <li>In Generation settings, choose Pages to generate and Words per page.</li>
+                                                <li>Read the draft and rework it like any page. Or write the chapter yourself.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <picture>
+                                            <source type="image/avif" srcset="../../assets/product/outline-draft-page-1200.avif 1200w, ../../assets/product/outline-draft-page-2000.avif 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <source type="image/webp" srcset="../../assets/product/outline-draft-page-1200.webp 1200w, ../../assets/product/outline-draft-page-2000.webp 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <img src="../../assets/product/outline-draft-page-1200.webp" width="1200" height="750" loading="lazy" alt="A chapter drafted from its outline, the page on the left and its scenes on the right" />
+                                        </picture>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-canvas-button" aria-expanded="false" aria-controls="entry-canvas" data-entry-button="canvas">
+                                        <span class="lg-entry-num">03</span>
+                                        <span class="lg-entry-name">The Canvas</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-canvas" role="region" aria-labelledby="entry-canvas-button">
+                                    <p class="lg-panel-kicker"><span>Plan</span><span>Entry 03: The Canvas</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">Your story world as linked cards, beside the manuscript.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Keeping names, places and who knows what straight across a long book.</p>
+                                            <a class="lg-link" href="/features/canvas">How the Canvas works</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>Add cards from the tray: Character, Location, Plot, Item, Faction or Note.</li>
+                                                <li>Draw a line between two cards and say how they relate.</li>
+                                                <li>Select a card and Branch to grow a related one. Feldar reads the board before it writes.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <picture>
+                                            <source type="image/avif" srcset="../../assets/product/canvas-board-1200.avif 1200w, ../../assets/product/canvas-board-2000.avif 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <source type="image/webp" srcset="../../assets/product/canvas-board-1200.webp 1200w, ../../assets/product/canvas-board-2000.webp 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <img src="../../assets/product/canvas-board-1200.webp" width="1200" height="750" loading="lazy" alt="A story board of character, place, object and plot cards, with labelled lines linking the main character to the others" />
+                                        </picture>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg-account" data-account="write">
+                            <p class="lg-account-head">Write <span>On the page</span></p>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-continue-button" aria-expanded="false" aria-controls="entry-continue" data-entry-button="continue">
+                                        <span class="lg-entry-num">04</span>
+                                        <span class="lg-entry-name">Continue from here</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-continue" role="region" aria-labelledby="entry-continue-button">
+                                    <p class="lg-panel-kicker"><span>Write</span><span>Entry 04: Continue from here</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">The next lines, when they will not come.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Getting unstuck without handing over the scene.</p>
+                                            <a class="lg-link" href="/ai-for-novelists">AI for novelists</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>Hover over the caret at the end of a paragraph.</li>
+                                                <li>Choose Continue from here, or Extend paragraph, Add transition or Start dialogue.</li>
+                                                <li>The lines arrive in blue. Accept, Revise or Dismiss them.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <video
+                                            data-loop
+                                            muted
+                                            loop
+                                            playsinline
+                                            preload="none"
+                                            width="1440"
+                                            height="900"
+                                            poster="../../assets/demo/loop-continue-blue-poster.jpg"
+                                            aria-label="The caret menu opens at the end of a page, Continue from here is chosen, and new lines arrive in blue before being accepted"
+                                        >
+                                            <source src="../../assets/demo/loop-continue-blue.webm" type="video/webm" />
+                                            <source src="../../assets/demo/loop-continue-blue.mp4" type="video/mp4" />
+                                        </video>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-rewrite-button" aria-expanded="false" aria-controls="entry-rewrite" data-entry-button="rewrite">
+                                        <span class="lg-entry-num">05</span>
+                                        <span class="lg-entry-name">Polish, Deepen, Enhance</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-rewrite" role="region" aria-labelledby="entry-rewrite-button">
+                                    <p class="lg-panel-kicker"><span>Write</span><span>Entry 05: Polish, Deepen, Enhance</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">Rewrite a passage and see every change before you keep it.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Line editing in your own voice.</p>
+                                            <a class="lg-link" href="/ai-for-novelists">AI for novelists</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>Select a passage.</li>
+                                                <li>Choose Polish, Deepen or Enhance, or type what you want with Instruct.</li>
+                                                <li>The card marks every added word. Apply keeps the rewrite, and Undo takes it back.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <video
+                                            data-loop
+                                            muted
+                                            loop
+                                            playsinline
+                                            preload="none"
+                                            width="1440"
+                                            height="900"
+                                            poster="../../assets/demo/loop-define-rewrite-card-poster.jpg"
+                                            aria-label="A paragraph is selected, Deepen description is chosen, and the rewrite card shows the suggestion with added words in blue before Apply"
+                                        >
+                                            <source src="../../assets/demo/loop-define-rewrite-card.webm" type="video/webm" />
+                                            <source src="../../assets/demo/loop-define-rewrite-card.mp4" type="video/mp4" />
+                                        </video>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-voice-button" aria-expanded="false" aria-controls="entry-voice" data-entry-button="voice">
+                                        <span class="lg-entry-num">06</span>
+                                        <span class="lg-entry-name">Voice &amp; Style</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-voice" role="region" aria-labelledby="entry-voice-button">
+                                    <p class="lg-panel-kicker"><span>Write</span><span>Entry 06: Voice &amp; Style</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">Help that sounds like your own prose.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Suggestions that fit the page they land on.</p>
+                                            <a class="lg-link" href="/ai-for-novelists">AI for novelists</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>Open Settings, then Voice &amp; Style.</li>
+                                                <li>Paste a sample of your prose, at least 600 words.</li>
+                                                <li>Feldar writes toward it, and follows the book's own prose as the project grows.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <picture>
+                                            <source type="image/avif" srcset="../../assets/product/voice-style-1200.avif 1200w, ../../assets/product/voice-style-2000.avif 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <source type="image/webp" srcset="../../assets/product/voice-style-1200.webp 1200w, ../../assets/product/voice-style-2000.webp 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <img src="../../assets/product/voice-style-1200.webp" width="1200" height="750" loading="lazy" alt="The Voice and Style settings, with a short description of the book's voice and a pasted writing sample" />
+                                        </picture>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg-account" data-account="revise">
+                            <p class="lg-account-head">Revise <span>Before anyone reads it</span></p>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-checks-button" aria-expanded="false" aria-controls="entry-checks" data-entry-button="checks">
+                                        <span class="lg-entry-num">07</span>
+                                        <span class="lg-entry-name">Checks</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-checks" role="region" aria-labelledby="entry-checks-button">
+                                    <p class="lg-panel-kicker"><span>Revise</span><span>Entry 07: Checks</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">Five editing passes, with a fix for every mark.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">A careful revision pass before anyone else reads the chapter. Opening Checks changes nothing.</p>
+                                            <a class="lg-link" href="/features">All features</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>Open Checks beside the page.</li>
+                                                <li>Run the passes: Fix critical mistakes, Improve accuracy and clarity, Tighten word choice, Smooth dialogue transitions, Clarify character perspectives.</li>
+                                                <li>Each issue is marked in the text. Accept the fix, ask Rewrite for me, or Discard it.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <picture>
+                                            <source type="image/avif" srcset="../../assets/product/checks-panel-1200.avif 1200w, ../../assets/product/checks-panel-2000.avif 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <source type="image/webp" srcset="../../assets/product/checks-panel-1200.webp 1200w, ../../assets/product/checks-panel-2000.webp 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <img src="../../assets/product/checks-panel-1200.webp" width="1200" height="750" loading="lazy" alt="The Checks panel listing five editorial checks, with two passages marked in the chapter" />
+                                        </picture>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-lens-button" aria-expanded="false" aria-controls="entry-lens" data-entry-button="lens">
+                                        <span class="lg-entry-num">08</span>
+                                        <span class="lg-entry-name">Lens</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-lens" role="region" aria-labelledby="entry-lens-button">
+                                    <p class="lg-panel-kicker"><span>Revise</span><span>Entry 08: Lens</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">Six readers beside your page.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Hearing what works, and what does not, before the draft goes out.</p>
+                                            <a class="lg-link" href="/features">All features</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>Open Chat and switch to Lens.</li>
+                                                <li>Ask the Critic, Cheerleader, Poet, Editor, Plotter or Reader, or @mention one.</li>
+                                                <li>Let them answer alone, or have them Debate and Synthesize.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <picture>
+                                            <source type="image/avif" srcset="../../assets/product/lens-chat-1200.avif 1200w, ../../assets/product/lens-chat-2000.avif 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <source type="image/webp" srcset="../../assets/product/lens-chat-1200.webp 1200w, ../../assets/product/lens-chat-2000.webp 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <img src="../../assets/product/lens-chat-1200.webp" width="1200" height="750" loading="lazy" alt="Two reader personas, a Critic and a Poet, giving feedback on the chapter in the chat beside the page" />
+                                        </picture>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-readers-button" aria-expanded="false" aria-controls="entry-readers" data-entry-button="readers">
+                                        <span class="lg-entry-num">09</span>
+                                        <span class="lg-entry-name">Reader reactions</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-readers" role="region" aria-labelledby="entry-readers-button">
+                                    <p class="lg-panel-kicker"><span>Revise</span><span>Entry 09: Reader reactions</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">How an audience might take the chapter.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Seeing the chapter from the other side of the page.</p>
+                                            <a class="lg-link" href="/features">All features</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>In Lens, choose Reader reactions.</li>
+                                                <li>Pick an audience: General readers, Fantasy readers, Book club readers, Creative writing students or Literary magazine editors.</li>
+                                                <li>Read the report, with markers in your page's margin.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <picture>
+                                            <source type="image/avif" srcset="../../assets/product/reader-reactions-1200.avif 1200w, ../../assets/product/reader-reactions-2000.avif 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <source type="image/webp" srcset="../../assets/product/reader-reactions-1200.webp 1200w, ../../assets/product/reader-reactions-2000.webp 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <img src="../../assets/product/reader-reactions-1200.webp" width="1200" height="750" loading="lazy" alt="A reader-reaction report for book club readers beside the chapter, with markers in the margin" />
+                                        </picture>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg-account" data-account="keep">
+                            <p class="lg-account-head">Keep <span>For good</span></p>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-record-button" aria-expanded="false" aria-controls="entry-record" data-entry-button="record">
+                                        <span class="lg-entry-num">10</span>
+                                        <span class="lg-entry-name">Writing record</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-record" role="region" aria-labelledby="entry-record-button">
+                                    <p class="lg-panel-kicker"><span>Keep</span><span>Entry 10: Writing record</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">A private record of how the book was written.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Showing a publisher, a prize or a workshop how the book was made.</p>
+                                            <a class="lg-link" href="/blog/provenance">Why Feldar records provenance</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>Write as you normally do.</li>
+                                                <li>Open Writing record from the Options menu.</li>
+                                                <li>See words typed by hand and words that came through Feldar, with active days, active time and models used.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <picture>
+                                            <source type="image/avif" srcset="../../assets/product/writing-record-1200.avif 1200w, ../../assets/product/writing-record-2000.avif 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <source type="image/webp" srcset="../../assets/product/writing-record-1200.webp 1200w, ../../assets/product/writing-record-2000.webp 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <img src="../../assets/product/writing-record-1200.webp" width="1200" height="750" loading="lazy" alt="A writing record showing how much of the book was typed by hand and how much came from Feldar, with a chart of daily writing" />
+                                        </picture>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-library-button" aria-expanded="false" aria-controls="entry-library" data-entry-button="library">
+                                        <span class="lg-entry-num">11</span>
+                                        <span class="lg-entry-name">Library, import and export</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-library" role="region" aria-labelledby="entry-library-button">
+                                    <p class="lg-panel-kicker"><span>Keep</span><span>Entry 11: Library, import and export</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">Every book on one shelf, and free to leave.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Bringing a draft in, and taking your novel out whenever you like.</p>
+                                            <a class="lg-link" href="/novel-writing-software">Novel writing software</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>Each project gets a cover in your Library.</li>
+                                                <li>Import a manuscript as Word, PDF, Markdown or plain text, up to 20 MB a file.</li>
+                                                <li>Export the whole book or chosen pages in the same four formats.</li>
+                                            </ol>
+                                            <p class="lg-panel-note">The library of Ashurbanipal at Nineveh, in the 7th century BCE, left roughly 30,000 tablets and fragments. Yours starts with one book.</p>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <picture>
+                                            <source type="image/avif" srcset="../../assets/product/library-covers-1200.avif 1200w, ../../assets/product/library-covers-2000.avif 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <source type="image/webp" srcset="../../assets/product/library-covers-1200.webp 1200w, ../../assets/product/library-covers-2000.webp 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <img src="../../assets/product/library-covers-1200.webp" width="1200" height="750" loading="lazy" alt="A library of five books with their covers, two of them pinned" />
+                                        </picture>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <div class="lg-entry">
+                                <h3 class="lg-entry-title">
+                                    <button type="button" class="lg-entry-button" id="entry-models-button" aria-expanded="false" aria-controls="entry-models" data-entry-button="models">
+                                        <span class="lg-entry-num">12</span>
+                                        <span class="lg-entry-name">Choose the model</span>
+                                    </button>
+                                </h3>
+                                <div class="lg-panel" id="entry-models" role="region" aria-labelledby="entry-models-button">
+                                    <p class="lg-panel-kicker"><span>Keep</span><span>Entry 12: Choose the model</span></p>
+                                    <div class="lg-panel-text">
+                                        <div>
+                                            <p class="lg-promise">Six models, chosen feature by feature.</p>
+                                            <p class="lg-label">Good for</p>
+                                            <p class="lg-good">Matching the model to the job. Which models you can use depends on your plan.</p>
+                                            <a class="lg-link" href="/pricing">Models by plan</a>
+                                        </div>
+                                        <div>
+                                            <p class="lg-label">How it works</p>
+                                            <ol class="lg-steps">
+                                                <li>In Settings, pick a model for each feature, or switch in Chat.</li>
+                                                <li>Choose from GPT-6 Astra, Sol and Luna, and Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5.</li>
+                                                <li>Set the effort where the model supports it.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <figure class="lg-shot">
+                                        <picture>
+                                            <source type="image/avif" srcset="../../assets/product/model-picker-1200.avif 1200w, ../../assets/product/model-picker-2000.avif 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <source type="image/webp" srcset="../../assets/product/model-picker-1200.webp 1200w, ../../assets/product/model-picker-2000.webp 2000w" sizes="(min-width: 1100px) 740px, 92vw" />
+                                            <img src="../../assets/product/model-picker-1200.webp" width="1200" height="750" loading="lazy" alt="The model menu in Chat, listing Claude and GPT models and an effort setting" />
+                                        </picture>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="lg-index-total"><span>12 entries</span><span>1 workspace</span></p>
+                    </div>
+
+                    <div class="lg-pager" data-pager>
+                        <button type="button" class="lg-pager-button" data-step="-1"><span aria-hidden="true">&lsaquo;</span> Previous: <span data-pager-name></span></button>
+                        <button type="button" class="lg-pager-button" data-step="1">Next: <span data-pager-name></span> <span aria-hidden="true">&rsaquo;</span></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lg-wrap lg-section" aria-labelledby="terms-title">
+                <p class="lg-kicker">How the AI behaves</p>
+                <h2 class="lg-h2" id="terms-title">The terms.</h2>
+                <p class="lg-intro">Every set of books has terms. These are the four that Feldar's AI keeps.</p>
+
+                <div class="lg-terms-grid">
+                    <div>
+                        <ol class="lg-terms">
+                            <li>
+                                <h3>Nothing goes in unless you accept it.</h3>
+                                <p>Suggestions wait in blue or in a card. Dismiss one and the page is as you left it.</p>
+                            </li>
+                            <li>
+                                <h3>It never trains on your writing.</h3>
+                                <p>Your manuscript is not used to train AI models.</p>
+                            </li>
+                            <li>
+                                <h3>You own what you write.</h3>
+                                <p>Export the whole book, or chosen pages, whenever you like.</p>
+                            </li>
+                            <li>
+                                <h3>It shows which words came from where.</h3>
+                                <p>Blue lines and the Writing record keep that account.</p>
+                            </li>
+                        </ol>
+                        <a class="lg-link" href="/ai-for-novelists">AI for novelists</a>
+                    </div>
+
+                    <div class="lg-demo" data-demo>
+                        <p class="lg-demo-try">Try the first term.</p>
+                        <div class="lg-demo-page">
+                            <p class="lg-demo-head"><span>The Winter Ledger, chapter two</span><span>From</span></p>
+                            <div class="lg-demo-line">
+                                <p>Nell set the ledger on the kitchen table and turned to the first of March. Two pounds, in her father's upright hand, and beside it the same two letters as every month before.</p>
+                                <span class="lg-from">You</span>
+                            </div>
+                            <div class="lg-demo-line lg-demo-line--suggested" data-continuation data-state="waiting">
+                                <p>
+                                    <span data-variant>She said the letters aloud, as if the kitchen might answer, and it gave her nothing back but the clock.</span>
+                                    <span data-variant hidden>M.P. She said it aloud. The kitchen kept its counsel.</span>
+                                </p>
+                                <span class="lg-from" data-from data-waiting="Feldar, waiting" data-kept="Feldar, kept">Feldar, waiting</span>
+                            </div>
+                            <div class="lg-demo-line lg-demo-line--suggested" data-continuation data-state="waiting" hidden>
+                                <p>
+                                    <span data-variant>Outside, the frost was coming down over the Lugg meadows, and the old trees stood in it with their arms raised.</span>
+                                    <span data-variant hidden>Frost came down over the Lugg meadows. In the bottom rows a branch gave way.</span>
+                                </p>
+                                <span class="lg-from" data-from data-waiting="Feldar, waiting" data-kept="Feldar, kept">Feldar, waiting</span>
+                            </div>
+                            <div class="lg-demo-line lg-demo-line--suggested" data-continuation data-state="waiting" hidden>
+                                <p>
+                                    <span data-variant>In the morning she would walk down to Pryce's Gate and ask Daniel what he knew.</span>
+                                    <span data-variant hidden>Tomorrow, she decided, Daniel Pryce could tell her who M.P. was.</span>
+                                </p>
+                                <span class="lg-from" data-from data-waiting="Feldar, waiting" data-kept="Feldar, kept">Feldar, waiting</span>
+                            </div>
+                        </div>
+                        <div class="lg-demo-controls">
+                            <div class="lg-demo-buttons" data-review>
+                                <button type="button" class="lg-button lg-button--primary lg-button--small" data-action="accept">Accept</button>
+                                <button type="button" class="lg-button lg-button--quiet lg-button--small" data-action="revise">Revise</button>
+                                <button type="button" class="lg-button lg-button--quiet lg-button--small" data-action="dismiss">Dismiss</button>
+                            </div>
+                            <div class="lg-demo-buttons" data-idle hidden>
+                                <button type="button" class="lg-button lg-button--primary lg-button--small" data-action="continue">Continue from here</button>
+                                <button type="button" class="lg-button lg-button--quiet lg-button--small" data-action="restart" hidden>Start over</button>
+                            </div>
+                            <p
+                                class="lg-demo-status"
+                                role="status"
+                                data-status
+                                data-accepted="Accepted. The line is on your page, and the Writing record notes it came through Feldar."
+                                data-dismissed="Dismissed. The page is as you left it."
+                            ></p>
+                        </div>
+                        <p class="lg-caption">Demo. These words were written by hand for this page. In Feldar they come from your book.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lg-wrap lg-section" aria-labelledby="plans-title" data-proto-section="pricing compare">
+                <p class="lg-kicker">Plans</p>
+                <h2 class="lg-h2" id="plans-title">Start free. Pay when you write more.</h2>
+                <p class="lg-intro">Every plan has the same workspace. Plans differ in credits, and in how much premium model use they include.</p>
+
+                <div class="lg-table-wrap">
+                    <table class="lg-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Plan</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Credits</th>
+                                <th scope="col">Good for</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="lg-table-start">
+                                <th scope="row">Starter <span class="lg-start-tag">Start here</span></th>
+                                <td data-label="Price">Free</td>
+                                <td data-label="Credits">500, once</td>
+                                <td data-label="Good for">Trying everything. No credit card.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Core</th>
+                                <td data-label="Price">$20 a month</td>
+                                <td data-label="Credits">20,000 a month</td>
+                                <td data-label="Good for">Regular drafting and revision.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Pro</th>
+                                <td data-label="Price">$40 a month</td>
+                                <td data-label="Credits">45,000 a month</td>
+                                <td data-label="Good for">Longer sessions and more premium model use.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Ultra</th>
+                                <td data-label="Price">$200 a month</td>
+                                <td data-label="Credits">250,000 a month</td>
+                                <td data-label="Good for">Large manuscripts and heavy use.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="lg-table-total"><span>Every plan</span><span>The same workspace</span></p>
+                </div>
+
+                <div class="lg-plans-foot">
+                    <p class="lg-footnote">Rewrites, Continue from here, Chat, Lens, Checks, Generate scenes and Draft Page use credits. Writing, planning by hand and arranging the Canvas never do. <a href="/pricing">Plans in full</a></p>
+                    <div class="lg-actions">
+                        <a class="lg-button lg-button--primary" href="/login" rel="nofollow">Start writing free</a>
+                    </div>
+                </div>
+
+                <div class="lg-compare">
+                    <h3 class="lg-compare-title">Moving over from another app?</h3>
+                    <ul class="lg-compare-list">
+                        <li><a href="/compare/scrivener"><span>Feldar and Scrivener</span>Organizing and compiling a long manuscript.</a></li>
+                        <li><a href="/compare/sudowrite"><span>Feldar and Sudowrite</span>AI drafting and brainstorming for fiction.</a></li>
+                        <li><a href="/compare/novelcrafter"><span>Feldar and Novelcrafter</span>A story codex, and AI you connect yourself.</a></li>
+                        <li><a href="/compare/plottr"><span>Feldar and Plottr</span>Visual timelines and plot outlines.</a></li>
+                    </ul>
+                    <a class="lg-link" href="/compare">All comparisons</a>
+                </div>
+            </section>
+
+            <section class="lg-wrap lg-section" aria-labelledby="faq-title">
+                <p class="lg-kicker">Questions</p>
+                <h2 class="lg-h2" id="faq-title">What novelists ask first.</h2>
+                <div class="lg-faq">
+                    <details open>
+                        <summary>Does Feldar write the book for me?</summary>
+                        <p>No. It writes when you ask, in blue or in a card, and nothing stays until you accept it.</p>
+                    </details>
+                    <details>
+                        <summary>Does Feldar train AI on my writing?</summary>
+                        <p>No. Your manuscript never trains AI models, and what you write in Feldar is yours.</p>
+                    </details>
+                    <details>
+                        <summary>Is Feldar free?</summary>
+                        <p>To start, yes. Starter is free with 500 credits and no credit card. Paid plans start at $20 a month.</p>
+                    </details>
+                    <details>
+                        <summary>Can I bring in a manuscript I have already started?</summary>
+                        <p>Yes, as a Word, PDF, Markdown or plain-text file of up to 20 MB.</p>
+                    </details>
+                    <details>
+                        <summary>Does Feldar work on Windows?</summary>
+                        <p>In the browser, yes. The desktop app is Mac only for now.</p>
+                    </details>
+                    <details>
+                        <summary>Can I take my novel out again?</summary>
+                        <p>Yes. Export the whole book or chosen pages as Word, PDF, Markdown or plain text.</p>
+                    </details>
+                </div>
+            </section>
+
+            <section class="lg-close" aria-labelledby="close-title">
+                <h2 class="lg-close-title" id="close-title">Open a new ledger.</h2>
+                <p class="lg-close-line">Starter is free, with 500 credits and no credit card. Feldar keeps the books. The novel is yours to write.</p>
+                <div class="lg-actions">
+                    <a class="lg-button lg-button--primary" href="/login" rel="nofollow">Start writing free</a>
+                    <a class="lg-button lg-button--quiet" href="/download">Download for Mac</a>
+                </div>
+                <p class="lg-note">Free to start. 500 credits, no credit card.</p>
+            </section>
+        </main>
+
+        <footer class="lg-foot">
+            <a class="lg-logo" href="/" aria-label="Feldar home">
+                <img src="../../assets/logo-nav.svg" alt="Feldar" width="59" height="17" loading="lazy" />
+            </a>
+            <nav class="lg-foot-links" aria-label="Footer">
+                <div>
+                    <p class="lg-foot-title">Product</p>
+                    <a href="/features">Features</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/download">Download</a>
+                    <a href="/changelog">Changelog</a>
+                </div>
+                <div>
+                    <p class="lg-foot-title">For writers</p>
+                    <a href="/novel-writing-software">Novel writing software</a>
+                    <a href="/ai-for-novelists">AI for novelists</a>
+                    <a href="/guides/how-to-outline-a-novel">Outline a novel</a>
+                    <a href="/tools">Free tools</a>
+                </div>
+                <div>
+                    <p class="lg-foot-title">Company</p>
+                    <a href="/about">About</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/terms">Terms of Use</a>
+                    <a href="/privacy">Privacy Policy</a>
+                </div>
+            </nav>
+        </footer>
+
+        <nav class="pt-switch" aria-label="Prototypes">
+            <a href="../index.html">All concepts</a>
+            <a href="then-and-now.html" rel="prev" aria-label="Previous concept: Then and now">‹ Prev</a>
+            <a href="manuscript.html" title="Manuscript">A</a>
+            <a href="index-cards.html" title="Index cards">B</a>
+            <a href="night-studio.html" title="Night studio">C</a>
+            <a href="five-thousand-years.html" title="5,000 years">D</a>
+            <a href="clay.html" title="Clay">E</a>
+            <a href="scriptorium.html" title="Scriptorium">F</a>
+            <a href="typewriter.html" title="Typewriter">G</a>
+            <a href="then-and-now.html" title="Then and now">H</a>
+            <a href="ledger.html" aria-current="page">I · The novel's ledger</a>
+            <a href="desk.html" title="The writer's desk">J</a>
+            <a href="desk.html" rel="next" aria-label="Next concept: The writer's desk">Next ›</a>
+        </nav>
+
+        <script type="module" src="scripts/ledger.js"></script>
+        <script type="module" src="../review.js"></script>
+    </body>
+</html>

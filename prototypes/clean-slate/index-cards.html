@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex,nofollow" />
+        <meta
+            name="description"
+            content="Feldar is a writing app for novelists. Outline scenes, keep a story world on cards, draft and revise with AI suggestions you accept or dismiss. Free to start."
+        />
+        <title>Concept B: Index cards - Feldar</title>
+
+        <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="../../assets/favicon-192.png" sizes="192x192" type="image/png" />
+        <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&family=Figtree:wght@400..700&family=Kalam:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="../switcher.css" />
+        <link rel="stylesheet" href="styles/index-cards.css" />
+    </head>
+    <body>
+        <header class="ic-nav" data-nav>
+            <a class="ic-nav-logo" href="/" aria-label="Feldar home">
+                <img src="../../assets/logo.svg" alt="Feldar" width="156" height="45" />
+            </a>
+            <nav class="ic-nav-links" id="ic-nav-links" aria-label="Main">
+                <a href="/features">Features</a>
+                <a href="/compare">Compare</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/blog">Blog</a>
+                <a href="/download">Download</a>
+                <a class="ic-nav-login" href="/login" rel="nofollow">Log in</a>
+            </nav>
+            <a class="ic-button ic-button--small" href="/login" rel="nofollow">Start writing free</a>
+            <button
+                class="ic-nav-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="ic-nav-links"
+                aria-label="Menu"
+                data-nav-toggle
+            >
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                    <path d="M3 7h16M3 15h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </header>
+
+        <main class="ic-page">
+            <section class="ic-hero">
+                <div class="ic-wrap ic-hero-head">
+                    <h1 class="ic-hero-title">Your whole novel, <span class="ic-highlight">on one desk.</span></h1>
+                    <p class="ic-hero-lede">Chapters, scene plans, characters and feedback sit beside the page you are writing. Ask for help and Feldar answers in blue ink, which stays only if you accept it.</p>
+                    <div class="ic-cta-row">
+                        <a class="ic-button" href="/login" rel="nofollow">Start writing free</a>
+                        <a class="ic-button ic-button--paper" href="/download">Download for Mac</a>
+                    </div>
+                    <p class="ic-note">Free to start. 500 credits, no credit card.</p>
+                </div>
+
+                <div class="ic-wrap">
+                    <div class="ic-desk" data-desk>
+                        <figure class="ic-window ic-desk-window">
+                            <picture>
+                                <source
+                                    type="image/avif"
+                                    srcset="../../assets/product/writing-view-1200.avif 1200w, ../../assets/product/writing-view-2000.avif 2000w, ../../assets/product/writing-view-2800.avif 2800w"
+                                    sizes="(min-width: 1240px) 880px, 92vw"
+                                />
+                                <source
+                                    type="image/webp"
+                                    srcset="../../assets/product/writing-view-1200.webp 1200w, ../../assets/product/writing-view-2000.webp 2000w, ../../assets/product/writing-view-2800.webp 2800w"
+                                    sizes="(min-width: 1240px) 880px, 92vw"
+                                />
+                                <img
+                                    src="../../assets/product/writing-view-1200.webp"
+                                    width="1200"
+                                    height="750"
+                                    alt="A chapter of a novel open in Feldar's editor, with the book's other chapters listed in the sidebar"
+                                    fetchpriority="high"
+                                />
+                            </picture>
+                        </figure>
+
+                        <div class="ic-prop ic-prop--character ic-index" data-drag>
+                            <svg class="ic-clip" width="26" height="54" viewBox="-2 2 26 54" fill="none" aria-hidden="true">
+                                <path d="M16 18v22a4.5 4.5 0 0 1-9 0V11a7.5 7.5 0 0 1 15 0v31a11 11 0 0 1-22 0V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                            <p class="ic-index-kind">Character</p>
+                            <p class="ic-index-name">Nell Ashby</p>
+                            <p>Home from Bristol to her late father's orchard.</p>
+                            <p>Wants to know who M.P. is.</p>
+                        </div>
+
+                        <div class="ic-prop ic-prop--scene ic-index" data-drag>
+                            <p class="ic-index-kind">Scene 3</p>
+                            <p class="ic-index-name">Agnes at the gate</p>
+                            <p>At first light Nell walks down to Pryce's Gate. Agnes is already there.</p>
+                        </div>
+
+                        <div class="ic-prop ic-prop--sticky ic-sticky" data-drag>
+                            <p>Who is M.P.?</p>
+                            <p class="ic-sticky-small">Two pounds, first of every month.</p>
+                        </div>
+
+                        <div class="ic-prop ic-prop--slip ic-slip" data-drag data-slip data-state="suggested">
+                            <p class="ic-slip-kind">Continue from here</p>
+                            <p class="ic-slip-line">
+                                <span data-slip-variant>He looked at the page for a long time without touching it.</span>
+                                <span data-slip-variant hidden>He did not touch the page. He only looked at it.</span>
+                            </p>
+                            <div class="ic-slip-actions">
+                                <button type="button" data-slip-action="accept">Accept</button>
+                                <button type="button" data-slip-action="revise">Revise</button>
+                                <button type="button" data-slip-action="dismiss">Dismiss</button>
+                            </div>
+                            <div class="ic-slip-outcome" aria-live="polite">
+                                <p data-slip-outcome="accepted">Kept. It reads like the rest of the page now.</p>
+                                <p data-slip-outcome="dismissed">Gone. The page is as you left it.</p>
+                                <button type="button" data-slip-action="reset">Try again</button>
+                            </div>
+                        </div>
+
+                        <div class="ic-prop ic-prop--stamp" data-drag>
+                            <svg class="ic-stamp" viewBox="0 0 160 160" role="img" aria-label="A round stamp from the Writing record that reads 92 percent by hand">
+                                <defs>
+                                    <path id="ic-stamp-arc" d="M 20 80 a 60 60 0 1 1 120 0 a 60 60 0 1 1 -120 0" />
+                                </defs>
+                                <circle cx="80" cy="80" r="76" stroke-width="3" />
+                                <circle cx="80" cy="80" r="45" stroke-width="1.5" />
+                                <text class="ic-stamp-ring">
+                                    <textPath href="#ic-stamp-arc" textLength="368">WRITING RECORD · TYPED BY HAND ·</textPath>
+                                </text>
+                                <text class="ic-stamp-figure" x="80" y="88" text-anchor="middle">92%</text>
+                                <text class="ic-stamp-label" x="80" y="106" text-anchor="middle">BY HAND</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ic-ticker" aria-label="Tools in the workspace, by the names they have in the app" tabindex="0">
+                <div class="ic-ticker-track" data-ticker>
+                    <ul class="ic-ticker-list">
+                        <li>Generate scenes</li>
+                        <li>Draft Page</li>
+                        <li>Canvas</li>
+                        <li>Branch</li>
+                        <li>Continue from here</li>
+                        <li>Accept</li>
+                        <li>Revise</li>
+                        <li>Dismiss</li>
+                        <li>Polish</li>
+                        <li>Deepen</li>
+                        <li>Enhance</li>
+                        <li>Instruct</li>
+                        <li>Voice &amp; Style</li>
+                        <li>Checks</li>
+                        <li>Lens</li>
+                        <li>Reader reactions</li>
+                        <li>Writing record</li>
+                        <li>Library</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="ic-section" aria-labelledby="ic-cards-title" data-proto-section="features">
+                <div class="ic-wrap">
+                    <div class="ic-section-head">
+                        <h2 class="ic-h2" id="ic-cards-title">Pick a card.</h2>
+                        <p class="ic-section-lede">Ten parts of one workspace. Each card opens the page that shows how it works.</p>
+                    </div>
+
+                    <div class="ic-bento">
+                        <a class="ic-tile ic-tile--sun ic-span-5" href="/features/scenes">
+                            <div class="ic-tile-text">
+                                <h3 class="ic-tile-title">Outline</h3>
+                                <p>Say what happens next and Generate scenes lays the chapter out as scenes. Edit, reorder or replace any of them.</p>
+                            </div>
+                            <div class="ic-tile-art ic-art-outline" aria-hidden="true">
+                                <p class="ic-scene-chip"><span>1</span>Daniel will not say</p>
+                                <p class="ic-scene-chip"><span>2</span>Fires in the low rows</p>
+                                <p class="ic-scene-chip"><span>3</span>Agnes at the gate</p>
+                                <span class="ic-chip ic-chip--ink">Generate scenes</span>
+                            </div>
+                            <span class="ic-tile-go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        </a>
+
+                        <a class="ic-tile ic-tile--mint ic-span-7" href="/features/canvas">
+                            <div class="ic-tile-text">
+                                <h3 class="ic-tile-title">The Canvas</h3>
+                                <p>A board of linked cards for your story world, beside the manuscript. Feldar reads it before it writes.</p>
+                            </div>
+                            <div class="ic-tile-art ic-art-canvas" aria-hidden="true">
+                                <p class="ic-mini-card ic-mini-card--picked"><span>Character</span>Nell Ashby</p>
+                                <p class="ic-thread ic-thread--across"><span>Her father</span></p>
+                                <p class="ic-mini-card"><span>Character</span>Tom Ashby</p>
+                                <p class="ic-thread ic-thread--down"><span>Keeps it</span></p>
+                                <p class="ic-mini-card ic-mini-card--item"><span>Item</span>The ledger</p>
+                                <ul class="ic-kinds">
+                                    <li>Character</li>
+                                    <li>Location</li>
+                                    <li>Plot</li>
+                                    <li>Item</li>
+                                    <li>Faction</li>
+                                    <li>Note</li>
+                                </ul>
+                            </div>
+                            <span class="ic-tile-go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        </a>
+
+                        <a class="ic-tile ic-tile--cobalt ic-span-4" href="/ai-for-novelists">
+                            <div class="ic-tile-text">
+                                <h3 class="ic-tile-title">Continue from here</h3>
+                                <p>Stuck at the end of a paragraph? The next lines arrive in blue ink and stay only if you accept them.</p>
+                            </div>
+                            <div class="ic-tile-art ic-art-continue" aria-hidden="true">
+                                <p>She opened the ledger at the column of two pounds, and waited. <span>He looked at the page for a long time without touching it.</span></p>
+                                <p class="ic-chip-row">
+                                    <span class="ic-chip ic-chip--cobalt">Accept</span>
+                                    <span class="ic-chip">Revise</span>
+                                    <span class="ic-chip">Dismiss</span>
+                                </p>
+                            </div>
+                            <span class="ic-tile-go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        </a>
+
+                        <a class="ic-tile ic-tile--blush ic-span-4" href="/ai-for-novelists">
+                            <div class="ic-tile-text">
+                                <h3 class="ic-tile-title">Polish, Deepen, Enhance</h3>
+                                <p>Select a passage and choose a rewrite, or use Instruct and say what you want. Every added word comes back marked.</p>
+                            </div>
+                            <div class="ic-tile-art" aria-hidden="true">
+                                <p class="ic-chip-row">
+                                    <span class="ic-chip">Polish</span>
+                                    <span class="ic-chip ic-chip--ink">Deepen</span>
+                                    <span class="ic-chip">Enhance</span>
+                                </p>
+                                <p class="ic-instruct"><span>Instruct</span>Slow it down</p>
+                            </div>
+                            <span class="ic-tile-go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        </a>
+
+                        <a class="ic-tile ic-tile--ruled ic-span-4" href="/features/scenes">
+                            <div class="ic-tile-text">
+                                <h3 class="ic-tile-title">Draft Page</h3>
+                                <p>Write from your scenes yourself, or press Draft Page for a first pass at the length you set.</p>
+                            </div>
+                            <div class="ic-tile-art ic-art-draft" aria-hidden="true">
+                                <p class="ic-chip-row">
+                                    <span class="ic-chip">Pages to generate 2</span>
+                                    <span class="ic-chip">Words per page Auto</span>
+                                </p>
+                                <span class="ic-chip ic-chip--ink">Draft Page</span>
+                            </div>
+                            <span class="ic-tile-go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        </a>
+
+                        <a class="ic-tile ic-tile--tomato ic-span-7" href="/features">
+                            <div class="ic-tile-text">
+                                <h3 class="ic-tile-title">Lens</h3>
+                                <p>Six readers for your page. Ask one by name, let them debate, or pick an audience such as book club readers and get Reader reactions.</p>
+                            </div>
+                            <ul class="ic-tile-art ic-faces" aria-hidden="true">
+                                <li><span class="ic-face ic-face--critic"></span>Critic</li>
+                                <li><span class="ic-face ic-face--cheerleader"></span>Cheerleader</li>
+                                <li><span class="ic-face ic-face--poet"></span>Poet</li>
+                                <li><span class="ic-face ic-face--editor"></span>Editor</li>
+                                <li><span class="ic-face ic-face--plotter"></span>Plotter</li>
+                                <li><span class="ic-face ic-face--reader"></span>Reader</li>
+                            </ul>
+                            <span class="ic-tile-go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        </a>
+
+                        <a class="ic-tile ic-tile--lilac ic-span-5" href="/features">
+                            <div class="ic-tile-text">
+                                <h3 class="ic-tile-title">Checks</h3>
+                                <p>Five editing passes over the page. Each issue is marked in the manuscript with a fix to accept or discard.</p>
+                            </div>
+                            <ul class="ic-tile-art ic-checklist" aria-hidden="true">
+                                <li>Fix critical mistakes</li>
+                                <li>Improve accuracy and clarity</li>
+                                <li>Tighten word choice</li>
+                                <li>Smooth dialogue transitions</li>
+                                <li>Clarify character perspectives</li>
+                            </ul>
+                            <span class="ic-tile-go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        </a>
+
+                        <a class="ic-tile ic-tile--ink ic-span-4" href="/blog/provenance">
+                            <div class="ic-tile-text">
+                                <h3 class="ic-tile-title">Writing record</h3>
+                                <p>A private record of which words you typed and which came through Feldar, kept as you write.</p>
+                            </div>
+                            <div class="ic-tile-art" aria-hidden="true">
+                                <p class="ic-record-figure">92%</p>
+                                <p class="ic-record-bar"><span></span><span></span><span></span></p>
+                                <p class="ic-record-key">92% by hand, 7% Feldar, 1% pasted</p>
+                            </div>
+                            <span class="ic-tile-go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        </a>
+
+                        <a class="ic-tile ic-tile--ruled ic-span-4" href="/ai-for-novelists">
+                            <div class="ic-tile-text">
+                                <h3 class="ic-tile-title">Voice &amp; Style</h3>
+                                <p>Paste a sample of at least 600 words and Feldar writes toward it. As the book grows, it follows the book's own prose.</p>
+                            </div>
+                            <div class="ic-tile-art" aria-hidden="true">
+                                <p class="ic-sample">The lane was white by eight o'clock, and Nell walked down the middle of it where the cart tracks had frozen into ridges.</p>
+                                <span class="ic-chip">Writing sample, 607 words</span>
+                            </div>
+                            <span class="ic-tile-go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        </a>
+
+                        <a class="ic-tile ic-tile--sun ic-span-4" href="/pricing">
+                            <div class="ic-tile-text">
+                                <h3 class="ic-tile-title">Choose the model</h3>
+                                <p>Six models from OpenAI and Anthropic. Set one per feature, or switch in Chat. Which ones you can use depends on your plan.</p>
+                            </div>
+                            <ul class="ic-tile-art ic-models" aria-hidden="true">
+                                <li>GPT-6 Astra</li>
+                                <li>GPT-6 Sol</li>
+                                <li>GPT-6 Luna</li>
+                                <li class="is-picked">Claude Opus 5.5</li>
+                                <li>Claude Sonnet 5.5</li>
+                                <li>Claude Haiku 5.5</li>
+                            </ul>
+                            <span class="ic-tile-go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ic-section" aria-labelledby="ic-moves-title">
+                <div class="ic-wrap ic-section-head ic-section-head--split">
+                    <div>
+                        <h2 class="ic-h2" id="ic-moves-title">One chapter, four moves.</h2>
+                        <p class="ic-section-lede">A chapter of The Winter Ledger, from an empty page to a first read. These are the real app, not drawings of it.</p>
+                    </div>
+                    <div class="ic-rail-buttons">
+                        <button type="button" class="ic-round-button" aria-label="Previous move" data-rail-step="-1">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16 10H4M9 5l-5 5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                        </button>
+                        <button type="button" class="ic-round-button" aria-label="Next move" data-rail-step="1">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <ol class="ic-rail" data-rail tabindex="0" aria-label="The four moves. Scroll sideways or use the arrow keys.">
+                    <li class="ic-move ic-move--sun">
+                        <div class="ic-move-text">
+                            <p class="ic-move-step" aria-hidden="true">1</p>
+                            <h3 class="ic-move-title">Plan</h3>
+                            <p>Open the Outline on an empty chapter and press Generate scenes. Five scenes arrive with titles and descriptions, ready for you to change.</p>
+                            <a class="ic-text-link" href="/features/scenes">How scene planning works</a>
+                        </div>
+                        <figure class="ic-window">
+                            <video
+                                muted
+                                loop
+                                playsinline
+                                preload="none"
+                                width="1440"
+                                height="900"
+                                poster="../../assets/demo/loop-outline-scenes-poster.jpg"
+                                aria-label="The Outline opens on an empty chapter, Generate scenes runs, and five scenes appear with titles and descriptions"
+                                data-loop
+                            >
+                                <source src="../../assets/demo/loop-outline-scenes.webm" type="video/webm" />
+                                <source src="../../assets/demo/loop-outline-scenes.mp4" type="video/mp4" />
+                            </video>
+                        </figure>
+                    </li>
+                    <li class="ic-move ic-move--mint">
+                        <div class="ic-move-text">
+                            <p class="ic-move-step" aria-hidden="true">2</p>
+                            <h3 class="ic-move-title">Draft</h3>
+                            <p>Write the chapter with its scenes beside you. Or press Draft Page and get a first pass to rework, at the word count you chose.</p>
+                            <a class="ic-text-link" href="/features/scenes">Scenes to chapters</a>
+                        </div>
+                        <figure class="ic-window">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/outline-draft-page-1200.avif 1200w, ../../assets/product/outline-draft-page-2000.avif 2000w" sizes="(min-width: 1100px) 640px, 78vw" />
+                                <source type="image/webp" srcset="../../assets/product/outline-draft-page-1200.webp 1200w, ../../assets/product/outline-draft-page-2000.webp 2000w" sizes="(min-width: 1100px) 640px, 78vw" />
+                                <img src="../../assets/product/outline-draft-page-1200.webp" width="1200" height="750" loading="lazy" alt="A chapter drafted from its outline, the page on the left and its scenes on the right" />
+                            </picture>
+                        </figure>
+                    </li>
+                    <li class="ic-move ic-move--blush">
+                        <div class="ic-move-text">
+                            <p class="ic-move-step" aria-hidden="true">3</p>
+                            <h3 class="ic-move-title">Revise</h3>
+                            <p>Select a paragraph and choose Deepen. The rewrite comes back in a card with its additions in blue, and Apply is the only way it reaches the page.</p>
+                            <a class="ic-text-link" href="/ai-for-novelists">AI for novelists</a>
+                        </div>
+                        <figure class="ic-window">
+                            <video
+                                muted
+                                loop
+                                playsinline
+                                preload="none"
+                                width="1440"
+                                height="900"
+                                poster="../../assets/demo/loop-define-rewrite-card-poster.jpg"
+                                aria-label="A paragraph is selected, Deepen description is chosen, and the rewrite card shows the suggestion with added words in blue before Apply"
+                                data-loop
+                            >
+                                <source src="../../assets/demo/loop-define-rewrite-card.webm" type="video/webm" />
+                                <source src="../../assets/demo/loop-define-rewrite-card.mp4" type="video/mp4" />
+                            </video>
+                        </figure>
+                    </li>
+                    <li class="ic-move ic-move--lilac">
+                        <div class="ic-move-text">
+                            <p class="ic-move-step" aria-hidden="true">4</p>
+                            <h3 class="ic-move-title">Read</h3>
+                            <p>Ask Lens what is working on the page and what is not. A Critic and a Poet answer in the chat beside your chapter, before anyone else has seen it.</p>
+                            <a class="ic-text-link" href="/features">All features</a>
+                        </div>
+                        <figure class="ic-window">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/lens-chat-1200.avif 1200w, ../../assets/product/lens-chat-2000.avif 2000w" sizes="(min-width: 1100px) 640px, 78vw" />
+                                <source type="image/webp" srcset="../../assets/product/lens-chat-1200.webp 1200w, ../../assets/product/lens-chat-2000.webp 2000w" sizes="(min-width: 1100px) 640px, 78vw" />
+                                <img src="../../assets/product/lens-chat-1200.webp" width="1200" height="750" loading="lazy" alt="Two reader personas, a Critic and a Poet, giving feedback on the chapter in the chat beside the page" />
+                            </picture>
+                        </figure>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="ic-section" aria-labelledby="ic-yours-title">
+                <div class="ic-wrap">
+                    <div class="ic-section-head">
+                        <h2 class="ic-h2" id="ic-yours-title">What stays yours.</h2>
+                        <p class="ic-section-lede">Three rules that do not bend. <a class="ic-text-link" href="/ai-for-novelists">How Feldar's AI behaves</a></p>
+                    </div>
+                    <div class="ic-stripes">
+                        <article class="ic-stripe ic-stripe--mint">
+                            <h3 class="ic-stripe-title">Nothing goes in unless you accept it.</h3>
+                            <p>Suggestions wait in blue ink or in a card. Dismiss one and the page is exactly as you left it.</p>
+                        </article>
+                        <article class="ic-stripe ic-stripe--sun">
+                            <h3 class="ic-stripe-title">Your manuscript never trains AI models.</h3>
+                            <p>Feldar does not use your writing, your drafts or your story world to train AI models.</p>
+                        </article>
+                        <article class="ic-stripe ic-stripe--blush">
+                            <h3 class="ic-stripe-title">You own what you write.</h3>
+                            <p>The words and worlds you make in Feldar remain yours. Export the whole book as Word, PDF, Markdown or text whenever you like.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ic-section" aria-labelledby="ic-switch-title" data-proto-section="compare">
+                <div class="ic-wrap">
+                    <div class="ic-section-head">
+                        <h2 class="ic-h2" id="ic-switch-title">Switching from another app?</h2>
+                        <p class="ic-section-lede">Each of these is the better choice for some writers. The comparisons say where. <a class="ic-text-link" href="/compare">See every comparison</a></p>
+                    </div>
+                    <ul class="ic-stickers">
+                        <li><a class="ic-sticker ic-sticker--sun" href="/compare/scrivener"><span>Feldar vs</span>Scrivener</a></li>
+                        <li><a class="ic-sticker ic-sticker--lilac" href="/compare/sudowrite"><span>Feldar vs</span>Sudowrite</a></li>
+                        <li><a class="ic-sticker ic-sticker--mint" href="/compare/novelcrafter"><span>Feldar vs</span>Novelcrafter</a></li>
+                        <li><a class="ic-sticker ic-sticker--blush" href="/compare/plottr"><span>Feldar vs</span>Plottr</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="ic-section" aria-labelledby="ic-plans-title" data-proto-section="pricing">
+                <div class="ic-wrap">
+                    <div class="ic-section-head">
+                        <h2 class="ic-h2" id="ic-plans-title">Start free. Pay when you write more.</h2>
+                        <p class="ic-section-lede">Every plan has the same workspace. Writing, planning and organizing never use credits. <a class="ic-text-link" href="/pricing">Plans and credits in full</a></p>
+                    </div>
+                    <div class="ic-plans">
+                        <article class="ic-plan ic-plan--starter">
+                            <p class="ic-plan-tab">Start here</p>
+                            <h3 class="ic-plan-name">Starter</h3>
+                            <p class="ic-plan-price">Free</p>
+                            <p class="ic-plan-detail">500 credits to try every tool. No credit card.</p>
+                            <a class="ic-button ic-button--small" href="/login" rel="nofollow">Start writing free</a>
+                        </article>
+                        <article class="ic-plan">
+                            <h3 class="ic-plan-name">Core</h3>
+                            <p class="ic-plan-price">$20 <span>a month</span></p>
+                            <p class="ic-plan-detail">20,000 credits a month for regular drafting and revision.</p>
+                        </article>
+                        <article class="ic-plan">
+                            <h3 class="ic-plan-name">Pro</h3>
+                            <p class="ic-plan-price">$40 <span>a month</span></p>
+                            <p class="ic-plan-detail">45,000 credits a month and more use of premium models.</p>
+                        </article>
+                        <article class="ic-plan">
+                            <h3 class="ic-plan-name">Ultra</h3>
+                            <p class="ic-plan-price">$200 <span>a month</span></p>
+                            <p class="ic-plan-detail">250,000 credits a month for large manuscripts.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ic-section" aria-labelledby="ic-faq-title">
+                <div class="ic-wrap ic-faq">
+                    <h2 class="ic-h2" id="ic-faq-title">Questions writers ask first.</h2>
+                    <div class="ic-faq-list">
+                        <details class="ic-question" open>
+                            <summary>Is Feldar free?</summary>
+                            <p>Yes, to start. The Starter plan is free, comes with 500 credits and needs no credit card. Writing, planning and organizing never use credits. Paid plans start at $20 a month.</p>
+                        </details>
+                        <details class="ic-question">
+                            <summary>Will it write my book for me?</summary>
+                            <p>No. You write. When you ask, Feldar suggests a continuation, a rewrite or a scene plan, and nothing stays on the page unless you accept it.</p>
+                        </details>
+                        <details class="ic-question">
+                            <summary>Does Feldar train AI on my writing?</summary>
+                            <p>No. Feldar does not use your writing to train AI models, and what you write is yours.</p>
+                        </details>
+                        <details class="ic-question">
+                            <summary>Can I bring in a book I have already started?</summary>
+                            <p>Yes. Import Word, PDF, Markdown or plain text files, up to 20 MB each.</p>
+                        </details>
+                        <details class="ic-question">
+                            <summary>Does it work on Windows?</summary>
+                            <p>Yes, in the browser. The desktop app is for Mac today, native on Apple silicon. Windows and Linux apps are coming soon.</p>
+                        </details>
+                        <details class="ic-question">
+                            <summary>Can I get my book out again?</summary>
+                            <p>Yes. Export the whole book or chosen pages as Word, PDF, Markdown or plain text.</p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="ic-footer">
+            <div class="ic-wrap">
+                <p class="ic-footer-line">Start <span>chapter one.</span></p>
+                <div class="ic-cta-row">
+                    <a class="ic-button ic-button--sun" href="/login" rel="nofollow">Start writing free</a>
+                    <a class="ic-button ic-button--outline" href="/download">Download for Mac</a>
+                </div>
+                <p class="ic-note">Free to start. 500 credits, no credit card.</p>
+
+                <div class="ic-footer-links">
+                    <div>
+                        <p class="ic-footer-heading">Product</p>
+                        <ul>
+                            <li><a href="/features">Features</a></li>
+                            <li><a href="/pricing">Pricing</a></li>
+                            <li><a href="/download">Download</a></li>
+                            <li><a href="/demo">Product demo</a></li>
+                            <li><a href="/changelog">Changelog</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="ic-footer-heading">For writers</p>
+                        <ul>
+                            <li><a href="/novel-writing-software">Novel writing software</a></li>
+                            <li><a href="/ai-for-novelists">AI for novelists</a></li>
+                            <li><a href="/compare">Compare</a></li>
+                            <li><a href="/guides/how-to-outline-a-novel">How to outline a novel</a></li>
+                            <li><a href="/tools">Free tools</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="ic-footer-heading">Company</p>
+                        <ul>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/blog">Blog</a></li>
+                            <li><a href="mailto:support@feldar.com">Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ic-footer-legal">
+                    <p>Feldar LLC</p>
+                    <a href="/terms">Terms of Use</a>
+                    <a href="/privacy">Privacy Policy</a>
+                </div>
+            </div>
+        </footer>
+
+        <nav class="pt-switch" aria-label="Prototypes">
+            <a href="../index.html">All concepts</a>
+            <a href="manuscript.html" rel="prev" aria-label="Previous concept: Manuscript">‹ Prev</a>
+            <a href="manuscript.html" title="Manuscript">A</a>
+            <a href="index-cards.html" aria-current="page">B · Index cards</a>
+            <a href="night-studio.html" title="Night studio">C</a>
+            <a href="five-thousand-years.html" title="5,000 years">D</a>
+            <a href="clay.html" title="Clay">E</a>
+            <a href="scriptorium.html" title="Scriptorium">F</a>
+            <a href="typewriter.html" title="Typewriter">G</a>
+            <a href="then-and-now.html" title="Then and now">H</a>
+            <a href="ledger.html" title="The novel's ledger">I</a>
+            <a href="desk.html" title="The writer's desk">J</a>
+            <a href="night-studio.html" rel="next" aria-label="Next concept: Night studio">Next ›</a>
+        </nav>
+
+        <script type="module" src="scripts/index-cards.js"></script>
+        <script type="module" src="../review.js"></script>
+    </body>
+</html>

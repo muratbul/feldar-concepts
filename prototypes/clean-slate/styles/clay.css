@@ -1,0 +1,1399 @@
+/* Concept E, Clay: the whole page is clay. Things are pressed in or raised with one
+   light, from the top left. Terracotta, sand and bone carry everything except Feldar's
+   ink, lapis blue, which appears only on what the AI wrote and on the main action.
+   Self-contained: nothing here comes from the live site's styles. */
+
+:root {
+    --cl-sand: #ead7b7;
+    --cl-bone: #f6eddf;
+    --cl-slip: #f1e2c6;
+    --cl-buff: #d9b48a;
+    --cl-clay: #b5714a;
+    --cl-terracotta: #c5633a;
+    --cl-ember: #9a4322;
+    --cl-kiln: #33241d;
+    --cl-umber: #5a3a28;
+    --cl-earth: #4d382c;
+    --cl-lapis: #2447b8;
+    --cl-lapis-deep: #16307f;
+    --cl-gold: #c9a227;
+
+    --cl-light: rgba(255, 246, 228, 0.62);
+    --cl-shade: rgba(74, 38, 16, 0.4);
+    --cl-raised:
+        inset 2px 2px 2px var(--cl-light),
+        inset -3px -4px 6px rgba(74, 38, 16, 0.28),
+        8px 14px 26px rgba(74, 38, 16, 0.3);
+    --cl-sunken:
+        inset 3px 4px 7px var(--cl-shade),
+        inset -2px -2px 3px var(--cl-light);
+    --cl-pressed-text: -1px -1px 0 rgba(50, 25, 10, 0.42), 1.5px 1.5px 0 var(--cl-light);
+
+    --cl-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.29 0 0 0 0 0.15 0 0 0 0 0.06 0 0 0 0.26 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    --cl-frieze-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='384' height='64' fill='none' stroke='%23000' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath transform='translate(8 8)' d='M24 44V7M24 31c-6-2-10-7-11-13M24 23c6-2 10-7 11-13M24 15c-3-1-5-4-6-8'/%3E%3Cpath transform='translate(72 8)' d='M24 44V9M24 35l-8-6M24 35l8-6M24 27l-8-6M24 27l8-6M24 19l-7-5M24 19l7-5'/%3E%3Cpath transform='translate(136 8)' d='M24 6v36M6 24h36M11 11l26 26M37 11L11 37'/%3E%3Cpath transform='translate(200 8)' d='M5 24c7-10 19-11 29 0-10 11-22 10-29 0zM34 24l9-8v16zM14 22v.5'/%3E%3Cpath transform='translate(264 8)' d='M5 24c7-11 31-11 38 0-7 11-31 11-38 0zM18 24a6 6 0 1 0 12 0a6 6 0 1 0-12 0'/%3E%3Cpath transform='translate(328 8)' d='M16 25V10M22 24V6M28 24V8M34 27V13M16 25v11c0 5 4 8 9 8h2c5 0 7-3 7-8v-9M16 31l-6-6'/%3E%3C/svg%3E");
+
+    --cl-display: "Unbounded", "Arial Black", sans-serif;
+    --cl-text: "Hanken Grotesk", system-ui, sans-serif;
+    --cl-gutter: clamp(20px, 4vw, 48px);
+    --cl-section: clamp(84px, 10vw, 152px);
+    --cl-focus: var(--cl-lapis);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--cl-grain), var(--cl-sand);
+    color: var(--cl-kiln);
+    font-family: var(--cl-text);
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure {
+    margin: 0;
+}
+
+ul,
+ol {
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+}
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+:focus-visible {
+    outline: 3px solid var(--cl-focus);
+    outline-offset: 3px;
+}
+
+.cl-sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.cl-wrap {
+    width: min(1200px, 100% - 2 * var(--cl-gutter));
+    margin-inline: auto;
+}
+
+/* ---------- Lettering ---------- */
+
+.cl-pressed {
+    color: var(--cl-umber);
+    text-shadow: var(--cl-pressed-text);
+}
+
+.cl-h1 {
+    font-family: var(--cl-display);
+    font-size: clamp(3rem, 10.5vw, 9.5rem);
+    font-weight: 900;
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+}
+
+.cl-h2 {
+    max-width: 17em;
+    font-family: var(--cl-display);
+    font-size: clamp(1.9rem, 4.3vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+}
+
+.cl-h2--small {
+    font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+}
+
+.cl-kicker {
+    margin-bottom: 18px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cl-umber);
+}
+
+.cl-lede {
+    max-width: 36em;
+    margin-top: 22px;
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    color: var(--cl-earth);
+    text-wrap: pretty;
+}
+
+.cl-note {
+    margin-top: 18px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cl-earth);
+}
+
+.cl-more {
+    display: inline-block;
+    margin-top: 32px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+}
+
+.cl-more::after {
+    content: " \2192";
+}
+
+/* ---------- Buttons: lumps of clay that go down when pressed ---------- */
+
+.cl-button {
+    --cl-edge: #a98761;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    padding: 10px 24px;
+    border: 0;
+    border-radius: 16px 19px 17px 21px / 19px 16px 21px 17px;
+    background: var(--cl-grain), linear-gradient(160deg, #e6c8a0, var(--cl-buff));
+    box-shadow:
+        inset 2px 2px 1px var(--cl-light),
+        inset -2px -3px 4px rgba(74, 38, 16, 0.2),
+        0 6px 0 var(--cl-edge),
+        0 12px 16px rgba(74, 38, 16, 0.28);
+    color: var(--cl-kiln);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.cl-button:hover {
+    transform: translateY(2px);
+    box-shadow:
+        inset 2px 2px 1px var(--cl-light),
+        inset -2px -3px 4px rgba(74, 38, 16, 0.2),
+        0 4px 0 var(--cl-edge),
+        0 8px 12px rgba(74, 38, 16, 0.28);
+}
+
+.cl-button:active {
+    transform: translateY(6px);
+    box-shadow:
+        inset 2px 3px 5px rgba(74, 38, 16, 0.35),
+        0 0 0 var(--cl-edge),
+        0 2px 4px rgba(74, 38, 16, 0.28);
+}
+
+.cl-button--lapis {
+    --cl-edge: var(--cl-lapis-deep);
+    background: linear-gradient(160deg, #3a61dc, var(--cl-lapis));
+    color: var(--cl-bone);
+}
+
+.cl-button--lapis,
+.cl-button--lapis:hover {
+    --cl-light: rgba(190, 210, 255, 0.5);
+}
+
+.cl-button--small {
+    min-height: 42px;
+    padding: 6px 16px;
+    font-size: 15px;
+}
+
+.cl-button small {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.82;
+}
+
+.cl-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 14px;
+    margin-top: 34px;
+}
+
+/* ---------- Top bar ---------- */
+
+.cl-top {
+    position: sticky;
+    top: 12px;
+    z-index: 30;
+    padding: 0 var(--cl-gutter);
+}
+
+.cl-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    max-width: 1200px;
+    min-height: 66px;
+    margin: 12px auto 0;
+    padding: 8px 12px 14px 24px;
+    border-radius: 22px 27px 24px 29px / 27px 22px 29px 24px;
+    background: var(--cl-grain), linear-gradient(170deg, #e3c59d, var(--cl-buff));
+    box-shadow: var(--cl-raised);
+}
+
+.cl-logo {
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.cl-logo img {
+    width: 92px;
+    opacity: 0.86;
+}
+
+.cl-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: auto;
+}
+
+.cl-links a {
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 var(--cl-light);
+    transition: box-shadow 120ms ease;
+}
+
+.cl-links a:hover {
+    box-shadow: var(--cl-sunken);
+}
+
+.cl-links-login {
+    margin-left: 12px;
+}
+
+.cl-menu {
+    display: none;
+    min-height: 42px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 12px;
+    background: none;
+    box-shadow: var(--cl-sunken);
+    color: var(--cl-kiln);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* ---------- Hero ---------- */
+
+.cl-hero {
+    position: relative;
+    padding: clamp(56px, 8vw, 104px) 0 clamp(72px, 9vw, 128px);
+    overflow: hidden;
+    background: radial-gradient(70% 55% at 8% 0%, rgba(255, 250, 236, 0.62), transparent 70%);
+}
+
+.cl-hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+    column-gap: 48px;
+    align-items: start;
+}
+
+.cl-hero-title {
+    grid-column: 1 / -1;
+}
+
+.cl-hero-copy {
+    padding-top: 28px;
+}
+
+/* The tablet rides up beside the short second line of the headline. */
+.cl-tablet {
+    position: relative;
+    margin-top: calc(-1 * clamp(0px, 8.6vw, 124px));
+    padding: 20px;
+    border-radius: 44px 36px 50px 38px / 38px 48px 36px 46px;
+    background:
+        radial-gradient(120% 70% at 18% 0%, rgba(255, 255, 255, 0.38), transparent 62%),
+        var(--cl-grain),
+        linear-gradient(155deg, #dcae82, #c08a5e);
+    box-shadow:
+        inset 3px 3px 3px rgba(255, 246, 228, 0.7),
+        inset -5px -7px 10px rgba(74, 38, 16, 0.34),
+        14px 24px 44px rgba(74, 38, 16, 0.36);
+    transform: rotate(1.6deg);
+}
+
+.cl-tablet-face {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 236px;
+    padding: 22px 18px 6px;
+}
+
+.cl-tablet-line {
+    min-height: 2.5em;
+    font-family: var(--cl-display);
+    font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: #3d2416;
+    text-shadow: var(--cl-pressed-text);
+    overflow-wrap: anywhere;
+}
+
+.cl-tablet-line .is-new {
+    animation: cl-press 320ms ease-out;
+}
+
+@keyframes cl-press {
+    from {
+        color: transparent;
+        text-shadow: 0 0 0 transparent;
+    }
+}
+
+.cl-wedges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    filter: drop-shadow(1px 1px 0 var(--cl-light));
+}
+
+.cl-wedge {
+    width: 12px;
+    height: 20px;
+    background: rgba(61, 36, 22, 0.16);
+    clip-path: polygon(0 0, 100% 0, 60% 42%, 58% 100%, 42% 100%, 40% 42%);
+    transition: background-color 200ms ease;
+}
+
+.cl-wedge.is-pressed {
+    background: #3d2416;
+}
+
+.cl-tablet-field {
+    margin-top: 14px;
+    padding: 12px 14px 14px;
+    border-radius: 22px 20px 30px 22px / 20px 24px 22px 28px;
+    box-shadow: var(--cl-sunken);
+}
+
+.cl-tablet-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #3d2416;
+}
+
+.cl-tablet-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--cl-bone);
+    box-shadow: inset 2px 2px 4px rgba(74, 38, 16, 0.3);
+    color: var(--cl-kiln);
+    font-size: 17px;
+    font-weight: 500;
+}
+
+/* A hairline crack running in from the tablet's top right corner. */
+.cl-crack {
+    position: absolute;
+    top: 26px;
+    right: 6px;
+    width: 92px;
+    fill: none;
+    stroke: rgba(61, 36, 22, 0.5);
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+    filter: drop-shadow(1px 1px 0 var(--cl-light));
+    pointer-events: none;
+}
+
+.cl-stylus {
+    position: absolute;
+    right: -44px;
+    bottom: -34px;
+    width: 250px;
+    transform: rotate(-24deg);
+    filter: drop-shadow(6px 10px 8px rgba(74, 38, 16, 0.35));
+    pointer-events: none;
+}
+
+.cl-stylus-shaft {
+    fill: #a9864f;
+    stroke: #6b5230;
+    stroke-width: 2;
+    stroke-linejoin: round;
+}
+
+.cl-stylus-band {
+    fill: none;
+    stroke: #6b5230;
+    stroke-width: 3;
+}
+
+.cl-thumbprint {
+    position: absolute;
+    width: 150px;
+    height: 188px;
+    fill: none;
+    stroke: rgba(90, 58, 40, 0.16);
+    stroke-width: 3.5;
+    pointer-events: none;
+}
+
+.cl-thumbprint--hero {
+    bottom: 5%;
+    left: 38%;
+    transform: rotate(-18deg);
+}
+
+.cl-thumbprint--close {
+    top: 9%;
+    right: 3%;
+    transform: rotate(22deg);
+}
+
+/* ---------- Frieze: a seal rolled along the clay ---------- */
+
+.cl-frieze {
+    position: relative;
+    height: 104px;
+    overflow: hidden;
+    border-block: 7px solid #c39062;
+    background: var(--cl-grain), linear-gradient(#c6936a, #d2a47a);
+    box-shadow:
+        inset 0 12px 14px -8px rgba(74, 38, 16, 0.55),
+        inset 0 -6px 8px -6px var(--cl-light);
+}
+
+.cl-frieze-band,
+.cl-frieze-band::before,
+.cl-frieze-band::after {
+    position: absolute;
+    inset: 0;
+}
+
+/* The same strip of marks twice: a light copy nudged down and right under a dark one,
+   so each mark reads as pressed into the band. */
+.cl-frieze-band::before,
+.cl-frieze-band::after {
+    content: "";
+    -webkit-mask: var(--cl-frieze-tile) repeat-x left center / auto 64px;
+    mask: var(--cl-frieze-tile) repeat-x left center / auto 64px;
+}
+
+.cl-frieze-band::before {
+    background: var(--cl-light);
+    transform: translate(1.5px, 1.5px);
+}
+
+.cl-frieze-band::after {
+    background: rgba(61, 36, 22, 0.78);
+}
+
+.cl-seal {
+    display: none;
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: 0;
+    width: 44px;
+    border-radius: 14px;
+    background:
+        repeating-linear-gradient(0deg, transparent 0 9px, rgba(0, 0, 0, 0.28) 9px 11px),
+        linear-gradient(90deg, #4a3b33, #9a8a7c 38%, #6a5a4f 62%, #2f2520);
+    box-shadow: 8px 0 14px rgba(40, 20, 10, 0.4);
+}
+
+.cl-frieze.is-waiting .cl-frieze-band {
+    clip-path: inset(0 100% 0 0);
+}
+
+.cl-frieze.is-waiting .cl-seal,
+.cl-frieze.is-rolling .cl-seal {
+    display: block;
+}
+
+.cl-frieze.is-rolling .cl-frieze-band {
+    animation: cl-reveal 2.4s cubic-bezier(0.45, 0, 0.3, 1) both;
+}
+
+.cl-frieze.is-rolling .cl-seal {
+    animation: cl-roll 2.4s cubic-bezier(0.45, 0, 0.3, 1) both;
+}
+
+@keyframes cl-reveal {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes cl-roll {
+    to {
+        transform: translateX(100vw);
+    }
+}
+
+.cl-frieze-copy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 16px 48px;
+    align-items: baseline;
+    padding-block: clamp(36px, 5vw, 64px);
+}
+
+.cl-eyebrow {
+    font-family: var(--cl-display);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--cl-umber);
+    text-shadow: var(--cl-pressed-text);
+}
+
+.cl-frieze-copy p {
+    max-width: 38em;
+    color: var(--cl-earth);
+}
+
+/* ---------- The kiln: wet clay, fired clay ---------- */
+
+.cl-kiln {
+    --cl-focus: var(--cl-bone);
+    padding: var(--cl-section) 0;
+    background:
+        radial-gradient(48% 54% at 76% 52%, rgba(214, 104, 52, 0.42), transparent 72%),
+        var(--cl-grain),
+        var(--cl-kiln);
+    color: var(--cl-bone);
+}
+
+.cl-kiln-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+    gap: 48px 72px;
+    align-items: center;
+}
+
+.cl-kiln .cl-kicker {
+    color: var(--cl-gold);
+}
+
+.cl-kiln .cl-lede {
+    color: #e2d2bd;
+}
+
+.cl-moves {
+    display: grid;
+    gap: 18px;
+    margin-top: 36px;
+}
+
+.cl-moves li {
+    padding-left: 22px;
+    border-left: 4px solid var(--cl-terracotta);
+}
+
+.cl-moves h3 {
+    font-family: var(--cl-display);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.cl-moves p {
+    margin-top: 2px;
+    font-size: 17px;
+    color: #e2d2bd;
+}
+
+.cl-demo-face {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 372px;
+    padding: 30px 34px 34px;
+    border-radius: 38px 30px 44px 34px / 32px 42px 30px 40px;
+    background:
+        radial-gradient(110% 60% at 16% 0%, rgba(255, 255, 255, 0.55), transparent 60%),
+        var(--cl-grain),
+        linear-gradient(160deg, var(--cl-bone), var(--cl-slip));
+    box-shadow:
+        inset 3px 3px 3px #fff,
+        inset -5px -6px 10px rgba(74, 38, 16, 0.24),
+        0 0 80px rgba(230, 120, 60, 0.3),
+        12px 22px 40px rgba(0, 0, 0, 0.45);
+    color: var(--cl-kiln);
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    line-height: 1.6;
+}
+
+.cl-demo-running {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cl-umber);
+}
+
+/* A suggestion is wet: lapis, with a sheen. Fired, it takes the writer's own ink. */
+.cl-wet {
+    color: var(--cl-lapis);
+    font-weight: 600;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: color 500ms ease;
+}
+
+.cl-wet.is-fired {
+    color: inherit;
+    font-weight: 400;
+    text-shadow: none;
+    animation: cl-fire 1s ease-out;
+}
+
+.cl-wet.is-wiping {
+    animation: cl-wipe 360ms ease-in forwards;
+}
+
+@keyframes cl-fire {
+    from {
+        color: #c9441a;
+        text-shadow: 0 0 18px rgba(255, 140, 40, 0.95);
+    }
+}
+
+@keyframes cl-wipe {
+    to {
+        opacity: 0;
+        transform: translateX(28px) skewX(-8deg);
+    }
+}
+
+.cl-demo [hidden] {
+    display: none;
+}
+
+.cl-demo-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 12px;
+    margin-top: 30px;
+}
+
+.cl-demo-controls .cl-button {
+    --cl-light: rgba(255, 246, 228, 0.5);
+}
+
+.cl-demo-status {
+    min-height: 1.6em;
+    margin-top: 22px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cl-sand);
+}
+
+.cl-demo-caption {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #b9a48c;
+}
+
+/* ---------- The tablet room ---------- */
+
+.cl-room,
+.cl-today,
+.cl-rules,
+.cl-plans {
+    padding: var(--cl-section) 0;
+}
+
+.cl-shelves {
+    display: grid;
+    gap: 64px;
+    margin-top: 64px;
+}
+
+/* Three tablets stand on a ledge, which is the last cell of the grid. */
+.cl-shelf {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 30px;
+    align-items: end;
+    padding: 0 22px;
+}
+
+.cl-shelf::after {
+    content: "";
+    grid-column: 1 / -1;
+    height: 22px;
+    margin: 0 -22px;
+    border-radius: 5px 7px 9px 6px;
+    background: var(--cl-grain), linear-gradient(#7a543b, #55382a);
+    box-shadow:
+        inset 0 2px 0 rgba(255, 230, 200, 0.28),
+        0 16px 20px -6px rgba(74, 38, 16, 0.5);
+}
+
+.cl-shelf > li {
+    display: flex;
+}
+
+.cl-slab {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 26px 24px 26px;
+    border-radius: 26px 20px 8px 10px / 22px 28px 8px 10px;
+    background: var(--cl-grain), linear-gradient(165deg, #e4c6a0, var(--cl-buff) 70%, #cda578);
+    box-shadow:
+        inset 2px 2px 2px var(--cl-light),
+        inset -4px -3px 7px rgba(74, 38, 16, 0.26),
+        6px -2px 18px rgba(74, 38, 16, 0.18);
+    text-decoration: none;
+    transform-origin: 50% 100%;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.cl-shelf > li:nth-child(1) .cl-slab {
+    transform: rotate(-1.1deg);
+}
+
+.cl-shelf > li:nth-child(2) .cl-slab {
+    transform: rotate(0.7deg);
+}
+
+.cl-shelf > li:nth-child(3) .cl-slab {
+    transform: rotate(-0.4deg);
+}
+
+.cl-shelf > li .cl-slab:hover,
+.cl-shelf > li .cl-slab:focus-visible {
+    transform: rotate(2.4deg) translateY(-4px);
+    box-shadow:
+        inset 2px 2px 2px var(--cl-light),
+        inset -4px -3px 7px rgba(74, 38, 16, 0.26),
+        14px -4px 26px rgba(74, 38, 16, 0.26);
+}
+
+.cl-glyph {
+    width: 68px;
+    height: 68px;
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 50%;
+    box-shadow: var(--cl-sunken);
+    fill: none;
+    stroke: var(--cl-umber);
+    stroke-width: 3.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.cl-slab h3,
+.cl-plan h3,
+.cl-brick h3,
+.cl-name-points h3 {
+    font-family: var(--cl-display);
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+}
+
+.cl-slab h3 {
+    text-shadow: 1px 1px 0 var(--cl-light);
+}
+
+.cl-slab p {
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.cl-slab-link {
+    margin-top: auto;
+    padding-top: 18px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+}
+
+.cl-slab-link::after {
+    content: " \2192";
+}
+
+/* ---------- Put your name to it ---------- */
+
+.cl-name {
+    --cl-focus: var(--cl-bone);
+    padding: var(--cl-section) 0;
+    background: var(--cl-grain), var(--cl-ember);
+    color: var(--cl-bone);
+}
+
+.cl-name-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 620px);
+    gap: 48px 64px;
+    align-items: center;
+}
+
+.cl-name .cl-kicker {
+    color: var(--cl-sand);
+}
+
+.cl-name .cl-lede {
+    color: var(--cl-bone);
+}
+
+.cl-name-points {
+    display: grid;
+    gap: 22px;
+    margin-top: 34px;
+}
+
+.cl-name-points p {
+    margin-top: 4px;
+    font-size: 17px;
+}
+
+/* A real view of the app, set into a clay surround. */
+.cl-frame {
+    padding: 16px 16px 14px;
+    border-radius: 26px 22px 30px 24px / 24px 30px 22px 28px;
+    background: var(--cl-grain), linear-gradient(165deg, #e4c6a0, var(--cl-buff));
+    box-shadow: var(--cl-raised);
+    color: var(--cl-kiln);
+}
+
+.cl-frame img,
+.cl-frame video {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 10px;
+    box-shadow:
+        -2px -2px 0 2px rgba(74, 38, 16, 0.32),
+        2px 2px 0 2px var(--cl-light);
+}
+
+.cl-frame figcaption {
+    padding: 14px 6px 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* ---------- The tablet today ---------- */
+
+.cl-today {
+    background: var(--cl-grain), var(--cl-bone);
+}
+
+.cl-today-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    margin-top: 56px;
+}
+
+.cl-frame--wide {
+    grid-column: 1 / -1;
+}
+
+/* ---------- What the clay will not do ---------- */
+
+.cl-bricks {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px 18px;
+    margin-top: 56px;
+    counter-reset: brick;
+}
+
+.cl-brick {
+    --cl-focus: var(--cl-bone);
+    position: relative;
+    padding: 76px 24px 28px;
+    border-radius: 9px 13px 11px 15px / 13px 9px 15px 11px;
+    background: var(--cl-grain), linear-gradient(170deg, #ad5028, var(--cl-ember));
+    box-shadow:
+        inset 2px 2px 1px rgba(255, 190, 150, 0.4),
+        inset -3px -4px 5px rgba(60, 20, 5, 0.35),
+        7px 11px 0 rgba(74, 38, 16, 0.2);
+    color: var(--cl-bone);
+    counter-increment: brick;
+}
+
+.cl-brick:nth-child(even) {
+    transform: translateY(18px);
+}
+
+.cl-brick::before {
+    content: counter(brick);
+    position: absolute;
+    top: 14px;
+    left: 22px;
+    font-family: var(--cl-display);
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(74, 24, 8, 0.6);
+    text-shadow: 1.5px 1.5px 0 rgba(255, 190, 150, 0.35);
+}
+
+.cl-brick p {
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.cl-rules .cl-more {
+    margin-top: 56px;
+}
+
+/* ---------- Prices ---------- */
+
+.cl-plan-row {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    align-items: end;
+    margin-top: 56px;
+}
+
+.cl-plan {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px 30px;
+    border-radius: 24px 20px 28px 22px / 22px 28px 20px 26px;
+    background: var(--cl-grain), linear-gradient(165deg, #e4c6a0, var(--cl-buff));
+    box-shadow: var(--cl-raised);
+}
+
+.cl-plan--starter {
+    --cl-focus: var(--cl-bone);
+    padding-block: 36px 34px;
+    background: var(--cl-grain), linear-gradient(165deg, #ad5028, var(--cl-ember));
+    box-shadow:
+        inset 2px 2px 1px rgba(255, 190, 150, 0.4),
+        inset -3px -4px 6px rgba(60, 20, 5, 0.35),
+        10px 18px 30px rgba(74, 38, 16, 0.36);
+    color: var(--cl-bone);
+    transform: rotate(-1.4deg);
+}
+
+.cl-plan-price {
+    margin: 10px 0 8px;
+    font-family: var(--cl-display);
+    font-size: clamp(2rem, 3.2vw, 2.7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+.cl-plan-price small {
+    font-family: var(--cl-text);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.cl-plan p:not(.cl-plan-price) {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.cl-plan .cl-button {
+    --cl-light: rgba(190, 210, 255, 0.5);
+    margin-top: 22px;
+}
+
+/* ---------- Comparisons and questions ---------- */
+
+.cl-switch {
+    padding: clamp(64px, 8vw, 104px) 0 0;
+    background: var(--cl-grain), var(--cl-bone);
+}
+
+.cl-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 32px;
+}
+
+.cl-chips a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 20px;
+    border-radius: 16px 20px 18px 22px / 20px 16px 22px 18px;
+    box-shadow: var(--cl-sunken);
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 150ms ease;
+}
+
+.cl-chips a::after {
+    content: "\2192";
+    margin-left: 10px;
+}
+
+.cl-chips a:hover {
+    background: rgba(217, 180, 138, 0.5);
+}
+
+.cl-faq {
+    padding: clamp(64px, 8vw, 104px) 0 var(--cl-section);
+    background: var(--cl-grain), var(--cl-bone);
+}
+
+.cl-faq-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 640px);
+    gap: 32px 64px;
+    align-items: start;
+}
+
+.cl-questions {
+    display: grid;
+    gap: 14px;
+}
+
+.cl-questions details {
+    border-radius: 18px 22px 20px 24px / 22px 18px 24px 20px;
+    background: var(--cl-grain), linear-gradient(165deg, #ecd3ae, #dfbd93);
+    box-shadow:
+        inset 2px 2px 1px var(--cl-light),
+        inset -2px -3px 4px rgba(74, 38, 16, 0.2),
+        4px 7px 12px rgba(74, 38, 16, 0.18);
+}
+
+.cl-questions summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 22px;
+    cursor: pointer;
+    list-style: none;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.cl-questions summary::-webkit-details-marker {
+    display: none;
+}
+
+.cl-questions summary::after {
+    content: "+";
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    box-shadow: var(--cl-sunken);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.cl-questions details[open] summary::after {
+    content: "\2212";
+}
+
+.cl-questions details p {
+    padding: 0 22px 22px;
+    font-size: 17px;
+}
+
+/* ---------- Close and footer ---------- */
+
+.cl-close {
+    position: relative;
+    padding: var(--cl-section) 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+.cl-close .cl-h1 {
+    max-width: 12em;
+    margin-inline: auto;
+    font-size: clamp(2.4rem, 7vw, 6.25rem);
+    text-wrap: balance;
+}
+
+.cl-close .cl-actions {
+    justify-content: center;
+    margin-top: 48px;
+}
+
+.cl-foot {
+    --cl-focus: var(--cl-bone);
+    padding: 64px 0 128px;
+    background: var(--cl-grain), var(--cl-kiln);
+    color: var(--cl-bone);
+}
+
+.cl-foot-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    gap: 40px;
+}
+
+.cl-logo--light img {
+    opacity: 1;
+    filter: invert(1) sepia(0.25);
+}
+
+.cl-foot-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+}
+
+.cl-foot-columns div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.cl-foot-title {
+    margin-bottom: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #b9a48c;
+}
+
+.cl-foot a {
+    text-decoration: none;
+}
+
+.cl-foot a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+}
+
+.cl-foot-legal {
+    display: flex;
+    flex-wrap: wrap;
+    grid-column: 1 / -1;
+    gap: 8px 24px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(246, 237, 223, 0.18);
+    font-size: 15px;
+    color: #b9a48c;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1000px) {
+    .cl-hero-grid,
+    .cl-kiln-grid,
+    .cl-name-grid,
+    .cl-faq-grid,
+    .cl-frieze-copy {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .cl-tablet {
+        max-width: 560px;
+        margin-top: 48px;
+    }
+
+    .cl-crack {
+        display: none;
+    }
+
+    .cl-hero-copy {
+        padding-top: 20px;
+    }
+
+    .cl-shelf {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 30px;
+    }
+
+    .cl-bricks,
+    .cl-plan-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cl-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        left: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        padding: 12px;
+        border-radius: 22px;
+        background: var(--cl-grain), linear-gradient(170deg, #e3c59d, var(--cl-buff));
+        box-shadow: var(--cl-raised);
+    }
+
+    .cl-links.is-open {
+        display: flex;
+    }
+
+    .cl-links-login {
+        margin-left: 0;
+    }
+
+    .cl-bar {
+        justify-content: space-between;
+        padding-left: 18px;
+    }
+
+    .cl-bar .cl-button {
+        margin-left: auto;
+    }
+
+    .cl-menu {
+        display: block;
+    }
+}
+
+@media (max-width: 640px) {
+    body {
+        font-size: 17px;
+    }
+
+    .cl-bar {
+        gap: 10px;
+    }
+
+    .cl-logo img {
+        width: 76px;
+    }
+
+    .cl-tablet {
+        padding: 14px;
+        transform: none;
+    }
+
+    .cl-tablet-face {
+        min-height: 190px;
+        padding: 16px 10px 4px;
+    }
+
+    .cl-stylus,
+    .cl-thumbprint--hero {
+        display: none;
+    }
+
+    .cl-frieze {
+        height: 88px;
+    }
+
+    .cl-demo-face {
+        min-height: 0;
+        padding: 24px 22px 28px;
+    }
+
+    .cl-shelf,
+    .cl-bricks,
+    .cl-plan-row,
+    .cl-today-grid,
+    .cl-foot-grid,
+    .cl-foot-columns {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .cl-shelf {
+        padding: 0 12px;
+    }
+
+    .cl-shelf::after {
+        margin: 0 -12px;
+    }
+
+    .cl-brick:nth-child(even),
+    .cl-plan--starter {
+        transform: none;
+    }
+
+    .cl-frame {
+        padding: 10px 10px 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

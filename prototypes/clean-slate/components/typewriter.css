@@ -1,0 +1,557 @@
+/* Typewriter component: an enamelled typewriter drawn in CSS that types its own intro
+   lines, takes the visitor's keystrokes, and strikes Feldar's suggestions in blue with
+   Accept, Revise and Dismiss. Markup: components/typewriter.html. Script:
+   components/typewriter.js. Used by concepts G, H and J.
+
+   Theming: every colour and face is a custom property with a default below. A page
+   overrides them on :root or on .tw-rig. The sheet needs the "Special Elite" face;
+   the badge face falls back to a narrow system sans. */
+
+:where(:root) {
+    --tw-paper: #f4efe3;
+    --tw-sheet: #fcf9f1;
+    --tw-carbon: #18181a;
+    --tw-ink-soft: #57524a;
+    --tw-enamel: #2e6f6a;
+    --tw-enamel-highlight: #3d8a83;
+    --tw-enamel-deep: #1d4b47;
+    --tw-key: #efe7d4;
+    --tw-blue: #2446c8;
+    --tw-brass: #b8923a;
+    --tw-typed: "Special Elite", "Courier New", monospace;
+    --tw-badge: "Big Shoulders Display", "Arial Narrow", sans-serif;
+    --tw-text: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Resets inside the machine carry no weight of their own (:where), so the component's
+   classes, such as a button's colours, always win over them. */
+:where(.tw-rig) *,
+:where(.tw-rig) *::before,
+:where(.tw-rig) *::after {
+    box-sizing: border-box;
+}
+
+:where(.tw-rig) button,
+:where(.tw-rig) input {
+    font: inherit;
+    color: inherit;
+}
+
+:where(.tw-rig) p {
+    margin: 0;
+}
+
+/* Several parts set their own display, which would otherwise beat the attribute. */
+.tw-rig [hidden] {
+    display: none !important;
+}
+
+.tw-defs {
+    position: absolute;
+}
+
+.tw-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* ---------- Typed text: the face, and ink that sits unevenly as a ribbon leaves it ---------- */
+
+.tw-sheet {
+    font-family: var(--tw-typed);
+}
+
+.tw-headline,
+.tw-line {
+    filter: url("#tw-ink");
+}
+
+.tw-blue {
+    color: var(--tw-blue);
+    transition: color 400ms ease;
+}
+
+.tw-blue.is-accepted {
+    color: inherit;
+}
+
+.tw-unstruck {
+    visibility: hidden;
+}
+
+/* ---------- Buttons: every one is a key that goes down ---------- */
+
+.tw-button {
+    --tw-button-face: var(--tw-carbon);
+    --tw-button-text: var(--tw-paper);
+    --tw-button-drop: #000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 22px;
+    border: 2px solid var(--tw-carbon);
+    border-radius: 999px;
+    background: var(--tw-button-face);
+    box-shadow: 0 5px 0 var(--tw-button-drop);
+    color: var(--tw-button-text);
+    font-family: var(--tw-text);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 80ms ease, box-shadow 80ms ease;
+}
+
+.tw-button:hover {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 var(--tw-button-drop);
+}
+
+.tw-button:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 var(--tw-button-drop);
+}
+
+.tw-button--cream {
+    --tw-button-face: var(--tw-key);
+    --tw-button-text: var(--tw-carbon);
+    --tw-button-drop: var(--tw-carbon);
+}
+
+.tw-button--blue {
+    --tw-button-face: var(--tw-blue);
+    --tw-button-text: #fff;
+    --tw-button-drop: var(--tw-carbon);
+}
+
+.tw-button--small {
+    min-height: 38px;
+    padding: 0 16px;
+    box-shadow: 0 3px 0 var(--tw-button-drop);
+    font-size: 0.9375rem;
+}
+
+/* ---------- The machine ----------
+   The rig is the unit every part is measured in: 1cqw is one hundredth of its width,
+   so the whole drawing scales with the space it is given. */
+
+.tw-rig {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 640px);
+    margin: 0 auto;
+    color: var(--tw-carbon);
+    container-type: inline-size;
+}
+
+.tw-carriage {
+    position: relative;
+    height: 46cqw;
+    transform: translateX(calc((0.5 - var(--tw-progress, 0)) * 5cqw));
+    transition: transform 160ms ease-out;
+}
+
+/* The sheet is pinned at the platen and grows upward, as paper feeds through a roller. */
+.tw-sheet {
+    position: absolute;
+    bottom: 3.2cqw;
+    left: 17cqw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.35em;
+    width: 66cqw;
+    min-height: 42cqw;
+    padding: 5cqw 5cqw 4.4cqw;
+    background:
+        linear-gradient(to top, rgba(60, 45, 20, 0.14), transparent 9%),
+        var(--tw-sheet);
+    box-shadow:
+        0 0 0 1px rgba(60, 45, 20, 0.08),
+        0 14px 30px -18px rgba(60, 45, 20, 0.6);
+    font-size: clamp(13px, 2.75cqw, 18px);
+    line-height: 1.5;
+    text-align: left;
+}
+
+.tw-headline {
+    margin: 0 0 0.25em;
+    font-size: clamp(22px, 5.8cqw, 38px);
+    font-weight: 400;
+    line-height: 1.14;
+}
+
+.tw-headline-line {
+    display: block;
+}
+
+.tw-line:nth-child(odd),
+.tw-headline-line:last-child {
+    transform: translateY(0.5px) rotate(-0.18deg);
+}
+
+.tw-kept {
+    display: contents;
+}
+
+.tw-own-line {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    caret-color: var(--tw-carbon);
+    filter: none;
+}
+
+.tw-own-line::placeholder {
+    color: var(--tw-ink-soft);
+    opacity: 0.75;
+}
+
+.tw-own-line:focus-visible {
+    outline: 0;
+    box-shadow: 0 2px 0 var(--tw-blue);
+}
+
+/* Lines the machine has yet to type stay laid out but unseen. The class can sit on the
+   rig, or on the root before first paint when the intro types on load. */
+.tw-will-type [data-type-line]:not(.is-struck),
+.tw-will-type [data-own-line] {
+    visibility: hidden;
+}
+
+.tw-bail {
+    position: absolute;
+    right: 13cqw;
+    bottom: 6.6cqw;
+    left: 13cqw;
+    z-index: 1;
+    height: 0.8cqw;
+    border-radius: 1cqw;
+    background: linear-gradient(#f2f3f5, #9da2aa 55%, #6d727a);
+    box-shadow: 0 0.4cqw 0.6cqw rgba(0, 0, 0, 0.25);
+}
+
+.tw-platen {
+    position: absolute;
+    right: 5cqw;
+    bottom: 0;
+    left: 5cqw;
+    z-index: 2;
+    height: 6.4cqw;
+    border-radius: 3.2cqw;
+    background: linear-gradient(#45454a, #0e0e10 42%, #2c2c30 78%, #151517);
+    box-shadow: 0 0.8cqw 0 rgba(0, 0, 0, 0.28);
+}
+
+/* Platen knobs, ridged for grip. */
+.tw-platen::before,
+.tw-platen::after {
+    content: "";
+    position: absolute;
+    top: -1.1cqw;
+    width: 4.2cqw;
+    height: 8.6cqw;
+    border-radius: 1.2cqw;
+    background: repeating-linear-gradient(#0b0b0c 0 0.55cqw, #3c3c41 0.55cqw 1.1cqw);
+    box-shadow: inset 0 0 0 0.3cqw #000;
+}
+
+.tw-platen::before {
+    left: -4.6cqw;
+}
+
+.tw-platen::after {
+    right: -4.6cqw;
+}
+
+.tw-return {
+    position: absolute;
+    bottom: 5.4cqw;
+    left: -1.5cqw;
+    min-width: 13cqw;
+    height: 4.4cqw;
+    min-height: 22px;
+    padding: 0 1.6cqw;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(#fafbfc, #a9aeb6 60%, #70757d);
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, 0.35),
+        0 0.5cqw 0.5cqw rgba(0, 0, 0, 0.3);
+    font-family: var(--tw-badge);
+    font-size: clamp(10px, 2cqw, 13px);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transform: rotate(-18deg);
+    transform-origin: right center;
+    transition: transform 120ms ease;
+}
+
+.tw-return:hover,
+.tw-return:active {
+    transform: rotate(-6deg);
+}
+
+.tw-bell {
+    position: absolute;
+    right: 0.5cqw;
+    bottom: 5.8cqw;
+    width: 6cqw;
+    height: 3.6cqw;
+    border-radius: 6cqw 6cqw 0.8cqw 0.8cqw;
+    background: radial-gradient(120% 140% at 35% 20%, #f1d98a, var(--tw-brass) 55%, #7a5c1c);
+    box-shadow:
+        inset 0 -0.5cqw 0 rgba(0, 0, 0, 0.2),
+        0 0.4cqw 0.5cqw rgba(0, 0, 0, 0.3);
+    transform-origin: 50% 100%;
+}
+
+.tw-body {
+    position: relative;
+    z-index: 3;
+    margin-top: -1.4cqw;
+    padding: 2.6cqw 4cqw 4.6cqw;
+    border: 0.5cqw solid var(--tw-carbon);
+    border-radius: 6cqw 6cqw 3.2cqw 3.2cqw;
+    background: linear-gradient(172deg, var(--tw-enamel-highlight) 0%, var(--tw-enamel) 36%, var(--tw-enamel-deep) 100%);
+    box-shadow:
+        inset 0 0.6cqw 0 rgba(255, 255, 255, 0.24),
+        inset 0 -1.2cqw 0 rgba(0, 0, 0, 0.24),
+        0 3cqw 3.2cqw -2cqw rgba(50, 35, 5, 0.7);
+}
+
+.tw-deck {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 9.6cqw;
+    padding: 0 3cqw;
+}
+
+.tw-spool {
+    width: 8.6cqw;
+    height: 8.6cqw;
+    border-radius: 50%;
+    background: radial-gradient(circle, #d7dade 0 10%, #18181a 11% 26%, #2f2f33 27% 60%, #101012 61% 70%, #9ea3ab 71% 100%);
+    box-shadow:
+        inset 0 0 0 0.35cqw #000,
+        0 0.5cqw 0.6cqw rgba(0, 0, 0, 0.35);
+}
+
+/* The type basket: a fan of typebars in a dark recess, drawn with one gradient. */
+.tw-basket {
+    width: 36cqw;
+    height: 9.2cqw;
+    border: 0.5cqw solid var(--tw-carbon);
+    border-top: 0;
+    border-radius: 0 0 18cqw 18cqw / 0 0 9.2cqw 9.2cqw;
+    background: repeating-conic-gradient(from 90deg at 50% 0%, #0c0c0e 0 2.6deg, #4a4a50 2.6deg 5.2deg);
+    box-shadow: inset 0 1.4cqw 1.8cqw #000;
+}
+
+/* The ribbon runs from spool to spool, black above and blue below. Choosing blue
+   lifts it, so the lower half meets the page. */
+.tw-ribbon-band {
+    position: absolute;
+    top: 3.4cqw;
+    right: 10cqw;
+    left: 10cqw;
+    height: 1.5cqw;
+    background: linear-gradient(var(--tw-carbon) 50%, var(--tw-blue) 50%);
+    box-shadow: 0 0.2cqw 0.3cqw rgba(0, 0, 0, 0.4);
+    transition: transform 180ms ease;
+}
+
+.is-blue .tw-ribbon-band {
+    transform: translateY(-0.8cqw);
+}
+
+.tw-keys {
+    display: grid;
+    justify-items: center;
+    gap: 1.3cqw;
+    margin-top: 2.4cqw;
+}
+
+.tw-key-row {
+    display: flex;
+    gap: 1.2cqw;
+}
+
+.tw-key {
+    display: grid;
+    place-items: center;
+    width: 6.6cqw;
+    height: 6.6cqw;
+    padding: 0;
+    border: 0.55cqw solid var(--tw-carbon);
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 32%, #fffbf1, var(--tw-key) 68%);
+    box-shadow:
+        0 0.8cqw 0 #0b0b0c,
+        0 1.2cqw 1cqw rgba(0, 0, 0, 0.35);
+    font-family: var(--tw-text);
+    font-size: clamp(8px, 2.5cqw, 16px);
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 70ms ease, box-shadow 70ms ease;
+}
+
+.tw-key.is-down,
+.tw-key:active {
+    transform: translateY(0.6cqw);
+    box-shadow:
+        0 0.2cqw 0 #0b0b0c,
+        0 0.4cqw 0.4cqw rgba(0, 0, 0, 0.35);
+}
+
+.tw-key--space {
+    width: 42cqw;
+    height: 4.6cqw;
+    border-radius: 2.3cqw;
+    background: linear-gradient(#fffbf1, var(--tw-key));
+}
+
+.tw-nameplate {
+    position: absolute;
+    right: 5cqw;
+    bottom: 1.5cqw;
+    padding: 0.3cqw 1.6cqw;
+    border-radius: 0.6cqw;
+    background: linear-gradient(#e7cf86, var(--tw-brass));
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+    font-family: var(--tw-badge);
+    font-size: clamp(8px, 2.1cqw, 14px);
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+/* ---------- Controls under the machine, full size so they are easy to press ---------- */
+
+.tw-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px 18px;
+    margin-top: 30px;
+}
+
+.tw-command-keys {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* The ribbon lever: two halves, the chosen one raised and lit. */
+.tw-ribbon {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-height: 48px;
+    padding: 0;
+    border: 2px solid var(--tw-carbon);
+    border-radius: 10px;
+    background: var(--tw-key);
+    box-shadow: 0 5px 0 var(--tw-carbon);
+    font-family: var(--tw-text);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.tw-ribbon-label {
+    padding: 0 12px;
+    font-family: var(--tw-badge);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tw-ribbon-half {
+    display: grid;
+    place-items: center;
+    align-self: stretch;
+    padding: 0 12px;
+    color: #fff;
+    opacity: 0.38;
+    transition: opacity 180ms ease;
+}
+
+.tw-ribbon-half--black {
+    background: var(--tw-carbon);
+}
+
+.tw-ribbon-half--blue {
+    background: var(--tw-blue);
+}
+
+.tw-ribbon[aria-checked="false"] .tw-ribbon-half--black,
+.tw-ribbon[aria-checked="true"] .tw-ribbon-half--blue {
+    opacity: 1;
+}
+
+.tw-status {
+    flex-basis: 100%;
+    min-height: 1.5em;
+    font-family: var(--tw-text);
+    font-size: 0.9375rem;
+    text-align: center;
+    color: var(--tw-carbon);
+}
+
+/* A narrow rig gives the sheet more of the carriage, so a typed line still fits, and
+   lines the controls up on the left. */
+@container (max-width: 460px) {
+    .tw-carriage {
+        height: 62cqw;
+    }
+
+    .tw-sheet {
+        left: 7cqw;
+        width: 86cqw;
+        min-height: 58cqw;
+        font-size: 16px;
+    }
+
+    .tw-headline {
+        font-size: clamp(22px, 8.4cqw, 34px);
+    }
+
+    .tw-controls {
+        justify-content: flex-start;
+    }
+
+    .tw-status {
+        text-align: left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tw-rig *,
+    .tw-rig *::before,
+    .tw-rig *::after,
+    .tw-button {
+        transition: none !important;
+    }
+
+    .tw-carriage,
+    .tw-key.is-down {
+        transform: none;
+    }
+}

@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex,nofollow" />
+        <meta
+            name="description"
+            content="Feldar is a writing app for novelists. You write in black. When you ask for help, Feldar types in blue, and its lines stay only if you accept them."
+        />
+        <title>Concept G: Typewriter - Feldar</title>
+
+        <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=Special+Elite&display=swap"
+        />
+
+        <link rel="stylesheet" href="../switcher.css" />
+        <link rel="stylesheet" href="components/typewriter.css" />
+        <link rel="stylesheet" href="styles/typewriter.css" />
+
+        <!-- Hides the headline before first paint so the machine can type it, unless the
+             reader asks for reduced motion. Without script the headline is simply there. -->
+        <script>
+            if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                document.documentElement.classList.add("tw-will-type");
+            }
+        </script>
+    </head>
+    <body>
+        <svg class="tw-defs" width="0" height="0" aria-hidden="true" focusable="false">
+            <defs>
+                <filter id="tw-ink" x="-3%" y="-12%" width="106%" height="124%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="grain" />
+                    <feDisplacementMap in="SourceGraphic" in2="grain" scale="1.4" result="rough" />
+                    <feTurbulence type="fractalNoise" baseFrequency="0.05 0.4" numOctaves="2" seed="3" result="wear" />
+                    <feColorMatrix in="wear" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.3" result="density" />
+                    <feComposite in="rough" in2="density" operator="in" />
+                </filter>
+                <symbol id="tw-clip" viewBox="6 0 24 60">
+                    <path d="M10 20v28a8 8 0 0 0 16 0V10a6 6 0 0 0-12 0v38a2 2 0 0 0 4 0V20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+                </symbol>
+            </defs>
+        </svg>
+
+        <header class="tw-bar">
+            <a class="tw-badge" href="/" aria-label="Feldar home">
+                <img src="../../assets/logo.svg" alt="Feldar" width="76" height="22" />
+            </a>
+            <nav class="tw-bar-links" aria-label="Main">
+                <a href="/features">Features</a>
+                <a href="/compare">Compare</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/blog">Blog</a>
+                <a href="/download">Download</a>
+            </nav>
+            <div class="tw-bar-actions">
+                <a class="tw-bar-login" href="/login" rel="nofollow">Log in</a>
+                <a class="tw-button tw-button--cream tw-button--small" href="/login" rel="nofollow">Start writing free</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="tw-hero">
+                <span class="tw-prop tw-prop--sheets" aria-hidden="true"></span>
+                <span class="tw-prop tw-prop--spool" aria-hidden="true"></span>
+
+                <div class="tw-rig" data-machine>
+                    <div class="tw-machine">
+                        <div class="tw-carriage" data-carriage>
+                            <div class="tw-sheet">
+                                <h1 class="tw-headline">
+                                    <span class="tw-headline-line" data-type-line>Black for you.</span>
+                                    <span class="tw-headline-line tw-blue" data-type-line>Blue for us.</span>
+                                </h1>
+                                <p class="tw-line" data-type-line>Feldar is a writing app for novelists.</p>
+                                <div class="tw-kept" data-kept></div>
+                                <p class="tw-line tw-blue" data-continuation hidden><span data-variant>Yours is in black. This line is ours, and it waits.</span><span data-variant hidden>A second take. Still blue, still waiting for you.</span></p>
+                                <p class="tw-line tw-blue" data-continuation hidden><span data-variant>Accept keeps a line. Dismiss leaves your page alone.</span><span data-variant hidden>Keep it, change it or wave it off. Your call.</span></p>
+                                <p class="tw-line tw-blue" data-continuation hidden><span data-variant>In Feldar these lines come from your own book.</span><span data-variant hidden>In the app, blue lines are drawn from your book.</span></p>
+                                <label class="tw-visually-hidden" for="tw-own-line">Type a line on the page</label>
+                                <input
+                                    class="tw-line tw-own-line"
+                                    id="tw-own-line"
+                                    data-own-line
+                                    type="text"
+                                    maxlength="28"
+                                    placeholder="Now you. Type a line."
+                                    autocomplete="off"
+                                    autocapitalize="off"
+                                    spellcheck="false"
+                                />
+                            </div>
+                            <span class="tw-bail" aria-hidden="true"></span>
+                            <div class="tw-platen">
+                                <button class="tw-return" type="button" data-return>Return</button>
+                                <span class="tw-bell" data-bell aria-hidden="true"></span>
+                            </div>
+                        </div>
+
+                        <div class="tw-body">
+                            <div class="tw-deck" aria-hidden="true">
+                                <span class="tw-spool"></span>
+                                <span class="tw-basket"></span>
+                                <span class="tw-spool"></span>
+                                <span class="tw-ribbon-band"></span>
+                            </div>
+                            <div class="tw-keys" data-keyboard aria-hidden="true">
+                                <div class="tw-key-row">
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="q">Q</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="w">W</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="e">E</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="r">R</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="t">T</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="y">Y</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="u">U</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="i">I</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="o">O</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="p">P</button>
+                                </div>
+                                <div class="tw-key-row">
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="a">A</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="s">S</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="d">D</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="f">F</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="g">G</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="h">H</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="j">J</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="k">K</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="l">L</button>
+                                </div>
+                                <div class="tw-key-row">
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="z">Z</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="x">X</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="c">C</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="v">V</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="b">B</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="n">N</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="m">M</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key=",">,</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key=".">.</button>
+                                </div>
+                                <div class="tw-key-row">
+                                    <button class="tw-key tw-key--space" type="button" tabindex="-1" data-key=" "></button>
+                                </div>
+                            </div>
+                            <span class="tw-nameplate" aria-hidden="true">Feldar</span>
+                        </div>
+                    </div>
+
+                    <div class="tw-controls">
+                        <button class="tw-ribbon" type="button" role="switch" aria-checked="false" data-action="ribbon">
+                            <span class="tw-ribbon-label">Ribbon</span>
+                            <span class="tw-ribbon-half tw-ribbon-half--black">Black, you</span>
+                            <span class="tw-ribbon-half tw-ribbon-half--blue">Blue, Feldar</span>
+                        </button>
+                        <div class="tw-command-keys" data-idle>
+                            <button class="tw-button tw-button--blue" type="button" data-action="continue">Continue from here</button>
+                            <button class="tw-button tw-button--blue" type="button" data-action="restart" hidden>Start over</button>
+                        </div>
+                        <div class="tw-command-keys" data-review hidden>
+                            <button class="tw-button tw-button--blue" type="button" data-action="accept">Accept</button>
+                            <button class="tw-button tw-button--cream" type="button" data-action="revise">Revise</button>
+                            <button class="tw-button tw-button--cream" type="button" data-action="dismiss">Dismiss</button>
+                        </div>
+                        <p
+                            class="tw-status"
+                            role="status"
+                            data-status
+                            data-accepted="Accepted. The line stays on your page."
+                            data-dismissed="Dismissed. The page is as you typed it."
+                            data-bell="Ting. Five characters to the margin. Press Return for a new line."
+                        ></p>
+                    </div>
+                </div>
+
+                <div class="tw-hero-copy">
+                    <p class="tw-plate">A writing app for novelists</p>
+                    <p class="tw-lede">Many typewriter ribbons came in two colours. Feldar keeps the idea. You write in black. When you ask for help, the next lines are struck in blue, and they stay only if you accept them.</p>
+                    <div class="tw-actions">
+                        <a class="tw-button" href="/login" rel="nofollow">Start writing free</a>
+                        <a class="tw-button tw-button--cream" href="/download">Download for Mac</a>
+                    </div>
+                    <p class="tw-note">Free to start. 500 credits, no credit card.</p>
+                    <ol class="tw-try" aria-label="Try the machine">
+                        <li>Type a line. The keys follow you.</li>
+                        <li>Press Continue from here. The ribbon flips to blue.</li>
+                        <li>Accept, Revise or Dismiss what it types.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="tw-section tw-ribbon-section" aria-labelledby="ribbon-title">
+                <div class="tw-wrap tw-split">
+                    <div class="tw-split-text">
+                        <h2 class="tw-h2" id="ribbon-title">The two-colour ribbon</h2>
+                        <p class="tw-intro">Many typewriters took a two-colour ribbon, black above and red below, with a lever to switch between them. Feldar's second colour is blue, and the lever is yours.</p>
+                        <div class="tw-points">
+                            <div>
+                                <h3 class="tw-h3">Continue from here</h3>
+                                <p>When the next sentence will not come, hover over the caret and choose Continue from here. The new lines are struck in blue, set apart from yours.</p>
+                            </div>
+                            <div>
+                                <h3 class="tw-h3">Accept, Revise, Dismiss</h3>
+                                <p>Accept keeps the lines. Revise asks for another take: shorter, longer, more direct. Dismiss leaves the page as you typed it.</p>
+                            </div>
+                        </div>
+                        <a class="tw-link" href="/ai-for-novelists">AI for novelists</a>
+                    </div>
+
+                    <div class="tw-demo" data-page-demo>
+                        <div class="tw-page">
+                            <svg class="tw-clip" aria-hidden="true"><use href="#tw-clip" /></svg>
+                            <p class="tw-page-head">The Winter Ledger, chapter three</p>
+                            <p>Nell laid the ledger open on the press and put one finger under the entry. Two pounds, on the first of the month, to M.P.</p>
+                            <p class="tw-blue" data-continuation><span data-variant>Daniel did not look at it. He went on wiping his hands, as if the figures might dry up and blow away if he gave them time.</span><span data-variant hidden>Daniel kept his eyes on his hands. "Ask my mother," he said.</span></p>
+                            <p class="tw-blue" data-continuation hidden><span data-variant>"Who is M.P.?" she said. The frost ticked on the cider house roof.</span><span data-variant hidden>She asked him who M.P. was. He let the question stand in the cold.</span></p>
+                        </div>
+                        <div class="tw-demo-controls">
+                            <div class="tw-command-keys" data-review>
+                                <button class="tw-button tw-button--blue" type="button" data-action="accept">Accept</button>
+                                <button class="tw-button tw-button--cream" type="button" data-action="revise">Revise</button>
+                                <button class="tw-button tw-button--cream" type="button" data-action="dismiss">Dismiss</button>
+                            </div>
+                            <div class="tw-command-keys" data-idle hidden>
+                                <button class="tw-button tw-button--blue" type="button" data-action="continue">Continue from here</button>
+                                <button class="tw-button tw-button--blue" type="button" data-action="restart" hidden>Start over</button>
+                            </div>
+                            <p
+                                class="tw-status"
+                                role="status"
+                                data-status
+                                data-accepted="Accepted. Those lines are part of the page now."
+                                data-dismissed="Dismissed. The page is as you typed it."
+                            ></p>
+                        </div>
+                        <p class="tw-caption">Demo. These words were written by hand for this page. In Feldar they come from your book.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tw-section tw-keys-section" aria-labelledby="keys-title" data-proto-section="features">
+                <div class="tw-wrap">
+                    <h2 class="tw-h2" id="keys-title">Every key does one thing</h2>
+                    <p class="tw-intro">The first commercially successful typewriter, by Sholes and Glidden, went on sale about 1874. It introduced the QWERTY layout still under your fingers. Feldar's keys are fewer, and each one waits for you to press it.</p>
+                    <div class="tw-features">
+                        <article class="tw-feature">
+                            <span class="tw-cap" aria-hidden="true">Plan</span>
+                            <h3 class="tw-h3">Outline and Generate scenes</h3>
+                            <p>Every page has an Outline. Say what happens next, pick a scene count, and Generate scenes lays out titles and descriptions for you to edit, reorder or replace.</p>
+                            <a class="tw-link" href="/features/scenes">How scene planning works</a>
+                        </article>
+                        <article class="tw-feature">
+                            <span class="tw-cap" aria-hidden="true">Draft</span>
+                            <h3 class="tw-h3">Draft Page</h3>
+                            <p>Write the chapter with its scenes beside you, or press Draft Page for a first pass at the length you set. One page, or several at once.</p>
+                            <a class="tw-link" href="/guides/how-to-outline-a-novel">How to outline a novel</a>
+                        </article>
+                        <article class="tw-feature">
+                            <span class="tw-cap" aria-hidden="true">World</span>
+                            <h3 class="tw-h3">The Canvas</h3>
+                            <p>A board of cards for your story world, joined by relations you label. Six kinds of card: Character, Location, Plot, Item, Faction and Note. Branch grows a new card from one you select.</p>
+                            <a class="tw-link" href="/features/canvas">How the Canvas works</a>
+                        </article>
+                        <article class="tw-feature">
+                            <span class="tw-cap" aria-hidden="true">Edit</span>
+                            <h3 class="tw-h3">Polish, Deepen, Enhance</h3>
+                            <p>A mistake once meant retyping the page, or correction fluid, invented in the 1950s by a typist, Bette Nesmith Graham. Here you select a passage and choose a rewrite, or say what you want with Instruct. Every added word comes back marked.</p>
+                            <a class="tw-link" href="/ai-for-novelists">AI for novelists</a>
+                        </article>
+                        <article class="tw-feature">
+                            <span class="tw-cap" aria-hidden="true">Voice</span>
+                            <h3 class="tw-h3">Voice &amp; Style</h3>
+                            <p>Paste at least 600 words of your own prose and Feldar writes toward them. As the book grows, it follows the book.</p>
+                            <a class="tw-link" href="/features">All features</a>
+                        </article>
+                        <article class="tw-feature">
+                            <span class="tw-cap tw-cap--brass" aria-hidden="true">Bell</span>
+                            <h3 class="tw-h3">Checks</h3>
+                            <p>A bell rang a few characters before the right margin, so the typist knew to finish the word and return the carriage. Checks is Feldar's bell. Five passes mark what they find, each with a fix to accept or discard.</p>
+                            <ol class="tw-typed-list">
+                                <li>Fix critical mistakes</li>
+                                <li>Improve accuracy and clarity</li>
+                                <li>Tighten word choice</li>
+                                <li>Smooth dialogue transitions</li>
+                                <li>Clarify character perspectives</li>
+                            </ol>
+                            <a class="tw-link" href="/features">All features</a>
+                        </article>
+                        <article class="tw-feature">
+                            <span class="tw-cap" aria-hidden="true">Read</span>
+                            <h3 class="tw-h3">Lens</h3>
+                            <p>Six readers beside the page: Critic, Cheerleader, Poet, Editor, Plotter and Reader. Ask one by name, let them debate, or ask for Reader reactions from an audience such as book club readers.</p>
+                            <a class="tw-link" href="/features">All features</a>
+                        </article>
+                        <article class="tw-feature">
+                            <span class="tw-cap tw-cap--blue" aria-hidden="true">Model</span>
+                            <h3 class="tw-h3">Choose the model</h3>
+                            <p>GPT-6 Astra, Sol and Luna, and Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5. Set one per feature, or switch in Chat. Which you can use depends on your plan.</p>
+                            <a class="tw-link" href="/pricing">Models by plan</a>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tw-section tw-carbon-section" aria-labelledby="carbon-title">
+                <div class="tw-wrap tw-split tw-split--visual-first">
+                    <div class="tw-carbon-stack">
+                        <span class="tw-carbon-sheet" aria-hidden="true"></span>
+                        <figure class="tw-top-sheet">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/writing-record-1200.avif 1200w, ../../assets/product/writing-record-2000.avif 2000w" sizes="(min-width: 1100px) 620px, 88vw" />
+                                <source type="image/webp" srcset="../../assets/product/writing-record-1200.webp 1200w, ../../assets/product/writing-record-2000.webp 2000w" sizes="(min-width: 1100px) 620px, 88vw" />
+                                <img src="../../assets/product/writing-record-1200.webp" width="1200" height="750" loading="lazy" alt="A writing record showing how much of the book was typed by hand and how much came from Feldar, with a chart of daily writing" />
+                            </picture>
+                            <figcaption class="tw-typed">cc: the author, and no one else.</figcaption>
+                        </figure>
+                    </div>
+                    <div class="tw-split-text">
+                        <h2 class="tw-h2" id="carbon-title">The carbon copy</h2>
+                        <p class="tw-intro">Carbon paper between two sheets made a copy as you typed. It is where "cc" comes from. Feldar keeps a copy of another kind.</p>
+                        <div class="tw-points">
+                            <div>
+                                <h3 class="tw-h3">Writing record</h3>
+                                <p>As you write, the Writing record notes which words you typed and which came through Feldar, with active days, time and models used. It is private. If a publisher, a prize or a workshop asks how the book was written, you have an answer.</p>
+                            </div>
+                            <div>
+                                <h3 class="tw-h3">Library</h3>
+                                <p>Finished pages go in the box. Every book gets a cover in your Library, and you can pin the one you are finishing.</p>
+                            </div>
+                            <div>
+                                <h3 class="tw-h3">Import and export</h3>
+                                <p>Bring a manuscript in as Word, PDF, Markdown or plain text, up to 20 MB a file. Take the whole book or chosen pages out again in the same four formats.</p>
+                            </div>
+                        </div>
+                        <a class="tw-link" href="/blog/provenance">Why Feldar records provenance</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tw-section tw-today-section" aria-labelledby="today-title">
+                <div class="tw-wrap">
+                    <h2 class="tw-h2" id="today-title">The machine today</h2>
+                    <p class="tw-intro">No ribbon to change and no carriage to return. This is Feldar as it runs in a browser and on a Mac, with one novel in every picture: The Winter Ledger.</p>
+                    <div class="tw-prints">
+                        <figure class="tw-print tw-print--wide">
+                            <svg class="tw-clip" aria-hidden="true"><use href="#tw-clip" /></svg>
+                            <video
+                                data-loop
+                                muted
+                                loop
+                                playsinline
+                                preload="none"
+                                width="1440"
+                                height="900"
+                                poster="../../assets/demo/loop-continue-blue-poster.jpg"
+                                aria-label="The caret menu opens at the end of a page, Continue from here is chosen, and new lines arrive in blue before being accepted"
+                            >
+                                <source src="../../assets/demo/loop-continue-blue.webm" type="video/webm" />
+                                <source src="../../assets/demo/loop-continue-blue.mp4" type="video/mp4" />
+                            </video>
+                            <figcaption class="tw-typed">Continue from here, at the end of a page. The new lines are blue until accepted.</figcaption>
+                        </figure>
+                        <figure class="tw-print">
+                            <svg class="tw-clip" aria-hidden="true"><use href="#tw-clip" /></svg>
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/canvas-board-1200.avif 1200w, ../../assets/product/canvas-board-2000.avif 2000w" sizes="(min-width: 900px) 560px, 88vw" />
+                                <source type="image/webp" srcset="../../assets/product/canvas-board-1200.webp 1200w, ../../assets/product/canvas-board-2000.webp 2000w" sizes="(min-width: 900px) 560px, 88vw" />
+                                <img src="../../assets/product/canvas-board-1200.webp" width="1200" height="750" loading="lazy" alt="A story board of character, place, object and plot cards, with labelled lines linking the main character to the others" />
+                            </picture>
+                            <figcaption class="tw-typed">The Canvas for the novel, with one character's relations labelled.</figcaption>
+                        </figure>
+                        <figure class="tw-print">
+                            <svg class="tw-clip" aria-hidden="true"><use href="#tw-clip" /></svg>
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/lens-chat-1200.avif 1200w, ../../assets/product/lens-chat-2000.avif 2000w" sizes="(min-width: 900px) 560px, 88vw" />
+                                <source type="image/webp" srcset="../../assets/product/lens-chat-1200.webp 1200w, ../../assets/product/lens-chat-2000.webp 2000w" sizes="(min-width: 900px) 560px, 88vw" />
+                                <img src="../../assets/product/lens-chat-1200.webp" width="1200" height="750" loading="lazy" alt="Two reader personas, a Critic and a Poet, giving feedback on the chapter in the chat beside the page" />
+                            </picture>
+                            <figcaption class="tw-typed">Lens. A Critic and a Poet on the same chapter.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tw-section tw-rules-section" aria-labelledby="rules-title">
+                <div class="tw-wrap tw-split">
+                    <div class="tw-split-text">
+                        <h2 class="tw-h2" id="rules-title">House rules for the second colour</h2>
+                        <figure class="tw-quote">
+                            <blockquote class="tw-typed">"Our writing tools are also working on our thoughts."</blockquote>
+                            <figcaption>Nietzsche, typing on an early machine, about 1882</figcaption>
+                        </figure>
+                        <a class="tw-link" href="/ai-for-novelists">AI for novelists</a>
+                    </div>
+                    <ol class="tw-rules">
+                        <li>
+                            <h3 class="tw-h3">Nothing goes in unless you accept it</h3>
+                            <p>Blue lines and rewrite cards wait for Accept or Apply. Dismiss one and the page is as you typed it.</p>
+                        </li>
+                        <li>
+                            <h3 class="tw-h3">It never trains on your writing</h3>
+                            <p>Feldar does not use your manuscript to train AI models.</p>
+                        </li>
+                        <li>
+                            <h3 class="tw-h3">You own what you write</h3>
+                            <p>The words, drafts and worlds you make in Feldar are yours, and you can export them whenever you like.</p>
+                        </li>
+                        <li>
+                            <h3 class="tw-h3">The record shows its work</h3>
+                            <p>The Writing record shows which words came from where.</p>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="tw-section tw-plans-section" aria-labelledby="plans-title" data-proto-section="pricing compare">
+                <div class="tw-wrap">
+                    <h2 class="tw-h2" id="plans-title">Start free. Pay when you write more.</h2>
+                    <p class="tw-intro">Every plan has the same workspace. Writing, planning and organizing never use credits. Rewrites, Chat, Checks, scenes and drafting do.</p>
+                    <div class="tw-plans">
+                        <article class="tw-plan tw-plan--starter">
+                            <h3 class="tw-plan-name">Starter</h3>
+                            <p class="tw-plan-price">Free</p>
+                            <p class="tw-plan-terms tw-typed">500 credits, once. No credit card.</p>
+                            <a class="tw-button tw-button--cream" href="/login" rel="nofollow">Start writing free</a>
+                        </article>
+                        <article class="tw-plan">
+                            <h3 class="tw-plan-name">Core</h3>
+                            <p class="tw-plan-price">$20 <span>a month</span></p>
+                            <p class="tw-plan-terms tw-typed">20,000 credits a month.</p>
+                        </article>
+                        <article class="tw-plan">
+                            <h3 class="tw-plan-name">Pro</h3>
+                            <p class="tw-plan-price">$40 <span>a month</span></p>
+                            <p class="tw-plan-terms tw-typed">45,000 credits a month, and more premium model use.</p>
+                        </article>
+                        <article class="tw-plan">
+                            <h3 class="tw-plan-name">Ultra</h3>
+                            <p class="tw-plan-price">$200 <span>a month</span></p>
+                            <p class="tw-plan-terms tw-typed">250,000 credits a month, for large manuscripts.</p>
+                        </article>
+                    </div>
+                    <a class="tw-link" href="/pricing">Plans in full</a>
+
+                    <div class="tw-switching">
+                        <h3 class="tw-h3">Coming from another writing app?</h3>
+                        <ul class="tw-tabs">
+                            <li><a href="/compare/scrivener">Feldar and Scrivener</a></li>
+                            <li><a href="/compare/sudowrite">Feldar and Sudowrite</a></li>
+                            <li><a href="/compare/novelcrafter">Feldar and Novelcrafter</a></li>
+                            <li><a href="/compare/plottr">Feldar and Plottr</a></li>
+                            <li><a href="/compare">All comparisons</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tw-section tw-faq-section" aria-labelledby="faq-title">
+                <div class="tw-wrap tw-split">
+                    <h2 class="tw-h2" id="faq-title">Questions writers ask first</h2>
+                    <div class="tw-faq">
+                        <details open>
+                            <summary>Does Feldar write the book for me?</summary>
+                            <p>No. It writes when you ask, in blue or in a card, and nothing stays until you accept it.</p>
+                        </details>
+                        <details>
+                            <summary>Does Feldar train AI on my writing?</summary>
+                            <p>No. Your manuscript never trains AI models, and what you write in Feldar is yours.</p>
+                        </details>
+                        <details>
+                            <summary>Is Feldar free?</summary>
+                            <p>To start, yes. Starter is free with 500 credits and no credit card. Writing, planning and organizing never use credits. Paid plans start at $20 a month.</p>
+                        </details>
+                        <details>
+                            <summary>Can I bring in a manuscript I have already started?</summary>
+                            <p>Yes, as a Word, PDF, Markdown or plain-text file of up to 20 MB.</p>
+                        </details>
+                        <details>
+                            <summary>Does Feldar work on Windows?</summary>
+                            <p>In the browser, yes. The desktop app is for Mac for now.</p>
+                        </details>
+                        <details>
+                            <summary>Can I take my novel out again?</summary>
+                            <p>Yes. Export the whole book or chosen pages as Word, PDF, Markdown or plain text.</p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tw-final" aria-labelledby="final-title">
+                <div class="tw-fresh" aria-hidden="true">
+                    <span class="tw-fresh-sheet"></span>
+                    <span class="tw-fresh-platen"></span>
+                </div>
+                <h2 class="tw-h2" id="final-title">Roll in a fresh page.</h2>
+                <div class="tw-actions">
+                    <a class="tw-button" href="/login" rel="nofollow">Start writing free</a>
+                    <a class="tw-button tw-button--cream" href="/download">Download for Mac</a>
+                </div>
+                <p class="tw-note">Free to start. 500 credits, no credit card.</p>
+            </section>
+        </main>
+
+        <footer class="tw-foot">
+            <div class="tw-wrap tw-foot-grid">
+                <a class="tw-badge" href="/" aria-label="Feldar home">
+                    <img src="../../assets/logo.svg" alt="Feldar" width="76" height="22" loading="lazy" />
+                </a>
+                <nav class="tw-foot-columns" aria-label="Footer">
+                    <div>
+                        <p class="tw-foot-title">Product</p>
+                        <a href="/features">Features</a>
+                        <a href="/pricing">Pricing</a>
+                        <a href="/download">Download</a>
+                        <a href="/changelog">Changelog</a>
+                    </div>
+                    <div>
+                        <p class="tw-foot-title">For writers</p>
+                        <a href="/novel-writing-software">Novel writing software</a>
+                        <a href="/ai-for-novelists">AI for novelists</a>
+                        <a href="/guides/how-to-outline-a-novel">Outline a novel</a>
+                        <a href="/tools">Free tools</a>
+                    </div>
+                    <div>
+                        <p class="tw-foot-title">Company</p>
+                        <a href="/about">About</a>
+                        <a href="/blog">Blog</a>
+                        <a href="/demo">Product demo</a>
+                    </div>
+                </nav>
+                <p class="tw-foot-legal">
+                    <span>Feldar LLC</span>
+                    <a href="/terms">Terms of Use</a>
+                    <a href="/privacy">Privacy Policy</a>
+                </p>
+            </div>
+        </footer>
+
+        <nav class="pt-switch" aria-label="Prototypes">
+            <a href="../index.html">All concepts</a>
+            <a href="scriptorium.html" rel="prev" aria-label="Previous concept: Scriptorium">‹ Prev</a>
+            <a href="manuscript.html" title="Manuscript">A</a>
+            <a href="index-cards.html" title="Index cards">B</a>
+            <a href="night-studio.html" title="Night studio">C</a>
+            <a href="five-thousand-years.html" title="5,000 years">D</a>
+            <a href="clay.html" title="Clay">E</a>
+            <a href="scriptorium.html" title="Scriptorium">F</a>
+            <a href="typewriter.html" aria-current="page">G · Typewriter</a>
+            <a href="then-and-now.html" title="Then and now">H</a>
+            <a href="ledger.html" title="The novel's ledger">I</a>
+            <a href="desk.html" title="The writer's desk">J</a>
+            <a href="then-and-now.html" rel="next" aria-label="Next concept: Then and now">Next ›</a>
+        </nav>
+
+        <script type="module" src="scripts/typewriter.js"></script>
+        <script type="module" src="../review.js"></script>
+    </body>
+</html>

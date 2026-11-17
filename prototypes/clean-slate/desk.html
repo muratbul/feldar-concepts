@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex,nofollow" />
+        <meta
+            name="description"
+            content="Feldar is a writing app for novelists. Scene cards, a story board, editing checks and six first readers sit on one desk, and its suggestions wait in blue."
+        />
+        <title>Concept J: The writer's desk - Feldar</title>
+
+        <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&family=Special+Elite&family=Young+Serif&display=swap"
+        />
+
+        <link rel="stylesheet" href="../switcher.css" />
+        <link rel="stylesheet" href="components/typewriter.css" />
+        <link rel="stylesheet" href="styles/desk.css" />
+
+        <!-- Hides the typewriter's intro lines before first paint so it can type them when
+             it comes into view, unless the reader asks for reduced motion. -->
+        <script>
+            if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                document.documentElement.classList.add("tw-will-type");
+            }
+        </script>
+    </head>
+    <body>
+        <svg class="tw-defs" width="0" height="0" aria-hidden="true" focusable="false">
+            <defs>
+                <filter id="tw-ink" x="-3%" y="-12%" width="106%" height="124%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="grain" />
+                    <feDisplacementMap in="SourceGraphic" in2="grain" scale="1.4" result="rough" />
+                    <feTurbulence type="fractalNoise" baseFrequency="0.05 0.4" numOctaves="2" seed="3" result="wear" />
+                    <feColorMatrix in="wear" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.3" result="density" />
+                    <feComposite in="rough" in2="density" operator="in" />
+                </filter>
+            </defs>
+        </svg>
+
+        <svg class="dk-defs" width="0" height="0" aria-hidden="true" focusable="false">
+            <defs>
+                <pattern id="dk-cork" width="12" height="12" patternUnits="userSpaceOnUse">
+                    <rect width="12" height="12" fill="#c99c68" />
+                    <circle cx="3" cy="4" r="0.9" fill="#a97a49" />
+                    <circle cx="9" cy="9" r="0.7" fill="#b88754" />
+                    <circle cx="8" cy="2" r="0.5" fill="#e2bc8a" />
+                    <circle cx="2" cy="10" r="0.6" fill="#b88754" />
+                </pattern>
+                <linearGradient id="dk-glow" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#fff4c8" stop-opacity="0.8" />
+                    <stop offset="1" stop-color="#fff4c8" stop-opacity="0" />
+                </linearGradient>
+                <radialGradient id="dk-clay" cx="0.35" cy="0.3" r="0.8">
+                    <stop offset="0" stop-color="#d69467" />
+                    <stop offset="0.55" stop-color="#b6693f" />
+                    <stop offset="1" stop-color="#8f4c2c" />
+                </radialGradient>
+                <symbol id="dk-card" viewBox="0 0 86 60">
+                    <rect x="2" y="3" width="82" height="56" rx="2" fill="#3b2a1a" opacity="0.14" />
+                    <rect width="82" height="56" rx="2" fill="#fffdf7" />
+                    <path d="M5 13H77" stroke="#d6564a" stroke-width="1.1" />
+                    <path d="M5 25H77M5 35H77M5 45H77" stroke="#d8dbd2" stroke-width="0.8" />
+                </symbol>
+                <symbol id="dk-pin" viewBox="0 0 8 8">
+                    <circle cx="4" cy="4" r="3.4" fill="currentColor" />
+                    <circle cx="3" cy="3" r="1.1" fill="#fff" opacity="0.55" />
+                </symbol>
+            </defs>
+        </svg>
+
+        <header class="dk-bar" data-bar>
+            <a class="dk-logo" href="/" aria-label="Feldar home">
+                <img src="../../assets/logo-nav.svg" alt="Feldar" width="59" height="17" />
+            </a>
+            <nav class="dk-nav" id="dk-nav" aria-label="Main">
+                <a href="/features">Features</a>
+                <a href="/compare">Compare</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/blog">Blog</a>
+                <a href="/download">Download</a>
+                <a class="dk-nav-login" href="/login" rel="nofollow">Log in</a>
+            </nav>
+            <div class="dk-bar-actions">
+                <a class="dk-bar-login" href="/login" rel="nofollow">Log in</a>
+                <a class="dk-button dk-button--small" href="/login" rel="nofollow">Start writing free</a>
+                <button class="dk-menu-button" type="button" aria-expanded="false" aria-controls="dk-nav" data-menu-button>Menu</button>
+            </div>
+        </header>
+
+        <main>
+            <section class="dk-hero" aria-labelledby="dk-title">
+                <div class="dk-wrap dk-intro">
+                    <div>
+                        <p class="dk-kicker">A writing app for novelists</p>
+                        <h1 class="dk-title" id="dk-title">Every tool for your novel, on one desk.</h1>
+                    </div>
+                    <div class="dk-intro-side">
+                        <p class="dk-lede">Scene cards, a story board, a red pencil, six first readers. Feldar keeps them beside your manuscript, and anything it writes waits in blue for your yes.</p>
+                        <div class="dk-actions">
+                            <a class="dk-button" href="/login" rel="nofollow">Start writing free</a>
+                            <a class="dk-button dk-button--quiet" href="/download">Download for Mac</a>
+                        </div>
+                        <p class="dk-note">Free to start. 500 credits, no credit card.</p>
+                        <p class="dk-hint">Everything on the desk below is part of Feldar. Try any of it.</p>
+                    </div>
+                </div>
+
+                <div class="dk-scene" data-scene>
+                    <div class="dk-desk-top" aria-hidden="true"></div>
+                    <div class="dk-apron" aria-hidden="true"></div>
+                    <div class="dk-legs" aria-hidden="true"></div>
+
+                    <button class="dk-object dk-object--label-below" type="button" style="--x: 2; --y: 1.4; --w: 28; --h: 7" data-feature="outline" aria-pressed="false" aria-controls="dk-panel-outline" aria-label="Outline and Generate scenes">
+                        <svg viewBox="0 0 280 70" aria-hidden="true" focusable="false">
+                            <g transform="translate(6 8) rotate(-2.4 41 28)">
+                                <use href="#dk-card" width="86" height="60" />
+                                <text class="dk-art-typed" x="7" y="10" font-size="7">1</text>
+                                <text class="dk-art-typed" x="7" y="23" font-size="9">Daniel will</text>
+                                <text class="dk-art-typed" x="7" y="33" font-size="9">not say.</text>
+                                <use href="#dk-pin" x="37" y="-1" width="8" height="8" color="#b8382b" />
+                            </g>
+                            <g transform="translate(100 6) rotate(1.6 41 28)">
+                                <use href="#dk-card" width="86" height="60" />
+                                <text class="dk-art-typed" x="7" y="10" font-size="7">2</text>
+                                <text class="dk-art-typed" x="7" y="23" font-size="9">Fires in the</text>
+                                <text class="dk-art-typed" x="7" y="33" font-size="9">low rows.</text>
+                                <use href="#dk-pin" x="37" y="-1" width="8" height="8" color="#c99a2e" />
+                            </g>
+                            <g transform="translate(192 9) rotate(-1 41 28)">
+                                <use href="#dk-card" width="86" height="60" />
+                                <text class="dk-art-typed" x="7" y="10" font-size="7">3</text>
+                                <text class="dk-art-typed" x="7" y="23" font-size="9">Agnes at</text>
+                                <text class="dk-art-typed" x="7" y="33" font-size="9">the gate.</text>
+                                <use href="#dk-pin" x="37" y="-1" width="8" height="8" color="#b8382b" />
+                            </g>
+                        </svg>
+                        <span class="dk-label">Outline and Generate scenes</span>
+                    </button>
+
+                    <button class="dk-object" type="button" style="--x: 2; --y: 10.2; --w: 19; --h: 15" data-feature="canvas" aria-pressed="false" aria-controls="dk-panel-canvas" aria-label="The Canvas">
+                        <svg viewBox="0 0 190 150" aria-hidden="true" focusable="false">
+                            <rect width="190" height="150" rx="5" fill="#7a5432" />
+                            <rect x="3" y="3" width="184" height="144" rx="3" fill="none" stroke="#a5784e" stroke-width="1.2" />
+                            <rect x="8" y="8" width="174" height="134" rx="1.5" fill="url(#dk-cork)" />
+                            <rect x="8" y="8" width="174" height="134" rx="1.5" fill="none" stroke="#3d2a18" stroke-opacity="0.35" stroke-width="2" />
+                            <g transform="translate(16 22) rotate(-2.5 32 18)">
+                                <rect x="1.5" y="2.5" width="64" height="36" rx="2" fill="#3b2a1a" opacity="0.16" />
+                                <rect width="64" height="36" rx="2" fill="#fffdf7" />
+                                <text class="dk-art-text" x="6" y="11" font-size="5.4" fill="#8a8478" letter-spacing="0.6">CHARACTER</text>
+                                <text class="dk-art-bold" x="6" y="24" font-size="9">Nell Ashby</text>
+                            </g>
+                            <g transform="translate(108 18) rotate(2 32 18)">
+                                <rect x="1.5" y="2.5" width="64" height="36" rx="2" fill="#3b2a1a" opacity="0.16" />
+                                <rect width="64" height="36" rx="2" fill="#fffdf7" />
+                                <text class="dk-art-text" x="6" y="11" font-size="5.4" fill="#8a8478" letter-spacing="0.6">CHARACTER</text>
+                                <text class="dk-art-bold" x="6" y="24" font-size="9">Tom Ashby</text>
+                            </g>
+                            <g transform="translate(20 92) rotate(1.5 32 18)">
+                                <rect x="1.5" y="2.5" width="64" height="36" rx="2" fill="#3b2a1a" opacity="0.16" />
+                                <rect width="64" height="36" rx="2" fill="#fff3d6" />
+                                <text class="dk-art-text" x="6" y="11" font-size="5.4" fill="#8a8478" letter-spacing="0.6">ITEM</text>
+                                <text class="dk-art-bold" x="6" y="24" font-size="9">The ledger</text>
+                            </g>
+                            <g transform="translate(106 94) rotate(-1.5 32 18)">
+                                <rect x="1.5" y="2.5" width="64" height="36" rx="2" fill="#3b2a1a" opacity="0.16" />
+                                <rect width="64" height="36" rx="2" fill="#fffdf7" />
+                                <text class="dk-art-text" x="6" y="11" font-size="5.4" fill="#8a8478" letter-spacing="0.6">CHARACTER</text>
+                                <text class="dk-art-bold" x="6" y="24" font-size="9">Daniel Pryce</text>
+                            </g>
+                            <g fill="none" stroke="#b8382b" stroke-width="1.4" stroke-linecap="round">
+                                <path d="M48 22Q94 36 140 18" />
+                                <path d="M48 22Q38 58 52 92" />
+                                <path d="M140 18Q151 56 138 94" />
+                                <path d="M52 92Q95 106 138 94" />
+                            </g>
+                            <g transform="translate(94 30) rotate(-3)">
+                                <rect x="-17" y="-6" width="34" height="10" rx="2" fill="#fffdf7" />
+                                <text class="dk-art-text" x="0" y="1.8" font-size="6" text-anchor="middle" fill="#5b2a20">her father</text>
+                            </g>
+                            <use href="#dk-pin" x="44" y="18" width="8" height="8" color="#b8382b" />
+                            <use href="#dk-pin" x="136" y="14" width="8" height="8" color="#c99a2e" />
+                            <use href="#dk-pin" x="48" y="88" width="8" height="8" color="#c99a2e" />
+                            <use href="#dk-pin" x="134" y="90" width="8" height="8" color="#b8382b" />
+                        </svg>
+                        <span class="dk-label">The Canvas</span>
+                    </button>
+
+                    <button class="dk-object" type="button" style="--x: 23; --y: 10.4; --w: 8; --h: 13" data-feature="voice" aria-pressed="false" aria-controls="dk-panel-voice" aria-label="Voice &amp; Style">
+                        <svg viewBox="0 0 80 130" aria-hidden="true" focusable="false">
+                            <path d="M10 12L70 9L72 116Q64 122 54 120L9 123Z" fill="#3b2a1a" opacity="0.12" transform="translate(2 3)" />
+                            <path d="M10 12L70 9L72 116Q64 122 54 120L9 123Z" fill="#fffdf7" />
+                            <path d="M54 120Q60 112 72 116Q64 122 54 120Z" fill="#ece3d1" />
+                            <g fill="none" stroke="#34302a" stroke-width="1.15" stroke-linecap="round">
+                                <path d="M16 30c2.5-4 5 3 8 0s5-4 8 0 5 3 8 0 5-4 8 0 5 3 8 0 4-3 6-1" />
+                                <path d="M16 41c2.5-3 5 3 8 0s5-4 8 0 5 3 8 0 5-4 8 0 5 3 7 0" />
+                                <path d="M16 52c2.5-4 5 3 8 0s5-4 8 0 5 3 8 0 5-4 8 0 5 3 8 0 5-4 6-1" />
+                                <path d="M16 63c2.5-4 5 3 8 0s5-4 8 0 5 3 8 0" />
+                                <path d="M22 74c2.5-4 5 3 8 0s5-4 8 0 5 3 8 0 5-4 8 0 5 3 8 0" />
+                                <path d="M16 85c2.5-4 5 3 8 0s5-4 8 0 5 3 8 0 5-4 8 0 5 3 8 0 4-3 6-1" />
+                                <path d="M16 96c2.5-4 5 3 8 0s5-4 8 0 5 3 8 0 5-4 6 0" />
+                                <path d="M30 110c4-9 8 4 12-2s6-5 9 1c2 3 6 1 9-3" stroke-width="1.3" />
+                            </g>
+                            <use href="#dk-pin" x="36" y="6" width="8" height="8" color="#c99a2e" />
+                        </svg>
+                        <span class="dk-label">Voice &amp; Style</span>
+                    </button>
+
+                    <button class="dk-object" type="button" style="--x: 3; --y: 32; --w: 11.5; --h: 7" data-feature="draft" aria-pressed="false" aria-controls="dk-panel-draft" aria-label="Draft Page">
+                        <svg viewBox="0 0 115 70" aria-hidden="true" focusable="false">
+                            <ellipse cx="57" cy="64" rx="55" ry="4.5" fill="#3b2a1a" opacity="0.18" />
+                            <rect x="5" y="36" width="104" height="26" fill="#f2eadb" />
+                            <path d="M5 39H109M5 42H109M5 45H109M5 48H109M5 51H109M5 54H109M5 57H109M5 60H109" stroke="#e1d6c2" stroke-width="0.8" />
+                            <path d="M13 22H101L109 36H5Z" fill="#fffdf8" />
+                            <path d="M20 18L96 15L104 30L14 33Z" fill="#fffefa" stroke="#e7dfd0" stroke-width="0.6" />
+                            <path d="M26 21L90 19M25 24L92 22M24 27L80 25" stroke="#cfc6b5" stroke-width="0.9" />
+                        </svg>
+                        <span class="dk-label">Draft Page</span>
+                    </button>
+
+                    <button class="dk-object" type="button" style="--x: 16.5; --y: 25.4; --w: 8.5; --h: 13.5" data-feature="rewrite" aria-pressed="false" aria-controls="dk-panel-rewrite" aria-label="Polish, Deepen, Enhance">
+                        <svg viewBox="0 0 85 135" aria-hidden="true" focusable="false">
+                            <ellipse cx="43" cy="129" rx="26" ry="3.6" fill="#3b2a1a" opacity="0.2" />
+                            <path d="M44 92L76 6" stroke="#6b5a45" stroke-width="1.6" stroke-linecap="round" />
+                            <path d="M75 8C57 20 47 44 48 74C55 60 66 42 75 8Z" fill="#efe7d8" stroke="#c9bda6" stroke-width="0.9" />
+                            <path d="M70 18L60 26M67 27L56 36M63 37L53 47M60 47L51 57" stroke="#d9cfbd" stroke-width="0.7" />
+                            <path d="M20 104Q20 94 30 92H56Q66 94 66 104V121Q66 128 59 128H27Q20 128 20 121Z" fill="#283041" />
+                            <path d="M22 110H64V121Q64 126 59 126H27Q22 126 22 121Z" fill="#2652d9" opacity="0.85" />
+                            <rect x="25" y="97" width="3" height="22" rx="1.5" fill="#fff" opacity="0.22" />
+                            <rect x="35" y="84" width="16" height="9" rx="2" fill="#b8923a" />
+                            <rect x="33" y="82" width="20" height="4" rx="2" fill="#d8b866" />
+                        </svg>
+                        <span class="dk-label">Polish, Deepen, Enhance</span>
+                    </button>
+
+                    <button class="dk-object dk-object--tag" type="button" style="--x: 26.4; --y: 28.6; --w: 6; --h: 6.4" data-feature="continue" aria-pressed="true" aria-controls="dk-panel-continue" aria-label="Continue from here">
+                        <svg viewBox="0 0 60 64" aria-hidden="true" focusable="false">
+                            <g transform="rotate(-6 30 36)">
+                                <path d="M6 14H46L54 22V58H6Z" fill="#e8d3a2" />
+                                <circle cx="15" cy="22" r="3.2" fill="#c9d3c7" stroke="#b39a63" stroke-width="1.2" />
+                                <text class="dk-art-bold" x="30" y="38" font-size="8.6" text-anchor="middle">Continue</text>
+                                <text class="dk-art-bold" x="30" y="49" font-size="8.6" text-anchor="middle">from here</text>
+                            </g>
+                            <path d="M13.6 23.7C26 8 46 8 60 15" fill="none" stroke="#6b5a45" stroke-width="1.1" />
+                        </svg>
+                    </button>
+
+                    <div class="tw-rig" data-machine>
+                        <div class="tw-machine">
+                            <div class="tw-carriage" data-carriage>
+                                <div class="tw-sheet">
+                                    <p class="tw-line" data-type-line>The Winter Ledger. Chapter 3.</p>
+                                    <p class="tw-line" data-type-line>Nell set the ledger down.</p>
+                                    <div class="tw-kept" data-kept></div>
+                                    <p class="tw-line tw-blue" data-continuation hidden><span data-variant>Daniel looked at it. Nothing.</span><span data-variant hidden>Daniel kept his eyes down.</span></p>
+                                    <p class="tw-line tw-blue" data-continuation hidden><span data-variant>Two pounds a month, to M.P.</span><span data-variant hidden>The same sum, every first.</span></p>
+                                    <p class="tw-line tw-blue" data-continuation hidden><span data-variant>Outside, the frost came down.</span><span data-variant hidden>A branch cracked in the cold.</span></p>
+                                    <label class="tw-visually-hidden" for="tw-own-line">Type a line on the page</label>
+                                    <input
+                                        class="tw-line tw-own-line"
+                                        id="tw-own-line"
+                                        data-own-line
+                                        type="text"
+                                        maxlength="28"
+                                        placeholder="Your turn. Type a line."
+                                        autocomplete="off"
+                                        autocapitalize="off"
+                                        spellcheck="false"
+                                    />
+                                </div>
+                                <span class="tw-bail" aria-hidden="true"></span>
+                                <div class="tw-platen">
+                                    <button class="tw-return" type="button" data-return>Return</button>
+                                    <span class="tw-bell" data-bell aria-hidden="true"></span>
+                                </div>
+                            </div>
+
+                            <div class="tw-body">
+                                <div class="tw-deck" aria-hidden="true">
+                                    <span class="tw-spool"></span>
+                                    <span class="tw-basket"></span>
+                                    <span class="tw-spool"></span>
+                                    <span class="tw-ribbon-band"></span>
+                                </div>
+                                <div class="tw-keys" data-keyboard aria-hidden="true">
+                                    <div class="tw-key-row">
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="q">Q</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="w">W</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="e">E</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="r">R</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="t">T</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="y">Y</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="u">U</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="i">I</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="o">O</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="p">P</button>
+                                    </div>
+                                    <div class="tw-key-row">
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="a">A</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="s">S</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="d">D</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="f">F</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="g">G</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="h">H</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="j">J</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="k">K</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="l">L</button>
+                                    </div>
+                                    <div class="tw-key-row">
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="z">Z</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="x">X</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="c">C</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="v">V</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="b">B</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="n">N</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key="m">M</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key=",">,</button>
+                                        <button class="tw-key" type="button" tabindex="-1" data-key=".">.</button>
+                                    </div>
+                                    <div class="tw-key-row">
+                                        <button class="tw-key tw-key--space" type="button" tabindex="-1" data-key=" "></button>
+                                    </div>
+                                </div>
+                                <span class="tw-nameplate" aria-hidden="true">Feldar</span>
+                            </div>
+                        </div>
+
+                        <div class="tw-controls">
+                            <button class="tw-ribbon" type="button" role="switch" aria-checked="false" data-action="ribbon">
+                                <span class="tw-ribbon-label">Ribbon</span>
+                                <span class="tw-ribbon-half tw-ribbon-half--black">Black, you</span>
+                                <span class="tw-ribbon-half tw-ribbon-half--blue">Blue, Feldar</span>
+                            </button>
+                            <div class="tw-command-keys" data-idle>
+                                <button class="tw-button tw-button--blue" type="button" data-action="continue">Continue from here</button>
+                                <button class="tw-button tw-button--blue" type="button" data-action="restart" hidden>Start over</button>
+                            </div>
+                            <div class="tw-command-keys" data-review hidden>
+                                <button class="tw-button tw-button--blue" type="button" data-action="accept">Accept</button>
+                                <button class="tw-button tw-button--cream" type="button" data-action="revise">Revise</button>
+                                <button class="tw-button tw-button--cream" type="button" data-action="dismiss">Dismiss</button>
+                            </div>
+                            <p
+                                class="tw-status"
+                                role="status"
+                                data-status
+                                data-accepted="Accepted. The line stays on your page."
+                                data-dismissed="Dismissed. The page is as it was."
+                                data-bell="Ting. Five to the margin. Press Return."
+                            ></p>
+                        </div>
+                    </div>
+
+                    <button class="dk-object dk-object--label-below" type="button" style="--x: 68.6; --y: 2.2; --w: 16; --h: 14" data-feature="lens" aria-pressed="false" aria-controls="dk-panel-lens" aria-label="Lens">
+                        <svg viewBox="0 0 160 140" aria-hidden="true" focusable="false">
+                            <g transform="translate(4 4)">
+                                <rect width="48" height="62" rx="2" fill="#c7a04e" />
+                                <rect x="4" y="4" width="40" height="54" fill="#dccdb6" />
+                                <path d="M9 58Q10 42 24 40Q38 42 39 58Z" fill="#4f5d73" />
+                                <circle cx="24" cy="26" r="8" fill="#e8c4a2" />
+                                <path d="M16 23Q17 15 24 15Q31 15 32 23Q29 19 24 19Q19 19 16 23Z" fill="#4a3a2c" />
+                                <circle cx="20.5" cy="26" r="0.9" fill="#2a2723" />
+                                <circle cx="27.5" cy="26" r="0.9" fill="#2a2723" />
+                                <circle cx="27.5" cy="26" r="3" fill="none" stroke="#b8923a" stroke-width="0.9" />
+                                <path d="M30.5 27Q34 35 31 41" fill="none" stroke="#b8923a" stroke-width="0.7" />
+                                <path d="M21 31.5H27" stroke="#6b3a2a" stroke-width="0.9" stroke-linecap="round" />
+                            </g>
+                            <g transform="translate(56 4)">
+                                <rect width="48" height="62" rx="2" fill="#c7a04e" />
+                                <rect x="4" y="4" width="40" height="54" fill="#ecd9ae" />
+                                <path d="M9 58Q10 42 24 40Q38 42 39 58Z" fill="#c94f3d" />
+                                <circle cx="24" cy="26" r="8" fill="#c99470" />
+                                <circle cx="15" cy="21" r="3" fill="#2b1d14" />
+                                <circle cx="33" cy="21" r="3" fill="#2b1d14" />
+                                <path d="M16 24Q16 15 24 15Q32 15 32 24Q29 19 24 19Q19 19 16 24Z" fill="#2b1d14" />
+                                <circle cx="20.5" cy="25.5" r="0.9" fill="#2a2723" />
+                                <circle cx="27.5" cy="25.5" r="0.9" fill="#2a2723" />
+                                <path d="M20 29Q24 34 28 29" fill="none" stroke="#6b3a2a" stroke-width="1" stroke-linecap="round" />
+                                <circle cx="18.5" cy="29" r="1.5" fill="#e58a7a" opacity="0.6" />
+                                <circle cx="29.5" cy="29" r="1.5" fill="#e58a7a" opacity="0.6" />
+                            </g>
+                            <g transform="translate(108 4)">
+                                <rect width="48" height="62" rx="2" fill="#c7a04e" />
+                                <rect x="4" y="4" width="40" height="54" fill="#c9d7d9" />
+                                <path d="M9 58Q10 42 24 40Q38 42 39 58Z" fill="#2f3b37" />
+                                <path d="M17 41Q24 45 31 41L32 46Q24 49 16 46Z" fill="#b5653f" />
+                                <circle cx="24" cy="26" r="8" fill="#f0d2b6" />
+                                <ellipse cx="23" cy="18" rx="10" ry="3.6" fill="#3a2a3e" />
+                                <rect x="22.4" y="13" width="1.4" height="2.6" rx="0.7" fill="#3a2a3e" />
+                                <path d="M19.5 26q1 1 2 0M26.5 26q1 1 2 0" fill="none" stroke="#2a2723" stroke-width="0.8" stroke-linecap="round" />
+                                <path d="M22.5 31q1.5 1 3 0" fill="none" stroke="#6b3a2a" stroke-width="0.9" stroke-linecap="round" />
+                            </g>
+                            <g transform="translate(4 74)">
+                                <rect width="48" height="62" rx="2" fill="#c7a04e" />
+                                <rect x="4" y="4" width="40" height="54" fill="#d9c3cb" />
+                                <path d="M9 58Q10 42 24 40Q38 42 39 58Z" fill="#6f8a6b" />
+                                <circle cx="24" cy="26" r="8" fill="#9a6a49" />
+                                <circle cx="24" cy="14.5" r="4" fill="#1e1a17" />
+                                <path d="M16 24Q16 17 24 17Q32 17 32 24Q29 20 24 20Q19 20 16 24Z" fill="#1e1a17" />
+                                <circle cx="20.5" cy="26" r="2.8" fill="none" stroke="#2a2723" stroke-width="0.9" />
+                                <circle cx="27.5" cy="26" r="2.8" fill="none" stroke="#2a2723" stroke-width="0.9" />
+                                <path d="M23.3 26H24.7" stroke="#2a2723" stroke-width="0.9" />
+                                <path d="M21.5 31.5Q24 32.6 26.5 31.5" fill="none" stroke="#3a1f14" stroke-width="0.9" stroke-linecap="round" />
+                            </g>
+                            <g transform="translate(56 74)">
+                                <rect width="48" height="62" rx="2" fill="#c7a04e" />
+                                <rect x="4" y="4" width="40" height="54" fill="#cdd5c1" />
+                                <path d="M9 58Q10 42 24 40Q38 42 39 58Z" fill="#8e5a6b" />
+                                <circle cx="24" cy="26" r="8" fill="#b98463" />
+                                <path d="M16 23Q17 16 24 16Q31 16 32 23Q28 20 24 20Q20 20 16 23Z" fill="#5a3a24" />
+                                <g transform="rotate(-24 33 22)">
+                                    <rect x="31.6" y="14" width="2.8" height="14" fill="#d9b44a" />
+                                    <path d="M31.6 14H34.4L33 10.6Z" fill="#e9c79a" />
+                                </g>
+                                <circle cx="21.5" cy="26" r="0.9" fill="#2a2723" />
+                                <circle cx="28.5" cy="26" r="0.9" fill="#2a2723" />
+                                <path d="M19 23.2L22.5 23.8M25.5 23.8L29 23.2" stroke="#3a2418" stroke-width="0.8" stroke-linecap="round" />
+                                <path d="M21.5 31.2H26.5" stroke="#3a1f14" stroke-width="0.9" stroke-linecap="round" />
+                            </g>
+                            <g transform="translate(108 74)">
+                                <rect width="48" height="62" rx="2" fill="#c7a04e" />
+                                <rect x="4" y="4" width="40" height="54" fill="#e5d0b3" />
+                                <path d="M9 58Q10 42 24 40Q38 42 39 58Z" fill="#d2a74a" />
+                                <path d="M14 34Q13 16 24 16Q35 16 34 34Q31 26 24 25Q17 26 14 34Z" fill="#2b1a10" />
+                                <circle cx="24" cy="26" r="8" fill="#7e553a" />
+                                <path d="M16 24Q17 16 24 16Q31 16 32 24Q28 20 24 20Q20 20 16 24Z" fill="#2b1a10" />
+                                <path d="M19.8 27.2q1 -0.8 2 0M26.2 27.2q1 -0.8 2 0" fill="none" stroke="#1a0f08" stroke-width="0.8" stroke-linecap="round" />
+                                <rect x="13" y="42" width="22" height="14" rx="1" fill="#4f5d73" />
+                                <rect x="23.4" y="42" width="1.2" height="14" fill="#f3ead6" />
+                            </g>
+                        </svg>
+                        <span class="dk-label">Lens</span>
+                    </button>
+
+                    <button class="dk-object dk-object--label-below" type="button" style="--x: 86.2; --y: 1.4; --w: 13; --h: 24.4" data-feature="library" aria-pressed="false" aria-controls="dk-panel-library" aria-label="Library, import and export">
+                        <svg viewBox="0 0 130 244" aria-hidden="true" focusable="false">
+                            <g fill="#6f8a6b">
+                                <rect x="8" y="18" width="11" height="58" />
+                                <rect x="77" y="26" width="9" height="50" />
+                                <rect x="79" y="102" width="13" height="56" />
+                                <rect x="43" y="186" width="9" height="52" />
+                            </g>
+                            <g fill="#b5653f">
+                                <rect x="19" y="12" width="13" height="64" />
+                                <rect x="86" y="18" width="12" height="58" />
+                                <rect x="103" y="106" width="12" height="52" />
+                            </g>
+                            <g fill="#d2a74a">
+                                <rect x="32" y="24" width="9" height="52" />
+                                <rect x="58" y="102" width="12" height="56" />
+                                <rect x="20" y="188" width="10" height="50" />
+                            </g>
+                            <g fill="#4f5d73">
+                                <rect x="41" y="16" width="12" height="60" />
+                                <rect x="48" y="108" width="10" height="50" />
+                                <rect x="115" y="114" width="9" height="44" />
+                                <rect x="30" y="178" width="13" height="60" />
+                            </g>
+                            <g fill="#8e5a6b">
+                                <rect x="53" y="20" width="10" height="56" />
+                                <rect x="70" y="112" width="9" height="46" />
+                                <rect x="8" y="182" width="12" height="56" />
+                            </g>
+                            <g fill="#e3d8c3">
+                                <rect x="63" y="14" width="14" height="62" />
+                                <rect x="92" y="110" width="11" height="48" />
+                                <rect x="52" y="180" width="12" height="58" />
+                            </g>
+                            <g fill="#fff" opacity="0.28">
+                                <rect x="8" y="24" width="11" height="2" />
+                                <rect x="19" y="18" width="13" height="2" />
+                                <rect x="41" y="22" width="12" height="2" />
+                                <rect x="63" y="20" width="14" height="2" />
+                                <rect x="86" y="24" width="12" height="2" />
+                                <rect x="58" y="108" width="12" height="2" />
+                                <rect x="79" y="108" width="13" height="2" />
+                                <rect x="103" y="112" width="12" height="2" />
+                                <rect x="8" y="188" width="12" height="2" />
+                                <rect x="30" y="184" width="13" height="2" />
+                                <rect x="52" y="186" width="12" height="2" />
+                            </g>
+                            <rect x="100" y="62" width="24" height="7" rx="1" fill="#4f5d73" />
+                            <rect x="102" y="69" width="22" height="7" rx="1" fill="#d2a74a" />
+                            <rect x="8" y="106" width="36" height="52" rx="1.5" fill="#b5653f" />
+                            <rect x="14" y="118" width="24" height="14" rx="1" fill="#f6ecd8" />
+                            <path d="M17 123H35M19 127H33" stroke="#8a5235" stroke-width="1.1" />
+                            <rect x="70" y="204" width="54" height="34" rx="2" fill="#e8d3a2" />
+                            <rect x="76" y="210" width="42" height="21" rx="1.5" fill="#fff8e6" />
+                            <text class="dk-art-bold" x="97" y="219" font-size="6.4" text-anchor="middle">DOCX PDF</text>
+                            <text class="dk-art-bold" x="97" y="228" font-size="6.4" text-anchor="middle">MD TXT</text>
+                            <g fill="#8c6239">
+                                <rect x="2" y="76" width="126" height="6" rx="1" />
+                                <rect x="2" y="158" width="126" height="6" rx="1" />
+                                <rect x="2" y="238" width="126" height="6" rx="1" />
+                            </g>
+                            <g fill="#6c4a2c">
+                                <path d="M12 82H20L12 92Z" />
+                                <path d="M118 82H110L118 92Z" />
+                                <path d="M12 164H20L12 174Z" />
+                                <path d="M118 164H110L118 174Z" />
+                            </g>
+                        </svg>
+                        <span class="dk-label">Library, import and export</span>
+                    </button>
+
+                    <button class="dk-object" type="button" style="--x: 68; --y: 17; --w: 9.4; --h: 21.6" data-feature="reactions" aria-pressed="false" aria-controls="dk-panel-reactions" aria-label="Reader reactions">
+                        <svg viewBox="0 0 94 216" aria-hidden="true" focusable="false">
+                            <ellipse cx="50" cy="211" rx="42" ry="4" fill="#3b2a1a" opacity="0.2" />
+                            <path d="M32 78L52 94L46 206H2Z" fill="url(#dk-glow)" />
+                            <rect x="5" y="172" width="37" height="11" rx="1.5" fill="#8e5a6b" />
+                            <rect x="38" y="173" width="4" height="9" fill="#f3ead6" />
+                            <rect x="8" y="183" width="36" height="11" rx="1.5" fill="#7c4c5c" />
+                            <rect x="40" y="184" width="4" height="9" fill="#f3ead6" />
+                            <rect x="6" y="194" width="38" height="11" rx="1.5" fill="#8e5a6b" />
+                            <rect x="40" y="195" width="4" height="9" fill="#f3ead6" />
+                            <text class="dk-art-bold" x="9" y="180" font-size="5.2" fill="#f7ebdd" letter-spacing="0.6">BOOK CLUB</text>
+                            <path d="M58 204Q58 198 66 198H82Q90 198 90 204V206H58Z" fill="#a67d22" />
+                            <rect x="56" y="205" width="36" height="3" rx="1.5" fill="#8a6a1c" />
+                            <path d="M74 199L50 126L62 62" fill="none" stroke="#c99a2e" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="50" cy="126" r="3.6" fill="#a67d22" />
+                            <circle cx="62" cy="62" r="3.2" fill="#a67d22" />
+                            <path d="M62 54L76 66L52 94L32 78Z" fill="#c99a2e" />
+                            <path d="M32 78L52 94" stroke="#fff3c4" stroke-width="2.4" stroke-linecap="round" />
+                            <circle cx="70" cy="60" r="4" fill="#a67d22" />
+                        </svg>
+                        <span class="dk-label">Reader reactions</span>
+                    </button>
+
+                    <button class="dk-object" type="button" style="--x: 77.8; --y: 27.6; --w: 5.6; --h: 11" data-feature="checks" aria-pressed="false" aria-controls="dk-panel-checks" aria-label="Checks">
+                        <svg viewBox="0 0 56 110" aria-hidden="true" focusable="false">
+                            <ellipse cx="28" cy="105" rx="22" ry="3.4" fill="#3b2a1a" opacity="0.2" />
+                            <g transform="rotate(-9 28 70)">
+                                <rect x="21" y="10" width="7.5" height="62" fill="#c23b2e" />
+                                <path d="M21 10H28.5L24.75 1Z" fill="#e9c79a" />
+                                <path d="M23.4 4.4H26.1L24.75 1Z" fill="#9e2a20" />
+                            </g>
+                            <g transform="rotate(8 28 70)">
+                                <rect x="29" y="20" width="6.8" height="52" fill="#d9b44a" />
+                                <path d="M29 20H35.8L32.4 12Z" fill="#e9c79a" />
+                                <path d="M31.3 14.6H33.5L32.4 12Z" fill="#2a2723" />
+                            </g>
+                            <g transform="rotate(1 28 70)">
+                                <rect x="13" y="28" width="6.4" height="44" fill="#6f8a6b" />
+                                <path d="M13 28H19.4L16.2 20Z" fill="#e9c79a" />
+                                <path d="M15.2 22.6H17.2L16.2 20Z" fill="#2a2723" />
+                            </g>
+                            <path d="M8 60H48L45 102Q45 104 43 104H13Q11 104 11 102Z" fill="#3f5a4a" />
+                            <ellipse cx="28" cy="60" rx="20" ry="3.4" fill="#4f6d5b" />
+                            <path d="M14 66L16 98" stroke="#fff" stroke-opacity="0.18" stroke-width="2.4" stroke-linecap="round" />
+                        </svg>
+                        <span class="dk-label">Checks</span>
+                    </button>
+
+                    <button class="dk-object" type="button" style="--x: 83.8; --y: 32.4; --w: 7.4; --h: 6.8" data-feature="record" aria-pressed="false" aria-controls="dk-panel-record" aria-label="Writing record">
+                        <svg viewBox="0 0 74 68" aria-hidden="true" focusable="false">
+                            <ellipse cx="38" cy="63" rx="34" ry="3.6" fill="#3b2a1a" opacity="0.2" />
+                            <path d="M3 50L66 44L71 61L1 64Z" fill="#f7f1e3" />
+                            <path d="M7 47L69 41L72 57L5 61Z" fill="#23262f" />
+                            <path d="M12 50L60 45" stroke="#fff" stroke-opacity="0.12" stroke-width="2" />
+                            <g transform="rotate(-4 37 34)">
+                                <rect x="14" y="10" width="46" height="44" rx="10" fill="url(#dk-clay)" />
+                                <rect x="14" y="10" width="46" height="44" rx="10" fill="none" stroke="#e7a77c" stroke-opacity="0.5" />
+                                <g fill="#7e3d22">
+                                    <path d="M20 19l5 2.4-5 2.4z" />
+                                    <path d="M31 19l5 2.4-5 2.4z" />
+                                    <path d="M42 19l5 2.4-5 2.4z" />
+                                    <path d="M20 28l5 2.4-5 2.4z" />
+                                    <path d="M31 28l5 2.4-5 2.4z" />
+                                    <path d="M42 28l5 2.4-5 2.4z" />
+                                    <path d="M20 37l5 2.4-5 2.4z" />
+                                    <path d="M31 37l5 2.4-5 2.4z" />
+                                </g>
+                                <path d="M25 21.4h4M36 21.4h4M47 21.4h4M25 30.4h4M36 30.4h4M47 30.4h4M25 39.4h4M36 39.4h4" stroke="#7e3d22" stroke-width="1.2" stroke-linecap="round" />
+                            </g>
+                        </svg>
+                        <span class="dk-label">Writing record</span>
+                    </button>
+
+                    <button class="dk-object" type="button" style="--x: 91.6; --y: 27.8; --w: 7.6; --h: 10.8" data-feature="models" aria-pressed="false" aria-controls="dk-panel-models" aria-label="Choose the model">
+                        <svg viewBox="0 0 76 108" aria-hidden="true" focusable="false">
+                            <ellipse cx="38" cy="104" rx="32" ry="3.4" fill="#3b2a1a" opacity="0.2" />
+                            <path d="M6 100V44Q6 6 38 6Q70 6 70 44V100Q70 102 68 102H8Q6 102 6 100Z" fill="#8c6239" />
+                            <path d="M11 97V45Q11 11 38 11Q65 11 65 45V97Z" fill="#7a5432" />
+                            <path d="M17 64V46Q17 18 38 18Q59 18 59 46V64Z" fill="#dccba6" />
+                            <path d="M24 64V30M31 64V22M38 64V19M45 64V22M52 64V30" stroke="#8c6239" stroke-width="2.4" />
+                            <rect x="16" y="70" width="44" height="13" rx="3" fill="#f6ebd0" stroke="#5c3f24" />
+                            <path d="M21 72.5V76M27.5 72.5V76M34 72.5V76M40.5 72.5V76M47 72.5V76M53.5 72.5V76" stroke="#5c3f24" stroke-width="0.9" />
+                            <path d="M34.5 71V82" stroke="#c23b2e" stroke-width="1.4" />
+                            <circle cx="22" cy="92" r="5" fill="#3a2a1e" />
+                            <circle cx="54" cy="92" r="5" fill="#3a2a1e" />
+                            <circle cx="20.6" cy="90.6" r="1.4" fill="#fff" opacity="0.25" />
+                            <circle cx="52.6" cy="90.6" r="1.4" fill="#fff" opacity="0.25" />
+                        </svg>
+                        <span class="dk-label">Choose the model</span>
+                    </button>
+                </div>
+
+                <p class="dk-demo-note">Demo. These words were written by hand for this page. In Feldar they come from your book.</p>
+            </section>
+
+            <section class="dk-around" id="around" data-proto-section="features" aria-labelledby="around-title">
+                <div class="dk-wrap dk-around-head">
+                    <div>
+                        <h2 class="dk-h2" id="around-title">Around the desk</h2>
+                        <p class="dk-section-lede">Twelve things on the desk, twelve parts of Feldar. Choose one to see what it does and how you use it.</p>
+                    </div>
+                    <div class="dk-index" role="group" aria-label="Features on the desk">
+                        <div>
+                            <p class="dk-index-group">Plan</p>
+                            <ul>
+                                <li><button class="dk-index-entry" type="button" data-feature="outline" aria-pressed="false" aria-controls="dk-panel-outline"><span class="dk-index-name">Outline and Generate scenes</span><span class="dk-index-object">The index cards</span></button></li>
+                                <li><button class="dk-index-entry" type="button" data-feature="draft" aria-pressed="false" aria-controls="dk-panel-draft"><span class="dk-index-name">Draft Page</span><span class="dk-index-object">The stack of paper</span></button></li>
+                                <li><button class="dk-index-entry" type="button" data-feature="canvas" aria-pressed="false" aria-controls="dk-panel-canvas"><span class="dk-index-name">The Canvas</span><span class="dk-index-object">The corkboard</span></button></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="dk-index-group">Write</p>
+                            <ul>
+                                <li><button class="dk-index-entry" type="button" data-feature="continue" aria-pressed="true" aria-controls="dk-panel-continue"><span class="dk-index-name">Continue from here</span><span class="dk-index-object">The typewriter</span></button></li>
+                                <li><button class="dk-index-entry" type="button" data-feature="rewrite" aria-pressed="false" aria-controls="dk-panel-rewrite"><span class="dk-index-name">Polish, Deepen, Enhance</span><span class="dk-index-object">The quill and ink</span></button></li>
+                                <li><button class="dk-index-entry" type="button" data-feature="voice" aria-pressed="false" aria-controls="dk-panel-voice"><span class="dk-index-name">Voice &amp; Style</span><span class="dk-index-object">The handwritten page</span></button></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="dk-index-group">Revise</p>
+                            <ul>
+                                <li><button class="dk-index-entry" type="button" data-feature="checks" aria-pressed="false" aria-controls="dk-panel-checks"><span class="dk-index-name">Checks</span><span class="dk-index-object">The red pencil</span></button></li>
+                                <li><button class="dk-index-entry" type="button" data-feature="lens" aria-pressed="false" aria-controls="dk-panel-lens"><span class="dk-index-name">Lens</span><span class="dk-index-object">The six portraits</span></button></li>
+                                <li><button class="dk-index-entry" type="button" data-feature="reactions" aria-pressed="false" aria-controls="dk-panel-reactions"><span class="dk-index-name">Reader reactions</span><span class="dk-index-object">The reading lamp</span></button></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="dk-index-group">Keep</p>
+                            <ul>
+                                <li><button class="dk-index-entry" type="button" data-feature="record" aria-pressed="false" aria-controls="dk-panel-record"><span class="dk-index-name">Writing record</span><span class="dk-index-object">The clay tablet</span></button></li>
+                                <li><button class="dk-index-entry" type="button" data-feature="library" aria-pressed="false" aria-controls="dk-panel-library"><span class="dk-index-name">Library, import and export</span><span class="dk-index-object">The bookshelf</span></button></li>
+                                <li><button class="dk-index-entry" type="button" data-feature="models" aria-pressed="false" aria-controls="dk-panel-models"><span class="dk-index-name">Choose the model</span><span class="dk-index-object">The radio</span></button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dk-wrap dk-panels" data-panels>
+                    <article class="dk-panel" id="dk-panel-outline" data-panel="outline" aria-labelledby="dk-outline-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Plan</span>The index cards</p>
+                            <h3 class="dk-panel-title" id="dk-outline-title">Outline and Generate scenes</h3>
+                            <p class="dk-panel-promise">Plan a chapter as scenes before you write it.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>Open the Outline beside any page.</li>
+                                <li>Say what happens next, choose how many scenes you want, and press Generate scenes.</li>
+                                <li>Edit, reorder, add or delete scenes until the plan is right.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> knowing where a chapter is going before you start it.</p>
+                            <a class="dk-link" href="/features/scenes">How scene planning works</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <video data-loop muted loop playsinline preload="none" width="1440" height="900" poster="../../assets/demo/loop-outline-scenes-poster.jpg" aria-label="The Outline opens on an empty chapter, Generate scenes runs, and five scenes appear with titles and descriptions">
+                                <source src="../../assets/demo/loop-outline-scenes.webm" type="video/webm" />
+                                <source src="../../assets/demo/loop-outline-scenes.mp4" type="video/mp4" />
+                            </video>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-draft" data-panel="draft" aria-labelledby="dk-draft-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Plan</span>The stack of paper</p>
+                            <h3 class="dk-panel-title" id="dk-draft-title">Draft Page</h3>
+                            <p class="dk-panel-promise">A first pass at the chapter, written from your scenes.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>With scenes in the Outline, press Draft Page.</li>
+                                <li>In Generation settings, choose Pages to generate and Words per page.</li>
+                                <li>Read the draft and rework it like any page. Or write the chapter yourself, scenes beside you.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> getting past the blank page on a chapter you have already planned.</p>
+                            <a class="dk-link" href="/features/scenes">Scenes to chapters</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/outline-draft-page-1200.avif 1200w, ../../assets/product/outline-draft-page-2000.avif 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/outline-draft-page-1200.webp 1200w, ../../assets/product/outline-draft-page-2000.webp 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <img src="../../assets/product/outline-draft-page-1200.webp" width="1200" height="750" loading="lazy" alt="A chapter drafted from its outline, the page on the left and its scenes on the right" />
+                            </picture>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-canvas" data-panel="canvas" aria-labelledby="dk-canvas-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Plan</span>The corkboard</p>
+                            <h3 class="dk-panel-title" id="dk-canvas-title">The Canvas</h3>
+                            <p class="dk-panel-promise">Your story world as linked cards, beside the manuscript.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>Add cards from the tray: Character, Location, Plot, Item, Faction or Note.</li>
+                                <li>Draw a line between two cards and say how they relate.</li>
+                                <li>Select a card and Branch to grow a related one. Feldar reads the board before it writes.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> keeping names, places and who knows what straight across a long book.</p>
+                            <a class="dk-link" href="/features/canvas">How the Canvas works</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/canvas-board-1200.avif 1200w, ../../assets/product/canvas-board-2000.avif 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/canvas-board-1200.webp 1200w, ../../assets/product/canvas-board-2000.webp 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <img src="../../assets/product/canvas-board-1200.webp" width="1200" height="750" loading="lazy" alt="A story board of character, place, object and plot cards, with labelled lines linking the main character to the others" />
+                            </picture>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-continue" data-panel="continue" aria-labelledby="dk-continue-title">
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Write</span>The typewriter</p>
+                            <h3 class="dk-panel-title" id="dk-continue-title">Continue from here</h3>
+                            <p class="dk-panel-promise">The next lines, when they will not come.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>Hover over the caret at the end of a paragraph.</li>
+                                <li>Choose Continue from here, or Extend paragraph, Add transition or Start dialogue.</li>
+                                <li>The lines arrive in blue. Accept them, Revise them, or Dismiss them.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> getting unstuck mid scene without handing over the scene.</p>
+                            <p class="dk-panel-aside">The first commercially successful typewriter gave writers the QWERTY keys. The one on this desk adds a second colour, and it is blue.</p>
+                            <a class="dk-link" href="/ai-for-novelists">How Feldar's AI behaves</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <video data-loop muted loop playsinline preload="none" width="1440" height="900" poster="../../assets/demo/loop-continue-blue-poster.jpg" aria-label="The caret menu opens at the end of a page, Continue from here is chosen, and new lines arrive in blue before being accepted">
+                                <source src="../../assets/demo/loop-continue-blue.webm" type="video/webm" />
+                                <source src="../../assets/demo/loop-continue-blue.mp4" type="video/mp4" />
+                            </video>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-rewrite" data-panel="rewrite" aria-labelledby="dk-rewrite-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Write</span>The quill and ink</p>
+                            <h3 class="dk-panel-title" id="dk-rewrite-title">Polish, Deepen, Enhance</h3>
+                            <p class="dk-panel-promise">Rewrite a passage and see every change.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>Select a passage.</li>
+                                <li>Choose Polish, Deepen or Enhance, or type what you want with Instruct.</li>
+                                <li>The card shows the rewrite with the added words marked. Apply keeps it, and Undo takes it back.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> line editing in your own voice.</p>
+                            <a class="dk-link" href="/ai-for-novelists">Rewriting in your voice</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <video data-loop muted loop playsinline preload="none" width="1440" height="900" poster="../../assets/demo/loop-define-rewrite-card-poster.jpg" aria-label="A paragraph is selected, Deepen description is chosen, and the rewrite card shows the suggestion with added words in blue before Apply">
+                                <source src="../../assets/demo/loop-define-rewrite-card.webm" type="video/webm" />
+                                <source src="../../assets/demo/loop-define-rewrite-card.mp4" type="video/mp4" />
+                            </video>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-voice" data-panel="voice" aria-labelledby="dk-voice-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Write</span>The handwritten page</p>
+                            <h3 class="dk-panel-title" id="dk-voice-title">Voice &amp; Style</h3>
+                            <p class="dk-panel-promise">Help that sounds like you.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>Open Settings, then Voice &amp; Style.</li>
+                                <li>Paste a sample of your own prose, at least 600 words.</li>
+                                <li>Feldar writes toward it, and follows the book's own prose as the project grows.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> suggestions that sound like the rest of your book.</p>
+                            <a class="dk-link" href="/ai-for-novelists">AI for novelists</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/voice-style-1200.avif 1200w, ../../assets/product/voice-style-2000.avif 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/voice-style-1200.webp 1200w, ../../assets/product/voice-style-2000.webp 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <img src="../../assets/product/voice-style-1200.webp" width="1200" height="750" loading="lazy" alt="The Voice and Style settings, with a short description of the book's voice and a pasted writing sample" />
+                            </picture>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-checks" data-panel="checks" aria-labelledby="dk-checks-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Revise</span>The red pencil</p>
+                            <h3 class="dk-panel-title" id="dk-checks-title">Checks</h3>
+                            <p class="dk-panel-promise">Five editing passes, with a fix for every mark.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>Open Checks beside the page. Opening it changes nothing.</li>
+                                <li>Run the passes: Fix critical mistakes, Improve accuracy and clarity, Tighten word choice, Smooth dialogue transitions, Clarify character perspectives.</li>
+                                <li>Each issue is marked in the text. Accept the fix, ask Rewrite for me, or Discard it.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> a clean-up pass before anyone else reads the chapter.</p>
+                            <a class="dk-link" href="/features">All features</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/checks-panel-1200.avif 1200w, ../../assets/product/checks-panel-2000.avif 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/checks-panel-1200.webp 1200w, ../../assets/product/checks-panel-2000.webp 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <img src="../../assets/product/checks-panel-1200.webp" width="1200" height="750" loading="lazy" alt="The Checks panel listing five editorial checks, with two passages marked in the chapter" />
+                            </picture>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-lens" data-panel="lens" aria-labelledby="dk-lens-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Revise</span>The six portraits</p>
+                            <h3 class="dk-panel-title" id="dk-lens-title">Lens</h3>
+                            <p class="dk-panel-promise">Six readers beside your page.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>Open Chat and switch to Lens.</li>
+                                <li>Ask the Critic, Cheerleader, Poet, Editor, Plotter or Reader, or @mention one.</li>
+                                <li>Let them answer one by one, or set them to Debate and Synthesize.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> hearing what works, and what does not, before the draft goes out.</p>
+                            <p class="dk-panel-aside">Readers once wrote their comments in the margins of handwritten books. The notes are called glosses. Lens puts the readers beside your page instead.</p>
+                            <a class="dk-link" href="/features">All features</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/lens-chat-1200.avif 1200w, ../../assets/product/lens-chat-2000.avif 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/lens-chat-1200.webp 1200w, ../../assets/product/lens-chat-2000.webp 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <img src="../../assets/product/lens-chat-1200.webp" width="1200" height="750" loading="lazy" alt="Two reader personas, a Critic and a Poet, giving feedback on the chapter in the chat beside the page" />
+                            </picture>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-reactions" data-panel="reactions" aria-labelledby="dk-reactions-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Revise</span>The reading lamp</p>
+                            <h3 class="dk-panel-title" id="dk-reactions-title">Reader reactions</h3>
+                            <p class="dk-panel-promise">How an audience might take the chapter.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>In Lens, choose Reader reactions.</li>
+                                <li>Pick an audience: General readers, Fantasy readers, Book club readers, Creative writing students or Literary magazine editors.</li>
+                                <li>Read the report, with markers in the margin of your page.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> seeing a chapter the way a particular audience might.</p>
+                            <a class="dk-link" href="/features">All features</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/reader-reactions-1200.avif 1200w, ../../assets/product/reader-reactions-2000.avif 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/reader-reactions-1200.webp 1200w, ../../assets/product/reader-reactions-2000.webp 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <img src="../../assets/product/reader-reactions-1200.webp" width="1200" height="750" loading="lazy" alt="A reader-reaction report for book club readers beside the chapter, with markers in the margin" />
+                            </picture>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-record" data-panel="record" aria-labelledby="dk-record-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Keep</span>The clay tablet</p>
+                            <h3 class="dk-panel-title" id="dk-record-title">Writing record</h3>
+                            <p class="dk-panel-promise">A private record of how the book was written.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>Write as you normally do.</li>
+                                <li>Open Writing record from the Options menu.</li>
+                                <li>See the words you typed by hand and the words that came through Feldar, with active days, active time and models used.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> showing a publisher, a prize or a workshop how the book was made.</p>
+                            <p class="dk-panel-aside">The first writing we know of, from about 3300 BCE, was a record too: accounts of grain, beer and livestock, pressed into wet clay with a reed.</p>
+                            <a class="dk-link" href="/blog/provenance">Why Feldar records provenance</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/writing-record-1200.avif 1200w, ../../assets/product/writing-record-2000.avif 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/writing-record-1200.webp 1200w, ../../assets/product/writing-record-2000.webp 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <img src="../../assets/product/writing-record-1200.webp" width="1200" height="750" loading="lazy" alt="A writing record showing how much of the book was typed by hand and how much came from Feldar, with a chart of daily writing" />
+                            </picture>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-library" data-panel="library" aria-labelledby="dk-library-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Keep</span>The bookshelf</p>
+                            <h3 class="dk-panel-title" id="dk-library-title">Library, import and export</h3>
+                            <p class="dk-panel-promise">Every book on one shelf, and free to leave.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>Each project gets a cover in your Library.</li>
+                                <li>Import a manuscript as Word, PDF, Markdown or plain text, up to 20 MB a file.</li>
+                                <li>Export the whole book or chosen pages in the same four formats.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> bringing a draft in, and taking it out whenever you like.</p>
+                            <a class="dk-link" href="/novel-writing-software">Novel writing software</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/library-covers-1200.avif 1200w, ../../assets/product/library-covers-2000.avif 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/library-covers-1200.webp 1200w, ../../assets/product/library-covers-2000.webp 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <img src="../../assets/product/library-covers-1200.webp" width="1200" height="750" loading="lazy" alt="A library of five books with their covers, two of them pinned" />
+                            </picture>
+                        </figure>
+                    </article>
+
+                    <article class="dk-panel" id="dk-panel-models" data-panel="models" aria-labelledby="dk-models-title" hidden>
+                        <div class="dk-panel-copy">
+                            <p class="dk-panel-kicker"><span>Keep</span>The radio</p>
+                            <h3 class="dk-panel-title" id="dk-models-title">Choose the model</h3>
+                            <p class="dk-panel-promise">Six models, chosen per feature.</p>
+                            <p class="dk-panel-label">How it works</p>
+                            <ol class="dk-steps">
+                                <li>In Settings, pick a model for each feature, or switch models in Chat.</li>
+                                <li>Choose from GPT-6 Astra, Sol and Luna, and Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5.</li>
+                                <li>Set the effort where the model supports it. Which models you can use depends on your plan.</li>
+                            </ol>
+                            <p class="dk-panel-good"><strong>Good for</strong> using the model you prefer for each kind of help.</p>
+                            <a class="dk-link" href="/pricing">Models by plan</a>
+                        </div>
+                        <figure class="dk-panel-shot">
+                            <picture>
+                                <source type="image/avif" srcset="../../assets/product/model-picker-1200.avif 1200w, ../../assets/product/model-picker-2000.avif 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/model-picker-1200.webp 1200w, ../../assets/product/model-picker-2000.webp 2000w" sizes="(min-width: 1180px) 680px, 92vw" />
+                                <img src="../../assets/product/model-picker-1200.webp" width="1200" height="750" loading="lazy" alt="The model menu in Chat, listing Claude and GPT models and an effort setting" />
+                            </picture>
+                        </figure>
+                    </article>
+                </div>
+            </section>
+
+            <section class="dk-wrap dk-section dk-chapter" aria-labelledby="chapter-title">
+                <h2 class="dk-h2" id="chapter-title">One chapter across the desk</h2>
+                <p class="dk-section-lede">How the things on the desk work together on chapter three of The Winter Ledger.</p>
+                <ol class="dk-chapter-steps">
+                    <li>
+                        <p class="dk-chapter-object">The index cards</p>
+                        <p class="dk-chapter-name">Outline</p>
+                        <p>Five scenes for the chapter, each one a line you can rewrite or move.</p>
+                    </li>
+                    <li>
+                        <p class="dk-chapter-object">The paper</p>
+                        <p class="dk-chapter-name">Draft Page</p>
+                        <p>A first pass at the length you set, or your own draft with the scenes beside you.</p>
+                    </li>
+                    <li>
+                        <p class="dk-chapter-object">The typewriter</p>
+                        <p class="dk-chapter-name">Continue from here</p>
+                        <p>Stuck halfway down the page? Ask at the caret, and the next lines arrive in blue.</p>
+                    </li>
+                    <li>
+                        <p class="dk-chapter-object">The red pencil</p>
+                        <p class="dk-chapter-name">Checks</p>
+                        <p>Five passes mark what they find. Take the fixes you agree with.</p>
+                    </li>
+                    <li>
+                        <p class="dk-chapter-object">The portraits</p>
+                        <p class="dk-chapter-name">Lens</p>
+                        <p>Ask the Critic and the Poet how the chapter reads.</p>
+                    </li>
+                    <li>
+                        <p class="dk-chapter-object">The clay tablet</p>
+                        <p class="dk-chapter-name">Writing record</p>
+                        <p>A private account of what you typed and what came through Feldar.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="dk-wrap dk-section dk-rules" aria-labelledby="rules-title">
+                <h2 class="dk-h2" id="rules-title">House rules</h2>
+                <p class="dk-section-lede">What the AI on this desk will not do.</p>
+                <ol class="dk-rule-list">
+                    <li>
+                        <h3>Change your page on its own</h3>
+                        <p>Suggestions wait in blue or in a card. Dismiss one and the page is as you left it.</p>
+                    </li>
+                    <li>
+                        <h3>Train on your writing</h3>
+                        <p>Your manuscript never trains AI models.</p>
+                    </li>
+                    <li>
+                        <h3>Claim your book</h3>
+                        <p>What you write in Feldar is yours. Export the whole book whenever you like.</p>
+                    </li>
+                    <li>
+                        <h3>Hide what it wrote</h3>
+                        <p>Blue lines and the Writing record show which words came from where.</p>
+                    </li>
+                </ol>
+                <a class="dk-link" href="/ai-for-novelists">How Feldar's AI behaves</a>
+            </section>
+
+            <section class="dk-wrap dk-section" data-proto-section="pricing" aria-labelledby="plans-title">
+                <h2 class="dk-h2" id="plans-title">Start free. Pay when you write more.</h2>
+                <p class="dk-section-lede">Same workspace on every plan. Rewrites, Continue from here, Chat, Lens, Checks, Generate scenes and Draft Page use credits. Writing, planning by hand and arranging the Canvas never do.</p>
+                <div class="dk-plans">
+                    <article class="dk-plan dk-plan--start">
+                        <p class="dk-plan-flag">Start here</p>
+                        <h3>Starter</h3>
+                        <p class="dk-plan-price">Free</p>
+                        <p class="dk-plan-terms">500 credits to try everything. No credit card.</p>
+                        <a class="dk-button dk-button--small" href="/login" rel="nofollow">Start writing free</a>
+                    </article>
+                    <article class="dk-plan">
+                        <h3>Core</h3>
+                        <p class="dk-plan-price">$20 <span>a month</span></p>
+                        <p class="dk-plan-terms">20,000 credits a month for regular drafting and revision.</p>
+                    </article>
+                    <article class="dk-plan">
+                        <h3>Pro</h3>
+                        <p class="dk-plan-price">$40 <span>a month</span></p>
+                        <p class="dk-plan-terms">45,000 credits a month, and more premium model use.</p>
+                    </article>
+                    <article class="dk-plan">
+                        <h3>Ultra</h3>
+                        <p class="dk-plan-price">$200 <span>a month</span></p>
+                        <p class="dk-plan-terms">250,000 credits a month for large manuscripts.</p>
+                    </article>
+                </div>
+                <a class="dk-link" href="/pricing">Plans in full</a>
+            </section>
+
+            <section class="dk-wrap dk-section dk-compare" data-proto-section="compare" aria-labelledby="compare-title">
+                <h2 class="dk-h2 dk-h2--small" id="compare-title">Switching from another app?</h2>
+                <p class="dk-section-lede">Each tool is strongest at a different part of the job. These pages say where Feldar fits, and where the other app is the better choice.</p>
+                <ul class="dk-compare-links">
+                    <li><a href="/compare/scrivener">Feldar and Scrivener</a></li>
+                    <li><a href="/compare/sudowrite">Feldar and Sudowrite</a></li>
+                    <li><a href="/compare/novelcrafter">Feldar and Novelcrafter</a></li>
+                    <li><a href="/compare/plottr">Feldar and Plottr</a></li>
+                    <li><a href="/compare">All comparisons</a></li>
+                </ul>
+            </section>
+
+            <section class="dk-wrap dk-section dk-faq" aria-labelledby="faq-title">
+                <h2 class="dk-h2" id="faq-title">Questions writers ask first</h2>
+                <div class="dk-faq-list">
+                    <details open>
+                        <summary>Does Feldar write the book for me?</summary>
+                        <p>No. It writes when you ask, in blue or in a card, and nothing stays until you accept it.</p>
+                    </details>
+                    <details>
+                        <summary>Does Feldar train AI on my writing?</summary>
+                        <p>No. Your manuscript never trains AI models, and what you write in Feldar is yours.</p>
+                    </details>
+                    <details>
+                        <summary>Is Feldar free?</summary>
+                        <p>To start, yes. Starter is free with 500 credits and no credit card. Writing, planning by hand and arranging the Canvas never use credits. Paid plans start at $20 a month.</p>
+                    </details>
+                    <details>
+                        <summary>Can I bring in a manuscript I have already started?</summary>
+                        <p>Yes. Import it as a Word, PDF, Markdown or plain-text file of up to 20 MB.</p>
+                    </details>
+                    <details>
+                        <summary>Does Feldar work on Windows?</summary>
+                        <p>In the browser, yes. The desktop app is Mac only for now.</p>
+                    </details>
+                    <details>
+                        <summary>Can I take my novel out again?</summary>
+                        <p>Yes. Export the whole book or chosen pages as Word, PDF, Markdown or plain text.</p>
+                    </details>
+                </div>
+            </section>
+
+            <section class="dk-close" aria-labelledby="close-title">
+                <div class="dk-wrap dk-close-inner">
+                    <svg class="dk-chair" viewBox="0 0 120 160" aria-hidden="true" focusable="false">
+                        <path d="M30 8Q60 0 90 8L86 70H34Z" fill="#b9875a" />
+                        <path d="M38 18Q60 12 82 18L80 62H40Z" fill="#a8774c" />
+                        <rect x="20" y="70" width="80" height="12" rx="4" fill="#8c6239" />
+                        <path d="M26 82L22 156M94 82L98 156M36 82L38 140M84 82L82 140" stroke="#7a5432" stroke-width="6" stroke-linecap="round" />
+                        <path d="M28 118H92" stroke="#7a5432" stroke-width="4" stroke-linecap="round" />
+                    </svg>
+                    <h2 class="dk-close-title" id="close-title">Pull up a chair.</h2>
+                    <p class="dk-section-lede">The desk is set and the first page is blank. Start your novel in Feldar.</p>
+                    <div class="dk-actions">
+                        <a class="dk-button" href="/login" rel="nofollow">Start writing free</a>
+                        <a class="dk-button dk-button--quiet" href="/download">Download for Mac</a>
+                    </div>
+                    <p class="dk-note">Free to start. 500 credits, no credit card.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="dk-foot">
+            <div class="dk-wrap dk-foot-inner">
+                <a class="dk-logo" href="/" aria-label="Feldar home">
+                    <img src="../../assets/logo-nav.svg" alt="Feldar" width="59" height="17" loading="lazy" />
+                </a>
+                <nav class="dk-foot-links" aria-label="Footer">
+                    <div>
+                        <p class="dk-foot-title">Product</p>
+                        <a href="/features">Features</a>
+                        <a href="/pricing">Pricing</a>
+                        <a href="/download">Download</a>
+                        <a href="/changelog">Changelog</a>
+                    </div>
+                    <div>
+                        <p class="dk-foot-title">For writers</p>
+                        <a href="/novel-writing-software">Novel writing software</a>
+                        <a href="/ai-for-novelists">AI for novelists</a>
+                        <a href="/guides/how-to-outline-a-novel">Outline a novel</a>
+                        <a href="/tools">Free tools</a>
+                    </div>
+                    <div>
+                        <p class="dk-foot-title">Company</p>
+                        <a href="/about">About</a>
+                        <a href="/blog">Blog</a>
+                        <a href="/terms">Terms of Use</a>
+                        <a href="/privacy">Privacy Policy</a>
+                    </div>
+                </nav>
+                <p class="dk-foot-note">Feldar LLC</p>
+            </div>
+        </footer>
+
+        <nav class="pt-switch" aria-label="Prototypes">
+            <a href="../index.html">All concepts</a>
+            <a href="ledger.html" rel="prev" aria-label="Previous concept: The novel's ledger">‹ Prev</a>
+            <a href="manuscript.html" title="Manuscript">A</a>
+            <a href="index-cards.html" title="Index cards">B</a>
+            <a href="night-studio.html" title="Night studio">C</a>
+            <a href="five-thousand-years.html" title="5,000 years">D</a>
+            <a href="clay.html" title="Clay">E</a>
+            <a href="scriptorium.html" title="Scriptorium">F</a>
+            <a href="typewriter.html" title="Typewriter">G</a>
+            <a href="then-and-now.html" title="Then and now">H</a>
+            <a href="ledger.html" title="The novel's ledger">I</a>
+            <a href="desk.html" aria-current="page">J · The writer's desk</a>
+        </nav>
+
+        <script type="module" src="scripts/desk.js"></script>
+        <script type="module" src="../review.js"></script>
+    </body>
+</html>

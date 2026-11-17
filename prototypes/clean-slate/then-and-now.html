@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex,nofollow" />
+        <meta
+            name="description"
+            content="Feldar is a writing app for novelists. Plan scenes, keep your story world beside the page, and get help in blue that stays only if you accept it."
+        />
+        <title>Concept H: Then and now - Feldar</title>
+
+        <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@1,600&family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..600&family=Grenze+Gotisch:wght@500&family=Hanken+Grotesk:wght@400;500;600;700&family=IM+Fell+English&family=Special+Elite&family=VT323&display=swap"
+        />
+
+        <link rel="stylesheet" href="../switcher.css" />
+        <link rel="stylesheet" href="components/typewriter.css" />
+        <link rel="stylesheet" href="styles/then-and-now.css" />
+    </head>
+    <body>
+        <svg class="tn-sprite" width="0" height="0" aria-hidden="true" focusable="false">
+            <symbol id="tn-icon-scroll" viewBox="0 0 48 48">
+                <path d="M13 12h22v24H13z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+                <path d="M12 8v32M36 8v32" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
+                <path d="M19 19h10M19 24h10M19 29h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </symbol>
+            <symbol id="tn-icon-key" viewBox="0 0 48 48">
+                <circle cx="24" cy="21" r="13" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <circle cx="24" cy="21" r="8" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M24 34v8M17 42h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            </symbol>
+            <symbol id="tn-icon-quill" viewBox="0 0 48 48">
+                <path d="M39 7C24 9 13 20 11 37c11-2 23-11 28-30z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+                <path d="M8 41l17-19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            </symbol>
+            <symbol id="tn-icon-tablet" viewBox="0 0 48 48">
+                <rect x="9" y="7" width="30" height="34" rx="7" fill="none" stroke="currentColor" stroke-width="2.5" />
+                <path d="M15 15l7 3-7 3zM26 15l7 3-7 3zM15 27l7 3-7 3zM26 27l7 3-7 3z" fill="currentColor" />
+            </symbol>
+        </svg>
+        <svg class="tw-defs" width="0" height="0" aria-hidden="true" focusable="false">
+            <defs>
+                <filter id="tw-ink" x="-3%" y="-12%" width="106%" height="124%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="grain" />
+                    <feDisplacementMap in="SourceGraphic" in2="grain" scale="1.4" result="rough" />
+                    <feTurbulence type="fractalNoise" baseFrequency="0.05 0.4" numOctaves="2" seed="3" result="wear" />
+                    <feColorMatrix in="wear" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.3" result="density" />
+                    <feComposite in="rough" in2="density" operator="in" />
+                </filter>
+            </defs>
+        </svg>
+
+        <header class="tn-bar">
+            <a class="tn-logo" href="/" aria-label="Feldar home">
+                <img src="../../assets/logo-nav.svg" alt="Feldar" width="59" height="17" />
+            </a>
+            <nav class="tn-nav" aria-label="Main">
+                <a href="/features">Features</a>
+                <a href="/compare">Compare</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/blog">Blog</a>
+                <a href="/download">Download</a>
+            </nav>
+            <div class="tn-bar-actions">
+                <a class="tn-bar-login" href="/login" rel="nofollow">Log in</a>
+                <a class="tn-button tn-button--small" href="/login" rel="nofollow">Start writing free</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="tn-hero">
+                <div class="tn-hero-text">
+                    <p class="tn-kicker">Feldar, a writing app for novelists</p>
+                    <h1 class="tn-headline">The tools keep changing. <em>You stay in charge.</em></h1>
+                    <p class="tn-lede">Plan in scenes, keep your story world beside the page, and get help when you ask for it. Whatever Feldar writes arrives in blue, and stays only if you accept it.</p>
+                    <div class="tn-actions">
+                        <a class="tn-button" href="/login" rel="nofollow">Start writing free</a>
+                        <a class="tn-button tn-button--quiet" href="/download">Download for Mac</a>
+                    </div>
+                    <p class="tn-note">Free to start. 500 credits, no credit card.</p>
+                </div>
+
+                <div class="tn-dial" data-dial>
+                    <div class="tn-stage">
+                        <div class="tn-frame tn-frame--clay is-active" data-era-frame="clay">
+                            <p class="tn-frame-head" data-era-caption><span>Clay</span> about 3300 BCE, Sumer</p>
+                            <div class="tn-art" role="img" aria-label="The sentence I have a story to tell, pressed into a clay tablet between rows of wedge marks, with a reed stylus beside it">
+                                <div class="tn-tablet">
+                                    <span class="tn-wedges"></span>
+                                    <span class="tn-wedges tn-wedges--offset"></span>
+                                    <p class="tn-tablet-line">I have a story to tell</p>
+                                    <span class="tn-wedges tn-wedges--offset"></span>
+                                    <span class="tn-wedges"></span>
+                                </div>
+                                <span class="tn-stylus"></span>
+                            </div>
+                            <p class="tn-frame-gift">Marks that outlast the speaker.</p>
+                        </div>
+
+                        <div class="tn-frame tn-frame--papyrus" data-era-frame="papyrus" inert>
+                            <p class="tn-frame-head" data-era-caption><span>Papyrus</span> about 2500 BCE, Egypt</p>
+                            <div class="tn-art" role="img" aria-label="The same sentence in brown ink on a papyrus roll that unrolls from both ends">
+                                <div class="tn-roll">
+                                    <span class="tn-roll-end"></span>
+                                    <div class="tn-roll-sheet">
+                                        <p class="tn-roll-line">I have a story to tell.</p>
+                                        <span class="tn-roll-script"></span>
+                                    </div>
+                                    <span class="tn-roll-end"></span>
+                                </div>
+                            </div>
+                            <p class="tn-frame-gift">Room for something long.</p>
+                        </div>
+
+                        <div class="tn-frame tn-frame--codex" data-era-frame="codex" inert>
+                            <p class="tn-frame-head" data-era-caption><span>Parchment</span> about 1200, a scriptorium</p>
+                            <div class="tn-art" role="img" aria-label="The same sentence in gothic script on a parchment page, opening with a blue and gold initial, with a note in the margin">
+                                <div class="tn-leaf">
+                                    <p class="tn-leaf-rubric">Here begins</p>
+                                    <p class="tn-leaf-line"><span class="tn-initial">I</span> have a story to tell.</p>
+                                    <span class="tn-leaf-rules"></span>
+                                    <p class="tn-leaf-gloss">who is telling?</p>
+                                </div>
+                            </div>
+                            <p class="tn-frame-gift">Pages to turn, and margins to argue in.</p>
+                        </div>
+
+                        <div class="tn-frame tn-frame--press" data-era-frame="press" inert>
+                            <p class="tn-frame-head" data-era-caption><span>Movable type</span> about 1450, Mainz</p>
+                            <div class="tn-art" role="img" aria-label="A row of metal type, its letters reversed, pressing the same sentence onto a sheet of paper">
+                                <div class="tn-press">
+                                    <div class="tn-forme">
+                                        <span>I</span><span class="tn-sort-space"></span><span>h</span><span>a</span><span>v</span><span>e</span><span class="tn-sort-space"></span><span>a</span><span class="tn-sort-space"></span><span>s</span><span>t</span><span>o</span><span>r</span><span>y</span><span class="tn-sort-space"></span><span>t</span><span>o</span><span class="tn-sort-space"></span><span>t</span><span>e</span><span>l</span><span>l</span><span>.</span>
+                                    </div>
+                                    <div class="tn-proof">
+                                        <p class="tn-proof-line">I have a story to tell.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="tn-frame-gift">The same book in many hands.</p>
+                        </div>
+
+                        <div class="tn-frame tn-frame--typewriter" data-era-frame="typewriter" inert>
+                            <p class="tn-frame-head" data-era-caption><span>Typewriter</span> 1874</p>
+                            <div class="tn-art" role="img" aria-label="The same sentence typed on a sheet of paper in a typewriter, above a row of round keys">
+                                <div class="tn-typer">
+                                    <div class="tn-typer-sheet">
+                                        <p class="tn-typer-line">I have a story to tell.</p>
+                                    </div>
+                                    <span class="tn-typer-roller"></span>
+                                    <div class="tn-typer-keys">
+                                        <span>Q</span><span>W</span><span>E</span><span>R</span><span>T</span><span>Y</span><span>U</span><span>I</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="tn-frame-gift">A draft that keeps up with a thought.</p>
+                        </div>
+
+                        <div class="tn-frame tn-frame--screen" data-era-frame="screen" inert>
+                            <p class="tn-frame-head" data-era-caption><span>Word processor</span> about 1978</p>
+                            <div class="tn-art" role="img" aria-label="The same sentence in green text on an old monitor, with a block cursor after it">
+                                <div class="tn-crt">
+                                    <div class="tn-crt-screen">
+                                        <p class="tn-crt-status"><span>STORY.TXT</span><span>INSERT</span></p>
+                                        <p class="tn-crt-line">I have a story to tell.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="tn-frame-gift">Revision without retyping.</p>
+                        </div>
+
+                        <div class="tn-frame tn-frame--today" data-era-frame="today" inert>
+                            <p class="tn-frame-head" data-era-caption><span>Feldar</span> today</p>
+                            <div class="tn-page" data-ink-demo>
+                                <p class="tn-page-head"><span>The Winter Ledger</span><span>Chapter One</span></p>
+                                <p class="tn-page-text">I have a story to tell.</p>
+                                <p class="tn-page-text tn-ink" data-continuation><span data-variant>It begins with a ledger, and two pounds paid on the first of every month to someone called M.P.</span><span data-variant hidden>It starts in a hard winter, with a dead man's ledger and a debt nobody will explain.</span><span data-variant hidden>It is about an orchard, a daughter who came home, and a column of sums that never missed a month.</span></p>
+                                <div class="tn-page-actions" data-review>
+                                    <button class="tn-chip tn-chip--blue" type="button" data-action="accept">Accept</button>
+                                    <button class="tn-chip" type="button" data-action="revise">Revise</button>
+                                    <button class="tn-chip" type="button" data-action="dismiss">Dismiss</button>
+                                </div>
+                                <div class="tn-page-actions" data-idle hidden>
+                                    <button class="tn-chip tn-chip--blue" type="button" data-action="continue">Continue from here</button>
+                                    <button class="tn-chip tn-chip--blue" type="button" data-action="restart" hidden>Start over</button>
+                                </div>
+                                <p
+                                    class="tn-page-status"
+                                    role="status"
+                                    data-status
+                                    data-accepted="Accepted. That line is yours now."
+                                    data-dismissed="Dismissed. The page is as you left it."
+                                ></p>
+                            </div>
+                            <p class="tn-frame-gift">Help when you ask, in a colour that isn't yours.</p>
+                        </div>
+                    </div>
+
+                    <div class="tn-stops" role="group" aria-label="Writing tools through time" data-era-stops>
+                        <button class="tn-stop" type="button" aria-pressed="true" data-era-stop="clay"><span>Clay</span> 3300 BCE</button>
+                        <button class="tn-stop" type="button" aria-pressed="false" data-era-stop="papyrus"><span>Papyrus</span> 2500 BCE</button>
+                        <button class="tn-stop" type="button" aria-pressed="false" data-era-stop="codex"><span>Parchment</span> 1200</button>
+                        <button class="tn-stop" type="button" aria-pressed="false" data-era-stop="press"><span>Type</span> 1450</button>
+                        <button class="tn-stop" type="button" aria-pressed="false" data-era-stop="typewriter"><span>Typewriter</span> 1874</button>
+                        <button class="tn-stop" type="button" aria-pressed="false" data-era-stop="screen"><span>Screen</span> 1978</button>
+                        <button class="tn-stop tn-stop--today" type="button" aria-pressed="false" data-era-stop="today"><span>Feldar</span> Today</button>
+                    </div>
+                    <div class="tn-dial-foot">
+                        <p class="tn-dial-note">Demo. These words were written by hand for this page. In Feldar they come from your book.</p>
+                        <button class="tn-replay" type="button" data-replay hidden>Play the 5,000 years again</button>
+                    </div>
+                    <p class="tn-visually-hidden" role="status" data-era-status></p>
+                </div>
+            </section>
+
+            <section class="tn-features" id="features" aria-labelledby="features-title" data-proto-section="features">
+                <div class="tn-section-head">
+                    <h2 class="tn-section-title" id="features-title">What Feldar does, and how you use it.</h2>
+                    <p class="tn-section-lede">Twelve tools, grouped by the work they help with. Choose one to see it in the app, with the steps in the app's own words.</p>
+                </div>
+
+                <div class="tn-explorer" data-explorer>
+                    <nav class="tn-index" aria-label="Features">
+                        <div class="tn-index-group">
+                            <p class="tn-index-label"><svg viewBox="0 0 48 48" width="22" height="22" aria-hidden="true"><use href="#tn-icon-scroll" /></svg>Plan</p>
+                            <button class="tn-index-item" type="button" aria-pressed="true" aria-controls="feature-outline" data-feature-tab="outline"><span>Outline and Generate scenes</span> Plan a chapter as scenes.</button>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-draft" data-feature-tab="draft"><span>Draft Page</span> A first pass from your scenes.</button>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-canvas" data-feature-tab="canvas"><span>The Canvas</span> Your story world as cards.</button>
+                        </div>
+                        <div class="tn-index-group">
+                            <p class="tn-index-label"><svg viewBox="0 0 48 48" width="22" height="22" aria-hidden="true"><use href="#tn-icon-key" /></svg>Write</p>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-continue" data-feature-tab="continue"><span>Continue from here</span> The next lines, in blue.</button>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-rewrite" data-feature-tab="rewrite"><span>Polish, Deepen, Enhance</span> Rewrites you can see.</button>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-voice" data-feature-tab="voice"><span>Voice &amp; Style</span> Help that sounds like you.</button>
+                        </div>
+                        <div class="tn-index-group">
+                            <p class="tn-index-label"><svg viewBox="0 0 48 48" width="22" height="22" aria-hidden="true"><use href="#tn-icon-quill" /></svg>Revise</p>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-checks" data-feature-tab="checks"><span>Checks</span> Five editing passes.</button>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-lens" data-feature-tab="lens"><span>Lens</span> Six readers beside the page.</button>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-readers" data-feature-tab="readers"><span>Reader reactions</span> How an audience might take it.</button>
+                        </div>
+                        <div class="tn-index-group">
+                            <p class="tn-index-label"><svg viewBox="0 0 48 48" width="22" height="22" aria-hidden="true"><use href="#tn-icon-tablet" /></svg>Keep</p>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-record" data-feature-tab="record"><span>Writing record</span> How the book was written.</button>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-library" data-feature-tab="library"><span>Library, import and export</span> One shelf, free to leave.</button>
+                            <button class="tn-index-item" type="button" aria-pressed="false" aria-controls="feature-models" data-feature-tab="models"><span>Choose the model</span> Six models, per feature.</button>
+                        </div>
+                    </nav>
+
+                    <div class="tn-panels">
+                        <article class="tn-panel" id="feature-outline" data-feature-panel="outline">
+                            <div class="tn-shot">
+                                <video muted loop playsinline preload="none" width="1440" height="900" poster="../../assets/demo/loop-outline-scenes-poster.jpg" aria-label="The Outline opens on an empty chapter, Generate scenes runs, and five scenes appear with titles and descriptions">
+                                    <source src="../../assets/demo/loop-outline-scenes.webm" type="video/webm" />
+                                    <source src="../../assets/demo/loop-outline-scenes.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Outline and Generate scenes</h3>
+                                    <p class="tn-panel-promise">Plan a chapter as scenes before you write a word of it.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> Knowing where a chapter is going before you start it.</p>
+                                    <a class="tn-link" href="/features/scenes">How scene planning works</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>Open the <span class="tn-ui">Outline</span> beside any page.</li>
+                                        <li>Say what happens next, choose how many scenes, and press <span class="tn-ui">Generate scenes</span>.</li>
+                                        <li>Edit, reorder, add or delete scenes until the plan is right.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-draft" data-feature-panel="draft" hidden>
+                            <picture class="tn-shot">
+                                <source type="image/avif" srcset="../../assets/product/outline-draft-page-1200.avif 1200w, ../../assets/product/outline-draft-page-2000.avif 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/outline-draft-page-1200.webp 1200w, ../../assets/product/outline-draft-page-2000.webp 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <img src="../../assets/product/outline-draft-page-1200.webp" width="1200" height="750" loading="lazy" alt="A chapter drafted from its outline, the page on the left and its scenes on the right" />
+                            </picture>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Draft Page</h3>
+                                    <p class="tn-panel-promise">A first pass at the chapter, written from your scenes.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> Getting past the blank page on a chapter you have already planned.</p>
+                                    <a class="tn-link" href="/features/scenes">Scenes to chapters</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>With scenes in the Outline, press <span class="tn-ui">Draft Page</span>.</li>
+                                        <li>In <span class="tn-ui">Generation settings</span>, choose <span class="tn-ui">Pages to generate</span> and <span class="tn-ui">Words per page</span>.</li>
+                                        <li>Read the draft and rework it like any page. Or write the chapter yourself.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-canvas" data-feature-panel="canvas" hidden>
+                            <picture class="tn-shot">
+                                <source type="image/avif" srcset="../../assets/product/canvas-board-1200.avif 1200w, ../../assets/product/canvas-board-2000.avif 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/canvas-board-1200.webp 1200w, ../../assets/product/canvas-board-2000.webp 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <img src="../../assets/product/canvas-board-1200.webp" width="1200" height="750" loading="lazy" alt="A story board of character, place, object and plot cards, with labelled lines linking the main character to the others" />
+                            </picture>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">The Canvas</h3>
+                                    <p class="tn-panel-promise">Your story world as linked cards, beside the manuscript.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> Keeping names, places and who knows what straight across a long book.</p>
+                                    <a class="tn-link" href="/features/canvas">How the Canvas works</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>Add cards from the tray: <span class="tn-ui">Character</span>, <span class="tn-ui">Location</span>, <span class="tn-ui">Plot</span>, <span class="tn-ui">Item</span>, <span class="tn-ui">Faction</span> or <span class="tn-ui">Note</span>.</li>
+                                        <li>Draw a line between two cards and say how they relate.</li>
+                                        <li>Select a card and <span class="tn-ui">Branch</span> to grow a related one. Feldar reads the board before it writes.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-continue" data-feature-panel="continue" hidden>
+                            <div class="tn-shot">
+                                <video muted loop playsinline preload="none" width="1440" height="900" poster="../../assets/demo/loop-continue-blue-poster.jpg" aria-label="The caret menu opens at the end of a page, Continue from here is chosen, and new lines arrive in blue before being accepted">
+                                    <source src="../../assets/demo/loop-continue-blue.webm" type="video/webm" />
+                                    <source src="../../assets/demo/loop-continue-blue.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Continue from here</h3>
+                                    <p class="tn-panel-promise">The next lines, when they will not come.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> Getting unstuck mid-scene without handing over the scene.</p>
+                                    <a class="tn-link" href="#your-turn">Try it on the typewriter below</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>Hover over the caret at the end of a paragraph.</li>
+                                        <li>Choose <span class="tn-ui">Continue from here</span>, or <span class="tn-ui">Extend paragraph</span>, <span class="tn-ui">Add transition</span> or <span class="tn-ui">Start dialogue</span>.</li>
+                                        <li>The lines arrive in blue. <span class="tn-ui">Accept</span>, <span class="tn-ui">Revise</span> or <span class="tn-ui">Dismiss</span> them.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-rewrite" data-feature-panel="rewrite" hidden>
+                            <div class="tn-shot">
+                                <video muted loop playsinline preload="none" width="1440" height="900" poster="../../assets/demo/loop-define-rewrite-card-poster.jpg" aria-label="A paragraph is selected, Deepen description is chosen, and the rewrite card shows the suggestion with added words in blue before Apply">
+                                    <source src="../../assets/demo/loop-define-rewrite-card.webm" type="video/webm" />
+                                    <source src="../../assets/demo/loop-define-rewrite-card.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Polish, Deepen, Enhance</h3>
+                                    <p class="tn-panel-promise">Rewrite a passage and see every change.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> Line editing in your own voice.</p>
+                                    <a class="tn-link" href="/ai-for-novelists">AI for novelists</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>Select a passage.</li>
+                                        <li>Choose <span class="tn-ui">Polish</span>, <span class="tn-ui">Deepen</span> or <span class="tn-ui">Enhance</span>, or say what you want with <span class="tn-ui">Instruct</span>.</li>
+                                        <li>The card shows the rewrite with added words marked. <span class="tn-ui">Apply</span> keeps it; <span class="tn-ui">Undo</span> takes it back.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-voice" data-feature-panel="voice" hidden>
+                            <picture class="tn-shot">
+                                <source type="image/avif" srcset="../../assets/product/voice-style-1200.avif 1200w, ../../assets/product/voice-style-2000.avif 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/voice-style-1200.webp 1200w, ../../assets/product/voice-style-2000.webp 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <img src="../../assets/product/voice-style-1200.webp" width="1200" height="750" loading="lazy" alt="The Voice and Style settings, with a short description of the book's voice and a pasted writing sample" />
+                            </picture>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Voice &amp; Style</h3>
+                                    <p class="tn-panel-promise">Help that sounds like you.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> Suggestions you could have written yourself.</p>
+                                    <a class="tn-link" href="/ai-for-novelists">AI for novelists</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>Open <span class="tn-ui">Settings</span>, then <span class="tn-ui">Voice &amp; Style</span>.</li>
+                                        <li>Paste a sample of your prose, at least 600 words.</li>
+                                        <li>Feldar writes toward it, and follows the book's own prose as the project grows.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-checks" data-feature-panel="checks" hidden>
+                            <picture class="tn-shot">
+                                <source type="image/avif" srcset="../../assets/product/checks-panel-1200.avif 1200w, ../../assets/product/checks-panel-2000.avif 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/checks-panel-1200.webp 1200w, ../../assets/product/checks-panel-2000.webp 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <img src="../../assets/product/checks-panel-1200.webp" width="1200" height="750" loading="lazy" alt="The Checks panel listing five editorial checks, with two passages marked in the chapter" />
+                            </picture>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Checks</h3>
+                                    <p class="tn-panel-promise">Five editing passes, with a fix for every mark.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> A clean-up pass before anyone else reads the chapter.</p>
+                                    <a class="tn-link" href="/features">All features</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>Open <span class="tn-ui">Checks</span> beside the page. Opening it changes nothing.</li>
+                                        <li>Run the passes: Fix critical mistakes, Improve accuracy and clarity, Tighten word choice, Smooth dialogue transitions and Clarify character perspectives.</li>
+                                        <li>Each issue is marked in the text. <span class="tn-ui">Accept</span> the fix, ask <span class="tn-ui">Rewrite for me</span>, or <span class="tn-ui">Discard</span> it.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-lens" data-feature-panel="lens" hidden>
+                            <picture class="tn-shot">
+                                <source type="image/avif" srcset="../../assets/product/lens-chat-1200.avif 1200w, ../../assets/product/lens-chat-2000.avif 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/lens-chat-1200.webp 1200w, ../../assets/product/lens-chat-2000.webp 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <img src="../../assets/product/lens-chat-1200.webp" width="1200" height="750" loading="lazy" alt="Two reader personas, a Critic and a Poet, giving feedback on the chapter in the chat beside the page" />
+                            </picture>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Lens</h3>
+                                    <p class="tn-panel-promise">Six readers beside your page.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> Hearing what works, and what does not, before the draft goes out.</p>
+                                    <a class="tn-link" href="/features">All features</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>Open <span class="tn-ui">Chat</span> and switch to <span class="tn-ui">Lens</span>.</li>
+                                        <li>Ask the Critic, Cheerleader, Poet, Editor, Plotter or Reader, or @mention one.</li>
+                                        <li>Let them answer alone, or <span class="tn-ui">Debate</span> and <span class="tn-ui">Synthesize</span>.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-readers" data-feature-panel="readers" hidden>
+                            <picture class="tn-shot">
+                                <source type="image/avif" srcset="../../assets/product/reader-reactions-1200.avif 1200w, ../../assets/product/reader-reactions-2000.avif 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/reader-reactions-1200.webp 1200w, ../../assets/product/reader-reactions-2000.webp 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <img src="../../assets/product/reader-reactions-1200.webp" width="1200" height="750" loading="lazy" alt="A reader-reaction report for book club readers beside the chapter, with markers in the margin" />
+                            </picture>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Reader reactions</h3>
+                                    <p class="tn-panel-promise">How an audience might take the chapter.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> A first read from the kind of reader you are writing for.</p>
+                                    <a class="tn-link" href="/features">All features</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>In Lens, choose <span class="tn-ui">Reader reactions</span>.</li>
+                                        <li>Pick an audience: General readers, Fantasy readers, Book club readers, Creative writing students or Literary magazine editors.</li>
+                                        <li>Read the report: what they will remember and what they might ask, with markers in your page's margin.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-record" data-feature-panel="record" hidden>
+                            <picture class="tn-shot">
+                                <source type="image/avif" srcset="../../assets/product/writing-record-1200.avif 1200w, ../../assets/product/writing-record-2000.avif 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/writing-record-1200.webp 1200w, ../../assets/product/writing-record-2000.webp 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <img src="../../assets/product/writing-record-1200.webp" width="1200" height="750" loading="lazy" alt="A writing record showing how much of the book was typed by hand and how much came from Feldar, with a chart of daily writing" />
+                            </picture>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Writing record</h3>
+                                    <p class="tn-panel-promise">A private record of how the book was written.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> Showing a publisher, a prize or a workshop how the book was made.</p>
+                                    <a class="tn-link" href="/blog/provenance">Why Feldar records provenance</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>Write as you normally do.</li>
+                                        <li>Open <span class="tn-ui">Writing record</span> from the <span class="tn-ui">Options</span> menu.</li>
+                                        <li>See the words you typed by hand and the words that came through Feldar, with active days, active time and models used.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-library" data-feature-panel="library" hidden>
+                            <picture class="tn-shot">
+                                <source type="image/avif" srcset="../../assets/product/library-covers-1200.avif 1200w, ../../assets/product/library-covers-2000.avif 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/library-covers-1200.webp 1200w, ../../assets/product/library-covers-2000.webp 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <img src="../../assets/product/library-covers-1200.webp" width="1200" height="750" loading="lazy" alt="A library of five books with their covers, two of them pinned" />
+                            </picture>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Library, import and export</h3>
+                                    <p class="tn-panel-promise">Every book on one shelf, and free to leave.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> Bringing a draft in, and taking it out whenever you like.</p>
+                                    <a class="tn-link" href="/novel-writing-software">Novel writing software</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>Each project gets a cover in your <span class="tn-ui">Library</span>.</li>
+                                        <li><span class="tn-ui">Import</span> a manuscript as Word, PDF, Markdown or plain text, up to 20 MB.</li>
+                                        <li><span class="tn-ui">Export</span> the whole book or chosen pages in the same four formats.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tn-panel" id="feature-models" data-feature-panel="models" hidden>
+                            <picture class="tn-shot">
+                                <source type="image/avif" srcset="../../assets/product/model-picker-1200.avif 1200w, ../../assets/product/model-picker-2000.avif 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <source type="image/webp" srcset="../../assets/product/model-picker-1200.webp 1200w, ../../assets/product/model-picker-2000.webp 2000w" sizes="(min-width: 1100px) 760px, 92vw" />
+                                <img src="../../assets/product/model-picker-1200.webp" width="1200" height="750" loading="lazy" alt="The model menu in Chat, listing Claude and GPT models and an effort setting" />
+                            </picture>
+                            <div class="tn-panel-text">
+                                <div>
+                                    <h3 class="tn-panel-title">Choose the model</h3>
+                                    <p class="tn-panel-promise">Six models, chosen per feature.</p>
+                                    <p class="tn-panel-good"><span>Good for</span> Using the model you prefer for each kind of help. Which models you can use depends on your plan.</p>
+                                    <a class="tn-link" href="/pricing">Models by plan</a>
+                                </div>
+                                <div>
+                                    <p class="tn-steps-label">How it works</p>
+                                    <ol class="tn-steps">
+                                        <li>In <span class="tn-ui">Settings</span>, pick a model for each feature, or switch in <span class="tn-ui">Chat</span>.</li>
+                                        <li>Choose from GPT-6 Astra, Sol and Luna, and Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5.</li>
+                                        <li>Set the <span class="tn-ui">Effort</span> where the model supports it.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <p class="tn-features-also">And beside every page, <span class="tn-ui">Chat</span> for questions about your own manuscript. <a class="tn-link" href="/features">All features</a></p>
+            </section>
+
+            <section class="tn-rules" aria-labelledby="rules-title">
+                <p class="tn-rules-kicker">About 370 BCE, in Plato's Phaedrus, Socrates warns that writing will make people forgetful. Plato wrote the warning down.</p>
+                <h2 class="tn-section-title" id="rules-title">New tools earn trust slowly. Feldar's AI keeps four rules.</h2>
+                <ol class="tn-rule-list">
+                    <li><strong>Nothing goes in unless you accept it.</strong> Suggestions wait in blue or in a card. Dismiss one and the page is as you left it.</li>
+                    <li><strong>It never trains on your writing.</strong> Your manuscript is not used to train AI models.</li>
+                    <li><strong>You own what you write.</strong> Export the whole book whenever you like.</li>
+                    <li><strong>It shows its work.</strong> Blue lines and the Writing record say which words came from where.</li>
+                </ol>
+                <a class="tn-link tn-link--light" href="/ai-for-novelists">AI for novelists</a>
+            </section>
+
+            <section class="tn-plans" aria-labelledby="plans-title" data-proto-section="pricing compare">
+                <div class="tn-section-head">
+                    <h2 class="tn-section-title" id="plans-title">Start free. Pay when you write more.</h2>
+                    <p class="tn-section-lede">Every plan has the same workspace. Rewrites, Continue from here, Chat, Lens, Checks, Generate scenes and Draft Page use credits. Writing, planning by hand and arranging the Canvas never do.</p>
+                </div>
+                <div class="tn-plan-grid">
+                    <article class="tn-plan tn-plan--start">
+                        <h3>Starter</h3>
+                        <p class="tn-plan-price">Free</p>
+                        <p>500 credits to try everything. No credit card.</p>
+                        <a class="tn-button tn-button--blue" href="/login" rel="nofollow">Start writing free</a>
+                    </article>
+                    <article class="tn-plan">
+                        <h3>Core</h3>
+                        <p class="tn-plan-price">$20 <span>a month</span></p>
+                        <p>20,000 credits a month for regular drafting and revision.</p>
+                    </article>
+                    <article class="tn-plan">
+                        <h3>Pro</h3>
+                        <p class="tn-plan-price">$40 <span>a month</span></p>
+                        <p>45,000 credits a month, and more premium model use.</p>
+                    </article>
+                    <article class="tn-plan">
+                        <h3>Ultra</h3>
+                        <p class="tn-plan-price">$200 <span>a month</span></p>
+                        <p>250,000 credits a month for large manuscripts.</p>
+                    </article>
+                </div>
+                <p class="tn-plans-more"><a class="tn-link" href="/pricing">Plans in full</a> <span>Coming from another tool?</span> <a href="/compare/scrivener">Scrivener</a> <a href="/compare/sudowrite">Sudowrite</a> <a href="/compare/novelcrafter">Novelcrafter</a> <a href="/compare/plottr">Plottr</a> <a href="/compare">All comparisons</a></p>
+            </section>
+
+            <section class="tn-faq" aria-labelledby="faq-title">
+                <h2 class="tn-section-title" id="faq-title">Questions writers ask first</h2>
+                <div class="tn-faq-list">
+                    <details open>
+                        <summary>Does Feldar write the book for me?</summary>
+                        <p>No. It writes when you ask, in blue or in a card, and nothing stays until you accept it.</p>
+                    </details>
+                    <details>
+                        <summary>Does Feldar train AI on my writing?</summary>
+                        <p>No. Your manuscript never trains AI models, and what you write in Feldar is yours.</p>
+                    </details>
+                    <details>
+                        <summary>Is Feldar free?</summary>
+                        <p>To start, yes. Starter is free with 500 credits and no credit card. Writing, planning and organizing never use credits. Paid plans start at $20 a month.</p>
+                    </details>
+                    <details>
+                        <summary>Can I bring in a manuscript I have already started?</summary>
+                        <p>Yes, as a Word, PDF, Markdown or plain-text file of up to 20 MB.</p>
+                    </details>
+                    <details>
+                        <summary>Does Feldar work on Windows?</summary>
+                        <p>In the browser, yes. The desktop app is for Mac only for now.</p>
+                    </details>
+                    <details>
+                        <summary>Can I take my novel out again?</summary>
+                        <p>Yes. Export the whole book or chosen pages as Word, PDF, Markdown or plain text.</p>
+                    </details>
+                </div>
+            </section>
+
+            <section class="tn-turn" id="your-turn" aria-labelledby="turn-title">
+                <div class="tw-rig" data-machine>
+                    <div class="tw-machine">
+                        <div class="tw-carriage" data-carriage>
+                            <div class="tw-sheet">
+                                <p class="tw-headline">
+                                    <span class="tw-headline-line" data-type-line>I have a story to tell.</span>
+                                </p>
+                                <div class="tw-kept" data-kept></div>
+                                <p class="tw-line tw-blue" data-continuation hidden><span data-variant>It begins with a ledger, and two pounds a month to M.P.</span><span data-variant hidden>It starts in a hard winter, with a dead man's ledger.</span></p>
+                                <p class="tw-line tw-blue" data-continuation hidden><span data-variant>Nell found it in the bureau, under a seed catalogue.</span><span data-variant hidden>The ledger was in the bottom drawer, where it always was.</span></p>
+                                <p class="tw-line tw-blue" data-continuation hidden><span data-variant>In Feldar, lines like these come from your own book.</span><span data-variant hidden>In the app, blue lines are drawn from your pages.</span></p>
+                                <label class="tw-visually-hidden" for="tw-own-line">Type a line on the page</label>
+                                <input
+                                    class="tw-line tw-own-line"
+                                    id="tw-own-line"
+                                    data-own-line
+                                    type="text"
+                                    maxlength="28"
+                                    placeholder="Now you. Type the next line."
+                                    autocomplete="off"
+                                    autocapitalize="off"
+                                    spellcheck="false"
+                                />
+                            </div>
+                            <span class="tw-bail" aria-hidden="true"></span>
+                            <div class="tw-platen">
+                                <button class="tw-return" type="button" data-return>Return</button>
+                                <span class="tw-bell" data-bell aria-hidden="true"></span>
+                            </div>
+                        </div>
+
+                        <div class="tw-body">
+                            <div class="tw-deck" aria-hidden="true">
+                                <span class="tw-spool"></span>
+                                <span class="tw-basket"></span>
+                                <span class="tw-spool"></span>
+                                <span class="tw-ribbon-band"></span>
+                            </div>
+                            <div class="tw-keys" data-keyboard aria-hidden="true">
+                                <div class="tw-key-row">
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="q">Q</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="w">W</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="e">E</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="r">R</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="t">T</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="y">Y</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="u">U</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="i">I</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="o">O</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="p">P</button>
+                                </div>
+                                <div class="tw-key-row">
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="a">A</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="s">S</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="d">D</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="f">F</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="g">G</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="h">H</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="j">J</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="k">K</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="l">L</button>
+                                </div>
+                                <div class="tw-key-row">
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="z">Z</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="x">X</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="c">C</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="v">V</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="b">B</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="n">N</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key="m">M</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key=",">,</button>
+                                    <button class="tw-key" type="button" tabindex="-1" data-key=".">.</button>
+                                </div>
+                                <div class="tw-key-row">
+                                    <button class="tw-key tw-key--space" type="button" tabindex="-1" data-key=" "></button>
+                                </div>
+                            </div>
+                            <span class="tw-nameplate" aria-hidden="true">Feldar</span>
+                        </div>
+                    </div>
+
+                    <div class="tw-controls">
+                        <button class="tw-ribbon" type="button" role="switch" aria-checked="false" data-action="ribbon">
+                            <span class="tw-ribbon-label">Ribbon</span>
+                            <span class="tw-ribbon-half tw-ribbon-half--black">Black, you</span>
+                            <span class="tw-ribbon-half tw-ribbon-half--blue">Blue, Feldar</span>
+                        </button>
+                        <div class="tw-command-keys" data-idle>
+                            <button class="tw-button tw-button--blue" type="button" data-action="continue">Continue from here</button>
+                            <button class="tw-button tw-button--blue" type="button" data-action="restart" hidden>Start over</button>
+                        </div>
+                        <div class="tw-command-keys" data-review hidden>
+                            <button class="tw-button tw-button--blue" type="button" data-action="accept">Accept</button>
+                            <button class="tw-button tw-button--cream" type="button" data-action="revise">Revise</button>
+                            <button class="tw-button tw-button--cream" type="button" data-action="dismiss">Dismiss</button>
+                        </div>
+                        <p
+                            class="tw-status"
+                            role="status"
+                            data-status
+                            data-accepted="Accepted. The line stays on your page."
+                            data-dismissed="Dismissed. The page is as you typed it."
+                            data-bell="Ting. Five characters to the margin. Press Return for a new line."
+                        ></p>
+                    </div>
+                </div>
+
+                <div class="tn-turn-text">
+                    <h2 class="tn-headline tn-headline--turn" id="turn-title">Your turn.</h2>
+                    <p class="tn-lede">Type a line on the machine, then press Continue from here. Your words go down in black. Feldar's come up in blue, and wait for you.</p>
+                    <div class="tn-actions">
+                        <a class="tn-button" href="/login" rel="nofollow">Start writing free</a>
+                        <a class="tn-button tn-button--quiet" href="/download">Download for Mac</a>
+                    </div>
+                    <p class="tn-note">Free to start. 500 credits, no credit card.</p>
+                    <p class="tn-dial-note">Demo. These words were written by hand for this page. In Feldar they come from your book.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="tn-foot">
+            <a class="tn-logo" href="/" aria-label="Feldar home">
+                <img src="../../assets/logo-nav.svg" alt="Feldar" width="59" height="17" loading="lazy" />
+            </a>
+            <nav class="tn-foot-links" aria-label="Footer">
+                <div>
+                    <p class="tn-kicker">Product</p>
+                    <a href="/features">Features</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/download">Download</a>
+                    <a href="/changelog">Changelog</a>
+                </div>
+                <div>
+                    <p class="tn-kicker">For writers</p>
+                    <a href="/novel-writing-software">Novel writing software</a>
+                    <a href="/ai-for-novelists">AI for novelists</a>
+                    <a href="/guides/how-to-outline-a-novel">Outline a novel</a>
+                    <a href="/tools">Free tools</a>
+                </div>
+                <div>
+                    <p class="tn-kicker">Company</p>
+                    <a href="/about">About</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/terms">Terms of Use</a>
+                    <a href="/privacy">Privacy Policy</a>
+                </div>
+            </nav>
+        </footer>
+
+        <nav class="pt-switch" aria-label="Prototypes">
+            <a href="../index.html">All concepts</a>
+            <a href="typewriter.html" rel="prev" aria-label="Previous concept: Typewriter">‹ Prev</a>
+            <a href="manuscript.html" title="Manuscript">A</a>
+            <a href="index-cards.html" title="Index cards">B</a>
+            <a href="night-studio.html" title="Night studio">C</a>
+            <a href="five-thousand-years.html" title="5,000 years">D</a>
+            <a href="clay.html" title="Clay">E</a>
+            <a href="scriptorium.html" title="Scriptorium">F</a>
+            <a href="typewriter.html" title="Typewriter">G</a>
+            <a href="then-and-now.html" aria-current="page">H · Then and now</a>
+            <a href="ledger.html" title="The novel's ledger">I</a>
+            <a href="desk.html" title="The writer's desk">J</a>
+            <a href="ledger.html" rel="next" aria-label="Next concept: The novel's ledger">Next ›</a>
+        </nav>
+
+        <script type="module" src="scripts/then-and-now.js"></script>
+        <script type="module" src="../review.js"></script>
+    </body>
+</html>

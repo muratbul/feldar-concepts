@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex,nofollow" />
+        <meta
+            name="description"
+            content="Feldar is a writing app for novelists. Plan scenes, keep your story world, draft and revise with AI that suggests in blue and waits for your yes. Try it here."
+        />
+        <title>Concept C: Night studio - Feldar</title>
+
+        <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="../../assets/favicon-192.png" sizes="192x192" type="image/png" />
+        <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
+        />
+
+        <link rel="stylesheet" href="../switcher.css" />
+        <link rel="stylesheet" href="styles/night-studio.css" />
+    </head>
+    <body>
+        <header class="ns-bar" data-bar>
+            <div class="ns-bar-inner">
+                <a class="ns-logo" href="/" aria-label="Feldar home">
+                    <img src="../../assets/logo.svg" alt="Feldar" width="97" height="28" />
+                </a>
+                <nav class="ns-menu" id="ns-menu" aria-label="Main">
+                    <a href="/features">Features</a>
+                    <a href="/compare">Compare</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/download">Download</a>
+                    <a class="ns-menu-login" href="/login" rel="nofollow">Log in</a>
+                </nav>
+                <a class="ns-button ns-button--primary ns-button--small" href="/login" rel="nofollow">Start writing free</a>
+                <button
+                    type="button"
+                    class="ns-menu-toggle"
+                    aria-expanded="false"
+                    aria-controls="ns-menu"
+                    data-menu-toggle
+                >
+                    Menu
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <section class="ns-hero">
+                <div class="ns-column ns-hero-text">
+                    <h1 class="ns-h1">
+                        <span class="ns-h1-line">You write.</span>
+                        <span class="ns-h1-line">Feldar suggests in&nbsp;<span class="ns-h1-blue">blue</span>.</span>
+                        <em class="ns-h1-line">You decide.</em>
+                    </h1>
+                    <p class="ns-lede">Feldar is a writing app for novelists. Your chapters, scene plans and story world sit beside the page, and every line the AI offers waits for your yes.</p>
+                    <div class="ns-actions">
+                        <a class="ns-button ns-button--primary" href="/login" rel="nofollow">Start writing free</a>
+                        <a class="ns-button ns-button--quiet" href="/download">Download for Mac</a>
+                    </div>
+                    <p class="ns-note">Free to start. 500 credits, no credit card.</p>
+                </div>
+
+                <div class="ns-desk" data-ink>
+                    <div
+                        class="ns-paper ns-paper--lit"
+                        tabindex="0"
+                        role="group"
+                        aria-label="A page from The Winter Ledger. Press Enter for the highlighted choice."
+                        data-ink-page
+                    >
+                        <p class="ns-paper-running">The Winter Ledger <span aria-hidden="true">/</span> Pryce's Gate</p>
+                        <p>Nell found him in the cider house, sweeping round the feet of the press as if the floor had asked him to. She did not say good morning. She laid her father's ledger on the cold iron and turned it to face him, one finger under the entry for the first of March.</p>
+                        <p class="ns-ink" data-ink-continuation>
+                            <span data-ink-variant>Daniel read it without bending. Then he leaned the broom against the wall with great care, the way a man sets down something he expects to need again.</span>
+                            <span data-ink-variant hidden>Daniel read it standing. Then he set the broom against the wall, carefully, like something he would need again.</span>
+                        </p>
+                        <p class="ns-ink" data-ink-continuation hidden>
+                            <span data-ink-variant>"That is your father's hand," he said. "I would know those fours anywhere. It is not my place to tell you what it paid for."</span>
+                            <span data-ink-variant hidden>"Your father's hand," he said. "What it paid for is not mine to tell."</span>
+                        </p>
+                        <p class="ns-ink" data-ink-continuation hidden>
+                            <span data-ink-variant>Outside, a cart went by on the frozen lane, and neither of them turned to look at it.</span>
+                            <span data-ink-variant hidden>A cart passed on the frozen lane. Neither of them looked up.</span>
+                        </p>
+                    </div>
+
+                    <div class="ns-desk-controls">
+                        <div class="ns-keys" data-ink-review>
+                            <button type="button" class="ns-key ns-key--primary" data-ink-action="accept">Accept <kbd>Enter</kbd></button>
+                            <button type="button" class="ns-key" data-ink-action="revise">Revise <kbd>R</kbd></button>
+                            <button type="button" class="ns-key" data-ink-action="dismiss">Dismiss <kbd>Esc</kbd></button>
+                        </div>
+                        <div class="ns-keys" data-ink-idle hidden>
+                            <button type="button" class="ns-key ns-key--primary" data-ink-action="continue">Continue from here <kbd>Enter</kbd></button>
+                            <button type="button" class="ns-key ns-key--primary" data-ink-action="restart" hidden>Start over <kbd>Enter</kbd></button>
+                        </div>
+                        <p
+                            class="ns-status"
+                            role="status"
+                            data-ink-status
+                            data-accepted="Accepted. Those lines are part of the page now."
+                            data-dismissed="Dismissed. The page is as you left it."
+                        ></p>
+                    </div>
+                    <p class="ns-demo-note">Demo. These words were written by hand for this page. In Feldar they come from your book.</p>
+                </div>
+            </section>
+
+            <nav class="ns-rail" aria-label="Stations" data-rail>
+                <ol>
+                    <li><a href="#plan"><span>01</span>Plan</a></li>
+                    <li><a href="#world"><span>02</span>World</a></li>
+                    <li><a href="#write"><span>03</span>Write</a></li>
+                    <li><a href="#revise"><span>04</span>Revise</a></li>
+                    <li><a href="#read"><span>05</span>Read</a></li>
+                    <li><a href="#keep"><span>06</span>Keep</a></li>
+                </ol>
+            </nav>
+
+            <div class="ns-column" data-stations>
+                <section class="ns-station" id="plan" data-station aria-labelledby="plan-title" data-proto-section="features">
+                    <div class="ns-station-text">
+                        <p class="ns-kicker"><span>01</span> / Plan</p>
+                        <h2 class="ns-h2" id="plan-title">Plan a chapter before you write a word of it.</h2>
+                        <p class="ns-body">Every page in Feldar has an Outline. Say what happens next, pick how many scenes you want, and Generate scenes lays them out with titles and descriptions.</p>
+                        <h3 class="ns-h3">Scenes you can argue with</h3>
+                        <p class="ns-body">Edit, reorder, add or delete any scene. The plan is yours to change.</p>
+                        <h3 class="ns-h3">Draft Page</h3>
+                        <p class="ns-body">Write the chapter yourself with the scenes beside you, or press Draft Page for a first pass at the length you set.</p>
+                        <a class="ns-more" href="/features/scenes">How scene planning works</a>
+                    </div>
+
+                    <div class="ns-widget" data-plan>
+                        <p class="ns-label">What happens next?</p>
+                        <p class="ns-field">Nell takes the ledger to the cider house. Daniel will not say who M.P. is, and a hard frost is coming.</p>
+                        <div class="ns-plan-controls">
+                            <div class="ns-stepper" role="group" aria-label="Number of scenes">
+                                <button type="button" class="ns-stepper-button" aria-label="Fewer scenes" data-plan-step="-1">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                                </button>
+                                <span class="ns-stepper-value"><output data-plan-count data-min="3" data-max="5">5</output> scenes</span>
+                                <button type="button" class="ns-stepper-button" aria-label="More scenes" data-plan-step="1">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7h8M7 3v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                                </button>
+                            </div>
+                            <button type="button" class="ns-button ns-button--primary ns-button--small" data-plan-generate>Generate scenes</button>
+                        </div>
+
+                        <p class="ns-hint" data-plan-empty hidden>No scenes yet. Generate them here. In Feldar you can also write them yourself.</p>
+                        <ol class="ns-scenes">
+                            <li class="ns-scene" data-plan-scene>
+                                <span class="ns-scene-number">1</span>
+                                <div>
+                                    <p class="ns-scene-title">Daniel will not say</p>
+                                    <p class="ns-scene-text">In the cider house Daniel refuses to name M.P. and sends Nell to his mother.</p>
+                                </div>
+                            </li>
+                            <li class="ns-scene" data-plan-scene>
+                                <span class="ns-scene-number">2</span>
+                                <div>
+                                    <p class="ns-scene-title">Fires in the low rows</p>
+                                    <p class="ns-scene-text">They light smudge pots between the Foxwhelps all night. He starts a story about 1932, then stops.</p>
+                                </div>
+                            </li>
+                            <li class="ns-scene" data-plan-scene>
+                                <span class="ns-scene-number">3</span>
+                                <div>
+                                    <p class="ns-scene-title">Agnes at the gate</p>
+                                    <p class="ns-scene-text">At first light Agnes is waiting at Pryce's Gate in her good coat.</p>
+                                </div>
+                            </li>
+                            <li class="ns-scene" data-plan-scene>
+                                <span class="ns-scene-number">4</span>
+                                <div>
+                                    <p class="ns-scene-title">The page of births</p>
+                                    <p class="ns-scene-text">In Agnes's kitchen the family Bible lies open, and one name has no father beside it.</p>
+                                </div>
+                            </li>
+                            <li class="ns-scene" data-plan-scene>
+                                <span class="ns-scene-number">5</span>
+                                <div>
+                                    <p class="ns-scene-title">What Agnes kept</p>
+                                    <p class="ns-scene-text">A biscuit tin holds thirty years of postal orders. Not one was cashed.</p>
+                                </div>
+                            </li>
+                        </ol>
+
+                        <button type="button" class="ns-button ns-button--quiet ns-button--small" data-plan-draft>Draft Page</button>
+                        <figure class="ns-plan-page" data-plan-page>
+                            <picture class="ns-frame">
+                                <source type="image/avif" srcset="../../assets/product/outline-draft-page-1200.avif 1200w, ../../assets/product/outline-draft-page-2000.avif 2000w" sizes="(min-width: 1000px) 590px, 88vw" />
+                                <source type="image/webp" srcset="../../assets/product/outline-draft-page-1200.webp 1200w, ../../assets/product/outline-draft-page-2000.webp 2000w" sizes="(min-width: 1000px) 590px, 88vw" />
+                                <img src="../../assets/product/outline-draft-page-1200.webp" width="1200" height="750" loading="lazy" alt="A chapter drafted from its outline, the page on the left and its scenes on the right" />
+                            </picture>
+                            <figcaption class="ns-caption">From the real app: the chapter after Draft Page, with its scenes beside it.</figcaption>
+                        </figure>
+                        <p
+                            class="ns-status"
+                            role="status"
+                            data-plan-status
+                            data-generating="Generating scenes"
+                            data-ready="Scenes ready. Change any of them, then draft."
+                            data-drafted="Drafted. This is the real app, after Draft Page."
+                        ></p>
+                    </div>
+                </section>
+
+                <section class="ns-station" id="world" data-station aria-labelledby="world-title">
+                    <div class="ns-station-text">
+                        <p class="ns-kicker"><span>02</span> / World</p>
+                        <h2 class="ns-h2" id="world-title">Keep the story world where the story is.</h2>
+                        <p class="ns-body">The Canvas is a board of cards beside your manuscript. Link them with relations you name, and Feldar reads the board before it writes, so it works from the people and places you made.</p>
+                        <h3 class="ns-h3">Six kinds of card</h3>
+                        <p class="ns-body">Character, Location, Plot, Item, Faction and Note.</p>
+                        <h3 class="ns-h3">Branch</h3>
+                        <p class="ns-body">Select a card and Branch adds one that knows it: a related character, a place, an item, or the next plot beat.</p>
+                        <a class="ns-more" href="/features/canvas">How the Canvas works</a>
+                    </div>
+
+                    <div class="ns-widget ns-widget--board">
+                        <div class="ns-board" data-board>
+                            <svg class="ns-board-links" aria-hidden="true">
+                                <g data-link data-from="nell" data-to="orchard"><line /><text>Returns to</text></g>
+                                <g data-link data-from="nell" data-to="tom"><line /><text>Her father</text></g>
+                                <g data-link data-from="nell" data-to="ledger"><line /><text>Finds</text></g>
+                                <g data-link data-from="nell" data-to="daniel"><line /><text>Asks</text></g>
+                            </svg>
+                            <article class="ns-card" tabindex="0" data-card="orchard" style="--x: 0; --y: 0">
+                                <p class="ns-card-kind">Location</p>
+                                <p class="ns-card-name">Ashby's Orchard</p>
+                                <p class="ns-card-text">Herefordshire. Foxwhelps in the low rows.</p>
+                            </article>
+                            <article class="ns-card" tabindex="0" data-card="tom" style="--x: 1; --y: 0">
+                                <p class="ns-card-kind">Character</p>
+                                <p class="ns-card-name">Tom Ashby</p>
+                                <p class="ns-card-text">Her father. Never missed a month.</p>
+                            </article>
+                            <article class="ns-card ns-card--chosen" tabindex="0" data-card="nell" style="--x: 0.5; --y: 0.5">
+                                <p class="ns-card-kind">Character</p>
+                                <p class="ns-card-name">Nell Ashby</p>
+                                <p class="ns-card-text">Home from Bristol to a failing orchard.</p>
+                            </article>
+                            <article class="ns-card ns-card--item" tabindex="0" data-card="ledger" style="--x: 0; --y: 1">
+                                <p class="ns-card-kind">Item</p>
+                                <p class="ns-card-name">The ledger</p>
+                                <p class="ns-card-text">Two pounds to M.P., every first of the month.</p>
+                            </article>
+                            <article class="ns-card" tabindex="0" data-card="daniel" style="--x: 1; --y: 1">
+                                <p class="ns-card-kind">Character</p>
+                                <p class="ns-card-name">Daniel Pryce</p>
+                                <p class="ns-card-text">Works the cider house. Will not say.</p>
+                            </article>
+                        </div>
+                        <p class="ns-visually-hidden">Nell Ashby is linked to four cards: she returns to Ashby's Orchard, Tom Ashby is her father, she finds the ledger, and she asks Daniel Pryce.</p>
+                        <p class="ns-hint ns-hint--pointer">Drag a card, or focus one and use the arrow keys. The links follow.</p>
+                    </div>
+                </section>
+
+                <section class="ns-station" id="write" data-station aria-labelledby="write-title">
+                    <div class="ns-station-text">
+                        <p class="ns-kicker"><span>03</span> / Write</p>
+                        <h2 class="ns-h2" id="write-title">Rewrite a paragraph and still recognise it.</h2>
+                        <p class="ns-body">Select a passage and choose a direction. The rewrite arrives with every changed word in blue. Apply keeps it, and Undo puts yours back.</p>
+                        <h3 class="ns-h3">Polish, Deepen, Enhance</h3>
+                        <p class="ns-body">Polish tightens and clarifies. Deepen adds description, interiority and voice. Enhance raises tension, plants foreshadowing and improves dialogue.</p>
+                        <h3 class="ns-h3">Instruct</h3>
+                        <p class="ns-body">Or say it in your own words, such as "slow it down", and review the change before it lands.</p>
+                        <h3 class="ns-h3">Voice &amp; Style</h3>
+                        <p class="ns-body">Paste a sample of 600 words or more and Feldar writes toward your voice. As the book grows, it follows the book.</p>
+                        <a class="ns-more" href="/ai-for-novelists">AI for novelists</a>
+                    </div>
+
+                    <div class="ns-widget" data-chooser data-rewrite>
+                        <div class="ns-chips" role="group" aria-label="Version of the paragraph">
+                            <button type="button" class="ns-chip" aria-pressed="true" data-choose="original">Yours</button>
+                            <button type="button" class="ns-chip" aria-pressed="false" data-choose="polish">Polish</button>
+                            <button type="button" class="ns-chip" aria-pressed="false" data-choose="deepen">Deepen</button>
+                            <button type="button" class="ns-chip" aria-pressed="false" data-choose="enhance">Enhance</button>
+                        </div>
+                        <div class="ns-paper">
+                            <p data-chosen="original">She sat with the book on her knees. The clock in the kitchen was ticking. It was cold outside and the frost was coming down on the meadows and the trees were standing in it.</p>
+                            <p class="ns-rewrite" data-chosen="polish" hidden>She sat with the book on her knees <ins>while the kitchen clock ticked on</ins>. <ins>Outside,</ins> the frost was coming down on the meadows, and the trees <ins>stood</ins> in it.</p>
+                            <p class="ns-rewrite" data-chosen="deepen" hidden>She sat with the book on her knees. The clock in the kitchen was ticking, <ins>each tick dropping into the quiet like a coin into a tin</ins>. It was cold outside and the frost was coming down on the meadows, <ins>whitening the grass between the rows,</ins> and the trees were standing in it<ins>, black and patient</ins>.</p>
+                            <p class="ns-rewrite" data-chosen="enhance" hidden>She sat with the book on her knees. The clock in the kitchen was ticking, <ins>and she found she was counting with it</ins>. It was cold outside and the frost was coming down on the meadows and the trees were standing in it<ins>, the way they had stood the night her father stopped writing things down</ins>.</p>
+                        </div>
+                        <div class="ns-keys">
+                            <button type="button" class="ns-key ns-key--primary" data-rewrite-apply disabled>Apply</button>
+                            <button type="button" class="ns-key" data-rewrite-undo disabled>Undo</button>
+                        </div>
+                        <p
+                            class="ns-status"
+                            role="status"
+                            data-rewrite-status
+                            data-applied="Applied. The blue words are yours now, and Undo still works."
+                            data-undone="Undone. Your paragraph is back as you wrote it."
+                        ></p>
+                    </div>
+                </section>
+
+                <section class="ns-station" id="revise" data-station aria-labelledby="revise-title">
+                    <div class="ns-station-text">
+                        <p class="ns-kicker"><span>04</span> / Revise</p>
+                        <h2 class="ns-h2" id="revise-title">Find the slips before a reader does.</h2>
+                        <p class="ns-body">Checks runs five editing passes over the page and marks what it finds in the manuscript. Each mark comes with a fix to accept or discard. Opening Checks never changes your text.</p>
+                        <h3 class="ns-h3">The five checks</h3>
+                        <ul class="ns-list">
+                            <li>Fix critical mistakes</li>
+                            <li>Improve accuracy and clarity</li>
+                            <li>Tighten word choice</li>
+                            <li>Smooth dialogue transitions</li>
+                            <li>Clarify character perspectives</li>
+                        </ul>
+                        <a class="ns-more" href="/features">All features</a>
+                    </div>
+
+                    <div class="ns-widget" data-checks>
+                        <div class="ns-score">
+                            <p class="ns-label">Writing quality</p>
+                            <p class="ns-score-value"><output data-checks-score>84</output> / 100</p>
+                            <div class="ns-meter" style="--score: 84" data-checks-meter></div>
+                        </div>
+                        <div class="ns-paper">
+                            <p>Daniel was in the cider house, rolling the empty <span class="ns-issue" role="button" tabindex="0" aria-expanded="false" aria-controls="issue-repeat" data-issue>casks casks</span> into a line along the wall. He did not stop when she came in. <span class="ns-issue" role="button" tabindex="0" aria-expanded="false" aria-controls="issue-passive" data-issue>It was said by him</span> that it was a hard frost, and that the Foxwhelps in the bottom rows would feel it <span class="ns-issue" role="button" tabindex="0" aria-expanded="false" aria-controls="issue-wordy" data-issue>first of all before the others</span>.</p>
+                        </div>
+
+                        <p class="ns-hint" data-checks-hint>Choose a marked phrase to see the fix.</p>
+                        <p class="ns-hint" tabindex="-1" data-checks-done hidden>All three marks handled. The rest of the page is as you wrote it.</p>
+                        <div class="ns-issue-card" id="issue-repeat" data-issue-card data-points="3" hidden>
+                            <p class="ns-issue-check">Fix critical mistakes</p>
+                            <p class="ns-issue-reason">A word is repeated.</p>
+                            <p class="ns-issue-change">Change to <q data-issue-fix>casks</q></p>
+                            <div class="ns-keys">
+                                <button type="button" class="ns-key ns-key--primary" data-issue-verdict="accept">Accept</button>
+                                <button type="button" class="ns-key" data-issue-verdict="discard">Discard</button>
+                            </div>
+                        </div>
+                        <div class="ns-issue-card" id="issue-passive" data-issue-card data-points="2" hidden>
+                            <p class="ns-issue-check">Improve accuracy and clarity</p>
+                            <p class="ns-issue-reason">Passive phrasing hides who is speaking.</p>
+                            <p class="ns-issue-change">Change to <q data-issue-fix>He said</q></p>
+                            <div class="ns-keys">
+                                <button type="button" class="ns-key ns-key--primary" data-issue-verdict="accept">Accept</button>
+                                <button type="button" class="ns-key" data-issue-verdict="discard">Discard</button>
+                            </div>
+                        </div>
+                        <div class="ns-issue-card" id="issue-wordy" data-issue-card data-points="2" hidden>
+                            <p class="ns-issue-check">Tighten word choice</p>
+                            <p class="ns-issue-reason">Three ways of saying one thing.</p>
+                            <p class="ns-issue-change">Change to <q data-issue-fix>first</q></p>
+                            <div class="ns-keys">
+                                <button type="button" class="ns-key ns-key--primary" data-issue-verdict="accept">Accept</button>
+                                <button type="button" class="ns-key" data-issue-verdict="discard">Discard</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ns-station" id="read" data-station aria-labelledby="read-title">
+                    <div class="ns-station-text">
+                        <p class="ns-kicker"><span>05</span> / Read</p>
+                        <h2 class="ns-h2" id="read-title">Six readers, before the first real one.</h2>
+                        <p class="ns-body">Lens puts six readers beside the page: Critic, Cheerleader, Poet, Editor, Plotter and Reader. Call one by name with a mention, or let them debate.</p>
+                        <h3 class="ns-h3">Reader reactions</h3>
+                        <p class="ns-body">Pick an audience and get a report of what they will remember and what they might ask, with markers in the margin. The audiences are general readers, fantasy readers, book club readers, creative writing students and literary magazine editors.</p>
+                        <a class="ns-more" href="/features">All features</a>
+                    </div>
+
+                    <div class="ns-widget" data-chooser>
+                        <div class="ns-paper">
+                            <p>The ledger smelled of the bureau drawer, of mints and cold tobacco. She turned to the first of the month and there it was again, in his careful hand: M.P., two pounds. Thirty years of it, and never once a name.</p>
+                        </div>
+                        <div class="ns-chips" role="group" aria-label="Reader">
+                            <button type="button" class="ns-chip ns-chip--persona" style="--persona: #f0795a" aria-pressed="true" data-choose="critic">Critic</button>
+                            <button type="button" class="ns-chip ns-chip--persona" style="--persona: #f5b759" aria-pressed="false" data-choose="cheerleader">Cheerleader</button>
+                            <button type="button" class="ns-chip ns-chip--persona" style="--persona: #b79cf7" aria-pressed="false" data-choose="poet">Poet</button>
+                            <button type="button" class="ns-chip ns-chip--persona" style="--persona: #6aa6ff" aria-pressed="false" data-choose="editor">Editor</button>
+                            <button type="button" class="ns-chip ns-chip--persona" style="--persona: #6fd3a0" aria-pressed="false" data-choose="plotter">Plotter</button>
+                            <button type="button" class="ns-chip ns-chip--persona" style="--persona: #e9ecf2" aria-pressed="false" data-choose="reader">Reader</button>
+                        </div>
+                        <div class="ns-comment" role="status">
+                            <p data-chosen="critic">The smell does real work. But "careful hand" is the third time we are told he was careful. Trust the entries to show it.</p>
+                            <p data-chosen="cheerleader" hidden>"Never once a name" gave me a chill. That is a hook, and you set it in four words.</p>
+                            <p data-chosen="poet" hidden>Mints and cold tobacco: keep that. Consider ending on "two pounds" and letting the silence carry the rest.</p>
+                            <p data-chosen="editor" hidden>Tense and viewpoint hold. "There it was again" leans on a stock phrase. A plainer verb would keep the line yours.</p>
+                            <p data-chosen="plotter" hidden>Thirty years of payments starts a clock. Decide now when Nell learns who M.P. is, and plant one refusal before it.</p>
+                            <p data-chosen="reader" hidden>I want to know who M.P. is, and I am a little afraid of the answer. I would turn the page.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ns-station" id="keep" data-station aria-labelledby="keep-title">
+                    <div class="ns-station-text">
+                        <p class="ns-kicker"><span>06</span> / Keep</p>
+                        <h2 class="ns-h2" id="keep-title">Keep the book, and the proof that you wrote it.</h2>
+                        <p class="ns-body">The Writing record keeps a private account of which words you typed and which came through Feldar, with active days, time and the models used. It is there if a publisher, a contest or a workshop ever asks how the book was made.</p>
+                        <h3 class="ns-h3">Library</h3>
+                        <p class="ns-body">Each book gets a cover in your Library. Pin the one you are finishing.</p>
+                        <h3 class="ns-h3">In and out</h3>
+                        <p class="ns-body">Import DOCX, PDF, Markdown or plain text, up to 20 MB a file. Export the whole manuscript or chosen pages in the same four formats.</p>
+                        <a class="ns-more" href="/blog/provenance">Why Feldar records provenance</a>
+                    </div>
+
+                    <div class="ns-station-demos">
+                        <div class="ns-widget ns-record" data-record>
+                            <p class="ns-label">Writing record <span aria-hidden="true">/</span> The Winter Ledger</p>
+                            <p class="ns-record-line">8,375 words entered.<br />92% by hand, 7% Feldar, 1% pasted.</p>
+                            <div class="ns-record-bar" aria-hidden="true">
+                                <span class="ns-record-part ns-record-part--hand" style="--share: 92"></span>
+                                <span class="ns-record-part ns-record-part--feldar" style="--share: 7"></span>
+                                <span class="ns-record-part ns-record-part--pasted" style="--share: 1"></span>
+                            </div>
+                            <ul class="ns-record-key">
+                                <li class="ns-record-key-item ns-record-key-item--hand">By hand</li>
+                                <li class="ns-record-key-item ns-record-key-item--feldar">Through Feldar</li>
+                                <li class="ns-record-key-item ns-record-key-item--pasted">Pasted</li>
+                            </ul>
+                            <p class="ns-hint">Private to you. It records as you write, and it cannot see text written elsewhere and typed in by hand.</p>
+                        </div>
+                        <div class="ns-widget">
+                            <p class="ns-label">Library <span aria-hidden="true">/</span> Continue writing</p>
+                            <ul class="ns-shelf">
+                                <li class="ns-book" style="--cover: #a8503a"><span class="ns-book-pin">Pinned</span>The Winter Ledger</li>
+                                <li class="ns-book" style="--cover: #3f5673">Salt Year</li>
+                                <li class="ns-book" style="--cover: #4d6b4f">Understorey</li>
+                                <li class="ns-book" style="--cover: #7a5a86">A Short History of Rain</li>
+                                <li class="ns-book" style="--cover: #8a6a2f">The Lamplighter</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <section class="ns-column ns-section" aria-labelledby="real-title">
+                <p class="ns-kicker">The app</p>
+                <h2 class="ns-h2" id="real-title">And this is the real thing.</h2>
+                <p class="ns-body ns-body--wide">Everything above is a sketch you can play with. These are the app itself, with one book running through every shot: The Winter Ledger.</p>
+
+                <div class="ns-real" data-chooser data-shots>
+                    <div class="ns-chips" role="group" aria-label="View of the app">
+                        <button type="button" class="ns-chip" aria-pressed="true" data-choose="page">The page</button>
+                        <button type="button" class="ns-chip" aria-pressed="false" data-choose="canvas">Canvas</button>
+                        <button type="button" class="ns-chip" aria-pressed="false" data-choose="rewrite">Rewrite</button>
+                        <button type="button" class="ns-chip" aria-pressed="false" data-choose="readers">Reader reactions</button>
+                        <button type="button" class="ns-chip" aria-pressed="false" data-choose="record">Writing record</button>
+                    </div>
+
+                    <figure class="ns-shot" data-chosen="page">
+                        <picture class="ns-frame">
+                            <source type="image/avif" srcset="../../assets/product/writing-view-1200.avif 1200w, ../../assets/product/writing-view-2000.avif 2000w, ../../assets/product/writing-view-2800.avif 2800w" sizes="(min-width: 1200px) 1120px, 92vw" />
+                            <source type="image/webp" srcset="../../assets/product/writing-view-1200.webp 1200w, ../../assets/product/writing-view-2000.webp 2000w, ../../assets/product/writing-view-2800.webp 2800w" sizes="(min-width: 1200px) 1120px, 92vw" />
+                            <img src="../../assets/product/writing-view-1200.webp" width="1200" height="750" loading="lazy" alt="A chapter of a novel open in Feldar's editor, with the book's other chapters listed in the sidebar" />
+                        </picture>
+                        <figcaption class="ns-caption">A chapter open in the editor, with the rest of the book in the sidebar.</figcaption>
+                    </figure>
+                    <figure class="ns-shot" data-chosen="canvas" hidden>
+                        <picture class="ns-frame">
+                            <source type="image/avif" srcset="../../assets/product/canvas-board-1200.avif 1200w, ../../assets/product/canvas-board-2000.avif 2000w, ../../assets/product/canvas-board-2800.avif 2800w" sizes="(min-width: 1200px) 1120px, 92vw" />
+                            <source type="image/webp" srcset="../../assets/product/canvas-board-1200.webp 1200w, ../../assets/product/canvas-board-2000.webp 2000w, ../../assets/product/canvas-board-2800.webp 2800w" sizes="(min-width: 1200px) 1120px, 92vw" />
+                            <img src="../../assets/product/canvas-board-1200.webp" width="1200" height="750" loading="lazy" alt="A story board of character, place, object and plot cards, with labelled lines linking the main character to the others" />
+                        </picture>
+                        <figcaption class="ns-caption">The Canvas for the book, with Nell's links to the other cards labelled.</figcaption>
+                    </figure>
+                    <figure class="ns-shot" data-chosen="rewrite" hidden>
+                        <div class="ns-frame">
+                            <video
+                                muted
+                                loop
+                                playsinline
+                                preload="none"
+                                width="1440"
+                                height="900"
+                                poster="../../assets/demo/loop-define-rewrite-card-poster.jpg"
+                                aria-label="A paragraph is selected, Deepen description is chosen, and the rewrite card shows the suggestion with added words in blue before Apply"
+                            >
+                                <source src="../../assets/demo/loop-define-rewrite-card.webm" type="video/webm" />
+                                <source src="../../assets/demo/loop-define-rewrite-card.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+                        <figcaption class="ns-caption">Select a paragraph, choose Deepen description, and Apply takes the rewrite.</figcaption>
+                    </figure>
+                    <figure class="ns-shot" data-chosen="readers" hidden>
+                        <picture class="ns-frame">
+                            <source type="image/avif" srcset="../../assets/product/reader-reactions-1200.avif 1200w, ../../assets/product/reader-reactions-2000.avif 2000w, ../../assets/product/reader-reactions-2800.avif 2800w" sizes="(min-width: 1200px) 1120px, 92vw" />
+                            <source type="image/webp" srcset="../../assets/product/reader-reactions-1200.webp 1200w, ../../assets/product/reader-reactions-2000.webp 2000w, ../../assets/product/reader-reactions-2800.webp 2800w" sizes="(min-width: 1200px) 1120px, 92vw" />
+                            <img src="../../assets/product/reader-reactions-1200.webp" width="1200" height="750" loading="lazy" alt="A reader-reaction report for book club readers beside the chapter, with markers in the margin" />
+                        </picture>
+                        <figcaption class="ns-caption">Lens with Reader reactions on, set to book club readers.</figcaption>
+                    </figure>
+                    <figure class="ns-shot" data-chosen="record" hidden>
+                        <picture class="ns-frame">
+                            <source type="image/avif" srcset="../../assets/product/writing-record-1200.avif 1200w, ../../assets/product/writing-record-2000.avif 2000w, ../../assets/product/writing-record-2800.avif 2800w" sizes="(min-width: 1200px) 1120px, 92vw" />
+                            <source type="image/webp" srcset="../../assets/product/writing-record-1200.webp 1200w, ../../assets/product/writing-record-2000.webp 2000w, ../../assets/product/writing-record-2800.webp 2800w" sizes="(min-width: 1200px) 1120px, 92vw" />
+                            <img src="../../assets/product/writing-record-1200.webp" width="1200" height="750" loading="lazy" alt="A writing record showing how much of the book was typed by hand and how much came from Feldar, with a chart of daily writing" />
+                        </picture>
+                        <figcaption class="ns-caption">The private Writing record for the book, with a chart of daily writing.</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="ns-column ns-section" aria-labelledby="rules-title">
+                <p class="ns-kicker">House rules</p>
+                <h2 class="ns-h2" id="rules-title">Five things the AI will not do.</h2>
+                <ol class="ns-rules">
+                    <li class="ns-rule">
+                        <h3 class="ns-rule-title">Change your page on its own</h3>
+                        <p class="ns-body">Every suggestion waits for Accept or Apply. Dismiss one and the page is as you left it.</p>
+                    </li>
+                    <li class="ns-rule">
+                        <h3 class="ns-rule-title">Train on your writing</h3>
+                        <p class="ns-body">Feldar never uses your manuscript to train AI models.</p>
+                    </li>
+                    <li class="ns-rule">
+                        <h3 class="ns-rule-title">Claim your book</h3>
+                        <p class="ns-body">The words, drafts, notes and worlds you make in Feldar stay yours.</p>
+                    </li>
+                    <li class="ns-rule">
+                        <h3 class="ns-rule-title">Hide what it wrote</h3>
+                        <p class="ns-body">New AI writing is blue until you accept it, and the Writing record keeps a private account.</p>
+                    </li>
+                    <li class="ns-rule">
+                        <h3 class="ns-rule-title">Lock you out</h3>
+                        <p class="ns-body">If credits run out, AI actions pause. Writing and export carry on.</p>
+                    </li>
+                </ol>
+                <a class="ns-more" href="/ai-for-novelists">How the AI works with your book</a>
+            </section>
+
+            <section class="ns-column ns-section" aria-labelledby="plans-title" data-proto-section="pricing">
+                <p class="ns-kicker">Pricing</p>
+                <h2 class="ns-h2" id="plans-title">Free to begin.</h2>
+                <p class="ns-body ns-body--wide">Every plan has the same workspace. Plans differ in credits, which only AI actions use. Writing, planning and organizing never use credits.</p>
+                <div class="ns-plans">
+                    <article class="ns-plan ns-plan--start">
+                        <h3 class="ns-plan-name">Starter</h3>
+                        <p class="ns-plan-price">Free</p>
+                        <p class="ns-plan-terms">500 credits to try everything. No credit card.</p>
+                        <a class="ns-button ns-button--primary ns-button--small" href="/login" rel="nofollow">Start writing free</a>
+                    </article>
+                    <article class="ns-plan">
+                        <h3 class="ns-plan-name">Core</h3>
+                        <p class="ns-plan-price">$20 <span>a month</span></p>
+                        <p class="ns-plan-terms">20,000 credits a month, for regular drafting and revision.</p>
+                    </article>
+                    <article class="ns-plan">
+                        <h3 class="ns-plan-name">Pro</h3>
+                        <p class="ns-plan-price">$40 <span>a month</span></p>
+                        <p class="ns-plan-terms">45,000 credits a month, and every model in the catalog.</p>
+                    </article>
+                    <article class="ns-plan">
+                        <h3 class="ns-plan-name">Ultra</h3>
+                        <p class="ns-plan-price">$200 <span>a month</span></p>
+                        <p class="ns-plan-terms">250,000 credits a month, for large manuscripts.</p>
+                    </article>
+                </div>
+                <a class="ns-more" href="/pricing">Plans, credits and models</a>
+            </section>
+
+            <section class="ns-column ns-section" aria-labelledby="compare-title" data-proto-section="compare">
+                <p class="ns-kicker">Compare</p>
+                <h2 class="ns-h2" id="compare-title">Coming from another app?</h2>
+                <p class="ns-body ns-body--wide">Each tool is good at a different part of the job. These pages say where Feldar fits, and where the other app is the better choice.</p>
+                <ul class="ns-rivals">
+                    <li><a class="ns-rival" href="/compare/scrivener">Feldar and Scrivener</a></li>
+                    <li><a class="ns-rival" href="/compare/sudowrite">Feldar and Sudowrite</a></li>
+                    <li><a class="ns-rival" href="/compare/novelcrafter">Feldar and Novelcrafter</a></li>
+                    <li><a class="ns-rival" href="/compare/plottr">Feldar and Plottr</a></li>
+                </ul>
+                <a class="ns-more" href="/compare">All comparisons</a>
+            </section>
+
+            <section class="ns-column ns-section ns-faq" aria-labelledby="faq-title">
+                <div>
+                    <p class="ns-kicker">Questions</p>
+                    <h2 class="ns-h2" id="faq-title">Asked before the first chapter.</h2>
+                </div>
+                <div>
+                    <details class="ns-question" open>
+                        <summary>Is Feldar free?</summary>
+                        <p>Yes, to start. The Starter plan is free, with 500 credits and no credit card. Writing, planning and organizing never use credits. Paid plans start at $20 a month.</p>
+                    </details>
+                    <details class="ns-question">
+                        <summary>Will Feldar write my book for me?</summary>
+                        <p>No. You write. Feldar offers lines, rewrites and feedback when you ask, in blue or in a card, and nothing joins your page until you accept it.</p>
+                    </details>
+                    <details class="ns-question">
+                        <summary>Does Feldar train AI on my writing?</summary>
+                        <p>No. Feldar does not use your manuscript to train AI models, and what you write stays yours.</p>
+                    </details>
+                    <details class="ns-question">
+                        <summary>Can I bring a manuscript I have already started?</summary>
+                        <p>Yes. Import DOCX, PDF, Markdown or plain text, up to 20 MB a file.</p>
+                    </details>
+                    <details class="ns-question">
+                        <summary>Does it work on Windows?</summary>
+                        <p>In the browser, yes. The desktop app is for Mac, and it is native on Apple silicon.</p>
+                    </details>
+                    <details class="ns-question">
+                        <summary>Can I get my book out again?</summary>
+                        <p>Yes. Export the whole manuscript or chosen pages as DOCX, PDF, Markdown or plain text.</p>
+                    </details>
+                    <details class="ns-question">
+                        <summary>Which AI models does Feldar use?</summary>
+                        <p>GPT-6 Astra, Sol and Luna, and Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5. Which ones you can use depends on your plan.</p>
+                    </details>
+                </div>
+            </section>
+
+            <section class="ns-close" aria-labelledby="close-title">
+                <h2 class="ns-close-title" id="close-title">The page is <em>waiting.</em></h2>
+                <div class="ns-actions">
+                    <a class="ns-button ns-button--primary" href="/login" rel="nofollow">Start writing free</a>
+                    <a class="ns-button ns-button--quiet" href="/download">Download for Mac</a>
+                </div>
+                <p class="ns-note">Free to start. 500 credits, no credit card. <a href="/demo">Or watch the 67-second demo.</a></p>
+            </section>
+        </main>
+
+        <footer class="ns-foot">
+            <div class="ns-column ns-foot-grid">
+                <a class="ns-logo" href="/" aria-label="Feldar home">
+                    <img src="../../assets/logo.svg" alt="Feldar" width="97" height="28" loading="lazy" />
+                </a>
+                <nav class="ns-foot-column" aria-label="Product">
+                    <p class="ns-label">Product</p>
+                    <a href="/features">Features</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/download">Download</a>
+                    <a href="/changelog">Changelog</a>
+                    <a href="/demo">Demo</a>
+                </nav>
+                <nav class="ns-foot-column" aria-label="For writers">
+                    <p class="ns-label">For writers</p>
+                    <a href="/novel-writing-software">Novel writing software</a>
+                    <a href="/ai-for-novelists">AI for novelists</a>
+                    <a href="/compare">Compare</a>
+                    <a href="/guides/how-to-outline-a-novel">How to outline a novel</a>
+                    <a href="/tools">Free tools</a>
+                </nav>
+                <nav class="ns-foot-column" aria-label="Company">
+                    <p class="ns-label">Company</p>
+                    <a href="/about">About</a>
+                    <a href="/blog">Blog</a>
+                    <a href="mailto:support@feldar.com">Support</a>
+                </nav>
+            </div>
+            <div class="ns-column ns-foot-legal">
+                <p>Feldar LLC</p>
+                <a href="/terms">Terms of Use</a>
+                <a href="/privacy">Privacy Policy</a>
+            </div>
+        </footer>
+
+        <nav class="pt-switch" aria-label="Prototypes">
+            <a href="../index.html">All concepts</a>
+            <a href="index-cards.html" rel="prev" aria-label="Previous concept: Index cards">‹ Prev</a>
+            <a href="manuscript.html" title="Manuscript">A</a>
+            <a href="index-cards.html" title="Index cards">B</a>
+            <a href="night-studio.html" aria-current="page">C · Night studio</a>
+            <a href="five-thousand-years.html" title="5,000 years">D</a>
+            <a href="clay.html" title="Clay">E</a>
+            <a href="scriptorium.html" title="Scriptorium">F</a>
+            <a href="typewriter.html" title="Typewriter">G</a>
+            <a href="then-and-now.html" title="Then and now">H</a>
+            <a href="ledger.html" title="The novel's ledger">I</a>
+            <a href="desk.html" title="The writer's desk">J</a>
+            <a href="five-thousand-years.html" rel="next" aria-label="Next concept: 5,000 years">Next ›</a>
+        </nav>
+
+        <script type="module" src="scripts/night-studio.js"></script>
+        <script type="module" src="../review.js"></script>
+    </body>
+</html>
