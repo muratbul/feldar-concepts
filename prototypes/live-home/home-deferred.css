@@ -1,0 +1,3166 @@
+/* Deferred homepage CSS: below-the-fold sections. */
+/* Machine mode: HUMAN/MACHINE toggle and the raw-markdown page view. */
+
+.machine-mode-toggle {
+    position: fixed;
+    bottom: 0.875rem;
+    right: 1rem;
+    z-index: 1100;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem; /* invisible tap target */
+    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    transition: color var(--transition-fast);
+}
+
+.machine-mode-toggle::before {
+    content: "";
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.machine-mode-toggle:hover {
+    color: var(--color-muted);
+}
+
+.machine-mode-toggle:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+html[data-view="machine"] body {
+    background: #0a0a0a;
+}
+
+html[data-view="machine"] body > :not(.machine-view):not(.machine-mode-toggle) {
+    display: none;
+}
+
+html[data-view="machine"] .machine-mode-toggle {
+    color: #f0f0f0;
+}
+
+html[data-view="machine"] .machine-mode-toggle:hover {
+    color: #b3b3b3;
+}
+
+@media (max-width: 48em) {
+    .machine-mode-toggle {
+        right: calc(1rem + env(safe-area-inset-right, 0px));
+        bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+        height: 1.375rem;
+        padding: 0 0.5rem;
+        background: rgba(255, 255, 255, 0.88);
+        border-radius: var(--radius-full);
+    }
+
+    .footer-bottom > .machine-mode-toggle {
+        position: static;
+        flex: none;
+        margin-left: auto;
+    }
+
+    html[data-view="machine"] .machine-mode-toggle {
+        background: rgba(26, 26, 26, 0.88);
+    }
+}
+
+.machine-view {
+    display: none;
+}
+
+html[data-view="machine"] .machine-view {
+    display: block;
+    min-height: 100vh;
+    padding: 4rem 1.5rem 6rem;
+}
+
+.machine-view-content {
+    max-width: 48rem;
+    margin: 0 auto;
+    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8125rem;
+    line-height: 1.75;
+    color: #b3b3b3;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.machine-view-content a {
+    color: #ececec;
+}
+
+.machine-view-content a:hover {
+    text-decoration: underline;
+}
+
+.machine-view-url {
+    color: #6b6b6b;
+}
+
+/* Shared base for app parts. */
+
+.au {
+    box-sizing: border-box;
+    font-family: 'Inter Variable', 'Inter', system-ui, sans-serif;
+    color: #0e0e0e;
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+}
+
+.au *,
+.au *::before,
+.au *::after {
+    box-sizing: border-box;
+}
+
+.au p {
+    margin: 0;
+}
+
+.au img {
+    display: block;
+    max-width: none;
+}
+
+.au-serif {
+    font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+.au-spacer {
+    flex: 1 0 0;
+    min-width: 1px;
+}
+
+/* editor: the white manuscript page with paragraphs and the blue AI continuation.
+   Measured from Figma 1349:3607 (/novel-writing-software, Card · Draft),
+   1349:3730 (small, /compare/sudowrite), 1371:4602 (medium, /compare) and
+   1375:4502 (wide moment card). Owner: /root/au_writing.
+   Markup: docs/seo/app-ui/editor.html.
+
+   Size: set width/height inline to the Figma size (the 1px border is inside it, as in
+   Figma; text width = width - 73). Type size comes from the modifier:
+     default   20/32, gap 32, padding top 40          (518x550, 580/600x620)
+     --md      18/30, gap 14, padding 22 top, 24 bottom (518x138 on /compare)
+     --sm      16/26, gap 12, padding 22 top, 24 bottom (316x190 three-up cards)
+   Per-node overrides: --au-ed-top (padding top: 100 in caret cards, 56 in the wide
+   moment cards) and --au-ed-gap (28 in the wide moment cards).
+   --au-scale scales the whole part from its top left. */
+
+.au-editor {
+    --au-ed-size: 20px;
+    --au-ed-lh: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--au-ed-gap, 32px);
+    align-items: stretch;
+    overflow: hidden;
+    padding: var(--au-ed-top, 40px) 34px var(--au-ed-bottom, 0) 37px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 24px;
+    background: #fff;
+    box-shadow:
+        0 18px 44px 0 rgba(0, 0, 0, 0.05),
+        0 4px 12px 0 rgba(0, 0, 0, 0.06),
+        0 1px 1px 0 rgba(0, 0, 0, 0.04);
+    font-size: var(--au-ed-size);
+    font-weight: 400;
+    line-height: var(--au-ed-lh);
+    letter-spacing: -0.2px;
+    color: #262626;
+    transform: scale(var(--au-scale, 1));
+    transform-origin: 0 0;
+}
+
+.au-editor--md {
+    --au-ed-size: 18px;
+    --au-ed-lh: 30px;
+    --au-ed-gap: 14px;
+    --au-ed-top: 22px;
+    --au-ed-bottom: 24px;
+}
+
+.au-editor--sm {
+    --au-ed-size: 16px;
+    --au-ed-lh: 26px;
+    --au-ed-gap: 12px;
+    --au-ed-top: 22px;
+    --au-ed-bottom: 24px;
+}
+
+.au-editor p {
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* AI continuation (preview text). */
+.au-editor .au-ai {
+    color: #4a92e8;
+}
+
+/* Text caret, 2x24, placed with .sp-at at the Figma left/top. */
+.au-caret {
+    width: 2px;
+    height: 24px;
+    background: #0e0e0e;
+}
+
+/* sage: Sage on the writer's page. The marks Sage leaves in the margin, the comment a
+   mark opens and the words it points at, Sage's pointer, its speech bubble, its answer
+   with the Follow up row under it, and the Sage section of Settings with Memories.
+   Measured from feldar-production origin/master:
+     frontend/src/features/sage/components/SageMargin.tsx (marks 24px, 8px right of the
+       text; lit words take a 12% wash of the ink, radius 4)
+     frontend/src/features/sage/components/SageBubble.tsx (surface #f3f3f3, radius 16,
+       speech padding 8/12 with its corner by Sage at 4, answer radius 20 and padding
+       14 12 14 18, comments gap 4, kind label 12/500 #6f6f6f, words 14/1.43)
+     frontend/src/features/sage/presence/SagePresenceMenu.tsx (menu glyphs, 14px grid)
+     frontend/src/features/account/settings/sections/SettingsPlaneSageSection.tsx
+   Markup: docs/seo/app-ui/sage.html. */
+
+.au-sage-mark {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    border-radius: 9999px;
+    background: transparent;
+    color: #6f6f6f;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease;
+    animation: au-sage-mark-appear 240ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.au-sage-mark:hover,
+.au-sage-mark[aria-expanded="true"] {
+    background: #f3f3f3;
+    color: #0e0e0e;
+}
+
+.au-sage-mark svg {
+    display: block;
+}
+
+@keyframes au-sage-mark-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+}
+
+/* The words an open comment is about. */
+.au-sage-quote {
+    border-radius: 4px;
+    transition: background-color 200ms ease;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+.au-sage-quote.is-lit {
+    background: color-mix(in srgb, currentColor 12%, transparent);
+    color: #0e0e0e;
+}
+
+/* Sage's pointer, the look Sage takes on the page as a cursor. */
+.au-sage-pointer {
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: url('../../assets/ui/sage-pointer-22.svg') center / 22px 22px no-repeat;
+    filter: drop-shadow(0 0 6px rgba(94, 192, 232, 0.55));
+}
+
+/* What goes with Sage: a column over a soft wash of the page, so the writing under it
+   fades away round it. */
+.au-sage-thread {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    line-height: 1.43;
+    letter-spacing: -0.004em;
+    color: #0e0e0e;
+}
+
+.au-sage-thread::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    z-index: -1;
+    border-radius: 16px;
+    background: #fff;
+    filter: blur(12px);
+    pointer-events: none;
+}
+
+.au-sage-bubble {
+    max-width: 100%;
+    padding: 8px 12px;
+    border-radius: 16px;
+    background: #f3f3f3;
+    overflow-wrap: anywhere;
+    animation: au-sage-reveal 180ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* A speech bubble's corner nearest Sage is sharper, pointing to it. */
+.au-sage-bubble--from-top-left {
+    border-top-left-radius: 4px;
+}
+
+.au-sage-answer {
+    max-width: 384px;
+    padding: 14px 12px 14px 18px;
+    border-radius: 20px;
+}
+
+@keyframes au-sage-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+}
+
+/* A line's comments from the margin: what kind each is over what Sage said. */
+.au-sage-comments {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.au-sage-kind {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.333;
+    letter-spacing: 0.01em;
+    color: #6f6f6f;
+}
+
+/* Under a bubble: the field Sage is followed up from on the left, what can be done
+   with what Sage said on the right. */
+.au-sage-row {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.au-sage-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-inline-start: auto;
+}
+
+.au-sage-button {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 10px;
+    border: 1px solid #e8e8e8;
+    border-radius: 9999px;
+    background: #fff;
+    color: #0e0e0e;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+}
+
+.au-sage-button:hover {
+    background: #f3f3f3;
+}
+
+.au-sage-button--primary {
+    border-color: #0e0e0e;
+    background: #0e0e0e;
+    color: #fff;
+}
+
+.au-sage-button--primary:hover {
+    background: #333;
+}
+
+.au-sage-icon-button {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    color: #4d4d4d;
+}
+
+.au-sage-field {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+    max-width: 260px;
+    height: 36px;
+    padding: 0 12px 0 14px;
+    border: 1px solid #e8e8e8;
+    border-radius: 9999px;
+    background: #fff;
+    color: #6f6f6f;
+    white-space: nowrap;
+}
+
+.au-sage-field-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.au-sage-field-text.is-typed {
+    color: #0e0e0e;
+}
+
+/* Settings, Sage: the preferences card, then Memories. */
+.au-sage-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow:
+        0 18px 44px 0 rgba(0, 0, 0, 0.05),
+        0 4px 12px 0 rgba(0, 0, 0, 0.06);
+    font-size: 14px;
+    line-height: 1.43;
+    color: #0e0e0e;
+}
+
+.au-sage-heading {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.375;
+}
+
+.au-sage-card {
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+}
+
+.au-sage-pref {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 16px;
+}
+
+.au-sage-pref + .au-sage-pref {
+    border-top: 1px solid #eeeeee;
+}
+
+.au-sage-pref-label {
+    font-weight: 500;
+}
+
+.au-sage-pref-text {
+    margin-top: 2px;
+    font-size: 13px;
+    line-height: 1.38;
+    color: #6f6f6f;
+}
+
+.au-sage-select {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+    height: 30px;
+    padding: 0 10px 0 12px;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.au-sage-switch {
+    flex-shrink: 0;
+    width: 32px;
+    height: 24px;
+    border: 0;
+    border-radius: 12px;
+    background: url('../../assets/ui/switch-off.svg') center / 32px 24px no-repeat;
+    cursor: pointer;
+}
+
+.au-sage-switch[aria-checked="true"] {
+    background-image: url('../../assets/ui/switch-on.svg');
+}
+
+.au-sage-memories-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.au-sage-day {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.333;
+    letter-spacing: 0.01em;
+    color: #6f6f6f;
+}
+
+.au-sage-memories {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* A memory on its day's rail: the time, a dot on the line, what Sage keeps, and the
+   row's actions. */
+.au-sage-memory {
+    display: grid;
+    grid-template-columns: 40px 12px minmax(0, 1fr) auto;
+    column-gap: 10px;
+    align-items: start;
+    transition: opacity 200ms ease;
+}
+
+.au-sage-memory.is-forgotten {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.au-sage-time {
+    padding-top: 1px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #6f6f6f;
+    font-variant-numeric: tabular-nums;
+}
+
+.au-sage-rail {
+    position: relative;
+    align-self: stretch;
+}
+
+.au-sage-rail::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 5.5px;
+    border-left: 1px solid #e8e8e8;
+}
+
+.au-sage-memory:first-child .au-sage-rail::before {
+    top: 7px;
+}
+
+.au-sage-memory:last-child .au-sage-rail::before {
+    bottom: auto;
+    height: 7px;
+}
+
+.au-sage-rail::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c7c7c7;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.au-sage-memory-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 16px;
+}
+
+.au-sage-memory-title {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.38;
+}
+
+.au-sage-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 2px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.au-sage-tag {
+    padding: 1px 8px;
+    border-radius: 9999px;
+    background: #f3f3f3;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #4d4d4d;
+}
+
+.au-sage-tag--thread {
+    background: #eef4fd;
+    color: #0c62c9;
+}
+
+.au-sage-forget {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    color: #6f6f6f;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+.au-sage-forget:hover {
+    background: #f3f3f3;
+    color: #0e0e0e;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .au-sage-mark,
+    .au-sage-bubble {
+        animation: none;
+    }
+}
+
+/* Typewriter: an enamelled typewriter drawn in CSS. It types its own intro lines, takes the
+   visitor's keystrokes, and strikes Feldar's suggestions in blue with Accept, Revise
+   and Dismiss. Script: scripts/components/typewriter.ts. The page carries the
+   <svg class="tw-defs"> block with the #tw-ink filter once.
+
+   Every colour and face is a custom property on the rig, so a section can retheme
+   the machine by setting them on .tw-rig. */
+
+.tw-rig {
+    --tw-paper: #f4efe3;
+    --tw-sheet: #fcf9f1;
+    --tw-carbon: #18181a;
+    --tw-ink-soft: #57524a;
+    --tw-enamel: #2e6f6a;
+    --tw-enamel-highlight: #3d8a83;
+    --tw-enamel-deep: #1d4b47;
+    --tw-key: #efe7d4;
+    --tw-blue: #0c70e5;
+    --tw-brass: #b8923a;
+    --tw-typed: "Courier New", Courier, monospace;
+    --tw-text: var(--font-body);
+
+    position: relative;
+    z-index: 1;
+    width: min(100%, 640px);
+    margin: 0 auto;
+    color: var(--tw-carbon);
+    container-type: inline-size;
+}
+
+/* Several parts set their own display, which would otherwise beat the attribute. */
+.tw-rig [hidden] {
+    display: none !important;
+}
+
+.tw-defs {
+    position: absolute;
+}
+
+/* Typed text: the face, and ink that sits unevenly as a ribbon leaves it. */
+
+.tw-sheet {
+    font-family: var(--tw-typed);
+}
+
+.tw-headline,
+.tw-line {
+    filter: url("#tw-ink");
+}
+
+.tw-blue {
+    color: var(--tw-blue);
+    transition: color 400ms ease;
+}
+
+.tw-blue.is-accepted {
+    color: inherit;
+}
+
+.tw-unstruck {
+    visibility: hidden;
+}
+
+/* Buttons: every one is a key that goes down. */
+
+.tw-button {
+    --tw-button-face: var(--tw-carbon);
+    --tw-button-text: var(--tw-paper);
+    --tw-button-drop: #000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 22px;
+    border: 2px solid var(--tw-carbon);
+    border-radius: 999px;
+    background: var(--tw-button-face);
+    box-shadow: 0 5px 0 var(--tw-button-drop);
+    color: var(--tw-button-text);
+    font-family: var(--tw-text);
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+    transition: transform 80ms ease, box-shadow 80ms ease;
+}
+
+.tw-button:hover {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 var(--tw-button-drop);
+}
+
+.tw-button:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 var(--tw-button-drop);
+}
+
+.tw-button--cream {
+    --tw-button-face: var(--tw-key);
+    --tw-button-text: var(--tw-carbon);
+    --tw-button-drop: var(--tw-carbon);
+}
+
+.tw-button--blue {
+    --tw-button-face: var(--tw-blue);
+    --tw-button-text: #fff;
+    --tw-button-drop: var(--tw-carbon);
+}
+
+/* The machine. The rig is the unit every part is measured in: 1cqw is one hundredth
+   of its width, so the whole drawing scales with the space it is given. */
+
+.tw-carriage {
+    position: relative;
+    height: 46cqw;
+    transform: translateX(calc((0.5 - var(--tw-progress, 0)) * 5cqw));
+    transition: transform 160ms ease-out;
+}
+
+/* The sheet is pinned at the platen and grows upward, as paper feeds through a roller. */
+.tw-sheet {
+    position: absolute;
+    bottom: 3.2cqw;
+    left: 17cqw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.35em;
+    width: 66cqw;
+    min-height: 42cqw;
+    padding: 5cqw 5cqw 4.4cqw;
+    background:
+        linear-gradient(to top, rgba(60, 45, 20, 0.14), transparent 9%),
+        var(--tw-sheet);
+    box-shadow:
+        0 0 0 1px rgba(60, 45, 20, 0.08),
+        0 14px 30px -18px rgba(60, 45, 20, 0.6);
+    font-size: clamp(13px, 2.75cqw, 18px);
+    line-height: 1.5;
+    text-align: left;
+}
+
+/* Courier's letters are 0.6em wide, so a twenty-letter headline line fits the sheet's
+   56cqw of text at 4.6cqw. */
+.tw-headline {
+    margin: 0 0 0.25em;
+    font-size: clamp(18px, 4.6cqw, 30px);
+    font-weight: 400;
+    line-height: 1.14;
+}
+
+.tw-headline-line {
+    display: block;
+}
+
+.tw-line:nth-child(odd),
+.tw-headline-line:last-child {
+    transform: translateY(0.5px) rotate(-0.18deg);
+}
+
+.tw-kept {
+    display: contents;
+}
+
+.tw-own-line {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    caret-color: var(--tw-carbon);
+    color: inherit;
+    filter: none;
+}
+
+.tw-own-line::placeholder {
+    color: var(--tw-ink-soft);
+    opacity: 0.75;
+}
+
+.tw-own-line:focus-visible {
+    outline: 0;
+    box-shadow: 0 2px 0 var(--tw-blue);
+}
+
+/* Lines the machine has yet to type stay laid out but unseen. */
+.tw-will-type [data-type-line]:not(.is-struck),
+.tw-will-type [data-own-line] {
+    visibility: hidden;
+}
+
+.tw-bail {
+    position: absolute;
+    right: 13cqw;
+    bottom: 6.6cqw;
+    left: 13cqw;
+    z-index: 1;
+    height: 0.8cqw;
+    border-radius: 1cqw;
+    background: linear-gradient(#f2f3f5, #9da2aa 55%, #6d727a);
+    box-shadow: 0 0.4cqw 0.6cqw rgba(0, 0, 0, 0.25);
+}
+
+.tw-platen {
+    position: absolute;
+    right: 5cqw;
+    bottom: 0;
+    left: 5cqw;
+    z-index: 2;
+    height: 6.4cqw;
+    border-radius: 3.2cqw;
+    background: linear-gradient(#45454a, #0e0e10 42%, #2c2c30 78%, #151517);
+    box-shadow: 0 0.8cqw 0 rgba(0, 0, 0, 0.28);
+}
+
+/* Platen knobs, ridged for grip. */
+.tw-platen::before,
+.tw-platen::after {
+    content: "";
+    position: absolute;
+    top: -1.1cqw;
+    width: 4.2cqw;
+    height: 8.6cqw;
+    border-radius: 1.2cqw;
+    background: repeating-linear-gradient(#0b0b0c 0 0.55cqw, #3c3c41 0.55cqw 1.1cqw);
+    box-shadow: inset 0 0 0 0.3cqw #000;
+}
+
+.tw-platen::before {
+    left: -4.6cqw;
+}
+
+.tw-platen::after {
+    right: -4.6cqw;
+}
+
+.tw-return {
+    position: absolute;
+    bottom: 5.4cqw;
+    left: -1.5cqw;
+    min-width: 13cqw;
+    height: 4.4cqw;
+    min-height: 22px;
+    padding: 0 1.6cqw;
+    border-radius: 999px;
+    background: linear-gradient(#fafbfc, #a9aeb6 60%, #70757d);
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, 0.35),
+        0 0.5cqw 0.5cqw rgba(0, 0, 0, 0.3);
+    font-family: var(--tw-text);
+    font-size: clamp(10px, 2cqw, 13px);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transform: rotate(-18deg);
+    transform-origin: right center;
+    transition: transform 120ms ease;
+}
+
+.tw-return:hover,
+.tw-return:active {
+    transform: rotate(-6deg);
+}
+
+.tw-bell {
+    position: absolute;
+    right: 0.5cqw;
+    bottom: 5.8cqw;
+    width: 6cqw;
+    height: 3.6cqw;
+    border-radius: 6cqw 6cqw 0.8cqw 0.8cqw;
+    background: radial-gradient(120% 140% at 35% 20%, #f1d98a, var(--tw-brass) 55%, #7a5c1c);
+    box-shadow:
+        inset 0 -0.5cqw 0 rgba(0, 0, 0, 0.2),
+        0 0.4cqw 0.5cqw rgba(0, 0, 0, 0.3);
+    transform-origin: 50% 100%;
+}
+
+.tw-body {
+    position: relative;
+    z-index: 3;
+    margin-top: -1.4cqw;
+    padding: 2.6cqw 4cqw 4.6cqw;
+    border: 0.5cqw solid var(--tw-carbon);
+    border-radius: 6cqw 6cqw 3.2cqw 3.2cqw;
+    background: linear-gradient(172deg, var(--tw-enamel-highlight) 0%, var(--tw-enamel) 36%, var(--tw-enamel-deep) 100%);
+    box-shadow:
+        inset 0 0.6cqw 0 rgba(255, 255, 255, 0.24),
+        inset 0 -1.2cqw 0 rgba(0, 0, 0, 0.24),
+        0 3cqw 3.2cqw -2cqw rgba(50, 35, 5, 0.7);
+}
+
+.tw-deck {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 9.6cqw;
+    padding: 0 3cqw;
+}
+
+.tw-spool {
+    width: 8.6cqw;
+    height: 8.6cqw;
+    border-radius: 50%;
+    background: radial-gradient(circle, #d7dade 0 10%, #18181a 11% 26%, #2f2f33 27% 60%, #101012 61% 70%, #9ea3ab 71% 100%);
+    box-shadow:
+        inset 0 0 0 0.35cqw #000,
+        0 0.5cqw 0.6cqw rgba(0, 0, 0, 0.35);
+}
+
+/* The type basket: a fan of typebars in a dark recess, drawn with one gradient. */
+.tw-basket {
+    width: 36cqw;
+    height: 9.2cqw;
+    border: 0.5cqw solid var(--tw-carbon);
+    border-top: 0;
+    border-radius: 0 0 18cqw 18cqw / 0 0 9.2cqw 9.2cqw;
+    background: repeating-conic-gradient(from 90deg at 50% 0%, #0c0c0e 0 2.6deg, #4a4a50 2.6deg 5.2deg);
+    box-shadow: inset 0 1.4cqw 1.8cqw #000;
+}
+
+/* The ribbon runs from spool to spool, black above and blue below. Choosing blue
+   lifts it, so the lower half meets the page. */
+.tw-ribbon-band {
+    position: absolute;
+    top: 3.4cqw;
+    right: 10cqw;
+    left: 10cqw;
+    height: 1.5cqw;
+    background: linear-gradient(var(--tw-carbon) 50%, var(--tw-blue) 50%);
+    box-shadow: 0 0.2cqw 0.3cqw rgba(0, 0, 0, 0.4);
+    transition: transform 180ms ease;
+}
+
+.is-blue .tw-ribbon-band {
+    transform: translateY(-0.8cqw);
+}
+
+.tw-keys {
+    display: grid;
+    justify-items: center;
+    gap: 1.3cqw;
+    margin-top: 2.4cqw;
+}
+
+.tw-key-row {
+    display: flex;
+    gap: 1.2cqw;
+}
+
+.tw-key {
+    display: grid;
+    place-items: center;
+    width: 6.6cqw;
+    height: 6.6cqw;
+    border: 0.55cqw solid var(--tw-carbon);
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 32%, #fffbf1, var(--tw-key) 68%);
+    box-shadow:
+        0 0.8cqw 0 #0b0b0c,
+        0 1.2cqw 1cqw rgba(0, 0, 0, 0.35);
+    color: var(--tw-carbon);
+    font-family: var(--tw-text);
+    font-size: clamp(8px, 2.5cqw, 16px);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    transition: transform 70ms ease, box-shadow 70ms ease;
+}
+
+.tw-key.is-down,
+.tw-key:active {
+    transform: translateY(0.6cqw);
+    box-shadow:
+        0 0.2cqw 0 #0b0b0c,
+        0 0.4cqw 0.4cqw rgba(0, 0, 0, 0.35);
+}
+
+.tw-key--space {
+    width: 42cqw;
+    height: 4.6cqw;
+    border-radius: 2.3cqw;
+    background: linear-gradient(#fffbf1, var(--tw-key));
+}
+
+.tw-nameplate {
+    position: absolute;
+    right: 5cqw;
+    bottom: 1.5cqw;
+    padding: 0.3cqw 1.6cqw;
+    border-radius: 0.6cqw;
+    background: linear-gradient(#e7cf86, var(--tw-brass));
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+    font-family: var(--tw-text);
+    font-size: clamp(8px, 2.1cqw, 14px);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+/* Controls under the machine, full size so they are easy to press. */
+
+.tw-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px 18px;
+    margin-top: 30px;
+}
+
+.tw-command-keys {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* The ribbon lever: two halves, the chosen one lit. */
+.tw-ribbon {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    overflow: hidden;
+    border: 2px solid var(--tw-carbon);
+    border-radius: 10px;
+    background: var(--tw-key);
+    box-shadow: 0 5px 0 var(--tw-carbon);
+    color: var(--tw-carbon);
+    font-family: var(--tw-text);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+.tw-ribbon-label {
+    padding: 0 12px;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tw-ribbon-half {
+    display: grid;
+    place-items: center;
+    align-self: stretch;
+    padding: 0 12px;
+    color: #fff;
+    opacity: 0.38;
+    transition: opacity 180ms ease;
+}
+
+.tw-ribbon-half--black {
+    background: var(--tw-carbon);
+}
+
+.tw-ribbon-half--blue {
+    background: var(--tw-blue);
+}
+
+.tw-ribbon[aria-checked="false"] .tw-ribbon-half--black,
+.tw-ribbon[aria-checked="true"] .tw-ribbon-half--blue {
+    opacity: 1;
+}
+
+.tw-status {
+    flex-basis: 100%;
+    min-height: 1.5em;
+    font-family: var(--tw-text);
+    font-size: 0.9375rem;
+    text-align: center;
+    color: var(--tw-carbon);
+}
+
+/* A narrow rig gives the sheet more of the carriage, so a typed line still fits, and
+   lines the controls up on the left. */
+@container (max-width: 460px) {
+    .tw-carriage {
+        height: 62cqw;
+    }
+
+    /* The extra room under the last line keeps it clear of the Return lever. */
+    .tw-sheet {
+        left: 7cqw;
+        width: 86cqw;
+        min-height: 58cqw;
+        padding-bottom: 9cqw;
+        font-size: 16px;
+    }
+
+    .tw-headline {
+        font-size: clamp(16px, 6.2cqw, 28px);
+    }
+
+    .tw-controls {
+        justify-content: flex-start;
+    }
+
+    .tw-status {
+        text-align: left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tw-rig *,
+    .tw-rig *::before,
+    .tw-rig *::after {
+        transition: none !important;
+    }
+
+    .tw-carriage,
+    .tw-key.is-down {
+        transform: none;
+    }
+}
+
+/* Sage on the home page: the four things Sage does on the left, and on the right a
+   page from the sample book showing each one. The drawings use the app-ui parts
+   (app-ui/editor.css, app-ui/sage.css); this file lays them out. */
+
+.sage-demo {
+    display: grid;
+    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    gap: var(--space-10) 3rem;
+    align-items: start;
+    margin-top: var(--space-10);
+}
+
+/* Several parts set their own display, which would otherwise beat the attribute. */
+.sage-demo [hidden] {
+    display: none;
+}
+
+.sage-moments {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.sage-moment {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: var(--space-1) var(--space-3);
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    text-align: left;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.sage-moment:hover {
+    background: var(--color-surface-tertiary);
+}
+
+.sage-moment[aria-pressed="true"] {
+    border-color: var(--color-border);
+    background: var(--color-surface-secondary);
+}
+
+.sage-moment-icon {
+    margin-top: 3px;
+    color: var(--color-muted);
+    transition: color var(--transition-fast);
+}
+
+.sage-moment[aria-pressed="true"] .sage-moment-icon {
+    color: #2b9fcf;
+}
+
+.sage-moment-name {
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.5rem;
+    color: var(--color-primary-alt);
+}
+
+.sage-moment-text {
+    grid-column: 2;
+    font-size: 0.9375rem;
+    line-height: 1.375rem;
+    color: var(--color-text-description);
+}
+
+/* Every scene shares one cell, so the stage keeps the height of the tallest and
+   nothing below it moves when the reader switches scenes. */
+.sage-stage {
+    display: grid;
+}
+
+.sage-scene {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: opacity 200ms ease;
+}
+
+.sage-scene:not(.is-active) {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.sage-canvas {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 2.5rem 2.5rem 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 0.625rem;
+    background:
+        radial-gradient(60% 40% at 50% 72%, rgba(226, 242, 250, 0.6) 0%, rgba(226, 242, 250, 0) 72%),
+        linear-gradient(180deg, rgb(121, 165, 191) 0%, rgb(131, 178, 207) 15%, rgb(148, 193, 218) 30%, rgb(186, 221, 238) 55%, rgb(214, 236, 247) 75%, rgb(221, 237, 246) 100%);
+    container-type: inline-size;
+}
+
+/* The page runs past the bottom of the card. It leaves room on its right for what Sage
+   says beside it, and its own right margin for Sage's marks. */
+.sage-page {
+    --au-ed-size: 17px;
+    --au-ed-lh: 28px;
+    --au-ed-gap: 18px;
+    --au-ed-top: 32px;
+    --au-ed-bottom: 32px;
+    flex: 1 1 auto;
+    width: calc(100% - 17.5rem);
+    padding-right: 3.25rem;
+    overflow: visible;
+    border-bottom: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    transform: none;
+}
+
+/* A scene with nothing beside the page keeps the page's width and centres it. */
+.sage-page--centered {
+    margin-inline: auto;
+}
+
+.sage-settings {
+    margin-bottom: 2.5rem;
+}
+
+.sage-paragraph {
+    position: relative;
+}
+
+.sage-mark {
+    position: absolute;
+    top: 2px;
+    left: calc(100% + 8px);
+}
+
+/* A comment, or a recap, stands in the space right of the page, level with its line. */
+.sage-aside {
+    position: absolute;
+    top: -6px;
+    left: calc(100% + 5rem);
+    z-index: 1;
+    width: 15rem;
+}
+
+.sage-pointer {
+    position: absolute;
+    top: -16px;
+    left: -18px;
+}
+
+.sage-answer {
+    margin: 6px 0 0 18px;
+}
+
+.sage-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.15em;
+    margin-left: 2px;
+    background: #0e0e0e;
+    vertical-align: -0.2em;
+    animation: sage-caret-blink 1100ms steps(2, jump-none) infinite;
+}
+
+@keyframes sage-caret-blink {
+    to {
+        opacity: 0;
+    }
+}
+
+.sage-fixed {
+    border-radius: 4px;
+    animation: sage-fixed 1400ms ease both;
+}
+
+@keyframes sage-fixed {
+    from {
+        background: rgba(43, 159, 207, 0.22);
+    }
+}
+
+.sage-said-later {
+    visibility: hidden;
+}
+
+.sage-caption {
+    font-size: 0.9375rem;
+    line-height: 1.375rem;
+    color: var(--color-muted);
+}
+
+@container (max-width: 40rem) {
+    .sage-page {
+        width: 100%;
+    }
+
+    .sage-aside {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: auto;
+        margin: 18px 0 4px 18px;
+    }
+}
+
+@media (max-width: 80em) {
+    .sage-demo {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-6);
+    }
+
+    .sage-moments {
+        flex-direction: row;
+        gap: var(--space-2);
+        margin-inline: calc(var(--page-margin) * -1);
+        padding: 2px var(--page-margin);
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .sage-moment {
+        display: inline-flex;
+        flex-shrink: 0;
+        align-items: center;
+        gap: var(--space-2);
+        width: auto;
+        padding: 8px 14px;
+        border-color: var(--color-border);
+        border-radius: var(--radius-full);
+    }
+
+    .sage-moment-icon {
+        margin-top: 0;
+    }
+
+    .sage-moment-name {
+        font-size: 0.9375rem;
+        white-space: nowrap;
+    }
+
+    .sage-moment-text {
+        display: none;
+    }
+}
+
+/* On a phone each scene is as tall as itself: stacked, the short ones would leave a
+   screen of empty page. The stage sits under the buttons, so only what follows moves. */
+@media (max-width: 48em) {
+    .sage-scene:not(.is-active) {
+        display: none;
+    }
+
+    .sage-canvas {
+        padding: 0.75rem 0.75rem 0;
+    }
+
+    .sage-page {
+        --au-ed-size: 16px;
+        --au-ed-lh: 26px;
+        --au-ed-gap: 14px;
+        --au-ed-top: 22px;
+        --au-ed-bottom: 22px;
+        padding-left: 18px;
+        padding-right: 2.5rem;
+    }
+
+    .sage-settings {
+        margin-bottom: 1rem;
+        padding: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sage-scene,
+    .sage-moment {
+        transition: none;
+    }
+
+    .sage-caret,
+    .sage-fixed {
+        animation: none;
+    }
+}
+
+/* The feature desk: twelve of Feldar's tools, each named with the desk object it
+   stands for, grouped as Plan, Write, Revise and Keep. Choosing one shows its panel:
+   what it is for, the steps in the app's own words, and a capture from the app. */
+
+.desk-index {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-10);
+}
+
+.desk-group {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+}
+
+.desk-group-name,
+.desk-kicker,
+.desk-label {
+    font-size: 0.8125rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+.desk-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: var(--space-2) -10px 0;
+}
+
+.desk-entry {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    column-gap: var(--space-3);
+    align-items: center;
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: var(--radius-lg);
+    text-align: left;
+    transition: background-color var(--transition-fast);
+}
+
+.desk-entry:hover {
+    background: var(--color-surface-tertiary);
+}
+
+.desk-entry[aria-pressed="true"] {
+    background: var(--color-surface-secondary);
+}
+
+.desk-entry-icon {
+    grid-row: 1 / span 2;
+    color: var(--color-muted);
+    transition: color var(--transition-fast);
+}
+
+.desk-entry:hover .desk-entry-icon,
+.desk-entry[aria-pressed="true"] .desk-entry-icon {
+    color: var(--color-primary);
+}
+
+.desk-entry-name {
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25rem;
+    color: var(--color-primary-alt);
+}
+
+.desk-entry-object {
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    color: var(--color-muted);
+}
+
+.desk-panels {
+    margin-top: var(--space-8);
+}
+
+.desk-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-8) 3.5rem;
+    align-items: start;
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+    scroll-margin-top: 4.5rem;
+    animation: desk-panel-in 280ms ease both;
+}
+
+.desk-panel[hidden] {
+    display: none;
+}
+
+@keyframes desk-panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+
+.desk-kicker span {
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.desk-title {
+    margin-top: var(--space-2);
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 2.125rem;
+    letter-spacing: -0.2px;
+    color: var(--color-primary-alt);
+}
+
+.desk-promise {
+    margin-top: var(--space-2);
+    font-size: 1.125rem;
+    line-height: 1.6875rem;
+    color: var(--color-text-description);
+}
+
+.desk-label {
+    margin-top: var(--space-6);
+}
+
+.desk-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    counter-reset: desk-step;
+}
+
+/* The number sits beside the step rather than in a grid with it, so app words in the
+   step wrap as ordinary text. */
+.desk-steps li {
+    position: relative;
+    padding-left: 36px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--color-secondary);
+    counter-increment: desk-step;
+}
+
+.desk-steps li::before {
+    content: counter(desk-step);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    background: var(--color-surface-secondary);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    color: var(--color-primary);
+}
+
+.desk-good {
+    margin-top: var(--space-5);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--color-secondary);
+}
+
+.desk-good strong {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+}
+
+/* A line of history for the tools that have one. */
+.desk-then {
+    margin-top: var(--space-4);
+    padding-left: 14px;
+    border-left: 2px solid #e6d8bd;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.9375rem;
+    font-style: italic;
+    line-height: 1.5rem;
+    color: var(--color-text-description);
+}
+
+.desk-copy .section-more {
+    margin-top: var(--space-5);
+}
+
+.desk-shot {
+    padding: clamp(0.75rem, 2vw, 1.75rem);
+    border: 1px solid var(--color-border);
+    border-radius: 0.625rem;
+    background: var(--color-surface-secondary);
+}
+
+.desk-shot img,
+.desk-shot video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.06),
+        0 12px 32px -12px rgba(0, 0, 0, 0.18);
+    object-fit: cover;
+}
+
+@media (max-width: 64em) {
+    .desk-index {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .desk-panel {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .desk-shot {
+        order: -1;
+    }
+}
+
+@media (max-width: 48em) {
+    .desk-index {
+        gap: var(--space-4) var(--space-3);
+    }
+
+    .desk-entry {
+        grid-template-columns: 24px minmax(0, 1fr);
+        column-gap: var(--space-2);
+        padding: 8px;
+    }
+
+    .desk-entry-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .desk-entry-name {
+        font-size: 0.875rem;
+    }
+
+    .desk-entry-object {
+        display: none;
+    }
+
+    .desk-title {
+        font-size: 1.5rem;
+        line-height: 1.875rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .desk-panel {
+        animation: none;
+    }
+}
+
+/* Then and now: five thousand years of writing tools on one dial. It plays once when it
+   comes into view and lands on Feldar's page, where a suggestion waits in blue. Beside
+   it, the house rules for Feldar's AI. Script: scripts/components/era-dial.ts.
+
+   The drawings are measured in cqw, hundredths of the stage's width, so each era keeps
+   its proportions at any size. */
+
+.eras-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: var(--space-10) 4rem;
+    align-items: start;
+}
+
+.eras-rules-title {
+    margin-top: var(--space-10);
+    font-size: 0.8125rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+.eras-rules {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-3);
+}
+
+.eras-rules li {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+}
+
+.eras-rules h3 {
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.5rem;
+    color: var(--color-primary-alt);
+}
+
+.eras-rules p {
+    margin-top: var(--space-1);
+    font-size: 0.9375rem;
+    line-height: 1.375rem;
+    color: var(--color-text-description);
+}
+
+.eras-house .section-more {
+    margin-top: var(--space-6);
+}
+
+/* The dial. */
+
+.eras-stage {
+    --eras-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+    --eras-wedge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='16' viewBox='0 0 34 16'%3E%3Cpath d='M3 2l11 6-11 6z' fill='%236e391f'/%3E%3Cpath d='M14 8h15' stroke='%236e391f' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+    --eras-serif: Georgia, "Times New Roman", serif;
+    --eras-blue: #0c70e5;
+    position: relative;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: #f4f7ff;
+    box-shadow: 0 32px 60px -38px rgba(40, 25, 10, 0.5);
+    container-type: inline-size;
+}
+
+.eras-frame {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 2cqw;
+    padding: 4.4cqw 5cqw;
+    background: var(--frame-bg);
+    color: var(--frame-ink);
+    opacity: 0;
+    transform: scale(1.02);
+    transition: opacity 450ms ease, transform 600ms ease;
+}
+
+.eras-frame.is-active {
+    opacity: 1;
+    transform: none;
+}
+
+.eras-frame-head {
+    font-size: max(11px, 1.9cqw);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--frame-soft);
+}
+
+.eras-frame-head span {
+    margin-right: 0.6em;
+    font-family: var(--eras-serif);
+    font-size: 1.9em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: var(--frame-ink);
+}
+
+.eras-frame-gift {
+    font-family: var(--eras-serif);
+    font-size: max(14px, 3cqw);
+    font-style: italic;
+    line-height: 1.2;
+}
+
+.eras-art {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 0;
+}
+
+/* I. Clay */
+
+.eras-frame--clay {
+    --frame-bg: #3b2418;
+    --frame-ink: #f3e0c8;
+    --frame-soft: #cfae8e;
+}
+
+.eras-tablet {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.4cqw;
+    width: 58cqw;
+    aspect-ratio: 5 / 4;
+    padding: 4cqw 5cqw;
+    border-radius: 46% 54% 50% 50% / 9% 11% 10% 12%;
+    background: radial-gradient(120% 90% at 28% 18%, #d39062 0%, #b56c44 45%, #93502f 100%);
+    box-shadow:
+        inset 0 0.4cqw 0.3cqw rgba(255, 235, 210, 0.4),
+        inset 0 -3cqw 5cqw rgba(60, 25, 10, 0.35),
+        0 5cqw 7cqw rgba(0, 0, 0, 0.5);
+    transform: rotate(-2deg);
+}
+
+.eras-tablet::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--eras-grain);
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.eras-wedges {
+    height: 2.2cqw;
+    background: var(--eras-wedge) 0 50% / 4.6cqw 2.2cqw repeat-x;
+    filter: drop-shadow(0 1px 0 rgba(255, 225, 195, 0.45));
+}
+
+.eras-wedges--offset {
+    background-position-x: 2.3cqw;
+}
+
+.eras-tablet-line {
+    font-family: var(--eras-serif);
+    font-size: 3.7cqw;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+    text-wrap: balance;
+    color: #6e391f;
+    text-shadow:
+        0 1px 0 rgba(255, 225, 195, 0.5),
+        0 -1px 1px rgba(40, 15, 5, 0.55);
+}
+
+.eras-stylus {
+    position: absolute;
+    right: 8%;
+    bottom: 2%;
+    width: 2cqw;
+    height: 30cqw;
+    border-radius: 1cqw 1cqw 0.2cqw 0.2cqw;
+    background: linear-gradient(90deg, #b99d62, #f2deae 45%, #9c8250);
+    box-shadow: 1cqw 1.6cqw 2cqw rgba(0, 0, 0, 0.4);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
+    transform: rotate(36deg);
+}
+
+.eras-frame--clay.is-active .eras-wedges {
+    animation: eras-press-wedges 900ms steps(12) both;
+}
+
+.eras-frame--clay.is-active .eras-wedges:nth-child(4),
+.eras-frame--clay.is-active .eras-wedges:nth-child(5) {
+    animation-delay: 500ms;
+}
+
+.eras-frame--clay.is-active .eras-tablet-line {
+    animation: eras-settle 600ms ease 300ms both;
+}
+
+.eras-frame--clay.is-active .eras-stylus {
+    animation: eras-stylus 900ms ease both;
+}
+
+@keyframes eras-press-wedges {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+        clip-path: inset(0);
+    }
+}
+
+@keyframes eras-settle {
+    from {
+        opacity: 0;
+        transform: scale(1.08);
+    }
+}
+
+@keyframes eras-stylus {
+    from {
+        transform: translate(-12cqw, -8cqw) rotate(36deg);
+    }
+}
+
+/* II. Papyrus */
+
+.eras-frame--papyrus {
+    --frame-bg: #e3c98f;
+    --frame-ink: #33220d;
+    --frame-soft: #6a4f29;
+}
+
+.eras-roll {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: 76cqw;
+}
+
+.eras-roll-end {
+    flex: 0 0 4.6cqw;
+    margin-block: -2cqw;
+    border-radius: 2.3cqw;
+    background: linear-gradient(90deg, #85642f, #d8ba78 40%, #f3dda6 56%, #94733d);
+    box-shadow: 0 2.4cqw 3cqw rgba(70, 45, 10, 0.35);
+}
+
+.eras-roll-sheet {
+    flex: 0 1 100%;
+    min-width: 0;
+    overflow: hidden;
+    padding: 6cqw 5cqw;
+    background:
+        repeating-linear-gradient(90deg, rgba(120, 88, 38, 0.14) 0 1px, transparent 1px 7px),
+        repeating-linear-gradient(0deg, rgba(120, 88, 38, 0.12) 0 1px, transparent 1px 5px),
+        #efdcab;
+    box-shadow: inset 0 0 5cqw rgba(120, 85, 30, 0.3);
+}
+
+.eras-roll-line {
+    font-family: var(--eras-serif);
+    font-size: 4.6cqw;
+    font-style: italic;
+    line-height: 1.2;
+    color: #43280f;
+    white-space: nowrap;
+}
+
+/* Three more lines of pretend script, as dashed ink rules. */
+.eras-roll-script,
+.eras-roll-script::before,
+.eras-roll-script::after {
+    border-top: 2px dashed rgba(67, 40, 15, 0.45);
+}
+
+.eras-roll-script {
+    position: relative;
+    display: block;
+    height: 6cqw;
+    margin-top: 4cqw;
+}
+
+.eras-roll-script::before,
+.eras-roll-script::after {
+    content: "";
+    position: absolute;
+    left: 0;
+}
+
+.eras-roll-script::before {
+    top: 2.4cqw;
+    right: 12%;
+}
+
+.eras-roll-script::after {
+    top: 4.8cqw;
+    right: 34%;
+}
+
+.eras-frame--papyrus.is-active .eras-roll-sheet {
+    animation: eras-unroll 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes eras-unroll {
+    from {
+        flex-basis: 0;
+        padding-inline: 0;
+    }
+}
+
+/* III. Parchment */
+
+.eras-frame--codex {
+    --frame-bg: #f4e9cb;
+    --frame-ink: #2a2018;
+    --frame-soft: #6b5a41;
+}
+
+.eras-leaf {
+    position: relative;
+    width: 66cqw;
+    padding: 5cqw 15cqw 5.5cqw 5.5cqw;
+    border: 1px solid #cdb98a;
+    outline: 3px double #b5321f;
+    outline-offset: -1.6cqw;
+    background: #fcf4dc;
+    box-shadow:
+        0 4cqw 6cqw -2.6cqw rgba(70, 50, 20, 0.45),
+        inset 0 0 8cqw rgba(160, 120, 60, 0.2);
+}
+
+.eras-leaf-rubric {
+    font-size: max(10px, 1.7cqw);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #b5321f;
+}
+
+.eras-leaf-line {
+    margin-top: 1.4cqw;
+    font-family: var(--eras-serif);
+    font-size: 4.4cqw;
+    line-height: 1.22;
+}
+
+.eras-initial {
+    float: left;
+    display: grid;
+    place-items: center;
+    width: 1.2em;
+    height: 1.2em;
+    margin: 0.04em 0.22em 0 0;
+    border: 3px solid #c9a227;
+    background:
+        radial-gradient(circle 2px at 5px 5px, #f0d77a 98%, transparent) 0 0 / 12px 12px,
+        #1e3fa6;
+    box-shadow: 0 0 0 3px #fcf4dc, 0 0 0 4px #1e3fa6;
+    color: #f0d77a;
+    font-size: 2.3em;
+    line-height: 1;
+}
+
+.eras-leaf-rules {
+    display: block;
+    clear: both;
+    height: 11cqw;
+    margin-top: 2.4cqw;
+    background: repeating-linear-gradient(180deg, transparent 0 2.6cqw, rgba(120, 90, 50, 0.38) 2.6cqw calc(2.6cqw + 1px));
+}
+
+.eras-leaf-gloss {
+    position: absolute;
+    top: 12cqw;
+    right: 3cqw;
+    width: 10cqw;
+    padding-left: 1cqw;
+    border-left: 1px solid #b5321f;
+    font-family: var(--eras-serif);
+    font-size: max(11px, 2.2cqw);
+    font-style: italic;
+    line-height: 1.1;
+    color: #8a2a1b;
+    transform: rotate(3deg);
+}
+
+.eras-frame--codex.is-active .eras-initial {
+    animation: eras-gild 1400ms ease-out 200ms both;
+}
+
+.eras-frame--codex.is-active .eras-leaf-gloss {
+    animation: eras-settle 600ms ease 500ms both;
+}
+
+@keyframes eras-gild {
+    0% {
+        filter: brightness(0.7) saturate(0.6);
+    }
+
+    45% {
+        filter: brightness(1.5) saturate(1.3);
+    }
+
+    100% {
+        filter: none;
+    }
+}
+
+/* IV. Movable type: real type reads back to front, so the row and each letter flip. */
+
+.eras-frame--press {
+    --frame-bg: #f7f3ea;
+    --frame-ink: #141414;
+    --frame-soft: #57514a;
+}
+
+.eras-press {
+    display: grid;
+    justify-items: center;
+    width: 76cqw;
+}
+
+.eras-forme {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    gap: 0.25cqw;
+    padding: 1.2cqw 1.4cqw;
+    border-radius: 4px;
+    background: #2a2a2d;
+    box-shadow: 0 2cqw 3cqw rgba(0, 0, 0, 0.32);
+    font-family: var(--eras-serif);
+    font-size: 2.3cqw;
+}
+
+.eras-forme span {
+    display: grid;
+    place-items: center;
+    width: 1.02em;
+    height: 1.75em;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #dcdce1, #9a9aa2);
+    color: #36363c;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+    transform: scaleX(-1);
+}
+
+.eras-forme .eras-sort-space {
+    height: 1.35em;
+    background: linear-gradient(180deg, #86868d, #6c6c73);
+}
+
+.eras-proof {
+    position: relative;
+    width: 100%;
+    margin-top: 3.6cqw;
+    padding: 7cqw 3cqw 8cqw;
+    border: 1px solid #ddd5c4;
+    background: #fffdf7;
+    box-shadow: 0 4cqw 5cqw -3cqw rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.eras-proof::before,
+.eras-proof::after {
+    content: "";
+    position: absolute;
+    top: 2cqw;
+    width: 2cqw;
+    height: 2cqw;
+    background:
+        linear-gradient(#c4321f, #c4321f) 50% 0 / 1.5px 100% no-repeat,
+        linear-gradient(#c4321f, #c4321f) 0 50% / 100% 1.5px no-repeat;
+}
+
+.eras-proof::before {
+    left: 2cqw;
+}
+
+.eras-proof::after {
+    right: 2cqw;
+}
+
+.eras-proof-line {
+    font-family: var(--eras-serif);
+    font-size: 4.6cqw;
+    line-height: 1.2;
+    color: #111;
+}
+
+.eras-frame--press.is-active .eras-forme {
+    animation: eras-press 1200ms ease-in-out both;
+}
+
+.eras-frame--press.is-active .eras-proof-line {
+    animation: eras-print 1200ms linear both;
+}
+
+@keyframes eras-press {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40%,
+    55% {
+        transform: translateY(11cqw);
+    }
+}
+
+@keyframes eras-print {
+    0%,
+    45% {
+        opacity: 0;
+    }
+
+    55%,
+    100% {
+        opacity: 1;
+    }
+}
+
+/* V. Typewriter */
+
+.eras-frame--typewriter {
+    --frame-bg: #1f302d;
+    --frame-ink: #eaf1ec;
+    --frame-soft: #a8beb5;
+}
+
+.eras-typer {
+    display: grid;
+    justify-items: center;
+    width: 70cqw;
+}
+
+.eras-typer-sheet {
+    width: 84%;
+    padding: 9cqw 4cqw 4cqw;
+    border-radius: 3px 3px 0 0;
+    background: #fdfbf5;
+    box-shadow: 0 -1.4cqw 4cqw rgba(0, 0, 0, 0.3);
+}
+
+.eras-typer-line,
+.eras-crt-line {
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+}
+
+.eras-typer-line {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 3.6cqw;
+    color: #1c1c1c;
+}
+
+.eras-typer-roller {
+    width: 98%;
+    height: 4cqw;
+    border-radius: 2cqw;
+    background: linear-gradient(180deg, #454545, #0d0d0d 62%, #2c2c2c);
+    box-shadow: 0 1.4cqw 2.6cqw rgba(0, 0, 0, 0.45);
+}
+
+.eras-typer-keys {
+    display: flex;
+    gap: 1.3cqw;
+    margin-top: 4cqw;
+}
+
+.eras-typer-keys span {
+    display: grid;
+    place-items: center;
+    width: 5.4cqw;
+    aspect-ratio: 1;
+    border: 0.45cqw solid #0d0d0d;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fffaf0, #e3d8c0);
+    box-shadow: 0 0.6cqw 0 #060606;
+    font-size: max(9px, 1.6cqw);
+    font-weight: var(--font-weight-semibold);
+    color: #111;
+}
+
+.eras-frame--typewriter.is-active .eras-typer-line,
+.eras-frame--screen.is-active .eras-crt-line {
+    animation: eras-type 1000ms steps(23) 150ms both;
+}
+
+@keyframes eras-type {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+        clip-path: inset(0 -1em 0 0);
+    }
+}
+
+/* VI. Word processor */
+
+.eras-frame--screen {
+    --frame-bg: #070b08;
+    --frame-ink: #dcffe5;
+    --frame-soft: #86bd95;
+}
+
+.eras-crt {
+    width: 66cqw;
+    padding: 3cqw 3cqw 6cqw;
+    border-radius: 3.4cqw;
+    background: linear-gradient(180deg, #dad1bd, #b7ac94);
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.55),
+        0 5cqw 7cqw rgba(0, 0, 0, 0.7);
+}
+
+.eras-crt-screen {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    padding: 2.4cqw 2.8cqw;
+    overflow: hidden;
+    border-radius: 2.4cqw / 3cqw;
+    background: radial-gradient(120% 100% at 50% 40%, #0e2c18, #041008 72%);
+    box-shadow: inset 0 0 5cqw rgba(0, 0, 0, 0.9);
+    font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+    color: #62ff8a;
+    text-shadow: 0 0 1cqw rgba(98, 255, 138, 0.7);
+}
+
+.eras-crt-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 3px);
+    pointer-events: none;
+}
+
+.eras-crt-status {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.8cqw;
+    border-bottom: 1px solid rgba(98, 255, 138, 0.38);
+    font-size: max(11px, 2.1cqw);
+    opacity: 0.85;
+}
+
+.eras-crt-line {
+    margin-top: 4cqw;
+    font-size: 4.2cqw;
+    line-height: 1.1;
+}
+
+.eras-crt-line::after {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.85em;
+    margin-left: 0.12em;
+    background: currentColor;
+    vertical-align: -0.08em;
+    animation: eras-blink 1000ms steps(2, jump-none) infinite;
+}
+
+@keyframes eras-blink {
+    to {
+        opacity: 0;
+    }
+}
+
+/* VII. Feldar: a page with a working suggestion. */
+
+.eras-frame--today {
+    --frame-bg: #f4f7ff;
+    --frame-ink: #111827;
+    --frame-soft: #525e73;
+}
+
+.eras-frame--today .eras-frame-head span,
+.eras-frame--today .eras-frame-gift {
+    color: var(--eras-blue);
+}
+
+.eras-page {
+    align-self: center;
+    justify-self: center;
+    width: 82cqw;
+    padding: 3.6cqw 4.4cqw 3cqw;
+    border-radius: 2.6cqw;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(20, 40, 120, 0.08),
+        0 4cqw 7cqw -3cqw rgba(30, 60, 160, 0.35);
+}
+
+.eras-page [hidden] {
+    display: none;
+}
+
+.eras-page-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: max(10px, 1.7cqw);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a93a6;
+}
+
+.eras-page-text {
+    margin-top: 1.6cqw;
+    font-size: clamp(14px, 3.1cqw, 19px);
+    line-height: 1.5;
+    color: #262626;
+}
+
+/* Feldar's ink: blue until it is accepted. */
+.eras-ink {
+    color: var(--eras-blue);
+    transition: color 400ms ease;
+}
+
+.eras-ink.is-accepted {
+    color: #262626;
+}
+
+.eras-frame--today.is-active .eras-ink {
+    animation: eras-ink-in 1100ms ease 250ms both;
+}
+
+@keyframes eras-ink-in {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+        clip-path: inset(0 -1em 0 0);
+    }
+}
+
+.eras-page-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2cqw;
+    margin-top: 2.6cqw;
+}
+
+.eras-chip {
+    height: max(32px, 6.4cqw);
+    padding: 0 max(12px, 2.6cqw);
+    border: 1.5px solid #cdd5e7;
+    border-radius: var(--radius-full);
+    background: #fff;
+    font-size: max(13px, 2.4cqw);
+    font-weight: var(--font-weight-semibold);
+    color: #111827;
+    transition: border-color var(--transition-fast);
+}
+
+.eras-chip:hover {
+    border-color: var(--eras-blue);
+}
+
+.eras-chip--blue {
+    border-color: var(--eras-blue);
+    background: var(--eras-blue);
+    color: #fff;
+}
+
+.eras-page-status {
+    min-height: 1.4em;
+    margin-top: 1.4cqw;
+    font-size: max(12px, 2.1cqw);
+    color: #525e73;
+}
+
+/* The stops along the bottom of the dial. Each stop draws its own stretch of the
+   dashed line, so the line still runs under every stop when the row scrolls. */
+.eras-stops {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    margin-top: 18px;
+}
+
+.eras-stop {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 26px 2px 6px;
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25;
+    color: var(--color-muted);
+}
+
+.eras-stop::after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    border-top: 2px dashed var(--color-border-muted);
+}
+
+.eras-stop:first-child::after {
+    left: 50%;
+}
+
+.eras-stop:last-child::after {
+    right: 50%;
+}
+
+.eras-stop::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--color-primary-alt);
+    border-radius: 50%;
+    background: var(--color-surface);
+    transform: translateX(-50%);
+    transition: background-color 200ms ease, transform 200ms ease;
+}
+
+.eras-stop span {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-alt);
+}
+
+.eras-stop:hover::before {
+    transform: translateX(-50%) scale(1.2);
+}
+
+.eras-stop[aria-pressed="true"]::before {
+    background: var(--color-primary-alt);
+    transform: translateX(-50%) scale(1.25);
+}
+
+.eras-stop--today::before {
+    border-color: #0c70e5;
+}
+
+.eras-stop--today span {
+    color: #0c70e5;
+}
+
+.eras-stop--today[aria-pressed="true"]::before {
+    background: #0c70e5;
+}
+
+.eras-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 20px;
+    margin-top: 10px;
+}
+
+.eras-note {
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    color: var(--color-muted);
+}
+
+.eras-replay {
+    padding: 4px 0;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-alt);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border-muted);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
+}
+
+.eras-replay:hover {
+    text-decoration-color: var(--color-primary-alt);
+}
+
+/* One column: the dial comes straight after the section head, the house rules after it. */
+@media (max-width: 64em) {
+    .eras-container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .eras-text {
+        display: contents;
+    }
+
+    .eras-dial {
+        max-width: 40rem;
+    }
+
+    .eras-house {
+        order: 1;
+    }
+
+    .eras-rules-title {
+        margin-top: 0;
+    }
+}
+
+/* On a phone the stage is square, which gives Feldar's page room for its buttons, and
+   the stops scroll sideways instead of squeezing their names together. */
+@media (max-width: 48em) {
+    .eras-stage {
+        aspect-ratio: 1 / 1;
+    }
+
+    .eras-stops {
+        grid-template-columns: repeat(7, minmax(4.5rem, 1fr));
+        margin-inline: calc(var(--page-margin) * -1);
+        padding-inline: var(--page-margin);
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .eras-rules {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-4);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .eras-frame,
+    .eras-ink {
+        transition: none;
+    }
+
+    .eras-stage *,
+    .eras-stage *::before,
+    .eras-stage *::after {
+        animation: none !important;
+    }
+}
+
+/* ============================================
+   TESTIMONIALS SECTION
+   ============================================ */
+
+.testimonials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 11.5rem; /* 184px */
+    padding-bottom: 8rem; /* 128px */
+    width: 100%;
+    padding-left: var(--page-margin);
+    padding-right: var(--page-margin);
+}
+
+.testimonials-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem; /* 56px */
+    align-items: center;
+    width: 100%;
+    margin-inline: auto;
+}
+
+.testimonial-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem; /* 32px */
+    max-width: 40rem; /* 640px */
+    text-align: center;
+}
+
+.testimonial-quote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2rem; /* 32px */
+    font-weight: var(--font-weight-medium);
+    line-height: 2.625rem; /* 42px */
+    letter-spacing: 0;
+    color: var(--color-primary-alt);
+    margin: 0;
+    width: 100%;
+    min-height: 10.5rem;
+    display: block;
+    text-wrap: balance;
+}
+
+.testimonial-author {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+}
+
+.testimonial-name {
+    font-family: var(--font-display);
+    font-size: 0.875rem; /* 14px */
+    font-weight: var(--font-weight-medium);
+    line-height: 1.125rem; /* 18px */
+    letter-spacing: 0;
+    color: var(--color-primary);
+}
+
+.testimonial-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem; /* 4px */
+}
+
+.testimonial-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem; /* 24px */
+    height: 1.5rem; /* 24px */
+    background: var(--color-surface-active);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.testimonial-nav-btn:hover {
+    background: var(--color-surface-active-hover);
+}
+
+.testimonial-nav-btn svg {
+    color: var(--color-primary-alt);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 80em) {
+    .testimonials {
+        padding-top: 8rem;
+        padding-bottom: 6rem;
+    }
+
+    .testimonial-quote {
+        min-height: 9rem;
+    }
+}
+
+@media (max-width: 48em) {
+    .testimonials {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .testimonial-quote {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        min-height: 8rem;
+    }
+}
+
+/* The home page's closing section: an invitation over the typewriter, where the reader
+   types a line of their own and asks Feldar for one in blue. */
+
+.closing {
+    width: 100%;
+    padding: clamp(2rem, 4vw, 4rem) var(--page-margin) clamp(4rem, 8vw, 8rem);
+}
+
+.closing-head {
+    align-items: center;
+    margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+}
+
+/* ============================================
+   FOOTER SECTION
+   ============================================ */
+
+/* Footer is ONE white container, constrained like other sections */
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100% - var(--page-margin) * 2);
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+}
+
+/* CTA Banner - inside the white footer container */
+.footer-cta {
+    --footer-symbol: url("../../assets/footer-symbol-home.svg");
+    --footer-symbol-size: 1180px 1180px;
+    --footer-symbol-opacity: 0.72;
+    --footer-symbol-wash: linear-gradient(180deg, rgba(226, 245, 255, 0.36) 0%, rgba(255, 255, 255, 0.06) 48%, rgba(32, 101, 142, 0.20) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 28.75rem;
+    min-height: 28.75rem;
+    padding-left: var(--container-padding-fluid);
+    padding-right: var(--container-padding-fluid);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: var(--radius-md);
+    background:
+        radial-gradient(ellipse 74% 46% at 50% 18%, rgba(226, 245, 255, 0.80), transparent 70%),
+        radial-gradient(ellipse 54% 42% at 72% 48%, rgba(174, 194, 238, 0.34), transparent 72%),
+        radial-gradient(ellipse 78% 54% at 50% 58%, rgba(111, 194, 226, 0.58), transparent 72%),
+        linear-gradient(180deg, #d9f1fb 0%, #8bcdea 45%, #4a9fc9 72%, #246a96 100%);
+}
+
+.footer-cta[data-footer-shader-variant="pricing"] {
+    --footer-symbol: url("../../assets/footer-symbol-pricing.svg");
+    --footer-symbol-size: 1770px 1770px;
+    --footer-symbol-opacity: 0.36;
+    --footer-symbol-wash: linear-gradient(180deg, rgba(255, 238, 204, 0.30) 0%, rgba(255, 255, 255, 0.04) 48%, rgba(94, 58, 31, 0.24) 100%);
+    background:
+        radial-gradient(ellipse 70% 40% at 50% 20%, rgba(255, 210, 164, 0.64), transparent 72%),
+        radial-gradient(ellipse 64% 46% at 34% 60%, rgba(222, 93, 63, 0.42), transparent 72%),
+        radial-gradient(ellipse 42% 36% at 68% 54%, rgba(170, 44, 54, 0.30), transparent 70%),
+        linear-gradient(180deg, #f0c28e 0%, #d06d44 46%, #983338 74%, #4a1d24 100%);
+}
+
+.footer-cta[data-footer-shader-variant="download"] {
+    --footer-symbol: url("../../assets/footer-symbol-download.svg");
+    --footer-symbol-size: 1770px 1770px;
+    --footer-symbol-opacity: 0.36;
+    --footer-symbol-wash: linear-gradient(180deg, rgba(232, 240, 238, 0.28) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(18, 31, 38, 0.28) 100%);
+    background:
+        radial-gradient(ellipse 58% 42% at 52% 22%, rgba(232, 240, 238, 0.56), transparent 72%),
+        radial-gradient(ellipse 58% 46% at 28% 64%, rgba(116, 191, 228, 0.32), transparent 72%),
+        radial-gradient(ellipse 48% 40% at 74% 58%, rgba(138, 123, 168, 0.18), transparent 74%),
+        linear-gradient(180deg, #c7d6d4 0%, #7c929c 48%, #25333b 100%);
+}
+
+.footer-cta[data-footer-shader-variant="resources"] {
+    --footer-symbol: url("../../assets/footer-symbol-resources.svg");
+    --footer-symbol-size: 1770px 1770px;
+    --footer-symbol-opacity: 0.36;
+    --footer-symbol-wash: linear-gradient(180deg, rgba(250, 250, 250, 0.28) 0%, rgba(255, 255, 255, 0.04) 48%, rgba(29, 37, 34, 0.30) 100%);
+    background:
+        radial-gradient(ellipse 66% 42% at 48% 22%, rgba(250, 250, 250, 0.62), transparent 72%),
+        radial-gradient(ellipse 58% 42% at 32% 60%, rgba(159, 180, 200, 0.38), transparent 74%),
+        linear-gradient(180deg, #ffffff 0%, #dde4df 50%, #1d2522 100%);
+}
+
+.footer-cta[data-footer-shader-variant="company"] {
+    --footer-symbol: url("../../assets/footer-symbol-company.svg");
+    --footer-symbol-size: 1770px 1770px;
+    --footer-symbol-opacity: 0.36;
+    --footer-symbol-wash: linear-gradient(180deg, rgba(225, 240, 243, 0.24) 0%, rgba(255, 255, 255, 0.05) 48%, rgba(55, 105, 116, 0.22) 100%);
+    background:
+        radial-gradient(ellipse 60% 38% at 48% 20%, rgba(225, 240, 243, 0.60), transparent 72%),
+        radial-gradient(ellipse 54% 42% at 36% 58%, rgba(135, 179, 188, 0.42), transparent 74%),
+        radial-gradient(ellipse 42% 38% at 70% 56%, rgba(146, 170, 190, 0.28), transparent 72%),
+        linear-gradient(180deg, #d6e5e7 0%, #8bb7bf 50%, #4b7d88 100%);
+}
+
+.footer-cta[data-footer-shader-variant="careers"] {
+    --footer-symbol: url("../../assets/footer-symbol-careers.svg");
+    --footer-symbol-size: 1770px 1770px;
+    --footer-symbol-opacity: 0.36;
+    --footer-symbol-wash: linear-gradient(180deg, rgba(232, 224, 194, 0.24) 0%, rgba(255, 255, 255, 0.05) 48%, rgba(53, 64, 38, 0.24) 100%);
+    background:
+        radial-gradient(ellipse 64% 40% at 50% 20%, rgba(232, 224, 194, 0.62), transparent 72%),
+        radial-gradient(ellipse 58% 46% at 34% 60%, rgba(124, 148, 104, 0.44), transparent 74%),
+        radial-gradient(ellipse 42% 38% at 70% 56%, rgba(176, 124, 78, 0.30), transparent 72%),
+        linear-gradient(180deg, #d6d0b8 0%, #8e9a70 48%, #465039 100%);
+}
+
+.footer-cta-bg {
+    display: none;
+}
+
+.footer-cta::before,
+.footer-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.footer-cta::before {
+    z-index: 1;
+    background-image: var(--footer-symbol), var(--footer-symbol-wash);
+    background-position: center center, center center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: var(--footer-symbol-size), 100% 100%;
+    mix-blend-mode: soft-light;
+    opacity: var(--footer-symbol-opacity);
+}
+
+.footer-cta::after {
+    z-index: 2;
+    opacity: 0.40;
+    mix-blend-mode: soft-light;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='96' height='96' fill='%23fff'/%3E%3Crect width='96' height='96' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-size: 96px 96px;
+}
+
+.footer-shader-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    pointer-events: none;
+    user-select: none;
+}
+
+.footer-cta-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* 24px */
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    text-align: center;
+}
+
+.footer-cta-title {
+    font-family: var(--font-display);
+    font-size: var(--title-size);
+    font-weight: var(--title-weight);
+    line-height: var(--title-line-height);
+    letter-spacing: var(--title-letter-spacing);
+    font-feature-settings: 'liga' off;
+    color: white;
+    max-width: var(--title-max-width);
+    text-align: center;
+    text-wrap: balance;
+}
+
+.btn-white {
+    background: white;
+    color: var(--color-primary);
+    border: none;
+    box-shadow:
+        0 3px 4px rgba(0, 0, 0, 0.06),
+        0 4px 24px rgba(0, 0, 0, 0.04),
+        0 0 0 1px rgba(0, 0, 0, 0.06),
+        0 0.6px 0.4px rgba(0, 0, 0, 0.04);
+}
+
+.btn-white:hover {
+    background: var(--color-surface-secondary);
+}
+
+/* Footer Links - inside the white footer container */
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* 32px */
+    width: 100%;
+    padding: 3rem 0.625rem 2.75rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 16.5rem repeat(4, 10.75rem);
+    column-gap: clamp(2rem, 3vw, 3rem);
+    align-items: flex-start;
+    justify-content: start;
+    width: 100%;
+    padding-bottom: 3rem;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 16.5rem;
+}
+
+.footer-brand-logo {
+    display: flex;
+    width: 5.3rem;
+    height: 1.5rem;
+}
+
+.footer-brand-logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-brand-text {
+    display: none;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 10.75rem;
+    overflow: hidden;
+}
+
+.footer-column-title {
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25rem;
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: none;
+    color: rgba(0, 0, 0, 0.54);
+    text-align: left;
+    width: 100%;
+    padding: 0 0.5rem 0.5rem 0;
+}
+
+.footer-column-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.footer-column-links a {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25rem;
+    letter-spacing: var(--letter-spacing-normal);
+    color: rgba(0, 0, 0, 0.90);
+    min-height: 1.625rem;
+    padding: 0.1875rem 1rem 0.1875rem 0;
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+}
+
+.footer-column-links a:hover,
+.footer-column-links a:focus-visible {
+    color: var(--color-muted);
+}
+
+/* Bottom Bar */
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 0.75rem; /* 12px */
+    align-items: flex-start;
+}
+
+.footer-legal a {
+    font-family: var(--font-display);
+    font-size: 0.8125rem; /* 13px */
+    font-weight: var(--font-weight-medium);
+    line-height: normal;
+    letter-spacing: var(--letter-spacing-wide);
+    color: #484848;
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+}
+
+.footer-legal a:hover,
+.footer-legal a:focus-visible {
+    color: var(--color-muted);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 80em) {
+    .footer-cta {
+        height: 28.75rem;
+        min-height: 28.75rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem;
+    }
+
+    .footer-brand,
+    .footer-column {
+        width: auto;
+    }
+}
+
+@media (max-width: 64em) {
+    .footer-cta {
+        height: 28.75rem;
+        min-height: 28.75rem;
+    }
+
+}
+
+@media (max-width: 48em) {
+    .footer-cta {
+        height: 28.75rem;
+        min-height: 28.75rem;
+    }
+
+    .footer-brand,
+    .footer-column {
+        width: 100%;
+    }
+
+    .footer-links {
+        padding: 2.5rem 0.625rem 2rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: row;
+        gap: 1rem;
+        align-items: center;
+    }
+}
+

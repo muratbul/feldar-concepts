@@ -160,6 +160,31 @@ a {
     transform-origin: 0 0;
 }
 
+/* Round four is one page, so it is shown larger with its notes beside it. Its preview
+   lays the page out at about 2.2 times the card's width and scales it back down. */
+.hub-concepts--one {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.hub-concept--wide {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    column-gap: 40px;
+    align-items: start;
+}
+
+.hub-concept--wide .hub-preview {
+    grid-row: 1 / span 4;
+    aspect-ratio: 16 / 10;
+    margin-bottom: 0;
+}
+
+.hub-concept--wide .hub-preview iframe {
+    width: 222.22%;
+    height: 222.22%;
+    transform: scale(0.45);
+}
+
 .hub-concept h3 {
     margin-top: 4px;
     font-size: 28px;
@@ -253,9 +278,18 @@ a {
         max-width: 640px;
     }
 
-    .hub-preview iframe {
+    .hub-preview iframe,
+    .hub-concept--wide .hub-preview iframe {
         width: 250%;
         height: 250%;
         transform: scale(0.4);
+    }
+
+    .hub-concept--wide {
+        display: block;
+    }
+
+    .hub-concept--wide .hub-preview {
+        margin-bottom: 20px;
     }
 }
