@@ -648,519 +648,6 @@ html[data-view="machine"] .machine-view {
     }
 }
 
-/* Typewriter: an enamelled typewriter drawn in CSS. It types its own intro lines, takes the
-   visitor's keystrokes, and strikes Feldar's suggestions in blue with Accept, Revise
-   and Dismiss. Script: scripts/components/typewriter.ts. The page carries the
-   <svg class="tw-defs"> block with the #tw-ink filter once.
-
-   Every colour and face is a custom property on the rig, so a section can retheme
-   the machine by setting them on .tw-rig. */
-
-.tw-rig {
-    --tw-paper: #f4efe3;
-    --tw-sheet: #fcf9f1;
-    --tw-carbon: #18181a;
-    --tw-ink-soft: #57524a;
-    --tw-enamel: #2e6f6a;
-    --tw-enamel-highlight: #3d8a83;
-    --tw-enamel-deep: #1d4b47;
-    --tw-key: #efe7d4;
-    --tw-blue: #0c70e5;
-    --tw-brass: #b8923a;
-    --tw-typed: "Courier New", Courier, monospace;
-    --tw-text: var(--font-body);
-
-    position: relative;
-    z-index: 1;
-    width: min(100%, 640px);
-    margin: 0 auto;
-    color: var(--tw-carbon);
-    container-type: inline-size;
-}
-
-/* Several parts set their own display, which would otherwise beat the attribute. */
-.tw-rig [hidden] {
-    display: none !important;
-}
-
-.tw-defs {
-    position: absolute;
-}
-
-/* Typed text: the face, and ink that sits unevenly as a ribbon leaves it. */
-
-.tw-sheet {
-    font-family: var(--tw-typed);
-}
-
-.tw-headline,
-.tw-line {
-    filter: url("#tw-ink");
-}
-
-.tw-blue {
-    color: var(--tw-blue);
-    transition: color 400ms ease;
-}
-
-.tw-blue.is-accepted {
-    color: inherit;
-}
-
-.tw-unstruck {
-    visibility: hidden;
-}
-
-/* Buttons: every one is a key that goes down. */
-
-.tw-button {
-    --tw-button-face: var(--tw-carbon);
-    --tw-button-text: var(--tw-paper);
-    --tw-button-drop: #000;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 48px;
-    padding: 0 22px;
-    border: 2px solid var(--tw-carbon);
-    border-radius: 999px;
-    background: var(--tw-button-face);
-    box-shadow: 0 5px 0 var(--tw-button-drop);
-    color: var(--tw-button-text);
-    font-family: var(--tw-text);
-    font-size: 1rem;
-    font-weight: var(--font-weight-semibold);
-    white-space: nowrap;
-    transition: transform 80ms ease, box-shadow 80ms ease;
-}
-
-.tw-button:hover {
-    transform: translateY(2px);
-    box-shadow: 0 3px 0 var(--tw-button-drop);
-}
-
-.tw-button:active {
-    transform: translateY(5px);
-    box-shadow: 0 0 0 var(--tw-button-drop);
-}
-
-.tw-button--cream {
-    --tw-button-face: var(--tw-key);
-    --tw-button-text: var(--tw-carbon);
-    --tw-button-drop: var(--tw-carbon);
-}
-
-.tw-button--blue {
-    --tw-button-face: var(--tw-blue);
-    --tw-button-text: #fff;
-    --tw-button-drop: var(--tw-carbon);
-}
-
-/* The machine. The rig is the unit every part is measured in: 1cqw is one hundredth
-   of its width, so the whole drawing scales with the space it is given. */
-
-.tw-carriage {
-    position: relative;
-    height: 46cqw;
-    transform: translateX(calc((0.5 - var(--tw-progress, 0)) * 5cqw));
-    transition: transform 160ms ease-out;
-}
-
-/* The sheet is pinned at the platen and grows upward, as paper feeds through a roller. */
-.tw-sheet {
-    position: absolute;
-    bottom: 3.2cqw;
-    left: 17cqw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 0.35em;
-    width: 66cqw;
-    min-height: 42cqw;
-    padding: 5cqw 5cqw 4.4cqw;
-    background:
-        linear-gradient(to top, rgba(60, 45, 20, 0.14), transparent 9%),
-        var(--tw-sheet);
-    box-shadow:
-        0 0 0 1px rgba(60, 45, 20, 0.08),
-        0 14px 30px -18px rgba(60, 45, 20, 0.6);
-    font-size: clamp(13px, 2.75cqw, 18px);
-    line-height: 1.5;
-    text-align: left;
-}
-
-/* Courier's letters are 0.6em wide, so a twenty-letter headline line fits the sheet's
-   56cqw of text at 4.6cqw. */
-.tw-headline {
-    margin: 0 0 0.25em;
-    font-size: clamp(18px, 4.6cqw, 30px);
-    font-weight: 400;
-    line-height: 1.14;
-}
-
-.tw-headline-line {
-    display: block;
-}
-
-.tw-line:nth-child(odd),
-.tw-headline-line:last-child {
-    transform: translateY(0.5px) rotate(-0.18deg);
-}
-
-.tw-kept {
-    display: contents;
-}
-
-.tw-own-line {
-    width: 100%;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    caret-color: var(--tw-carbon);
-    color: inherit;
-    filter: none;
-}
-
-.tw-own-line::placeholder {
-    color: var(--tw-ink-soft);
-    opacity: 0.75;
-}
-
-.tw-own-line:focus-visible {
-    outline: 0;
-    box-shadow: 0 2px 0 var(--tw-blue);
-}
-
-/* Lines the machine has yet to type stay laid out but unseen. */
-.tw-will-type [data-type-line]:not(.is-struck),
-.tw-will-type [data-own-line] {
-    visibility: hidden;
-}
-
-.tw-bail {
-    position: absolute;
-    right: 13cqw;
-    bottom: 6.6cqw;
-    left: 13cqw;
-    z-index: 1;
-    height: 0.8cqw;
-    border-radius: 1cqw;
-    background: linear-gradient(#f2f3f5, #9da2aa 55%, #6d727a);
-    box-shadow: 0 0.4cqw 0.6cqw rgba(0, 0, 0, 0.25);
-}
-
-.tw-platen {
-    position: absolute;
-    right: 5cqw;
-    bottom: 0;
-    left: 5cqw;
-    z-index: 2;
-    height: 6.4cqw;
-    border-radius: 3.2cqw;
-    background: linear-gradient(#45454a, #0e0e10 42%, #2c2c30 78%, #151517);
-    box-shadow: 0 0.8cqw 0 rgba(0, 0, 0, 0.28);
-}
-
-/* Platen knobs, ridged for grip. */
-.tw-platen::before,
-.tw-platen::after {
-    content: "";
-    position: absolute;
-    top: -1.1cqw;
-    width: 4.2cqw;
-    height: 8.6cqw;
-    border-radius: 1.2cqw;
-    background: repeating-linear-gradient(#0b0b0c 0 0.55cqw, #3c3c41 0.55cqw 1.1cqw);
-    box-shadow: inset 0 0 0 0.3cqw #000;
-}
-
-.tw-platen::before {
-    left: -4.6cqw;
-}
-
-.tw-platen::after {
-    right: -4.6cqw;
-}
-
-.tw-return {
-    position: absolute;
-    bottom: 5.4cqw;
-    left: -1.5cqw;
-    min-width: 13cqw;
-    height: 4.4cqw;
-    min-height: 22px;
-    padding: 0 1.6cqw;
-    border-radius: 999px;
-    background: linear-gradient(#fafbfc, #a9aeb6 60%, #70757d);
-    box-shadow:
-        inset 0 0 0 1px rgba(0, 0, 0, 0.35),
-        0 0.5cqw 0.5cqw rgba(0, 0, 0, 0.3);
-    font-family: var(--tw-text);
-    font-size: clamp(10px, 2cqw, 13px);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transform: rotate(-18deg);
-    transform-origin: right center;
-    transition: transform 120ms ease;
-}
-
-.tw-return:hover,
-.tw-return:active {
-    transform: rotate(-6deg);
-}
-
-.tw-bell {
-    position: absolute;
-    right: 0.5cqw;
-    bottom: 5.8cqw;
-    width: 6cqw;
-    height: 3.6cqw;
-    border-radius: 6cqw 6cqw 0.8cqw 0.8cqw;
-    background: radial-gradient(120% 140% at 35% 20%, #f1d98a, var(--tw-brass) 55%, #7a5c1c);
-    box-shadow:
-        inset 0 -0.5cqw 0 rgba(0, 0, 0, 0.2),
-        0 0.4cqw 0.5cqw rgba(0, 0, 0, 0.3);
-    transform-origin: 50% 100%;
-}
-
-.tw-body {
-    position: relative;
-    z-index: 3;
-    margin-top: -1.4cqw;
-    padding: 2.6cqw 4cqw 4.6cqw;
-    border: 0.5cqw solid var(--tw-carbon);
-    border-radius: 6cqw 6cqw 3.2cqw 3.2cqw;
-    background: linear-gradient(172deg, var(--tw-enamel-highlight) 0%, var(--tw-enamel) 36%, var(--tw-enamel-deep) 100%);
-    box-shadow:
-        inset 0 0.6cqw 0 rgba(255, 255, 255, 0.24),
-        inset 0 -1.2cqw 0 rgba(0, 0, 0, 0.24),
-        0 3cqw 3.2cqw -2cqw rgba(50, 35, 5, 0.7);
-}
-
-.tw-deck {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    height: 9.6cqw;
-    padding: 0 3cqw;
-}
-
-.tw-spool {
-    width: 8.6cqw;
-    height: 8.6cqw;
-    border-radius: 50%;
-    background: radial-gradient(circle, #d7dade 0 10%, #18181a 11% 26%, #2f2f33 27% 60%, #101012 61% 70%, #9ea3ab 71% 100%);
-    box-shadow:
-        inset 0 0 0 0.35cqw #000,
-        0 0.5cqw 0.6cqw rgba(0, 0, 0, 0.35);
-}
-
-/* The type basket: a fan of typebars in a dark recess, drawn with one gradient. */
-.tw-basket {
-    width: 36cqw;
-    height: 9.2cqw;
-    border: 0.5cqw solid var(--tw-carbon);
-    border-top: 0;
-    border-radius: 0 0 18cqw 18cqw / 0 0 9.2cqw 9.2cqw;
-    background: repeating-conic-gradient(from 90deg at 50% 0%, #0c0c0e 0 2.6deg, #4a4a50 2.6deg 5.2deg);
-    box-shadow: inset 0 1.4cqw 1.8cqw #000;
-}
-
-/* The ribbon runs from spool to spool, black above and blue below. Choosing blue
-   lifts it, so the lower half meets the page. */
-.tw-ribbon-band {
-    position: absolute;
-    top: 3.4cqw;
-    right: 10cqw;
-    left: 10cqw;
-    height: 1.5cqw;
-    background: linear-gradient(var(--tw-carbon) 50%, var(--tw-blue) 50%);
-    box-shadow: 0 0.2cqw 0.3cqw rgba(0, 0, 0, 0.4);
-    transition: transform 180ms ease;
-}
-
-.is-blue .tw-ribbon-band {
-    transform: translateY(-0.8cqw);
-}
-
-.tw-keys {
-    display: grid;
-    justify-items: center;
-    gap: 1.3cqw;
-    margin-top: 2.4cqw;
-}
-
-.tw-key-row {
-    display: flex;
-    gap: 1.2cqw;
-}
-
-.tw-key {
-    display: grid;
-    place-items: center;
-    width: 6.6cqw;
-    height: 6.6cqw;
-    border: 0.55cqw solid var(--tw-carbon);
-    border-radius: 50%;
-    background: radial-gradient(circle at 50% 32%, #fffbf1, var(--tw-key) 68%);
-    box-shadow:
-        0 0.8cqw 0 #0b0b0c,
-        0 1.2cqw 1cqw rgba(0, 0, 0, 0.35);
-    color: var(--tw-carbon);
-    font-family: var(--tw-text);
-    font-size: clamp(8px, 2.5cqw, 16px);
-    font-weight: var(--font-weight-semibold);
-    line-height: 1;
-    transition: transform 70ms ease, box-shadow 70ms ease;
-}
-
-.tw-key.is-down,
-.tw-key:active {
-    transform: translateY(0.6cqw);
-    box-shadow:
-        0 0.2cqw 0 #0b0b0c,
-        0 0.4cqw 0.4cqw rgba(0, 0, 0, 0.35);
-}
-
-.tw-key--space {
-    width: 42cqw;
-    height: 4.6cqw;
-    border-radius: 2.3cqw;
-    background: linear-gradient(#fffbf1, var(--tw-key));
-}
-
-.tw-nameplate {
-    position: absolute;
-    right: 5cqw;
-    bottom: 1.5cqw;
-    padding: 0.3cqw 1.6cqw;
-    border-radius: 0.6cqw;
-    background: linear-gradient(#e7cf86, var(--tw-brass));
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
-    font-family: var(--tw-text);
-    font-size: clamp(8px, 2.1cqw, 14px);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-}
-
-/* Controls under the machine, full size so they are easy to press. */
-
-.tw-controls {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 14px 18px;
-    margin-top: 30px;
-}
-
-.tw-command-keys {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-/* The ribbon lever: two halves, the chosen one lit. */
-.tw-ribbon {
-    display: flex;
-    align-items: center;
-    min-height: 48px;
-    overflow: hidden;
-    border: 2px solid var(--tw-carbon);
-    border-radius: 10px;
-    background: var(--tw-key);
-    box-shadow: 0 5px 0 var(--tw-carbon);
-    color: var(--tw-carbon);
-    font-family: var(--tw-text);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-semibold);
-}
-
-.tw-ribbon-label {
-    padding: 0 12px;
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.tw-ribbon-half {
-    display: grid;
-    place-items: center;
-    align-self: stretch;
-    padding: 0 12px;
-    color: #fff;
-    opacity: 0.38;
-    transition: opacity 180ms ease;
-}
-
-.tw-ribbon-half--black {
-    background: var(--tw-carbon);
-}
-
-.tw-ribbon-half--blue {
-    background: var(--tw-blue);
-}
-
-.tw-ribbon[aria-checked="false"] .tw-ribbon-half--black,
-.tw-ribbon[aria-checked="true"] .tw-ribbon-half--blue {
-    opacity: 1;
-}
-
-.tw-status {
-    flex-basis: 100%;
-    min-height: 1.5em;
-    font-family: var(--tw-text);
-    font-size: 0.9375rem;
-    text-align: center;
-    color: var(--tw-carbon);
-}
-
-/* A narrow rig gives the sheet more of the carriage, so a typed line still fits, and
-   lines the controls up on the left. */
-@container (max-width: 460px) {
-    .tw-carriage {
-        height: 62cqw;
-    }
-
-    /* The extra room under the last line keeps it clear of the Return lever. */
-    .tw-sheet {
-        left: 7cqw;
-        width: 86cqw;
-        min-height: 58cqw;
-        padding-bottom: 9cqw;
-        font-size: 16px;
-    }
-
-    .tw-headline {
-        font-size: clamp(16px, 6.2cqw, 28px);
-    }
-
-    .tw-controls {
-        justify-content: flex-start;
-    }
-
-    .tw-status {
-        text-align: left;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .tw-rig *,
-    .tw-rig *::before,
-    .tw-rig *::after {
-        transition: none !important;
-    }
-
-    .tw-carriage,
-    .tw-key.is-down {
-        transform: none;
-    }
-}
-
 /* Sage on the home page: the four things Sage does on the left, and on the right a
    page from the sample book showing each one. The drawings use the app-ui parts
    (app-ui/editor.css, app-ui/sage.css); this file lays them out. */
@@ -1178,10 +665,12 @@ html[data-view="machine"] .machine-view {
     display: none;
 }
 
+/* The moments read like the features section's tabs turned on their side: a rule runs
+   down beside them, and the chosen one is marked on it. */
 .sage-moments {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
+    border-left: 1px solid var(--color-border);
 }
 
 .sage-moment {
@@ -1189,20 +678,19 @@ html[data-view="machine"] .machine-view {
     grid-template-columns: 18px minmax(0, 1fr);
     gap: var(--space-1) var(--space-3);
     width: 100%;
-    padding: 14px 16px;
-    border: 1px solid transparent;
-    border-radius: var(--radius-lg);
+    margin-left: -1px;
+    padding: 14px 0 14px 20px;
+    border-left: 2px solid transparent;
     text-align: left;
-    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+    transition: border-color var(--transition-fast);
 }
 
 .sage-moment:hover {
-    background: var(--color-surface-tertiary);
+    border-left-color: var(--color-border-hover);
 }
 
 .sage-moment[aria-pressed="true"] {
-    border-color: var(--color-border);
-    background: var(--color-surface-secondary);
+    border-left-color: var(--color-primary-alt);
 }
 
 .sage-moment-icon {
@@ -1219,6 +707,12 @@ html[data-view="machine"] .machine-view {
     font-size: 1rem;
     font-weight: var(--font-weight-semibold);
     line-height: 1.5rem;
+    color: var(--color-muted);
+    transition: color var(--transition-fast);
+}
+
+.sage-moment:hover .sage-moment-name,
+.sage-moment[aria-pressed="true"] .sage-moment-name {
     color: var(--color-primary-alt);
 }
 
@@ -1256,14 +750,21 @@ html[data-view="machine"] .machine-view {
     overflow: hidden;
     border: 1px solid var(--color-border);
     border-radius: 0.625rem;
-    background:
-        radial-gradient(60% 40% at 50% 72%, rgba(226, 242, 250, 0.6) 0%, rgba(226, 242, 250, 0) 72%),
-        linear-gradient(180deg, rgb(121, 165, 191) 0%, rgb(131, 178, 207) 15%, rgb(148, 193, 218) 30%, rgb(186, 221, 238) 55%, rgb(214, 236, 247) 75%, rgb(221, 237, 246) 100%);
+    background: var(--color-surface-secondary);
     container-type: inline-size;
 }
 
+/* A page scene holds a full manuscript page, longer than the card. It takes the height
+   the stage has rather than adding its own, so the page fills the card and runs on
+   past its foot. */
+.sage-canvas--page {
+    flex-basis: 0;
+    min-height: 0;
+}
+
 /* The page runs past the bottom of the card. It leaves room on its right for what Sage
-   says beside it, and its own right margin for Sage's marks. */
+   says beside it, and its own right margin for Sage's marks. On a wide stage it stops
+   at a book's line length rather than stretching. */
 .sage-page {
     --au-ed-size: 17px;
     --au-ed-lh: 28px;
@@ -1272,6 +773,7 @@ html[data-view="machine"] .machine-view {
     --au-ed-bottom: 32px;
     flex: 1 1 auto;
     width: calc(100% - 17.5rem);
+    max-width: 36rem;
     padding-right: 3.25rem;
     overflow: visible;
     border-bottom: 0;
@@ -1314,8 +816,20 @@ html[data-view="machine"] .machine-view {
     left: -18px;
 }
 
+/* Sage's answer floats over the page, under the paragraph it was asked from; the
+   writing beneath fades away round it, as it does in the app. */
 .sage-answer {
-    margin: 6px 0 0 18px;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    left: 18px;
+    z-index: 1;
+}
+
+/* The wash reaches the page's left margin, so no half-covered letters show beside the
+   answer. */
+.sage-answer::before {
+    inset: -14px -16px -16px -36px;
 }
 
 .sage-caret {
@@ -1376,23 +890,29 @@ html[data-view="machine"] .machine-view {
     }
 
     .sage-moments {
-        flex-direction: row;
-        gap: var(--space-2);
-        margin-inline: calc(var(--page-margin) * -1);
-        padding: 2px var(--page-margin);
-        overflow-x: auto;
-        scrollbar-width: none;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: var(--space-3);
+        border-left: 0;
     }
 
+    /* Across the top, as the features section's tabs are. */
     .sage-moment {
-        display: inline-flex;
-        flex-shrink: 0;
+        display: flex;
         align-items: center;
         gap: var(--space-2);
-        width: auto;
-        padding: 8px 14px;
-        border-color: var(--color-border);
-        border-radius: var(--radius-full);
+        margin-left: 0;
+        padding: var(--space-3) 0 0;
+        border-top: 2px solid var(--color-border);
+        border-left: 0;
+    }
+
+    .sage-moment:hover {
+        border-top-color: var(--color-border-hover);
+    }
+
+    .sage-moment[aria-pressed="true"] {
+        border-top-color: var(--color-primary-alt);
     }
 
     .sage-moment-icon {
@@ -1401,7 +921,7 @@ html[data-view="machine"] .machine-view {
 
     .sage-moment-name {
         font-size: 0.9375rem;
-        white-space: nowrap;
+        line-height: 1.25rem;
     }
 
     .sage-moment-text {
@@ -1412,12 +932,34 @@ html[data-view="machine"] .machine-view {
 /* On a phone each scene is as tall as itself: stacked, the short ones would leave a
    screen of empty page. The stage sits under the buttons, so only what follows moves. */
 @media (max-width: 48em) {
+    .sage-moments {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .sage-scene:not(.is-active) {
         display: none;
     }
 
     .sage-canvas {
         padding: 0.75rem 0.75rem 0;
+    }
+
+    /* The page is as long as its text here, so it keeps to the paragraphs the scene is
+       about, with Sage's answer set under them. */
+    .sage-canvas--page {
+        flex-basis: auto;
+    }
+
+    .sage-paragraph--more {
+        display: none;
+    }
+
+    .sage-answer {
+        position: relative;
+        top: auto;
+        right: auto;
+        left: auto;
+        margin: 10px 0 4px 18px;
     }
 
     .sage-page {
@@ -1448,117 +990,76 @@ html[data-view="machine"] .machine-view {
     }
 }
 
-/* The feature desk: twelve of Feldar's tools, each named with the desk object it
-   stands for, grouped as Plan, Write, Revise and Keep. Choosing one shows its panel:
-   what it is for, the steps in the app's own words, and a capture from the app. */
+/* Features: the four parts of the work (Plan, Write, Revise, Keep) as tabs. Each panel
+   pairs one large capture from the app with a promise and the three tools that do that
+   work; every tool is listed on /features. Script: scripts/components/feature-tabs.ts. */
 
-.desk-index {
+.features-tabs {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-6);
     margin-top: var(--space-10);
 }
 
-.desk-group {
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--color-border);
-}
-
-.desk-group-name,
-.desk-kicker,
-.desk-label {
-    font-size: 0.8125rem;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.25rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-}
-
-.desk-entries {
+.features-tab {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 2px;
-    margin: var(--space-2) -10px 0;
-}
-
-.desk-entry {
-    display: grid;
-    grid-template-columns: 28px minmax(0, 1fr);
-    column-gap: var(--space-3);
-    align-items: center;
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: var(--radius-lg);
+    padding-top: var(--space-4);
+    border-top: 2px solid var(--color-border);
     text-align: left;
-    transition: background-color var(--transition-fast);
+    transition: border-color var(--transition-fast);
 }
 
-.desk-entry:hover {
-    background: var(--color-surface-tertiary);
+.features-tab:hover {
+    border-top-color: var(--color-border-hover);
 }
 
-.desk-entry[aria-pressed="true"] {
-    background: var(--color-surface-secondary);
+.features-tab[aria-selected="true"] {
+    border-top-color: var(--color-primary-alt);
 }
 
-.desk-entry-icon {
-    grid-row: 1 / span 2;
+.features-tab-name {
+    font-size: 1.0625rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.5rem;
     color: var(--color-muted);
     transition: color var(--transition-fast);
 }
 
-.desk-entry:hover .desk-entry-icon,
-.desk-entry[aria-pressed="true"] .desk-entry-icon {
-    color: var(--color-primary);
-}
-
-.desk-entry-name {
-    font-size: 0.9375rem;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.25rem;
+.features-tab:hover .features-tab-name,
+.features-tab[aria-selected="true"] .features-tab-name {
     color: var(--color-primary-alt);
 }
 
-.desk-entry-object {
-    font-size: 0.8125rem;
-    line-height: 1.125rem;
+.features-tab-note {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
     color: var(--color-muted);
 }
 
-.desk-panels {
-    margin-top: var(--space-8);
-}
-
-.desk-panel {
+.features-panel {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     gap: var(--space-8) 3.5rem;
-    align-items: start;
-    padding-top: var(--space-8);
-    border-top: 1px solid var(--color-border);
-    scroll-margin-top: 4.5rem;
-    animation: desk-panel-in 280ms ease both;
+    align-items: center;
+    margin-top: var(--space-8);
+    animation: features-panel-in 280ms ease both;
 }
 
-.desk-panel[hidden] {
+.features-panel[hidden] {
     display: none;
 }
 
-@keyframes desk-panel-in {
+@keyframes features-panel-in {
     from {
         opacity: 0;
         transform: translateY(6px);
     }
 }
 
-.desk-kicker span {
-    letter-spacing: 0;
-    text-transform: none;
-}
-
-.desk-title {
-    margin-top: var(--space-2);
+.features-chapter-title {
     font-size: 1.75rem;
     font-weight: var(--font-weight-semibold);
     line-height: 2.125rem;
@@ -1566,91 +1067,49 @@ html[data-view="machine"] .machine-view {
     color: var(--color-primary-alt);
 }
 
-.desk-promise {
-    margin-top: var(--space-2);
+.features-promise {
+    margin-top: var(--space-3);
     font-size: 1.125rem;
     line-height: 1.6875rem;
     color: var(--color-text-description);
 }
 
-.desk-label {
+.features-tools {
     margin-top: var(--space-6);
 }
 
-.desk-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-    counter-reset: desk-step;
+.features-tools li {
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--color-border);
 }
 
-/* The number sits beside the step rather than in a grid with it, so app words in the
-   step wrap as ordinary text. */
-.desk-steps li {
-    position: relative;
-    padding-left: 36px;
+.features-tools h4 {
     font-size: 1rem;
-    line-height: 1.5rem;
-    color: var(--color-secondary);
-    counter-increment: desk-step;
-}
-
-.desk-steps li::before {
-    content: counter(desk-step);
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: grid;
-    place-items: center;
-    width: 24px;
-    height: 24px;
-    border: 1px solid var(--color-border);
-    border-radius: 50%;
-    background: var(--color-surface-secondary);
-    font-size: 0.75rem;
     font-weight: var(--font-weight-semibold);
-    line-height: 1;
-    color: var(--color-primary);
-}
-
-.desk-good {
-    margin-top: var(--space-5);
-    font-size: 1rem;
     line-height: 1.5rem;
-    color: var(--color-secondary);
+    color: var(--color-primary-alt);
 }
 
-.desk-good strong {
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-primary);
-}
-
-/* A line of history for the tools that have one. */
-.desk-then {
-    margin-top: var(--space-4);
-    padding-left: 14px;
-    border-left: 2px solid #e6d8bd;
-    font-family: Georgia, "Times New Roman", serif;
+.features-tools p {
+    margin-top: 2px;
     font-size: 0.9375rem;
-    font-style: italic;
-    line-height: 1.5rem;
+    line-height: 1.375rem;
     color: var(--color-text-description);
 }
 
-.desk-copy .section-more {
-    margin-top: var(--space-5);
+.features-copy .section-more {
+    margin-top: var(--space-4);
 }
 
-.desk-shot {
+.features-shot {
     padding: clamp(0.75rem, 2vw, 1.75rem);
     border: 1px solid var(--color-border);
     border-radius: 0.625rem;
     background: var(--color-surface-secondary);
 }
 
-.desk-shot img,
-.desk-shot video {
+.features-shot img,
+.features-shot video {
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 10;
@@ -1663,1013 +1122,84 @@ html[data-view="machine"] .machine-view {
 }
 
 @media (max-width: 64em) {
-    .desk-index {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .desk-panel {
+    .features-panel {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .desk-shot {
+    .features-shot {
         order: -1;
     }
 }
 
 @media (max-width: 48em) {
-    .desk-index {
-        gap: var(--space-4) var(--space-3);
+    .features-tabs {
+        gap: var(--space-3);
     }
 
-    .desk-entry {
-        grid-template-columns: 24px minmax(0, 1fr);
-        column-gap: var(--space-2);
-        padding: 8px;
-    }
-
-    .desk-entry-icon {
-        width: 24px;
-        height: 24px;
-    }
-
-    .desk-entry-name {
-        font-size: 0.875rem;
-    }
-
-    .desk-entry-object {
+    .features-tab-note {
         display: none;
     }
 
-    .desk-title {
+    .features-tab-name {
+        font-size: 1rem;
+    }
+
+    .features-chapter-title {
         font-size: 1.5rem;
         line-height: 1.875rem;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .desk-panel {
+    .features-panel {
         animation: none;
     }
 }
 
-/* Then and now: five thousand years of writing tools on one dial. It plays once when it
-   comes into view and lands on Feldar's page, where a suggestion waits in blue. Beside
-   it, the house rules for Feldar's AI. Script: scripts/components/era-dial.ts.
+/* House rules: what Feldar's AI does and does not do with a writer's words, four across
+   under thin rules, each with a line icon. */
 
-   The drawings are measured in cqw, hundredths of the stage's width, so each era keeps
-   its proportions at any size. */
-
-.eras-container {
+.rules-list {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-    gap: var(--space-10) 4rem;
-    align-items: start;
-}
-
-.eras-rules-title {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-8);
     margin-top: var(--space-10);
-    font-size: 0.8125rem;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.25rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-muted);
 }
 
-.eras-rules {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-6);
-    margin-top: var(--space-3);
-}
-
-.eras-rules li {
-    padding-top: var(--space-3);
+.rules-list li {
+    padding-top: var(--space-4);
     border-top: 1px solid var(--color-border);
 }
 
-.eras-rules h3 {
+.rules-icon {
+    margin-bottom: var(--space-3);
+    color: var(--color-primary-alt);
+}
+
+.rules-list h3 {
     font-size: 1rem;
     font-weight: var(--font-weight-semibold);
     line-height: 1.5rem;
     color: var(--color-primary-alt);
 }
 
-.eras-rules p {
+.rules-list p {
     margin-top: var(--space-1);
     font-size: 0.9375rem;
     line-height: 1.375rem;
     color: var(--color-text-description);
 }
 
-.eras-house .section-more {
-    margin-top: var(--space-6);
-}
-
-/* The dial. */
-
-.eras-stage {
-    --eras-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
-    --eras-wedge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='16' viewBox='0 0 34 16'%3E%3Cpath d='M3 2l11 6-11 6z' fill='%236e391f'/%3E%3Cpath d='M14 8h15' stroke='%236e391f' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
-    --eras-serif: Georgia, "Times New Roman", serif;
-    --eras-blue: #0c70e5;
-    position: relative;
-    aspect-ratio: 5 / 4;
-    overflow: hidden;
-    border-radius: 1rem;
-    background: #f4f7ff;
-    box-shadow: 0 32px 60px -38px rgba(40, 25, 10, 0.5);
-    container-type: inline-size;
-}
-
-.eras-frame {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    gap: 2cqw;
-    padding: 4.4cqw 5cqw;
-    background: var(--frame-bg);
-    color: var(--frame-ink);
-    opacity: 0;
-    transform: scale(1.02);
-    transition: opacity 450ms ease, transform 600ms ease;
-}
-
-.eras-frame.is-active {
-    opacity: 1;
-    transform: none;
-}
-
-.eras-frame-head {
-    font-size: max(11px, 1.9cqw);
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--frame-soft);
-}
-
-.eras-frame-head span {
-    margin-right: 0.6em;
-    font-family: var(--eras-serif);
-    font-size: 1.9em;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    text-transform: none;
-    color: var(--frame-ink);
-}
-
-.eras-frame-gift {
-    font-family: var(--eras-serif);
-    font-size: max(14px, 3cqw);
-    font-style: italic;
-    line-height: 1.2;
-}
-
-.eras-art {
-    position: relative;
-    display: grid;
-    place-items: center;
-    min-height: 0;
-}
-
-/* I. Clay */
-
-.eras-frame--clay {
-    --frame-bg: #3b2418;
-    --frame-ink: #f3e0c8;
-    --frame-soft: #cfae8e;
-}
-
-.eras-tablet {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2.4cqw;
-    width: 58cqw;
-    aspect-ratio: 5 / 4;
-    padding: 4cqw 5cqw;
-    border-radius: 46% 54% 50% 50% / 9% 11% 10% 12%;
-    background: radial-gradient(120% 90% at 28% 18%, #d39062 0%, #b56c44 45%, #93502f 100%);
-    box-shadow:
-        inset 0 0.4cqw 0.3cqw rgba(255, 235, 210, 0.4),
-        inset 0 -3cqw 5cqw rgba(60, 25, 10, 0.35),
-        0 5cqw 7cqw rgba(0, 0, 0, 0.5);
-    transform: rotate(-2deg);
-}
-
-.eras-tablet::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: var(--eras-grain);
-    mix-blend-mode: multiply;
-    opacity: 0.55;
-    pointer-events: none;
-}
-
-.eras-wedges {
-    height: 2.2cqw;
-    background: var(--eras-wedge) 0 50% / 4.6cqw 2.2cqw repeat-x;
-    filter: drop-shadow(0 1px 0 rgba(255, 225, 195, 0.45));
-}
-
-.eras-wedges--offset {
-    background-position-x: 2.3cqw;
-}
-
-.eras-tablet-line {
-    font-family: var(--eras-serif);
-    font-size: 3.7cqw;
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: 0.08em;
-    text-align: center;
-    text-transform: uppercase;
-    text-wrap: balance;
-    color: #6e391f;
-    text-shadow:
-        0 1px 0 rgba(255, 225, 195, 0.5),
-        0 -1px 1px rgba(40, 15, 5, 0.55);
-}
-
-.eras-stylus {
-    position: absolute;
-    right: 8%;
-    bottom: 2%;
-    width: 2cqw;
-    height: 30cqw;
-    border-radius: 1cqw 1cqw 0.2cqw 0.2cqw;
-    background: linear-gradient(90deg, #b99d62, #f2deae 45%, #9c8250);
-    box-shadow: 1cqw 1.6cqw 2cqw rgba(0, 0, 0, 0.4);
-    clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
-    transform: rotate(36deg);
-}
-
-.eras-frame--clay.is-active .eras-wedges {
-    animation: eras-press-wedges 900ms steps(12) both;
-}
-
-.eras-frame--clay.is-active .eras-wedges:nth-child(4),
-.eras-frame--clay.is-active .eras-wedges:nth-child(5) {
-    animation-delay: 500ms;
-}
-
-.eras-frame--clay.is-active .eras-tablet-line {
-    animation: eras-settle 600ms ease 300ms both;
-}
-
-.eras-frame--clay.is-active .eras-stylus {
-    animation: eras-stylus 900ms ease both;
-}
-
-@keyframes eras-press-wedges {
-    from {
-        clip-path: inset(0 100% 0 0);
-    }
-
-    to {
-        clip-path: inset(0);
-    }
-}
-
-@keyframes eras-settle {
-    from {
-        opacity: 0;
-        transform: scale(1.08);
-    }
-}
-
-@keyframes eras-stylus {
-    from {
-        transform: translate(-12cqw, -8cqw) rotate(36deg);
-    }
-}
-
-/* II. Papyrus */
-
-.eras-frame--papyrus {
-    --frame-bg: #e3c98f;
-    --frame-ink: #33220d;
-    --frame-soft: #6a4f29;
-}
-
-.eras-roll {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    width: 76cqw;
-}
-
-.eras-roll-end {
-    flex: 0 0 4.6cqw;
-    margin-block: -2cqw;
-    border-radius: 2.3cqw;
-    background: linear-gradient(90deg, #85642f, #d8ba78 40%, #f3dda6 56%, #94733d);
-    box-shadow: 0 2.4cqw 3cqw rgba(70, 45, 10, 0.35);
-}
-
-.eras-roll-sheet {
-    flex: 0 1 100%;
-    min-width: 0;
-    overflow: hidden;
-    padding: 6cqw 5cqw;
-    background:
-        repeating-linear-gradient(90deg, rgba(120, 88, 38, 0.14) 0 1px, transparent 1px 7px),
-        repeating-linear-gradient(0deg, rgba(120, 88, 38, 0.12) 0 1px, transparent 1px 5px),
-        #efdcab;
-    box-shadow: inset 0 0 5cqw rgba(120, 85, 30, 0.3);
-}
-
-.eras-roll-line {
-    font-family: var(--eras-serif);
-    font-size: 4.6cqw;
-    font-style: italic;
-    line-height: 1.2;
-    color: #43280f;
-    white-space: nowrap;
-}
-
-/* Three more lines of pretend script, as dashed ink rules. */
-.eras-roll-script,
-.eras-roll-script::before,
-.eras-roll-script::after {
-    border-top: 2px dashed rgba(67, 40, 15, 0.45);
-}
-
-.eras-roll-script {
-    position: relative;
-    display: block;
-    height: 6cqw;
-    margin-top: 4cqw;
-}
-
-.eras-roll-script::before,
-.eras-roll-script::after {
-    content: "";
-    position: absolute;
-    left: 0;
-}
-
-.eras-roll-script::before {
-    top: 2.4cqw;
-    right: 12%;
-}
-
-.eras-roll-script::after {
-    top: 4.8cqw;
-    right: 34%;
-}
-
-.eras-frame--papyrus.is-active .eras-roll-sheet {
-    animation: eras-unroll 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-
-@keyframes eras-unroll {
-    from {
-        flex-basis: 0;
-        padding-inline: 0;
-    }
-}
-
-/* III. Parchment */
-
-.eras-frame--codex {
-    --frame-bg: #f4e9cb;
-    --frame-ink: #2a2018;
-    --frame-soft: #6b5a41;
-}
-
-.eras-leaf {
-    position: relative;
-    width: 66cqw;
-    padding: 5cqw 15cqw 5.5cqw 5.5cqw;
-    border: 1px solid #cdb98a;
-    outline: 3px double #b5321f;
-    outline-offset: -1.6cqw;
-    background: #fcf4dc;
-    box-shadow:
-        0 4cqw 6cqw -2.6cqw rgba(70, 50, 20, 0.45),
-        inset 0 0 8cqw rgba(160, 120, 60, 0.2);
-}
-
-.eras-leaf-rubric {
-    font-size: max(10px, 1.7cqw);
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #b5321f;
-}
-
-.eras-leaf-line {
-    margin-top: 1.4cqw;
-    font-family: var(--eras-serif);
-    font-size: 4.4cqw;
-    line-height: 1.22;
-}
-
-.eras-initial {
-    float: left;
-    display: grid;
-    place-items: center;
-    width: 1.2em;
-    height: 1.2em;
-    margin: 0.04em 0.22em 0 0;
-    border: 3px solid #c9a227;
-    background:
-        radial-gradient(circle 2px at 5px 5px, #f0d77a 98%, transparent) 0 0 / 12px 12px,
-        #1e3fa6;
-    box-shadow: 0 0 0 3px #fcf4dc, 0 0 0 4px #1e3fa6;
-    color: #f0d77a;
-    font-size: 2.3em;
-    line-height: 1;
-}
-
-.eras-leaf-rules {
-    display: block;
-    clear: both;
-    height: 11cqw;
-    margin-top: 2.4cqw;
-    background: repeating-linear-gradient(180deg, transparent 0 2.6cqw, rgba(120, 90, 50, 0.38) 2.6cqw calc(2.6cqw + 1px));
-}
-
-.eras-leaf-gloss {
-    position: absolute;
-    top: 12cqw;
-    right: 3cqw;
-    width: 10cqw;
-    padding-left: 1cqw;
-    border-left: 1px solid #b5321f;
-    font-family: var(--eras-serif);
-    font-size: max(11px, 2.2cqw);
-    font-style: italic;
-    line-height: 1.1;
-    color: #8a2a1b;
-    transform: rotate(3deg);
-}
-
-.eras-frame--codex.is-active .eras-initial {
-    animation: eras-gild 1400ms ease-out 200ms both;
-}
-
-.eras-frame--codex.is-active .eras-leaf-gloss {
-    animation: eras-settle 600ms ease 500ms both;
-}
-
-@keyframes eras-gild {
-    0% {
-        filter: brightness(0.7) saturate(0.6);
-    }
-
-    45% {
-        filter: brightness(1.5) saturate(1.3);
-    }
-
-    100% {
-        filter: none;
-    }
-}
-
-/* IV. Movable type: real type reads back to front, so the row and each letter flip. */
-
-.eras-frame--press {
-    --frame-bg: #f7f3ea;
-    --frame-ink: #141414;
-    --frame-soft: #57514a;
-}
-
-.eras-press {
-    display: grid;
-    justify-items: center;
-    width: 76cqw;
-}
-
-.eras-forme {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-end;
-    gap: 0.25cqw;
-    padding: 1.2cqw 1.4cqw;
-    border-radius: 4px;
-    background: #2a2a2d;
-    box-shadow: 0 2cqw 3cqw rgba(0, 0, 0, 0.32);
-    font-family: var(--eras-serif);
-    font-size: 2.3cqw;
-}
-
-.eras-forme span {
-    display: grid;
-    place-items: center;
-    width: 1.02em;
-    height: 1.75em;
-    border-radius: 2px;
-    background: linear-gradient(180deg, #dcdce1, #9a9aa2);
-    color: #36363c;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
-    transform: scaleX(-1);
-}
-
-.eras-forme .eras-sort-space {
-    height: 1.35em;
-    background: linear-gradient(180deg, #86868d, #6c6c73);
-}
-
-.eras-proof {
-    position: relative;
-    width: 100%;
-    margin-top: 3.6cqw;
-    padding: 7cqw 3cqw 8cqw;
-    border: 1px solid #ddd5c4;
-    background: #fffdf7;
-    box-shadow: 0 4cqw 5cqw -3cqw rgba(0, 0, 0, 0.4);
-    text-align: center;
-}
-
-.eras-proof::before,
-.eras-proof::after {
-    content: "";
-    position: absolute;
-    top: 2cqw;
-    width: 2cqw;
-    height: 2cqw;
-    background:
-        linear-gradient(#c4321f, #c4321f) 50% 0 / 1.5px 100% no-repeat,
-        linear-gradient(#c4321f, #c4321f) 0 50% / 100% 1.5px no-repeat;
-}
-
-.eras-proof::before {
-    left: 2cqw;
-}
-
-.eras-proof::after {
-    right: 2cqw;
-}
-
-.eras-proof-line {
-    font-family: var(--eras-serif);
-    font-size: 4.6cqw;
-    line-height: 1.2;
-    color: #111;
-}
-
-.eras-frame--press.is-active .eras-forme {
-    animation: eras-press 1200ms ease-in-out both;
-}
-
-.eras-frame--press.is-active .eras-proof-line {
-    animation: eras-print 1200ms linear both;
-}
-
-@keyframes eras-press {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    40%,
-    55% {
-        transform: translateY(11cqw);
-    }
-}
-
-@keyframes eras-print {
-    0%,
-    45% {
-        opacity: 0;
-    }
-
-    55%,
-    100% {
-        opacity: 1;
-    }
-}
-
-/* V. Typewriter */
-
-.eras-frame--typewriter {
-    --frame-bg: #1f302d;
-    --frame-ink: #eaf1ec;
-    --frame-soft: #a8beb5;
-}
-
-.eras-typer {
-    display: grid;
-    justify-items: center;
-    width: 70cqw;
-}
-
-.eras-typer-sheet {
-    width: 84%;
-    padding: 9cqw 4cqw 4cqw;
-    border-radius: 3px 3px 0 0;
-    background: #fdfbf5;
-    box-shadow: 0 -1.4cqw 4cqw rgba(0, 0, 0, 0.3);
-}
-
-.eras-typer-line,
-.eras-crt-line {
-    width: max-content;
-    max-width: 100%;
-    white-space: nowrap;
-}
-
-.eras-typer-line {
-    font-family: "Courier New", Courier, monospace;
-    font-size: 3.6cqw;
-    color: #1c1c1c;
-}
-
-.eras-typer-roller {
-    width: 98%;
-    height: 4cqw;
-    border-radius: 2cqw;
-    background: linear-gradient(180deg, #454545, #0d0d0d 62%, #2c2c2c);
-    box-shadow: 0 1.4cqw 2.6cqw rgba(0, 0, 0, 0.45);
-}
-
-.eras-typer-keys {
-    display: flex;
-    gap: 1.3cqw;
-    margin-top: 4cqw;
-}
-
-.eras-typer-keys span {
-    display: grid;
-    place-items: center;
-    width: 5.4cqw;
-    aspect-ratio: 1;
-    border: 0.45cqw solid #0d0d0d;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #fffaf0, #e3d8c0);
-    box-shadow: 0 0.6cqw 0 #060606;
-    font-size: max(9px, 1.6cqw);
-    font-weight: var(--font-weight-semibold);
-    color: #111;
-}
-
-.eras-frame--typewriter.is-active .eras-typer-line,
-.eras-frame--screen.is-active .eras-crt-line {
-    animation: eras-type 1000ms steps(23) 150ms both;
-}
-
-@keyframes eras-type {
-    from {
-        clip-path: inset(0 100% 0 0);
-    }
-
-    to {
-        clip-path: inset(0 -1em 0 0);
-    }
-}
-
-/* VI. Word processor */
-
-.eras-frame--screen {
-    --frame-bg: #070b08;
-    --frame-ink: #dcffe5;
-    --frame-soft: #86bd95;
-}
-
-.eras-crt {
-    width: 66cqw;
-    padding: 3cqw 3cqw 6cqw;
-    border-radius: 3.4cqw;
-    background: linear-gradient(180deg, #dad1bd, #b7ac94);
-    box-shadow:
-        inset 0 2px 0 rgba(255, 255, 255, 0.55),
-        0 5cqw 7cqw rgba(0, 0, 0, 0.7);
-}
-
-.eras-crt-screen {
-    position: relative;
-    aspect-ratio: 4 / 3;
-    padding: 2.4cqw 2.8cqw;
-    overflow: hidden;
-    border-radius: 2.4cqw / 3cqw;
-    background: radial-gradient(120% 100% at 50% 40%, #0e2c18, #041008 72%);
-    box-shadow: inset 0 0 5cqw rgba(0, 0, 0, 0.9);
-    font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
-    color: #62ff8a;
-    text-shadow: 0 0 1cqw rgba(98, 255, 138, 0.7);
-}
-
-.eras-crt-screen::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 3px);
-    pointer-events: none;
-}
-
-.eras-crt-status {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 0.8cqw;
-    border-bottom: 1px solid rgba(98, 255, 138, 0.38);
-    font-size: max(11px, 2.1cqw);
-    opacity: 0.85;
-}
-
-.eras-crt-line {
-    margin-top: 4cqw;
-    font-size: 4.2cqw;
-    line-height: 1.1;
-}
-
-.eras-crt-line::after {
-    content: "";
-    display: inline-block;
-    width: 0.5em;
-    height: 0.85em;
-    margin-left: 0.12em;
-    background: currentColor;
-    vertical-align: -0.08em;
-    animation: eras-blink 1000ms steps(2, jump-none) infinite;
-}
-
-@keyframes eras-blink {
-    to {
-        opacity: 0;
-    }
-}
-
-/* VII. Feldar: a page with a working suggestion. */
-
-.eras-frame--today {
-    --frame-bg: #f4f7ff;
-    --frame-ink: #111827;
-    --frame-soft: #525e73;
-}
-
-.eras-frame--today .eras-frame-head span,
-.eras-frame--today .eras-frame-gift {
-    color: var(--eras-blue);
-}
-
-.eras-page {
-    align-self: center;
-    justify-self: center;
-    width: 82cqw;
-    padding: 3.6cqw 4.4cqw 3cqw;
-    border-radius: 2.6cqw;
-    background: #fff;
-    box-shadow:
-        0 0 0 1px rgba(20, 40, 120, 0.08),
-        0 4cqw 7cqw -3cqw rgba(30, 60, 160, 0.35);
-}
-
-.eras-page [hidden] {
-    display: none;
-}
-
-.eras-page-head {
-    display: flex;
-    justify-content: space-between;
-    font-size: max(10px, 1.7cqw);
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #8a93a6;
-}
-
-.eras-page-text {
-    margin-top: 1.6cqw;
-    font-size: clamp(14px, 3.1cqw, 19px);
-    line-height: 1.5;
-    color: #262626;
-}
-
-/* Feldar's ink: blue until it is accepted. */
-.eras-ink {
-    color: var(--eras-blue);
-    transition: color 400ms ease;
-}
-
-.eras-ink.is-accepted {
-    color: #262626;
-}
-
-.eras-frame--today.is-active .eras-ink {
-    animation: eras-ink-in 1100ms ease 250ms both;
-}
-
-@keyframes eras-ink-in {
-    from {
-        clip-path: inset(0 100% 0 0);
-    }
-
-    to {
-        clip-path: inset(0 -1em 0 0);
-    }
-}
-
-.eras-page-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.2cqw;
-    margin-top: 2.6cqw;
-}
-
-.eras-chip {
-    height: max(32px, 6.4cqw);
-    padding: 0 max(12px, 2.6cqw);
-    border: 1.5px solid #cdd5e7;
-    border-radius: var(--radius-full);
-    background: #fff;
-    font-size: max(13px, 2.4cqw);
-    font-weight: var(--font-weight-semibold);
-    color: #111827;
-    transition: border-color var(--transition-fast);
-}
-
-.eras-chip:hover {
-    border-color: var(--eras-blue);
-}
-
-.eras-chip--blue {
-    border-color: var(--eras-blue);
-    background: var(--eras-blue);
-    color: #fff;
-}
-
-.eras-page-status {
-    min-height: 1.4em;
-    margin-top: 1.4cqw;
-    font-size: max(12px, 2.1cqw);
-    color: #525e73;
-}
-
-/* The stops along the bottom of the dial. Each stop draws its own stretch of the
-   dashed line, so the line still runs under every stop when the row scrolls. */
-.eras-stops {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-    margin-top: 18px;
-}
-
-.eras-stop {
-    position: relative;
-    isolation: isolate;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    padding: 26px 2px 6px;
-    border-radius: var(--radius-md);
-    font-size: 0.75rem;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.25;
-    color: var(--color-muted);
-}
-
-.eras-stop::after {
-    content: "";
-    position: absolute;
-    top: 9px;
-    right: 0;
-    left: 0;
-    z-index: -1;
-    border-top: 2px dashed var(--color-border-muted);
-}
-
-.eras-stop:first-child::after {
-    left: 50%;
-}
-
-.eras-stop:last-child::after {
-    right: 50%;
-}
-
-.eras-stop::before {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 50%;
-    width: 16px;
-    height: 16px;
-    border: 2px solid var(--color-primary-alt);
-    border-radius: 50%;
-    background: var(--color-surface);
-    transform: translateX(-50%);
-    transition: background-color 200ms ease, transform 200ms ease;
-}
-
-.eras-stop span {
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-primary-alt);
-}
-
-.eras-stop:hover::before {
-    transform: translateX(-50%) scale(1.2);
-}
-
-.eras-stop[aria-pressed="true"]::before {
-    background: var(--color-primary-alt);
-    transform: translateX(-50%) scale(1.25);
-}
-
-.eras-stop--today::before {
-    border-color: #0c70e5;
-}
-
-.eras-stop--today span {
-    color: #0c70e5;
-}
-
-.eras-stop--today[aria-pressed="true"]::before {
-    background: #0c70e5;
-}
-
-.eras-foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px 20px;
-    margin-top: 10px;
-}
-
-.eras-note {
-    font-size: 0.8125rem;
-    line-height: 1.25rem;
-    color: var(--color-muted);
-}
-
-.eras-replay {
-    padding: 4px 0;
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-primary-alt);
-    text-decoration: underline;
-    text-decoration-color: var(--color-border-muted);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.25em;
-}
-
-.eras-replay:hover {
-    text-decoration-color: var(--color-primary-alt);
-}
-
-/* One column: the dial comes straight after the section head, the house rules after it. */
 @media (max-width: 64em) {
-    .eras-container {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .eras-text {
-        display: contents;
-    }
-
-    .eras-dial {
-        max-width: 40rem;
-    }
-
-    .eras-house {
-        order: 1;
-    }
-
-    .eras-rules-title {
-        margin-top: 0;
+    .rules-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-/* On a phone the stage is square, which gives Feldar's page room for its buttons, and
-   the stops scroll sideways instead of squeezing their names together. */
 @media (max-width: 48em) {
-    .eras-stage {
-        aspect-ratio: 1 / 1;
-    }
-
-    .eras-stops {
-        grid-template-columns: repeat(7, minmax(4.5rem, 1fr));
-        margin-inline: calc(var(--page-margin) * -1);
-        padding-inline: var(--page-margin);
-        overflow-x: auto;
-        scrollbar-width: none;
-    }
-
-    .eras-rules {
+    .rules-list {
         grid-template-columns: minmax(0, 1fr);
         gap: var(--space-4);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .eras-frame,
-    .eras-ink {
-        transition: none;
-    }
-
-    .eras-stage *,
-    .eras-stage *::before,
-    .eras-stage *::after {
-        animation: none !important;
     }
 }
 
@@ -2789,20 +1319,6 @@ html[data-view="machine"] .machine-view {
         line-height: 2rem;
         min-height: 8rem;
     }
-}
-
-/* The home page's closing section: an invitation over the typewriter, where the reader
-   types a line of their own and asks Feldar for one in blue. */
-
-.closing {
-    width: 100%;
-    padding: clamp(2rem, 4vw, 4rem) var(--page-margin) clamp(4rem, 8vw, 8rem);
-}
-
-.closing-head {
-    align-items: center;
-    margin: 0 auto clamp(2.5rem, 5vw, 4rem);
-    text-align: center;
 }
 
 /* ============================================

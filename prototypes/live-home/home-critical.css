@@ -902,8 +902,10 @@ body.nav-open {
     z-index: 1;
 }
 
+/* The texture stays on the hero's paper: it fades out by the hero's foot rather than
+   running on over the white section below. */
 .hero-writing-texture-canvas {
-    --hero-ink-fade-distance: clamp(9rem, 16vw, 18rem);
+    --hero-ink-fade-distance: 0px;
 
     position: absolute;
     inset: 0 0 auto;
@@ -1747,11 +1749,12 @@ body.nav-open {
     rotate: -2.5deg;
 }
 
-/* Top right, beside the page's opening paragraphs, leaving the margin by the suggestion
-   to Sage. */
+/* Top right, in the margin beside the page's opening paragraphs and narrow enough to
+   stay clear of them, leaving the margin by the suggestion to Sage. */
 .hero-card--canvas {
     top: calc(var(--px) * 96);
     right: calc(var(--px) * -52);
+    width: calc(var(--px) * 226);
     padding: 0 calc(var(--px) * 3) calc(var(--px) * 3);
     border-radius: calc(var(--px) * 15);
     background: #f3f3f3;
