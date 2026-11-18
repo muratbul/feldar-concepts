@@ -1165,34 +1165,30 @@ html[data-view="machine"] .machine-view {
     }
 }
 
-/* House rules: what Feldar's AI does and does not do with a writer's words, four across
-   under thin rules, each with a line icon. */
+/* A row of short items under thin rules: four across, two on a tablet, one on a phone.
+   Each item is a heading with a line or two beneath it. The house rules and the plans
+   are both set this way. */
 
-.rules-list {
+.ruled-list {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-8);
     margin-top: var(--space-10);
 }
 
-.rules-list li {
+.ruled-list li {
     padding-top: var(--space-4);
     border-top: 1px solid var(--color-border);
 }
 
-.rules-icon {
-    margin-bottom: var(--space-3);
-    color: var(--color-primary-alt);
-}
-
-.rules-list h3 {
+.ruled-list h3 {
     font-size: 1rem;
     font-weight: var(--font-weight-semibold);
     line-height: 1.5rem;
     color: var(--color-primary-alt);
 }
 
-.rules-list p {
+.ruled-list p {
     margin-top: var(--space-1);
     font-size: 0.9375rem;
     line-height: 1.375rem;
@@ -1200,29 +1196,37 @@ html[data-view="machine"] .machine-view {
 }
 
 @media (max-width: 64em) {
-    .rules-list {
+    .ruled-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 48em) {
-    .rules-list {
+    .ruled-list {
         grid-template-columns: minmax(0, 1fr);
         gap: var(--space-4);
     }
+}
+
+/* House rules: what Feldar's AI does and does not do with a writer's words, set as a
+   ruled list, each rule under a line icon. */
+
+.rules-icon {
+    margin-bottom: var(--space-3);
+    color: var(--color-primary-alt);
 }
 
 /* ============================================
    TESTIMONIALS SECTION
    ============================================ */
 
-/* Spaced above and below by the same measure as the home page's other sections. */
+/* Spaced above by the same measure as the home page's other sections. */
 .testimonials {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: clamp(4rem, 9.58vw, 11.5rem) var(--page-margin);
+    padding: var(--home-section-gap) var(--page-margin) 0;
 }
 
 .testimonials-container {
@@ -1312,6 +1316,89 @@ html[data-view="machine"] .machine-view {
         font-size: 1.5rem;
         line-height: 2rem;
         min-height: 8rem;
+    }
+}
+
+/* Plans: the four plans as a ruled list, each with its price, its credits and the models
+   it can use. The full comparison is on the pricing page. */
+
+.ruled-list .plans-price {
+    margin-top: var(--space-2);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 2rem;
+    letter-spacing: -0.2px;
+    color: var(--color-primary-alt);
+}
+
+/* Common questions: the section head on the left and the questions beside it, as native
+   disclosures under thin rules. They carry the landing pages' .lp-faq-item class because
+   the build reads a page's FAQ markup from it. */
+
+.questions-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: var(--space-8);
+    align-items: start;
+}
+
+.questions .lp-faq-item {
+    border-top: 1px solid var(--color-border);
+}
+
+.questions .lp-faq-item:last-child {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.questions summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) 0;
+    font-size: 1.0625rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5rem;
+    color: var(--color-primary-alt);
+    cursor: pointer;
+    list-style: none;
+}
+
+.questions summary::-webkit-details-marker {
+    display: none;
+}
+
+.questions summary::after {
+    content: "";
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    margin-top: 5px;
+    background: url('../../assets/ui/icon-down-14.svg') center / 14px 14px no-repeat;
+    transition: transform var(--transition-fast);
+}
+
+.questions [open] summary::after {
+    transform: rotate(180deg);
+}
+
+.questions .lp-faq-item p {
+    max-width: 36rem;
+    padding-bottom: var(--space-5);
+    font-size: 1rem;
+    line-height: 1.625rem;
+    color: var(--color-text-description);
+}
+
+.questions a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+@media (max-width: 64em) {
+    .questions-layout {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 

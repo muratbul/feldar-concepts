@@ -1966,9 +1966,18 @@ body.nav-open {
    critical CSS, so the first section under the hero has its frame before the rest of
    its styles arrive. */
 
+.home-page {
+    --home-section-gap: clamp(4rem, 9.58vw, 11.5rem);
+}
+
 .home-section {
     width: 100%;
-    padding: clamp(4rem, 9.58vw, 11.5rem) var(--page-margin) 0;
+    padding: var(--home-section-gap) var(--page-margin) 0;
+}
+
+/* The footer stands as far below the last section as the sections do from each other. */
+.home-page .footer {
+    margin-top: var(--home-section-gap);
 }
 
 .home-section-container {
