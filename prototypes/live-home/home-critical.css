@@ -849,9 +849,11 @@ body.nav-open {
    ============================================ */
 
 /* The hero is a sheet of writing paper; the header above it takes the same colour
-   while it is transparent. */
+   while it is transparent. The paper runs to --hero-paper-reach of the hero's height
+   and fades to white by its foot. */
 .home-page {
     --hero-paper: #f8f4ec;
+    --hero-paper-reach: 70%;
 }
 
 .hero {
@@ -863,7 +865,14 @@ body.nav-open {
     position: relative;
     isolation: isolate;
     overflow: visible;
-    background: linear-gradient(to bottom, var(--hero-paper) 0%, var(--hero-paper) 70%, var(--color-surface) 100%);
+    background: linear-gradient(to bottom, var(--hero-paper) 0%, var(--hero-paper) var(--hero-paper-reach), var(--color-surface) 100%);
+}
+
+/* Scrolled, the header is a solid bar in the colour of the hero beneath it: paper, then
+   white by the same fade. hero-header.ts sets --header-paper-share from the scroll
+   position, 1 for paper down to 0 for white. */
+.home-page .header.is-scrolled {
+    background: color-mix(in srgb, var(--hero-paper) calc(var(--header-paper-share, 0) * 100%), var(--color-surface));
 }
 
 .home-page .header:not(.is-scrolled) {
@@ -900,6 +909,15 @@ body.nav-open {
 
 .home-page .header:not(.is-scrolled) .nav {
     z-index: 1;
+}
+
+/* With the phone menu open, the header joins the menu's white sheet. */
+.home-page.nav-open .header {
+    background: var(--color-surface);
+}
+
+.home-page.nav-open .header::before {
+    content: none;
 }
 
 /* The texture stays on the hero's paper: it fades out by the hero's foot rather than
