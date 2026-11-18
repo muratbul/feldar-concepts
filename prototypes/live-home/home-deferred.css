@@ -1207,21 +1207,19 @@ html[data-view="machine"] .machine-view {
    TESTIMONIALS SECTION
    ============================================ */
 
+/* Spaced above and below by the same measure as the home page's other sections. */
 .testimonials {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 11.5rem; /* 184px */
-    padding-bottom: 8rem; /* 128px */
     width: 100%;
-    padding-left: var(--page-margin);
-    padding-right: var(--page-margin);
+    padding: clamp(4rem, 9.58vw, 11.5rem) var(--page-margin);
 }
 
 .testimonials-container {
     display: flex;
     flex-direction: column;
-    gap: 3.5rem; /* 56px */
+    gap: 2.5rem; /* 40px */
     align-items: center;
     width: 100%;
     margin-inline: auto;
@@ -1245,7 +1243,9 @@ html[data-view="machine"] .machine-view {
     color: var(--color-primary-alt);
     margin: 0;
     width: 100%;
-    min-height: 10.5rem;
+    /* Two lines, which every quote runs to at this size, so the name below stays put
+       as the quotes change. */
+    min-height: 5.25rem;
     display: block;
     text-wrap: balance;
 }
@@ -1269,15 +1269,15 @@ html[data-view="machine"] .machine-view {
 .testimonial-nav {
     display: flex;
     align-items: center;
-    gap: 0.25rem; /* 4px */
+    gap: 0.5rem; /* 8px */
 }
 
 .testimonial-nav-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.5rem; /* 24px */
-    height: 1.5rem; /* 24px */
+    width: 2rem; /* 32px */
+    height: 2rem; /* 32px */
     background: var(--color-surface-active);
     border: none;
     border-radius: 50%;
@@ -1297,23 +1297,8 @@ html[data-view="machine"] .machine-view {
    RESPONSIVE
    ============================================ */
 
-@media (max-width: 80em) {
-    .testimonials {
-        padding-top: 8rem;
-        padding-bottom: 6rem;
-    }
-
-    .testimonial-quote {
-        min-height: 9rem;
-    }
-}
-
+/* Smaller type on a phone, where a quote can run to four lines. */
 @media (max-width: 48em) {
-    .testimonials {
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-    }
-
     .testimonial-quote {
         font-size: 1.5rem;
         line-height: 2rem;
@@ -1502,21 +1487,21 @@ html[data-view="machine"] .machine-view {
     background: var(--color-surface-secondary);
 }
 
-/* Footer Links - inside the white footer container */
+/* Footer links: the logo on the left, the link columns as one block against the right
+   edge, and the legal links under a rule. Everything lines up with the page's column
+   and with the banner above. */
 .footer-links {
     display: flex;
     flex-direction: column;
-    gap: 2rem; /* 32px */
     width: 100%;
-    padding: 3rem 0.625rem 2.75rem;
+    padding: 3rem 0 2rem;
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 16.5rem repeat(4, 10.75rem);
-    column-gap: clamp(2rem, 3vw, 3rem);
+    grid-template-columns: minmax(0, 1fr) repeat(4, max-content);
+    column-gap: clamp(2.5rem, 5vw, 4.5rem);
     align-items: flex-start;
-    justify-content: start;
     width: 100%;
     padding-bottom: 3rem;
 }
@@ -1525,7 +1510,6 @@ html[data-view="machine"] .machine-view {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 16.5rem;
 }
 
 .footer-brand-logo {
@@ -1547,11 +1531,7 @@ html[data-view="machine"] .machine-view {
 .footer-column {
     display: flex;
     flex-direction: column;
-    gap: 0;
     align-items: flex-start;
-    justify-content: flex-start;
-    width: 10.75rem;
-    overflow: hidden;
 }
 
 .footer-column-title {
@@ -1564,7 +1544,7 @@ html[data-view="machine"] .machine-view {
     color: rgba(0, 0, 0, 0.54);
     text-align: left;
     width: 100%;
-    padding: 0 0.5rem 0.5rem 0;
+    padding-bottom: 0.5rem;
 }
 
 .footer-column-links {
@@ -1583,7 +1563,7 @@ html[data-view="machine"] .machine-view {
     letter-spacing: var(--letter-spacing-normal);
     color: rgba(0, 0, 0, 0.90);
     min-height: 1.625rem;
-    padding: 0.1875rem 1rem 0.1875rem 0;
+    padding: 0.1875rem 0;
     white-space: nowrap;
     transition: color var(--transition-fast);
 }
@@ -1599,6 +1579,8 @@ html[data-view="machine"] .machine-view {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
 }
 
 .footer-legal {
@@ -1627,56 +1609,35 @@ html[data-view="machine"] .machine-view {
    RESPONSIVE
    ============================================ */
 
-@media (max-width: 80em) {
-    .footer-cta {
-        height: 28.75rem;
-        min-height: 28.75rem;
+/* Too narrow for the logo and the columns in one row: the logo takes a line of its own
+   and the columns share the width. */
+@media (max-width: 64em) {
+    .footer-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2.5rem 2rem;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 48em) {
+    .footer-links {
+        padding: 2.5rem 0 2rem;
     }
 
     .footer-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 2rem;
-    }
-
-    .footer-brand,
-    .footer-column {
-        width: auto;
-    }
-}
-
-@media (max-width: 64em) {
-    .footer-cta {
-        height: 28.75rem;
-        min-height: 28.75rem;
-    }
-
-}
-
-@media (max-width: 48em) {
-    .footer-cta {
-        height: 28.75rem;
-        min-height: 28.75rem;
-    }
-
-    .footer-brand,
-    .footer-column {
-        width: 100%;
-    }
-
-    .footer-links {
-        padding: 2.5rem 0.625rem 2rem;
-    }
-
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
         padding-bottom: 2rem;
     }
 
+    .footer-column-links a {
+        white-space: normal;
+    }
+
     .footer-bottom {
-        flex-direction: row;
         gap: 1rem;
-        align-items: center;
     }
 }
 
