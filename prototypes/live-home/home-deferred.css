@@ -848,6 +848,11 @@ html[data-view="machine"] .machine-view {
     }
 }
 
+/* The caret stays lit while the page's motion is paused. */
+[data-motion-paused] .sage-caret {
+    animation: none;
+}
+
 .sage-fixed {
     border-radius: 4px;
     animation: sage-fixed 1400ms ease both;
@@ -1102,7 +1107,11 @@ html[data-view="machine"] .machine-view {
 }
 
 .features-shot {
-    padding: clamp(0.75rem, 2vw, 1.75rem);
+    --features-shot-padding: clamp(0.75rem, 2vw, 1.75rem);
+    /* Sets the pause button in the corner of the loop, not of the frame round it. */
+    --motion-toggle-inset: calc(var(--features-shot-padding) + 0.625rem);
+    position: relative;
+    padding: var(--features-shot-padding);
     border: 1px solid var(--color-border);
     border-radius: 0.625rem;
     background: var(--color-surface-secondary);

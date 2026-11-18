@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
             name="description"
-            content="Feldar is the AI-powered writing tool built for focus and depth. Generate, reshape, and refine your writing with context that remembers everything."
+            content="Feldar is a writing app for novelists. Keep chapters, scenes and story world together, with AI suggestions you accept or dismiss. Start free on web or Mac."
         />
-        <title>Feldar - Write your story in full context</title>
+        <title>Feldar - Novel Writing Software with AI You Approve</title>
 
         <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png" />
         <link rel="icon" href="../../assets/favicon-192.png" sizes="192x192" type="image/png" />
@@ -111,15 +111,16 @@
                     <!-- Hero Content -->
                     <div class="hero-content" data-hero-ink-exclusion>
                         <h1 class="hero-title">
-                            Writing with your drafts, notes, and world connected
+                            The novel writing app where AI suggests and you decide
                         </h1>
+                        <p class="hero-lede">Feldar keeps your chapters, scene plans and story world in one place, so its help draws on your book. Suggestions arrive in blue and stay only if you accept them.</p>
                         <div class="hero-cta">
                             <a href="/login" class="btn btn-primary hero-cta-button" rel="nofollow">Start writing free</a>
-                            <a href="/download" class="btn btn-secondary hero-cta-button">
+                            <a href="/download" class="btn btn-secondary hero-cta-button hero-cta-button--mac">
                                 <img src="../../assets/icons/apple.svg" alt="" class="hero-cta-icon" width="13" height="16" />
                                 Download for Mac
                             </a>
-                            <p class="hero-cta-terms">Free to start: 500 credits, no credit card.</p>
+                            <p class="hero-cta-terms">Free to start, no credit card. Your 500 credits pay for AI help. Writing never uses them.</p>
                         </div>
                     </div>
                 </div>
@@ -214,6 +215,10 @@
 
                             <p class="sr-only">Feldar's writing page, playing on a loop: a suggestion waits in blue with Accept, Revise and Dismiss; the writer accepts it, Sage leaves a reaction in the margin, and the next suggestion comes from Continue from here in the caret menu.</p>
                         </div>
+                        <button class="motion-toggle" type="button" aria-label="Pause the animations" data-motion-toggle data-markdown-skip hidden>
+                            <svg class="motion-toggle-pause" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx="0.75"/><rect x="7" y="1.5" width="3" height="9" rx="0.75"/></svg>
+                            <svg class="motion-toggle-play" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.25 1.9v8.2a.6.6 0 0 0 .92.5l6.38-4.1a.6.6 0 0 0 0-1L4.17 1.4a.6.6 0 0 0-.92.5Z"/></svg>
+                        </button>
                         <div class="hero-frame hero-frame--legacy" id="hero-demo-frame">
                             <!-- React demo mount (optional). If present, JS will mount and hide fallback below. -->
                             <div
@@ -639,6 +644,10 @@
                                 <source src="../../assets/demo/loop-outline-scenes.webm" type="video/webm" />
                                 <source src="../../assets/demo/loop-outline-scenes.mp4" type="video/mp4" />
                             </video>
+                            <button class="motion-toggle" type="button" aria-label="Pause the animations" data-motion-toggle data-markdown-skip hidden>
+                                <svg class="motion-toggle-pause" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx="0.75"/><rect x="7" y="1.5" width="3" height="9" rx="0.75"/></svg>
+                                <svg class="motion-toggle-play" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.25 1.9v8.2a.6.6 0 0 0 .92.5l6.38-4.1a.6.6 0 0 0 0-1L4.17 1.4a.6.6 0 0 0-.92.5Z"/></svg>
+                            </button>
                         </figure>
                     </div>
                     <div class="features-panel" role="tabpanel" id="features-panel-write" aria-labelledby="features-tab-write" tabindex="0" hidden>
@@ -666,6 +675,10 @@
                                 <source src="../../assets/demo/loop-continue-blue.webm" type="video/webm" />
                                 <source src="../../assets/demo/loop-continue-blue.mp4" type="video/mp4" />
                             </video>
+                            <button class="motion-toggle" type="button" aria-label="Pause the animations" data-motion-toggle data-markdown-skip hidden>
+                                <svg class="motion-toggle-pause" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx="0.75"/><rect x="7" y="1.5" width="3" height="9" rx="0.75"/></svg>
+                                <svg class="motion-toggle-play" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.25 1.9v8.2a.6.6 0 0 0 .92.5l6.38-4.1a.6.6 0 0 0 0-1L4.17 1.4a.6.6 0 0 0-.92.5Z"/></svg>
+                            </button>
                         </figure>
                     </div>
                     <div class="features-panel" role="tabpanel" id="features-panel-revise" aria-labelledby="features-tab-revise" tabindex="0" hidden>
@@ -790,9 +803,7 @@
                         <h2 class="footer-cta-title">
                             Try Feldar today.
                         </h2>
-                        <a href="/download" class="btn btn-md btn-white">
-                            Start writing
-                        </a>
+                        <a href="/login" class="btn btn-md btn-white" rel="nofollow">Start writing</a>
                     </div>
                 </div>
 

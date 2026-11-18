@@ -1010,6 +1010,18 @@ body.nav-open {
     text-wrap: balance;
 }
 
+/* Set like the ledes of the sections below, and pulled up so it reads as one block
+   with the headline: 16px under it, against 32px before the buttons. */
+.hero-lede {
+    max-width: 37.5rem;
+    margin-top: -1rem;
+    font-size: 1.125rem;
+    line-height: 1.6875rem;
+    letter-spacing: -0.09px;
+    color: var(--color-text-description);
+    text-wrap: pretty;
+}
+
 .hero-cta {
     display: flex;
     flex-wrap: wrap;
@@ -1040,6 +1052,14 @@ body.nav-open {
     font-size: 0.875rem;
     line-height: 1.25rem;
     color: var(--color-text-description);
+}
+
+/* A phone or tablet cannot run the Mac app, so the download is offered only where the
+   main pointer is a mouse or trackpad. */
+@media (hover: none) and (pointer: coarse) {
+    .hero-cta-button--mac {
+        display: none;
+    }
 }
 
 /* Demo/Thumbnail section */
@@ -1883,6 +1903,15 @@ body.nav-open {
     }
 }
 
+/* Paused with the page's motion, the cards hold where they are and the caret stays lit. */
+[data-motion-paused] .hero-card {
+    animation-play-state: paused;
+}
+
+[data-motion-paused] .hero-window-caret {
+    animation: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .hero-card,
     .hero-window-caret {
@@ -1892,6 +1921,43 @@ body.nav-open {
     .hero-window * {
         transition: none !important;
     }
+}
+
+/* The button that pauses and plays the page's motion, set in the bottom right corner of
+   a looping demo. It stays hidden until the script that works it has loaded. */
+.motion-toggle {
+    position: absolute;
+    right: var(--motion-toggle-inset, 0.75rem);
+    bottom: var(--motion-toggle-inset, 0.75rem);
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(14, 14, 14, 0.56);
+    color: #fff;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.motion-toggle[hidden] {
+    display: none;
+}
+
+.motion-toggle:hover {
+    background: rgba(14, 14, 14, 0.72);
+}
+
+.motion-toggle-play,
+[data-motion-paused] .motion-toggle-pause {
+    display: none;
+}
+
+[data-motion-paused] .motion-toggle-play {
+    display: block;
 }
 
 /* The home page's sections below the hero share one frame: the page margin, the space
