@@ -202,19 +202,28 @@
                 </div>
             </section>
 
-            <!-- Points Section -->
-            <section class="rv-wrap points" aria-label="What Feldar is">
-                <div class="points-item">
-                    <h2 class="rv-h3">A full writing app</h2>
-                    <p class="rv-text">Write, plan and organize your book in one place. All of it works without the AI.</p>
-                </div>
-                <div class="points-item">
-                    <h2 class="rv-h3">Help when you ask for it</h2>
-                    <p class="rv-text">Feldar can suggest the next lines, rework a passage or plan a chapter’s scenes. You choose what to keep.</p>
-                </div>
-                <div class="points-item">
-                    <h2 class="rv-h3">Your writing stays yours</h2>
-                    <p class="rv-text">Feldar does not train AI models on your writing, and you own what you write.</p>
+            <!-- Limits Section -->
+            <section class="limits" aria-labelledby="limits-title">
+                <div class="rv-wrap rv-grid">
+                    <h2 class="rv-h2 limits-title" id="limits-title">What Feldar will not do</h2>
+                    <div class="limits-list">
+                        <div class="limits-item">
+                            <h3 class="rv-h3">It does not write unless you ask.</h3>
+                            <p class="rv-text">Every suggestion begins with a request from you, and what Feldar writes is marked so you can review it.</p>
+                        </div>
+                        <div class="limits-item">
+                            <h3 class="rv-h3">It does not train AI on your writing.</h3>
+                            <p class="rv-text">You own what you write. The details are in the <a href="/privacy">privacy policy</a>.</p>
+                        </div>
+                        <div class="limits-item">
+                            <h3 class="rv-h3">It does not need the AI to work.</h3>
+                            <p class="rv-text">You can write, plan and organize a whole book without it, and none of that uses credits.</p>
+                        </div>
+                        <div class="limits-item">
+                            <h3 class="rv-h3">It does not ask for a card to start.</h3>
+                            <p class="rv-text">The Starter plan is free.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -251,6 +260,14 @@
                                         />
                                     </picture>
                                 </div>
+                                <a
+                                    class="rv-button rv-button--small rv-button--paper rv-play"
+                                    href="../../assets/demo/loop-outline-scenes.mp4"
+                                    data-recording
+                                    data-focus="100%"
+                                    data-title="Generate scenes planning five scenes for an empty chapter"
+                                    >Watch Generate scenes</a
+                                >
                             </figure>
                             <div class="plan-notes">
                                 <div class="rv-note">
@@ -352,20 +369,58 @@
                                     />
                                 </picture>
                             </div>
+                            <a
+                                class="rv-button rv-button--small rv-button--paper rv-play"
+                                href="../../assets/demo/loop-define-rewrite-card.mp4"
+                                data-recording
+                                data-focus="69%"
+                                data-title="A paragraph rewritten with Deepen Description, then applied to the page"
+                                >Watch a rewrite</a
+                            >
                         </figure>
-                        <div class="write-notes">
-                            <div class="rv-note">
-                                <h3 class="rv-h3">Polish, Deepen, Enhance</h3>
-                                <p class="rv-text">Select a passage and pick a rewrite. The new version shows what changed, and you apply it or keep your own.</p>
+                        <div class="rv-note write-rewrites">
+                            <h3 class="rv-h3">Polish, Deepen, Enhance</h3>
+                            <p class="rv-text">Select a passage and pick a rewrite. The new version shows what changed, and you apply it or keep your own.</p>
+                            <div class="write-index">
+                                <div>
+                                    <h4 class="write-index-group">Polish</h4>
+                                    <dl>
+                                        <div><dt>Sharpen Prose</dt><dd>Add power and precision to the prose</dd></div>
+                                        <div><dt>Smooth Flow</dt><dd>Improve rhythm and readability</dd></div>
+                                        <div><dt>Tighten</dt><dd>Remove unnecessary words</dd></div>
+                                        <div><dt>Clarify</dt><dd>Make meaning clearer</dd></div>
+                                    </dl>
+                                </div>
+                                <div>
+                                    <h4 class="write-index-group">Deepen</h4>
+                                    <dl>
+                                        <div><dt>Deepen Description</dt><dd>Add depth and sensory detail</dd></div>
+                                        <div><dt>Cut Exposition</dt><dd>Reduce summary and backstory load</dd></div>
+                                        <div><dt>Dramatize</dt><dd>Turn summary into action and scene beats</dd></div>
+                                        <div><dt>Add Interiority</dt><dd>Deepen character thoughts and feelings</dd></div>
+                                        <div><dt>Strengthen Voice</dt><dd>Reinforce narrative style and diction</dd></div>
+                                    </dl>
+                                </div>
+                                <div>
+                                    <h4 class="write-index-group">Enhance</h4>
+                                    <dl>
+                                        <div><dt>Raise Tension</dt><dd>Increase urgency and emotional pressure</dd></div>
+                                        <div><dt>Add Foreshadowing</dt><dd>Plant subtle hints for what comes next</dd></div>
+                                        <div><dt>Improve Dialogue</dt><dd>Refine voice, rhythm and exchange</dd></div>
+                                        <div><dt>Change POV</dt><dd>Shift the passage into a different viewpoint</dd></div>
+                                        <div><dt>Change Tense</dt><dd>Convert the passage to a different tense</dd></div>
+                                    </dl>
+                                </div>
                             </div>
-                            <div class="rv-note">
-                                <h3 class="rv-h3">Instruct</h3>
-                                <p class="rv-text">Type what you want changed in plain words, such as slow it down.</p>
-                            </div>
-                            <div class="rv-note">
-                                <h3 class="rv-h3">Voice &amp; Style</h3>
-                                <p class="rv-text">Paste a sample of your prose and Feldar writes toward it.</p>
-                            </div>
+                            <p class="write-index-note">Sharpen Prose, Cut Exposition, Dramatize and Raise Tension appear when the passage you select suits them.</p>
+                        </div>
+                        <div class="rv-note write-note">
+                            <h3 class="rv-h3">Instruct</h3>
+                            <p class="rv-text">Type what you want changed in plain words, such as slow it down.</p>
+                        </div>
+                        <div class="rv-note write-note write-note--side">
+                            <h3 class="rv-h3">Voice &amp; Style</h3>
+                            <p class="rv-text">Paste a sample of your prose and Feldar writes toward it.</p>
                             <a class="rv-link part-more" href="/ai-for-novelists">How Feldar’s AI behaves</a>
                         </div>
                     </div>
@@ -561,6 +616,15 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Recording Player -->
+            <dialog class="rv-player" aria-labelledby="recording-title" data-recording-player data-markdown-skip>
+                <video class="rv-player-video" controls loop muted playsinline preload="none" width="1440" height="900"></video>
+                <form class="rv-player-foot" method="dialog">
+                    <p class="rv-player-title" id="recording-title" data-recording-title></p>
+                    <button class="rv-button rv-button--small rv-button--paper">Close</button>
+                </form>
+            </dialog>
 
             <!-- Footer Section -->
             <footer>

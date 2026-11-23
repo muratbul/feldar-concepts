@@ -4,8 +4,9 @@
 /* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: H, the contents column could compete with the live chapter; its titles stay at title size under thin rules so the chapter leads */
 /* Hallmark · waive 7b · surface: absolute, on the live chapter and the mounts behind the stills only · those grounds are the app's own white page, set beside real captures of it */
 /* Hallmark · waive 26b · no control on the page is ever disabled · the live chapter puts its choices away rather than disabling them */
+/* Hallmark · waive 28b · the player holds no recording until a link under a still is pressed · that still already shows the screen a poster would */
 /* Hallmark · hero-review: not run as its own step · finish-review: subagent · 8 findings · 6 resolved 2 partial · gap: the view toggle stays fixed on desktop, and at 1280 x 800 the plate's foot runs past the fold */
-/* Critical homepage CSS: the page shell, the front page and the points under it. */
+/* Critical homepage CSS: the page shell, the front page and the limits under it. */
 /* ============================================
    FELDAR DESIGN TOKENS
    ============================================ */
@@ -1390,50 +1391,64 @@ body.nav-open {
     }
 }
 
-/* Three standing points under the front page, set as ruled columns. */
+/* What Feldar will not do, under the front page. The heading takes the first three
+   columns, as the offer does above it, and the four statements are ruled beside it. */
 
-.points {
+.limits {
+    padding-top: var(--rv-section);
+}
+
+.limits-title {
+    grid-column: span 3;
+}
+
+.limits-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-column: span 9;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: var(--rv-gap);
-    border-block: 1px solid var(--rv-rule);
 }
 
-.points-item {
-    position: relative;
-    padding-block: var(--space-8);
+.limits-item {
+    padding-block: var(--space-5) var(--space-10);
+    border-top: 1px solid var(--rv-ink);
 }
 
-.points-item + .points-item::before {
-    content: "";
-    position: absolute;
-    top: var(--space-8);
-    bottom: var(--space-8);
-    left: calc(var(--rv-gap) / -2);
-    width: 1px;
-    background: var(--rv-rule);
-}
-
-.points-item .rv-text {
+.limits-item .rv-text {
+    max-width: 34ch;
     margin-top: var(--space-2);
     color: var(--rv-soft);
 }
 
-@media (max-width: 45rem) {
-    .points {
+.limits-item a {
+    color: var(--rv-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.limits-item a:hover {
+    text-decoration-thickness: 2px;
+}
+
+@media (max-width: 62.5rem) {
+    .limits-title,
+    .limits-list {
+        grid-column: 1 / -1;
+    }
+
+    .limits-title {
+        margin-bottom: var(--space-10);
+    }
+}
+
+@media (max-width: 40rem) {
+    .limits-list {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .points-item {
-        padding-block: var(--space-5);
-    }
-
-    .points-item + .points-item {
-        border-top: 1px solid var(--rv-rule);
-    }
-
-    .points-item + .points-item::before {
-        content: none;
+    .limits-item {
+        padding-bottom: var(--space-6);
     }
 }
 

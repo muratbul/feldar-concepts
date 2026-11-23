@@ -180,10 +180,11 @@ html[data-view="machine"] .machine-view {
     margin-top: var(--space-5);
 }
 
-/* Write: the rewrite card larger than life on the cloth, its notes ruled beside it. */
+/* Write: the rewrite card larger than life on the cloth, with the rewrites it can make
+   indexed beside it. The two other ways to ask sit under rules below. */
 .write-body {
     align-items: start;
-    row-gap: var(--space-10);
+    row-gap: var(--space-12);
     margin-top: var(--space-12);
 }
 
@@ -191,18 +192,58 @@ html[data-view="machine"] .machine-view {
     grid-column: span 5;
 }
 
-.write-notes {
+.write-rewrites {
     grid-column: 7 / span 6;
 }
 
-.write-notes .rv-note {
-    padding-block: var(--space-5);
+/* The app's own rewrite menu: its three groups, and each rewrite with the line the app
+   gives it. */
+.write-index {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--rv-gap);
+    margin-top: var(--space-8);
+}
+
+.write-index-group {
+    padding-block: var(--space-3);
+    border-top: 1px solid var(--rv-band-rule);
+    font-family: var(--rv-serif);
+    font-size: var(--rv-size-lead);
+    line-height: 1.25;
+}
+
+.write-index dl > div {
+    padding-bottom: var(--space-3);
+}
+
+.write-index dt {
+    font-size: var(--rv-size-text);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.45;
+}
+
+.write-index dd,
+.write-index-note {
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    text-wrap: pretty;
+}
+
+/* The app only lists these four for a passage its own reading of the text suits. */
+.write-index-note {
+    padding-top: var(--space-3);
     border-top: 1px solid var(--rv-band-rule);
 }
 
-.write-notes .rv-note:first-child {
-    padding-top: 0;
-    border-top: 0;
+.write-note {
+    grid-column: span 5;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--rv-band-rule);
+}
+
+.write-note--side {
+    grid-column: 7 / span 6;
 }
 
 /* Revise: the Checks panel on a narrow plate, then a chapter with its readers on a wide
@@ -268,7 +309,8 @@ html[data-view="machine"] .machine-view {
     .plan-head,
     .plan-plates,
     .write-plate,
-    .write-notes,
+    .write-rewrites,
+    .write-note,
     .revise-item,
     .keep-text,
     .keep-plates {
@@ -317,6 +359,7 @@ html[data-view="machine"] .machine-view {
 @media (max-width: 40rem) {
     .plan-pair,
     .plan-notes,
+    .write-index,
     .revise-item:not(.revise-item--wide) {
         grid-template-columns: minmax(0, 1fr);
         row-gap: var(--space-5);
@@ -501,6 +544,76 @@ html[data-view="machine"] .machine-view {
 
     .questions-head {
         margin-bottom: var(--space-10);
+    }
+}
+
+/* The recordings: the link under a still that plays one, and the page's one player,
+   which the link opens. */
+
+/* The link only stands on a part's cloth, where the ink focus ring would not show. */
+.rv-play {
+    --rv-focus: var(--rv-paper);
+    margin-top: var(--space-5);
+}
+
+.rv-play::before {
+    content: "";
+    border-block: 0.3125rem solid transparent;
+    border-left: 0.5rem solid currentColor;
+}
+
+/* The player is as wide as the page allows and never taller than the screen. Its shape
+   is the recording's own 1440 by 900, and 8rem is the foot plus air above and below.
+   The site's reset removes the margin a dialog centres itself with, so it is set here. */
+.rv-player {
+    --rv-focus: var(--rv-paper);
+    --player-shape: 1.6;
+    width: min(75rem, 100% - 2 * var(--rv-gutter), (100svh - 8rem) * var(--player-shape));
+    max-width: none;
+    max-height: none;
+    margin: auto;
+    border: 0;
+    background: var(--rv-ink);
+    color: var(--rv-paper);
+}
+
+.rv-player::backdrop {
+    background: color-mix(in oklab, var(--rv-ink) 72%, transparent);
+}
+
+.rv-player-video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--player-shape);
+    object-fit: cover;
+    background: var(--rv-page);
+}
+
+/* The dialog clips whatever is drawn outside it, so the ring goes inside the frame. */
+.rv-player-video:focus-visible {
+    outline-offset: -2px;
+}
+
+.rv-player-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+}
+
+.rv-player-title {
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    text-wrap: pretty;
+}
+
+/* The whole window would be too small to read on a phone, so the player turns upright
+   and shows the part of it where the recording happens. Each link says which part, as
+   data-focus. */
+@media (max-width: 40rem) {
+    .rv-player {
+        --player-shape: 0.8;
     }
 }
 
