@@ -2473,15 +2473,15 @@ html[data-view="machine"] .machine-view {
 }
 
 /* The home page's own layouts, on top of the system the search pages share
-   (pages/seo.css): the three points under the hero, the feature rows of one wide card
-   beside one regular card, and the single quotes set between the rows. */
+   (pages/seo.css): the three points under the hero, and the feature rows of one wide
+   card beside one regular card. */
 
 .home-points {
     padding-top: 72px;
 }
 
-/* A feature row's head: the label and heading on the left, the one line and its link on
-   the right, their last lines level. */
+/* A feature row's head: the heading on the left, the one line and its link on the right,
+   their last lines level. */
 .showcase-head {
     display: grid;
     grid-template-columns: minmax(0, 640px) minmax(0, 420px);
@@ -2494,16 +2494,6 @@ html[data-view="machine"] .machine-view {
     margin-top: 0;
 }
 
-/* The small word above a feature heading: Plan, Write, Revise, Keep. */
-.showcase-label {
-    margin: 0 0 12px;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 18px;
-    letter-spacing: -0.026px;
-    color: var(--sp-faint);
-}
-
 /* A wide card is exactly twice a regular one, so their drawings (776 and 388 wide, both
    440 tall) come out the same height at any width. */
 .showcase-cards {
@@ -2514,35 +2504,6 @@ html[data-view="machine"] .machine-view {
 
 .showcase-cards--flipped {
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-}
-
-/* A quote sits closer to the rows on either side than two rows sit to each other. */
-.home-quote {
-    margin-block: 0;
-    padding-top: 104px;
-}
-
-.home-quote + .sp-section {
-    padding-top: 104px;
-}
-
-.home-quote blockquote {
-    max-width: 760px;
-    margin: 0;
-    font-size: 28px;
-    font-weight: 500;
-    line-height: 36px;
-    letter-spacing: -0.3px;
-    color: var(--sp-ink);
-    text-wrap: balance;
-}
-
-.home-quote figcaption {
-    margin-top: 14px;
-    font-size: 15px;
-    line-height: 22px;
-    letter-spacing: -0.1px;
-    color: var(--sp-faint);
 }
 
 @media (max-width: 1000px) {
@@ -2583,17 +2544,6 @@ html[data-view="machine"] .machine-view {
 
     .showcase-card--wide .sp-stage-inner {
         left: calc(var(--sp-mx) * var(--sp-scale, 1) * -1px);
-    }
-
-    .home-quote,
-    .home-quote + .sp-section {
-        padding-top: 72px;
-    }
-
-    .home-quote blockquote {
-        font-size: 22px;
-        line-height: 30px;
-        letter-spacing: -0.2px;
     }
 }
 
