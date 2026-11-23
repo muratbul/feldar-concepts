@@ -22,6 +22,14 @@
             type="font/woff2"
             crossorigin
         />
+        <link
+            rel="preload"
+            as="image"
+            type="image/avif"
+            imagesrcset="../../assets/product/continue-blue-1200.avif 1200w, ../../assets/product/continue-blue-2000.avif 2000w, ../../assets/product/continue-blue-2800.avif 2800w"
+            imagesizes="(min-width: 1228px) 1084px, 88vw"
+            fetchpriority="high"
+        />
 
         <link rel="stylesheet" href="home-critical.css" />
         <link
@@ -36,7 +44,7 @@
         <meta name="robots" content="noindex,nofollow" />
         <link rel="stylesheet" href="../switcher.css" />
     </head>
-    <body class="home-page">
+    <body>
         <!-- Sticky Header -->
         <header class="header">
             <nav class="nav">
@@ -98,752 +106,427 @@
             </div>
         </div>
 
-        <main class="page">
+        <main class="sp-page">
             <!-- Hero Section -->
             <section class="hero">
-                <canvas
-                    class="hero-writing-texture-canvas"
-                    data-literary-ink-background
-                    data-ink-theme="paper"
-                    aria-hidden="true"
-                ></canvas>
-                <div class="hero-container">
-                    <!-- Hero Content -->
-                    <div class="hero-content" data-hero-ink-exclusion>
-                        <h1 class="hero-title">
-                            The novel writing app where AI suggests and you decide
-                        </h1>
-                        <p class="hero-lede">Feldar keeps your chapters, scene plans and story world in one place, so its help draws on your book. Anything the AI writes is shown in blue, and it stays only if you accept it.</p>
-                        <div class="hero-cta">
-                            <a href="/login" class="btn btn-primary hero-cta-button" rel="nofollow">Start writing free</a>
-                            <a href="/download" class="btn btn-secondary hero-cta-button hero-cta-button--mac">
-                                <img src="../../assets/icons/apple.svg" alt="" class="hero-cta-icon" width="13" height="16" />
-                                Download for Mac
-                            </a>
-                            <p class="hero-cta-terms">Free to start with 500 credits. No credit card needed.</p>
-                        </div>
+                <h1 class="hero-title">The novel writing app where AI suggests and you decide</h1>
+                <p class="hero-lede">Feldar keeps your chapters, scene plans and story world in one place, so its help draws on your book. When it suggests a line, you can accept it, revise it or dismiss it.</p>
+                <div class="hero-cta">
+                    <a href="/login" class="btn btn-primary hero-cta-button" rel="nofollow">Start writing free</a>
+                    <a href="/download" class="btn btn-secondary hero-cta-button hero-cta-button--mac">
+                        <img src="../../assets/icons/apple.svg" alt="" class="hero-cta-icon" width="13" height="16" />
+                        Download for Mac
+                    </a>
+                </div>
+                <p class="hero-terms">Free to start with 500 credits. No credit card needed.</p>
+                <figure class="hero-shot">
+                    <picture>
+                        <source
+                            type="image/avif"
+                            srcset="../../assets/product/continue-blue-1200.avif 1200w, ../../assets/product/continue-blue-2000.avif 2000w, ../../assets/product/continue-blue-2800.avif 2800w"
+                            sizes="(min-width: 1228px) 1084px, 88vw"
+                        />
+                        <source
+                            type="image/webp"
+                            srcset="../../assets/product/continue-blue-1200.webp 1200w, ../../assets/product/continue-blue-2000.webp 2000w, ../../assets/product/continue-blue-2800.webp 2800w"
+                            sizes="(min-width: 1228px) 1084px, 88vw"
+                        />
+                        <img
+                            src="../../assets/product/continue-blue-1200.webp"
+                            alt="A chapter open in Feldar, with new sentences suggested at the end of the page and the choices Accept, Revise and Dismiss"
+                            width="1200"
+                            height="750"
+                            fetchpriority="high"
+                            decoding="async"
+                        />
+                    </picture>
+                </figure>
+            </section>
+
+            <!-- Points Section -->
+            <section class="sp-wrap home-points" aria-label="What Feldar is">
+                <div class="sp-points">
+                    <div class="sp-point">
+                        <h2 class="sp-point-title">A full writing app</h2>
+                        <p class="sp-point-desc">Write, plan and organize your book in one place. All of it works without the AI.</p>
+                    </div>
+                    <div class="sp-point">
+                        <h2 class="sp-point-title">Help when you ask for it</h2>
+                        <p class="sp-point-desc">Feldar can suggest the next lines, rework a passage or plan a chapter's scenes. You choose what to keep.</p>
+                    </div>
+                    <div class="sp-point">
+                        <h2 class="sp-point-title">Your writing stays yours</h2>
+                        <p class="sp-point-desc">Feldar does not train AI models on your writing, and you own what you write.</p>
                     </div>
                 </div>
+            </section>
 
-                <!-- Demo Thumbnail -->
-                <div class="hero-demo">
-                    <div class="hero-thumbnail">
-                        <canvas
-                            class="hero-shader-canvas"
-                            data-hero-shader
-                            aria-hidden="true"
-                        ></canvas>
-                        <div class="hero-stage" data-hero-stage data-nosnippet>
-                            <div class="hero-window">
-                                <div class="hero-window-app" aria-hidden="true">
-                                    <div class="hero-window-sidebar">
-                                        <p class="hero-window-brand">Feldar</p>
-                                        <ul class="hero-window-nav">
-                                            <li><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2L7 2l5 4.2V12H2z" /><path d="M5.5 12V8.5h3V12" /></svg>Library</li>
-                                            <li><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.2" /><path d="M1.5 9.8c2.2-.2 5.8-1.6 11-6.2" /></svg>Canvas</li>
-                                            <li><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5H3a1 1 0 0 0-1 1v7.5a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V8" /><path d="M10.4 1.9l1.7 1.7L7 8.7 5 9l.3-2z" /></svg>New page</li>
-                                        </ul>
-                                        <p class="hero-window-project">The Winter Ledger</p>
-                                        <ul class="hero-window-pages">
-                                            <li>The Burying Field</li>
-                                            <li>The Ledger</li>
-                                            <li class="is-current">Pryce's Gate</li>
-                                            <li>Hard Frost</li>
-                                            <li>Wassail</li>
-                                        </ul>
-                                        <div class="hero-window-user">
-                                            <span class="hero-window-avatar">R</span>
-                                            <span>Ruth<small>Pro plan</small></span>
-                                        </div>
-                                    </div>
-                                    <div class="hero-window-main">
-                                        <div class="hero-window-bar">
-                                            <p class="hero-window-crumbs"><span>The Winter Ledger</span><span>/</span><span>Pryce's Gate</span></p>
-                                            <p class="hero-window-count"><span data-hero-words>114</span> words</p>
-                                        </div>
-                                        <div class="hero-window-page">
-                                            <p class="hero-window-title">Pryce's Gate</p>
-                                            <p>The lane was white by eight o'clock, and Nell walked down the middle of it where the cart tracks had frozen into ridges, her father's ledger buttoned inside her coat like something that might get away.</p>
-                                            <p>Daniel was in the cider house, as she had known he would be, rolling the empty casks into a line along the wall. He did not stop when she came in. He said it was a hard frost, and that it would be harder tonight, and that the Foxwhelps in the bottom rows would feel it first.</p>
-                                            <p>She took out the ledger and opened it on the press between them, at the column of two pounds, and waited.<span class="hero-window-anchor"><span class="hero-window-caret" data-hero-caret></span><span class="hero-window-menu hero-window-menu--caret" data-hero-caret-menu>
-                                                <span class="hero-window-menu-item is-active">Continue from here<img src="../../assets/ui/icon-enter-14.svg" alt="" width="14" height="14" /></span>
-                                                <span class="hero-window-menu-item">Extend paragraph</span>
-                                                <span class="hero-window-menu-item">Add transition</span>
-                                                <span class="hero-window-menu-item">Add scene detail</span>
-                                                <span class="hero-window-menu-item">Start dialogue</span>
-                                                <span class="hero-window-menu-item">Expand beat</span>
-                                            </span></span></p>
-                                            <div class="hero-window-continuation" data-hero-continuation>
-                                                <p><span data-hero-suggestion>He looked at the page for a long time without touching it. Then he wiped his hands on the sack tied round his waist, slowly, one finger at a time, as if there were a great deal of cider on them and he meant to have every drop.</span><span class="hero-window-anchor"><span class="hero-window-menu is-open" data-hero-preview-menu>
-                                                    <span class="hero-window-menu-item" data-hero-accept><img src="../../assets/ui/icon-check-16.svg" alt="" width="16" height="16" />Accept</span>
-                                                    <span class="hero-window-menu-item"><img src="../../assets/ui/icon-revise-16.svg" alt="" width="16" height="16" />Revise</span>
-                                                    <span class="hero-window-menu-item"><img src="../../assets/ui/icon-x-ink-16.svg" alt="" width="16" height="16" />Dismiss</span>
-                                                    <span class="hero-window-menu-divider"></span>
-                                                    <span class="hero-window-menu-hint">esc to dismiss</span>
-                                                </span></span></p>
-                                                <div class="hero-window-sage" data-hero-sage>
-                                                    <span class="hero-window-mark"><svg viewBox="0 0 14 14"><path d="M1.65 7A5.35 5.35 0 1 1 7 12.35H2.65Q1.65 12.35 1.65 11.35Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" /></svg></span>
-                                                    <span class="hero-window-pointer"></span>
-                                                    <span class="hero-window-bubble">
-                                                        <span class="hero-window-bubble-kind">Sage's reaction</span><br />
-                                                        The cider on his hands. I believe every word of it.
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            <!-- Plan Section -->
+            <section class="sp-wrap sp-section" aria-labelledby="plan-title">
+                <div class="showcase-head">
+                    <div>
+                        <p class="showcase-label">Plan</p>
+                        <h2 class="sp-h2" id="plan-title">Plan a chapter as scenes, with your story world beside it.</h2>
+                    </div>
+                    <div>
+                        <p class="sp-intro">Outline the chapter yourself or let Feldar suggest scenes, and keep your characters and places on linked cards.</p>
+                        <a class="sp-more" href="/features/scenes">How scene planning works</a>
+                    </div>
+                </div>
+                <div class="sp-body showcase-cards">
+                    <article class="sp-card showcase-card--wide">
+                        <div class="sp-stage" style="--w:776;--h:440;--sp-mx:386;--sp-mw:390" aria-hidden="true" data-nosnippet><div class="sp-stage-inner">
+                            <div class="sp-at au au-editor au-editor--sm" style="left:40px;top:36px;width:356px;height:440px;--au-ed-top:30px">
+                                <p>Daniel would not say. He stood with his back to the press while she held the ledger open between them, and when she read the two letters aloud he looked at the door, as though someone might come through it.</p>
+                                <p>"Ask my mother," he said at last. "It's hers to tell, not mine."</p>
+                                <p>Then he took the lantern from its nail and went out to the low rows, where the smudge pots stood in their lines between the Foxwhelps.</p>
                             </div>
-
-                            <div class="hero-card hero-card--scenes" aria-hidden="true">
-                                <p class="hero-card-head">Scenes</p>
-                                <p class="hero-card-label">PAGE 3</p>
-                                <ol class="hero-card-scenes">
-                                    <li><b>1</b><p><b>The frozen lane</b><span>Nell walks to Pryce's Gate with the ledger.</span></p></li>
-                                    <li class="is-current"><b>2</b><p><b>The cider house</b><span>She shows Daniel the column of two pounds.</span></p></li>
-                                    <li><b>3</b><p><b>Daniel will not say</b><span>He will not tell her who M.P. is.</span></p></li>
+                            <div class="sp-at au au-outline" style="left:412px;top:36px;width:332px;height:380px">
+                                <div class="au-outline-head">
+                                    <span class="au-outline-title">Scenes</span>
+                                    <img src="../../assets/ui/icon-x-16.svg" alt="" width="16" height="16" />
+                                </div>
+                                <p class="au-outline-label">PAGE 4</p>
+                                <ol class="au-outline-scenes">
+                                    <li class="au-outline-scene">
+                                        <span class="au-outline-num">1</span>
+                                        <div class="au-outline-stack">
+                                            <p class="au-outline-name">Daniel will not say</p>
+                                            <p class="au-outline-desc">In the cider house Daniel will not tell Nell who M.P. is.</p>
+                                        </div>
+                                    </li>
+                                    <li class="au-outline-scene">
+                                        <span class="au-outline-num">2</span>
+                                        <div class="au-outline-stack">
+                                            <p class="au-outline-name">Fires in the low rows</p>
+                                            <p class="au-outline-desc">They work through the night lighting fires between the Foxwhelps.</p>
+                                        </div>
+                                    </li>
+                                    <li class="au-outline-scene">
+                                        <span class="au-outline-num">3</span>
+                                        <div class="au-outline-stack">
+                                            <p class="au-outline-name">Agnes at the gate</p>
+                                            <p class="au-outline-desc">At first light Nell walks down to Pryce's Gate.</p>
+                                        </div>
+                                    </li>
                                 </ol>
-                            </div>
-
-                            <div class="hero-card hero-card--canvas" aria-hidden="true">
-                                <p class="hero-card-head"><img src="../../assets/ui/icon-card-character.svg" alt="" width="14" height="14" />Daniel Pryce</p>
-                                <div class="hero-card-surface">
-                                    Works the low rows at Ashby's Orchard. Knows more about the ledger than he lets on.
-                                    <span class="hero-card-relation">Works in Ashby's Orchard</span>
+                                <div class="au-outline-fade"></div>
+                                <div class="au-outline-foot">
+                                    <div class="au-outline-tools">
+                                        <span class="au-outline-tool"><img src="../../assets/ui/icon-baseline-16.svg" alt="" width="16" height="16" /></span>
+                                        <span class="au-outline-tool"><img src="../../assets/ui/icon-spark-16.svg" alt="" width="16" height="16" /></span>
+                                    </div>
+                                    <span class="au-outline-draft">Draft Page</span>
                                 </div>
                             </div>
-
-                            <p class="sr-only">Feldar's writing page, playing on a loop. A suggestion written by the AI is shown in blue with Accept, Revise and Dismiss buttons. The writer accepts it, Sage leaves a reaction in the margin, and the next suggestion comes from Continue from here in the caret menu.</p>
+                        </div></div>
+                        <div class="sp-card-text">
+                            <h3 class="sp-card-title">Outline and Draft Page</h3>
+                            <p class="sp-card-desc">Every page has an outline of scenes. Write them yourself or use Generate scenes, then write the chapter or press Draft Page for a first pass.</p>
                         </div>
-                        <button class="motion-toggle" type="button" aria-label="Pause the animations" data-motion-toggle data-markdown-skip hidden>
-                            <svg class="motion-toggle-pause" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx="0.75"/><rect x="7" y="1.5" width="3" height="9" rx="0.75"/></svg>
-                            <svg class="motion-toggle-play" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.25 1.9v8.2a.6.6 0 0 0 .92.5l6.38-4.1a.6.6 0 0 0 0-1L4.17 1.4a.6.6 0 0 0-.92.5Z"/></svg>
-                        </button>
-                        <div class="hero-frame hero-frame--legacy" id="hero-demo-frame">
-                            <!-- React demo mount (optional). If present, JS will mount and hide fallback below. -->
-                            <div
-                                class="hero-demo-mount"
-                                id="hero-demo-mount"
-                            ></div>
-
-                            <!-- Fallback demo (static HTML) -->
-                            <div class="hero-demo-fallback">
-                                <!-- Left Sidebar -->
-                                <div class="demo-sidebar">
-                                    <div class="demo-sidebar-top">
-                                        <div class="demo-user">
-                                            <div class="demo-avatar"></div>
-                                            <span class="demo-username"
-                                                >Alim</span
-                                            >
-                                        </div>
-                                        <div class="demo-nav-items">
-                                            <div class="demo-nav-item">
-                                                <span class="demo-nav-icon"
-                                                    >📚</span
-                                                >
-                                                <span>Library</span>
-                                            </div>
-                                            <div class="demo-nav-item">
-                                                <span class="demo-nav-icon"
-                                                    >✨</span
-                                                >
-                                                <span>Storycraft</span>
-                                            </div>
-                                        </div>
-                                        <div class="demo-pages">
-                                            <div class="demo-pages-header">
-                                                <span>Project Name</span>
-                                                <span>+</span>
-                                            </div>
-                                            <div class="demo-page-item active">
-                                                <span class="demo-page-icon"
-                                                    >📄</span
-                                                >
-                                                <span>Untitled</span>
-                                            </div>
-                                            <div class="demo-page-item">
-                                                <span class="demo-page-icon"
-                                                    >📄</span
-                                                >
-                                                <span>Untitled</span>
-                                            </div>
-                                            <div class="demo-page-item">
-                                                <span class="demo-page-icon"
-                                                    >📄</span
-                                                >
-                                                <span>Untitled</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Editor Area -->
-                                <div class="demo-editor">
-                                    <div class="demo-editor-header">
-                                        <span class="demo-project-name"
-                                            >Chains of Twilight</span
-                                        >
-                                        <span class="demo-status"
-                                            >Edited 3 mins ago</span
-                                        >
-                                    </div>
-                                    <div class="demo-editor-content">
-                                        <h2 class="demo-title">The Robbery</h2>
-                                        <p class="demo-text">
-                                            The coffee had gone cold again.
-                                        </p>
-                                        <p class="demo-text">
-                                            Sarah stared at the mug on her desk,
-                                            watching the thin film that had
-                                            formed across the surface catch the
-                                            pale morning light filtering through
-                                            her office window. She'd poured it
-                                            two hours ago, maybe three. Time had
-                                            a way of slipping through her
-                                            fingers lately, like water through a
-                                            sieve.
-                                        </p>
-                                        <p class="demo-text">
-                                            Her computer screen glowed with the
-                                            same email she'd been trying to
-                                            compose since dawn. The cursor
-                                            blinked at her, patient and
-                                            accusatory all at once.
-                                        </p>
-                                        <p class="demo-text">
-                                            "Dear Dr. Morrison,"
-                                        </p>
-                                        <p class="demo-text">
-                                            "I regret to inform you that I will
-                                            be unable to continue with the
-                                            research project..."
-                                        </p>
-                                    </div>
+                    </article>
+                    <article class="sp-card">
+                        <div class="sp-stage" style="--w:388;--h:440" aria-hidden="true" data-nosnippet><div class="sp-stage-inner">
+                            <div class="au au-ccard is-selected sp-at" style="left:28px;top:40px;width:240px">
+                                <div class="au-ccard-head"><p class="au-ccard-title">Nell Ashby</p></div>
+                                <div class="au-ccard-surface">
+                                    <p class="au-ccard-body">Thirty-one. Teaches in Bristol. Came home for the funeral and stayed for the frost.</p>
                                 </div>
                             </div>
+                            <div class="au au-rail sp-at" style="left:284px;top:40px">
+                                <span class="au-rail-btn is-active"><img src="../../assets/ui/icon-action-develop.svg" width="11.8" height="11.8" alt="" /></span>
+                                <span class="au-rail-btn"><img src="../../assets/ui/icon-action-branch.svg" width="14.08" height="12.8" alt="" /></span>
+                                <span class="au-rail-btn"><img src="../../assets/ui/icon-action-connect.svg" width="10.6" height="12.8" alt="" /></span>
+                                <span class="au-rail-btn"><img src="../../assets/ui/icon-action-more.svg" width="11.5" height="2.3" alt="" /></span>
+                            </div>
+                            <div class="au au-rel au-rel--v is-active sp-at" style="left:147px;top:190px;height:100px"><span class="au-rel-label">Keeps it</span></div>
+                            <div class="au au-ccard au-ccard--item sp-at" style="left:28px;top:290px;width:240px">
+                                <div class="au-ccard-head"><p class="au-ccard-title">The ledger</p></div>
+                                <div class="au-ccard-surface">
+                                    <p class="au-ccard-body">Green cloth, black at the corners. Thirty years of rates, wages and sulphur.</p>
+                                </div>
+                            </div>
+                        </div></div>
+                        <div class="sp-card-text">
+                            <h3 class="sp-card-title">The Canvas</h3>
+                            <p class="sp-card-desc">Characters, places and plot beats as linked cards. Feldar draws on them when it writes.</p>
                         </div>
-                    </div>
-                </div>
-
-            </section>
-
-            <!-- Sage Section -->
-            <section class="home-section sage" aria-labelledby="sage-title">
-                <div class="home-section-container">
-                    <div class="section-head">
-                        <p class="section-kicker">New in Feldar 1.2</p>
-                        <h2 class="section-title" id="sage-title">Meet Sage, a first reader in the margin.</h2>
-                        <p class="section-lede">Sage is a companion you can talk to while you write. It works across your workspace, reads along when you ask it to, and answers in writing beside your page.</p>
-                        <a class="section-more" href="/changelog">What's new in Feldar 1.2</a>
-                    </div>
-
-                    <div class="sage-demo" data-sage-demo>
-                        <ul class="sage-moments" aria-label="What Sage does">
-                            <li>
-                                <button class="sage-moment" type="button" aria-pressed="true" aria-controls="sage-stage" data-sage-moment="follow">
-                                    <svg class="sage-moment-icon" width="18" height="18" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1.75 2.6Q1.5 1.5 2.6 1.75L12.05 5.45Q12.75 5.75 12.1 6.1L8.45 8Q8.15 8.15 8 8.45L6.1 12.1Q5.75 12.75 5.45 12.05Z" /></svg>
-                                    <span class="sage-moment-name">Follow me</span>
-                                    <span class="sage-moment-text">Sage reads along as you write. It keeps track of story details and leaves comments in the margin beside your writing.</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button class="sage-moment" type="button" aria-pressed="false" aria-controls="sage-stage" data-sage-moment="ask">
-                                    <svg class="sage-moment-icon" width="18" height="18" viewBox="0 -0.5 15 15" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11.3388 10.4652C11.3388 10.4652 11.3944 10.4258 11.4832 10.3585C12.8143 9.33752 13.6484 7.85805 13.6484 6.21094C13.6484 3.14024 10.7379 0.648438 7.14988 0.648438C3.56044 0.648438 0.648438 3.14024 0.648438 6.21094C0.648438 9.28307 3.55899 11.6889 7.14844 11.6889C7.45466 11.6889 7.95733 11.6688 8.65644 11.6287C9.56788 12.2162 10.588 12.6484 11.7522 12.6484C12.1126 12.6484 12.2824 12.3547 12.0512 12.0552C11.7002 11.6282 11.5265 10.9947 11.3388 10.4652Z" /></svg>
-                                    <span class="sage-moment-name">Ask Sage</span>
-                                    <span class="sage-moment-text">Speak or type a question, and Sage answers in writing beside your page.</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button class="sage-moment" type="button" aria-pressed="false" aria-controls="sage-stage" data-sage-moment="where">
-                                    <svg class="sage-moment-icon" width="18" height="18" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1.95 7.25A5.3 5.3 0 1 0 3.5 3.5" /><path d="M1.75 1.6V4.2H4.35" /><path d="M7.25 4.6V7.25L9.15 8.45" /></svg>
-                                    <span class="sage-moment-name">Where was I?</span>
-                                    <span class="sage-moment-text">Ask where you left off, and Sage can open the page for you.</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button class="sage-moment" type="button" aria-pressed="false" aria-controls="sage-stage" data-sage-moment="memories">
-                                    <svg class="sage-moment-icon" width="18" height="18" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.25 1.75H10.25C10.8 1.75 11.25 2.2 11.25 2.75V11.25C11.25 11.8 10.8 12.25 10.25 12.25H3.25Z" /><path d="M5.5 1.75V12.25" /><path d="M7.75 4.75H9.25" /><path d="M7.75 7H9.25" /></svg>
-                                    <span class="sage-moment-name">Memories</span>
-                                    <span class="sage-moment-text">Review what Sage remembers, forget a single memory, or turn learning off.</span>
-                                </button>
-                            </li>
-                        </ul>
-
-                        <div class="sage-stage" id="sage-stage" data-nosnippet>
-                            <div class="sage-scene is-active" data-sage-scene="follow">
-                                <div class="sage-canvas sage-canvas--page" data-sage-canvas>
-                                    <div class="au au-editor sage-page">
-                                        <div class="sage-paragraph">
-                                            <p>The ledger was in the bottom drawer of the bureau, under a seed catalogue from 1958 and <span class="au-sage-quote" id="sage-reaction-quote">a tin of the mints her father had sucked for his chest</span>.</p>
-                                            <button class="au-sage-mark sage-mark" type="button" aria-expanded="false" aria-controls="sage-reaction" aria-label="Sage's reaction. The tin of mints got me. He is gone, and still in the room." data-sage-mark>
-                                                <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1.65 7A5.35 5.35 0 1 1 7 12.35H2.65Q1.65 12.35 1.65 11.35Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" /></svg>
-                                            </button>
-                                            <div class="au-sage-thread sage-aside" id="sage-reaction" hidden data-sage-comment data-sage-quote="sage-reaction-quote">
-                                                <span class="au-sage-pointer sage-pointer" aria-hidden="true"></span>
-                                                <div class="au-sage-bubble au-sage-comments">
-                                                    <p class="au-sage-kind">Sage's reaction</p>
-                                                    <p>The tin of mints got me. He is gone, and still in the room.</p>
-                                                </div>
-                                                <div class="au-sage-row">
-                                                    <div class="au-sage-actions">
-                                                        <button class="au-sage-button" type="button" data-sage-done>Done</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sage-paragraph">
-                                            <p>It fell open, as she had known it would, at the last page he had used. Two pounds on the first of every month, paid to M.P.</p>
-                                        </div>
-                                        <div class="sage-paragraph">
-                                            <p>She was still holding it when <span class="au-sage-quote is-lit" id="sage-note-quote" data-sage-fix="Daniel came in from the yard">her father came in from the yard</span> and asked what she wanted with his things.</p>
-                                            <button class="au-sage-mark sage-mark" type="button" aria-expanded="true" aria-controls="sage-note" aria-label="Sage's note. Tom died before chapter one. Did you mean Daniel?" data-sage-mark>
-                                                <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M4 1.75H10C10.55 1.75 11 2.2 11 2.75V12.25L7 9.6L3 12.25V2.75C3 2.2 3.45 1.75 4 1.75Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" /></svg>
-                                            </button>
-                                            <div class="au-sage-thread sage-aside" id="sage-note" data-sage-comment data-sage-quote="sage-note-quote">
-                                                <span class="au-sage-pointer sage-pointer" aria-hidden="true"></span>
-                                                <div class="au-sage-bubble au-sage-comments">
-                                                    <p class="au-sage-kind">Sage's note</p>
-                                                    <p>Tom died before chapter one. Did you mean Daniel?</p>
-                                                </div>
-                                                <div class="au-sage-row">
-                                                    <div class="au-sage-actions">
-                                                        <button class="au-sage-button au-sage-button--primary" type="button" data-sage-fix>Fix it</button>
-                                                        <button class="au-sage-button" type="button" data-sage-done>Done</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sage-paragraph">
-                                            <p>“Nothing,” she said, and closed the ledger before anyone could see the page.</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>Later, alone, she opened it again. His hand had not changed in thirty years. The same upright figures, the same small flourish on every four, the same habit of pressing so hard at the foot of a column that the total stood up from the paper like braille.</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>Nell turned back a year, then ten. The orchard had been losing money since before she left for Bristol, a little each season, the way a tree loses ground to canker, with nothing you could point to and then a limb on the grass one morning.</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>But it was the other column that held her. It ran back through the bad winters and the good ones, through the year of the flood and the year her mother died, as steady as a pulse.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="sage-caption">Sage noticed a slip and left a note beside it, with a reaction further up. Press a mark to open it.</p>
-                            </div>
-
-                            <div class="sage-scene" data-sage-scene="ask" inert>
-                                <div class="sage-canvas sage-canvas--page" data-sage-canvas>
-                                    <div class="au au-editor sage-page sage-page--centered">
-                                        <div class="sage-paragraph">
-                                            <p>The ledger was in <span class="au-sage-quote is-lit" data-sage-answer-quote>the bottom drawer of the bureau</span>, under a seed catalogue from 1958 and a tin of the mints her father had sucked for his chest.</p>
-                                        </div>
-                                        <div class="sage-paragraph">
-                                            <p>It fell open, as she had known it would, at the last page he had used.</p>
-                                            <div class="au-sage-thread sage-answer" data-sage-thread>
-                                                <span class="au-sage-pointer sage-pointer" aria-hidden="true"></span>
-                                                <div class="au-sage-bubble au-sage-answer" data-sage-answer>
-                                                    <p data-sage-saying>In the bottom drawer of the bureau, under a seed catalogue from 1958 (“The Winter Ledger”, page 1).</p>
-                                                </div>
-                                                <div class="au-sage-row">
-                                                    <span class="au-sage-field">
-                                                        <span class="au-sage-field-text" data-sage-field data-question="Where did Tom keep the ledger?">Follow up</span>
-                                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M2.5 5.75V8.25" /><path d="M4.75 3.75V10.25" /><path d="M7 2V12" /><path d="M9.25 4.25V9.75" /><path d="M11.5 5.5V8.5" /></svg>
-                                                    </span>
-                                                    <span class="au-sage-actions" aria-hidden="true">
-                                                        <span class="au-sage-icon-button">
-                                                            <svg width="14" height="14" viewBox="0 -0.5 15 15" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M11.3388 10.4652C11.3388 10.4652 11.3944 10.4258 11.4832 10.3585C12.8143 9.33752 13.6484 7.85805 13.6484 6.21094C13.6484 3.14024 10.7379 0.648438 7.14988 0.648438C3.56044 0.648438 0.648438 3.14024 0.648438 6.21094C0.648438 9.28307 3.55899 11.6889 7.14844 11.6889C7.45466 11.6889 7.95733 11.6688 8.65644 11.6287C9.56788 12.2162 10.588 12.6484 11.7522 12.6484C12.1126 12.6484 12.2824 12.3547 12.0512 12.0552C11.7002 11.6282 11.5265 10.9947 11.3388 10.4652Z" /></svg>
-                                                        </span>
-                                                        <span class="au-sage-icon-button">
-                                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M9.21 4.51V3.41C9.21 2.49 8.47 1.75 7.55 1.75H3.41C2.49 1.75 1.75 2.49 1.75 3.41V7.55C1.75 8.47 2.49 9.21 3.41 9.21H4.51" /><path d="M6.17 4.51H10.59C11.51 4.51 12.25 5.25 12.25 6.17V10.59C12.25 11.51 11.51 12.25 10.59 12.25H6.17C5.25 12.25 4.51 11.51 4.51 10.59V6.17C4.51 5.25 5.25 4.51 6.17 4.51Z" /></svg>
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>His hand had not changed in thirty years. The same upright figures, the same small flourish on every four, the same habit of pressing so hard at the foot of a column that the total stood up from the paper like braille.</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>Nell turned back a year, then ten. The orchard had been losing money since before she left for Bristol, a little each season, the way a tree loses ground to canker, with nothing you could point to and then a limb on the grass one morning.</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>But it was the other column that held her. It ran back through the bad winters and the good ones, through the year of the flood and the year her mother died, as steady as a pulse.</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>She sat with the book open on her knees while the kitchen clock went on with its business. Outside, the frost was already coming down over the Lugg meadows.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="sage-caption">You ask where Tom kept the ledger. Sage answers beside the page, says where it found the answer, and lights the words.</p>
-                            </div>
-
-                            <div class="sage-scene" data-sage-scene="where" inert>
-                                <div class="sage-canvas sage-canvas--page" data-sage-canvas>
-                                    <div class="au au-editor sage-page">
-                                        <div class="sage-paragraph">
-                                            <p>The cider house was warm after the yard. Daniel had set two cups by the fire and did not look up when she came in.</p>
-                                        </div>
-                                        <div class="sage-paragraph">
-                                            <p>“Who is M.P.?” Nell asked. Daniel turned the cup in his hands, looked at the fire, and said nothing.<span class="sage-caret" aria-hidden="true"></span></p>
-                                            <div class="au-sage-thread sage-aside sage-recap">
-                                                <span class="au-sage-pointer sage-pointer" aria-hidden="true"></span>
-                                                <div class="au-sage-bubble au-sage-bubble--from-top-left">
-                                                    <p>You stopped in the cider house, just after Daniel wouldn't say who M.P. is. I've opened the page for you.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>She took out the ledger and opened it on the press between them, at the column of two pounds, and waited.</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>He looked at the page for a long time without touching it. Then he wiped his hands on the sack tied round his waist, slowly, one finger at a time, as if there were a great deal of cider on them and he meant to have every drop.</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>“That was your father's business,” he said at last. “It was never mine to tell.”</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>Outside, the frost was already coming down over the low rows.</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>She did not ask again. She turned the ledger round so that it faced him, and laid her finger on the first of the entries, in her father's upright hand.</p>
-                                        </div>
-                                        <div class="sage-paragraph sage-paragraph--more">
-                                            <p>Daniel looked at the door, and then at the window, as a man looks for the weather. “Ask Agnes,” he said.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="sage-caption">Back after a few days away? Sage says where you stopped and opens the page.</p>
-                            </div>
-
-                            <div class="sage-scene" data-sage-scene="memories" inert>
-                                <div class="sage-canvas" data-sage-canvas>
-                                    <div class="au au-sage-settings sage-settings">
-                                        <p class="au-sage-heading">Sage</p>
-                                        <div class="au-sage-card">
-                                            <div class="au-sage-pref">
-                                                <div>
-                                                    <p class="au-sage-pref-label" id="sage-learn-label">Learn from my writing</p>
-                                                    <p class="au-sage-pref-text" id="sage-learn-text">While Sage follows you, it notes who's who and what's still open in your story, to catch slips and remember where you left off. What it learned stays below until you clear it.</p>
-                                                </div>
-                                                <button class="au-sage-switch" type="button" role="switch" aria-checked="true" aria-labelledby="sage-learn-label" aria-describedby="sage-learn-text" data-sage-switch></button>
-                                            </div>
-                                        </div>
-                                        <div class="au-sage-memories-head">
-                                            <p class="au-sage-heading">Memories</p>
-                                            <span class="au-sage-select">Clear memories
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5.5L7 8.5L10 5.5" /></svg>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <p class="au-sage-day">Today</p>
-                                            <ul class="au-sage-memories sage-memories">
-                                                <li class="au-sage-memory">
-                                                    <span class="au-sage-time">9:12</span>
-                                                    <span class="au-sage-rail" aria-hidden="true"></span>
-                                                    <div class="au-sage-memory-body">
-                                                        <p class="au-sage-memory-title">The Winter Ledger</p>
-                                                        <p id="sage-memory-ledger">Tom Ashby paid two pounds on the first of every month to someone called M.P.</p>
-                                                        <ul class="au-sage-tags">
-                                                            <li class="au-sage-tag au-sage-tag--thread">Open thread</li>
-                                                            <li class="au-sage-tag">Page 1</li>
-                                                        </ul>
-                                                    </div>
-                                                    <button class="au-sage-forget" type="button" aria-label="Forget" aria-describedby="sage-memory-ledger" data-sage-forget>
-                                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.5 4.05L4.78 2.09C5.17 1.75 5.87 1.75 6.26 2.1L8.47 4.05" /><path d="M9.41 2.19L11.5 4.05" /><path d="M11.5 4.05L11.03 10.83C10.97 11.62 10.11 12.25 9.07 12.25H7H4.94C3.89 12.25 3.03 11.62 2.97 10.83L2.5 4.05H11.5Z" /></svg>
-                                                    </button>
-                                                </li>
-                                                <li class="au-sage-memory">
-                                                    <span class="au-sage-time">9:40</span>
-                                                    <span class="au-sage-rail" aria-hidden="true"></span>
-                                                    <div class="au-sage-memory-body">
-                                                        <p class="au-sage-memory-title">The Winter Ledger</p>
-                                                        <p id="sage-memory-gate">Agnes Pryce keeps the gate at Pryce's Gate. Daniel works the low rows.</p>
-                                                        <ul class="au-sage-tags">
-                                                            <li class="au-sage-tag">Page 4</li>
-                                                        </ul>
-                                                    </div>
-                                                    <button class="au-sage-forget" type="button" aria-label="Forget" aria-describedby="sage-memory-gate" data-sage-forget>
-                                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.5 4.05L4.78 2.09C5.17 1.75 5.87 1.75 6.26 2.1L8.47 4.05" /><path d="M9.41 2.19L11.5 4.05" /><path d="M11.5 4.05L11.03 10.83C10.97 11.62 10.11 12.25 9.07 12.25H7H4.94C3.89 12.25 3.03 11.62 2.97 10.83L2.5 4.05H11.5Z" /></svg>
-                                                    </button>
-                                                </li>
-                                                <li class="au-sage-memory">
-                                                    <span class="au-sage-time">10:05</span>
-                                                    <span class="au-sage-rail" aria-hidden="true"></span>
-                                                    <div class="au-sage-memory-body">
-                                                        <p class="au-sage-memory-title">The Winter Ledger</p>
-                                                        <p id="sage-memory-daniel">Keep Daniel's age vague until chapter six.</p>
-                                                        <ul class="au-sage-tags">
-                                                            <li class="au-sage-tag">You asked Sage</li>
-                                                        </ul>
-                                                    </div>
-                                                    <button class="au-sage-forget" type="button" aria-label="Forget" aria-describedby="sage-memory-daniel" data-sage-forget>
-                                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.5 4.05L4.78 2.09C5.17 1.75 5.87 1.75 6.26 2.1L8.47 4.05" /><path d="M9.41 2.19L11.5 4.05" /><path d="M11.5 4.05L11.03 10.83C10.97 11.62 10.11 12.25 9.07 12.25H7H4.94C3.89 12.25 3.03 11.62 2.97 10.83L2.5 4.05H11.5Z" /></svg>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="sage-caption">Everything Sage keeps is listed in Settings. Forget one memory, or turn learning off.</p>
-                            </div>
-                        </div>
-                        <p class="sr-only" role="status" data-sage-status></p>
-                    </div>
+                    </article>
                 </div>
             </section>
 
-            <!-- Features Section -->
-            <section class="home-section features" aria-labelledby="features-title">
-                <div class="home-section-container" data-feature-tabs>
-                    <div class="section-head">
-                        <h2 class="section-title" id="features-title">From first outline to finished book.</h2>
-                        <p class="section-lede">Feldar follows the work from the first scene to the last export.</p>
-                        <a class="section-more" href="/features">See all features</a>
-                    </div>
+            <figure class="sp-wrap home-quote">
+                <blockquote>“The canvas finally made my story brain feel organized.”</blockquote>
+                <figcaption>Oliver</figcaption>
+            </figure>
 
-                    <div class="features-tabs" role="tablist" aria-label="Parts of the work">
-                        <button class="features-tab" type="button" role="tab" id="features-tab-plan" aria-selected="true" aria-controls="features-panel-plan" tabindex="0">
-                            <span class="features-tab-name">Plan</span>
-                            <span class="features-tab-note">Scenes and story world</span>
-                        </button>
-                        <button class="features-tab" type="button" role="tab" id="features-tab-write" aria-selected="false" aria-controls="features-panel-write" tabindex="-1">
-                            <span class="features-tab-name">Write</span>
-                            <span class="features-tab-note">Drafting and rewrites</span>
-                        </button>
-                        <button class="features-tab" type="button" role="tab" id="features-tab-revise" aria-selected="false" aria-controls="features-panel-revise" tabindex="-1">
-                            <span class="features-tab-name">Revise</span>
-                            <span class="features-tab-note">Checks and readers</span>
-                        </button>
-                        <button class="features-tab" type="button" role="tab" id="features-tab-keep" aria-selected="false" aria-controls="features-panel-keep" tabindex="-1">
-                            <span class="features-tab-name">Keep</span>
-                            <span class="features-tab-note">Record and library</span>
-                        </button>
+            <!-- Write Section -->
+            <section class="sp-wrap sp-section" aria-labelledby="write-title">
+                <div class="showcase-head">
+                    <div>
+                        <p class="showcase-label">Write</p>
+                        <h2 class="sp-h2" id="write-title">Get help with the next lines or a rewrite, when you ask.</h2>
                     </div>
-
-                    <div class="features-panel" role="tabpanel" id="features-panel-plan" aria-labelledby="features-tab-plan" tabindex="0">
-                        <div class="features-copy">
-                            <h3 class="features-chapter-title">Plan the book and keep its world.</h3>
-                            <p class="features-promise">Shape each chapter as scenes before you write it, with the people and places of your story beside the page.</p>
-                            <ul class="features-tools">
-                                <li>
-                                    <h4>Outline and Generate scenes</h4>
-                                    <p>Plan a chapter as scenes yourself, or say what happens next and let Feldar suggest them.</p>
-                                </li>
-                                <li>
-                                    <h4>Draft Page</h4>
-                                    <p>A first pass at the chapter, written from your scenes, when you want one.</p>
-                                </li>
-                                <li>
-                                    <h4>The Canvas</h4>
-                                    <p>Characters, places and plot beats as linked cards. Feldar reads the board before it writes.</p>
-                                </li>
-                            </ul>
-                            <a class="section-more" href="/features/scenes">How scene planning works</a>
+                    <div>
+                        <p class="sp-intro">Give Feldar a sample of your own prose in Voice &amp; Style, and its suggestions follow your voice.</p>
+                        <a class="sp-more" href="/ai-for-novelists">How Feldar's AI behaves</a>
+                    </div>
+                </div>
+                <div class="sp-body showcase-cards showcase-cards--flipped">
+                    <article class="sp-card">
+                        <div class="sp-stage" style="--w:388;--h:440" aria-hidden="true" data-nosnippet><div class="sp-stage-inner">
+                            <div class="sp-at au au-rewrite" style="left:28px;top:128px;width:332px">
+                                <div class="au-rewrite-bar">
+                                    Deepen Description
+                                    <span class="au-rewrite-icon"><img src="../../assets/ui/icon-minus-faint-16.svg" alt="" width="16" height="16" /></span>
+                                </div>
+                                <div class="au-rewrite-body">
+                                    <p class="au-rewrite-text">She sat with the book open on her knees while the kitchen clock went on with its business, <span class="au-new">loud in the way clocks are only loud in an empty house</span>.</p>
+                                    <div class="au-rewrite-foot">
+                                        <span class="au-rewrite-refine">Refine</span>
+                                        <span class="au-rewrite-tools">
+                                            <span class="au-rewrite-tool"><img src="../../assets/ui/icon-redo-18.svg" alt="" width="18" height="18" /></span>
+                                            <span class="au-rewrite-tool"><img src="../../assets/ui/icon-insert-18.svg" alt="" width="18" height="18" /></span>
+                                            <span class="au-rewrite-tool"><img src="../../assets/ui/icon-trash-18.svg" alt="" width="18" height="18" /></span>
+                                        </span>
+                                        <span class="au-rewrite-apply">Apply<img src="../../assets/ui/icon-enter-white-15.svg" alt="" width="15" height="15" /></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div>
+                        <div class="sp-card-text">
+                            <h3 class="sp-card-title">Polish, Deepen, Enhance</h3>
+                            <p class="sp-card-desc">Select a passage and pick a rewrite. Feldar shows the new version with its changes marked, and you apply it or keep your own.</p>
                         </div>
-                        <figure class="features-shot">
-                            <video muted loop playsinline preload="none" width="1440" height="900" poster="../../assets/demo/loop-outline-scenes-poster.jpg" aria-label="The Outline opens on an empty chapter, Generate scenes runs, and five scenes appear with titles and descriptions">
-                                <source src="../../assets/demo/loop-outline-scenes.webm" type="video/webm" />
-                                <source src="../../assets/demo/loop-outline-scenes.mp4" type="video/mp4" />
-                            </video>
-                            <button class="motion-toggle" type="button" aria-label="Pause the animations" data-motion-toggle data-markdown-skip hidden>
-                                <svg class="motion-toggle-pause" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx="0.75"/><rect x="7" y="1.5" width="3" height="9" rx="0.75"/></svg>
-                                <svg class="motion-toggle-play" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.25 1.9v8.2a.6.6 0 0 0 .92.5l6.38-4.1a.6.6 0 0 0 0-1L4.17 1.4a.6.6 0 0 0-.92.5Z"/></svg>
-                            </button>
-                        </figure>
-                    </div>
-                    <div class="features-panel" role="tabpanel" id="features-panel-write" aria-labelledby="features-tab-write" tabindex="0" hidden>
-                        <div class="features-copy">
-                            <h3 class="features-chapter-title">Write in your own voice.</h3>
-                            <p class="features-promise">Feldar can suggest the next lines or rework a passage when you ask, in a style based on your own writing.</p>
-                            <ul class="features-tools">
-                                <li>
-                                    <h4>Continue from here</h4>
-                                    <p>Feldar writes the next few lines from where you stopped and shows them in blue. You can accept, revise or dismiss them.</p>
-                                </li>
-                                <li>
-                                    <h4>Polish, Deepen, Enhance</h4>
-                                    <p>Rewrite a passage and see every added word before the change stays.</p>
-                                </li>
-                                <li>
-                                    <h4>Voice &amp; Style</h4>
-                                    <p>Paste a sample of your own prose and Feldar tries to match it.</p>
-                                </li>
-                            </ul>
-                            <a class="section-more" href="/ai-for-novelists">How Feldar's AI behaves</a>
+                    </article>
+                    <article class="sp-card showcase-card--wide">
+                        <div class="sp-stage" style="--w:776;--h:440;--sp-mx:128;--sp-mw:520" aria-hidden="true" data-nosnippet><div class="sp-stage-inner">
+                            <div class="sp-at au au-editor au-editor--md" style="left:108px;top:36px;width:560px;height:440px;--au-ed-top:30px">
+                                <p>She took out the ledger and opened it on the press between them, at the column of two pounds, and waited.</p>
+                                <p class="au-ai">He looked at the page for a long time without touching it. Then he wiped his hands on the sack tied round his waist, slowly, one finger at a time, as if there were a great deal of cider on them and he meant to have every drop.</p>
+                            </div>
+                            <div class="sp-at au au-menu" style="left:356px;top:270px">
+                                <div class="au-menu-item"><img src="../../assets/ui/icon-check-16.svg" alt="" width="16" height="16" />Accept</div>
+                                <div class="au-menu-item"><img src="../../assets/ui/icon-revise-16.svg" alt="" width="16" height="16" />Revise</div>
+                                <div class="au-menu-item"><img src="../../assets/ui/icon-x-ink-16.svg" alt="" width="16" height="16" />Dismiss</div>
+                                <div class="au-menu-divider"></div>
+                                <div class="au-menu-hint">esc to dismiss</div>
+                            </div>
+                        </div></div>
+                        <div class="sp-card-text">
+                            <h3 class="sp-card-title">Continue from here</h3>
+                            <p class="sp-card-desc">Feldar writes the next few lines from where you stopped. You can accept them, revise them or dismiss them.</p>
                         </div>
-                        <figure class="features-shot">
-                            <video muted loop playsinline preload="none" width="1440" height="900" data-poster="../../assets/demo/loop-continue-blue-poster.jpg" aria-label="The caret menu opens at the end of a page, Continue from here is chosen, and new lines appear in blue before being accepted">
-                                <source src="../../assets/demo/loop-continue-blue.webm" type="video/webm" />
-                                <source src="../../assets/demo/loop-continue-blue.mp4" type="video/mp4" />
-                            </video>
-                            <button class="motion-toggle" type="button" aria-label="Pause the animations" data-motion-toggle data-markdown-skip hidden>
-                                <svg class="motion-toggle-pause" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx="0.75"/><rect x="7" y="1.5" width="3" height="9" rx="0.75"/></svg>
-                                <svg class="motion-toggle-play" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3.25 1.9v8.2a.6.6 0 0 0 .92.5l6.38-4.1a.6.6 0 0 0 0-1L4.17 1.4a.6.6 0 0 0-.92.5Z"/></svg>
-                            </button>
-                        </figure>
-                    </div>
-                    <div class="features-panel" role="tabpanel" id="features-panel-revise" aria-labelledby="features-tab-revise" tabindex="0" hidden>
-                        <div class="features-copy">
-                            <h3 class="features-chapter-title">Check a chapter before anyone reads it.</h3>
-                            <p class="features-promise">Feldar can check a chapter for common problems and show how different readers might react to it.</p>
-                            <ul class="features-tools">
-                                <li>
-                                    <h4>Checks</h4>
-                                    <p>Five editing checks mark each issue in the text and offer a fix you can accept or discard.</p>
-                                </li>
-                                <li>
-                                    <h4>Lens</h4>
-                                    <p>Six reader personas, such as the Critic and the Plotter, respond to your page.</p>
-                                </li>
-                                <li>
-                                    <h4>Reader reactions</h4>
-                                    <p>How an audience, such as book club readers, might take the chapter.</p>
-                                </li>
-                            </ul>
-                            <a class="section-more" href="/features">All features</a>
-                        </div>
-                        <figure class="features-shot">
-                            <picture>
-                                <source type="image/avif" srcset="../../assets/product/checks-panel-1200.avif 1200w, ../../assets/product/checks-panel-2000.avif 2000w" sizes="(min-width: 80em) 680px, (min-width: 64em) 56vw, 92vw" />
-                                <source type="image/webp" srcset="../../assets/product/checks-panel-1200.webp 1200w, ../../assets/product/checks-panel-2000.webp 2000w" sizes="(min-width: 80em) 680px, (min-width: 64em) 56vw, 92vw" />
-                                <img src="../../assets/product/checks-panel-1200.webp" width="1200" height="750" loading="lazy" decoding="async" alt="The Checks panel listing five editorial checks, with two passages marked in the chapter" />
-                            </picture>
-                        </figure>
-                    </div>
-                    <div class="features-panel" role="tabpanel" id="features-panel-keep" aria-labelledby="features-tab-keep" tabindex="0" hidden>
-                        <div class="features-copy">
-                            <h3 class="features-chapter-title">Keep your books and a record of how you wrote them.</h3>
-                            <p class="features-promise">Your books sit together in the Library. Each has a private writing record, and you can export your files at any time.</p>
-                            <ul class="features-tools">
-                                <li>
-                                    <h4>Writing record</h4>
-                                    <p>The words you typed by hand and the words that came through Feldar, day by day.</p>
-                                </li>
-                                <li>
-                                    <h4>Library, import and export</h4>
-                                    <p>Bring a manuscript in, or take it out, as Word, PDF, Markdown or plain text.</p>
-                                </li>
-                                <li>
-                                    <h4>Choose the model</h4>
-                                    <p>Six GPT-6 and Claude models, chosen per feature. Your plan sets which you can use.</p>
-                                </li>
-                            </ul>
-                            <a class="section-more" href="/blog/provenance">Why Feldar records provenance</a>
-                        </div>
-                        <figure class="features-shot">
-                            <picture>
-                                <source type="image/avif" srcset="../../assets/product/writing-record-1200.avif 1200w, ../../assets/product/writing-record-2000.avif 2000w" sizes="(min-width: 80em) 680px, (min-width: 64em) 56vw, 92vw" />
-                                <source type="image/webp" srcset="../../assets/product/writing-record-1200.webp 1200w, ../../assets/product/writing-record-2000.webp 2000w" sizes="(min-width: 80em) 680px, (min-width: 64em) 56vw, 92vw" />
-                                <img src="../../assets/product/writing-record-1200.webp" width="1200" height="750" loading="lazy" decoding="async" alt="A writing record showing how much of the book was typed by hand and how much came from Feldar, with a chart of daily writing" />
-                            </picture>
-                        </figure>
-                    </div>
+                    </article>
                 </div>
             </section>
 
-            <!-- House Rules Section -->
-            <section class="home-section rules" aria-labelledby="rules-title">
-                <div class="home-section-container">
-                    <div class="section-head">
-                        <h2 class="section-title" id="rules-title">Your words stay yours.</h2>
-                        <p class="section-lede">Feldar follows the same four rules in every part of the app.</p>
-                        <a class="section-more" href="/ai-for-novelists">How Feldar's AI behaves</a>
+            <figure class="sp-wrap home-quote">
+                <blockquote>“It helps without trying to sound smarter than me.”</blockquote>
+                <figcaption>Leo</figcaption>
+            </figure>
+
+            <!-- Revise Section -->
+            <section class="sp-wrap sp-section" aria-labelledby="revise-title">
+                <div class="showcase-head">
+                    <div>
+                        <p class="showcase-label">Revise</p>
+                        <h2 class="sp-h2" id="revise-title">Check a chapter and hear from readers before you share it.</h2>
                     </div>
-                    <ul class="ruled-list">
-                        <li>
-                            <svg class="rules-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="14" height="14" rx="3" /><path d="M6.5 10.2l2.4 2.3 4.6-4.9" /></svg>
-                            <h3>Nothing changes until you accept it.</h3>
-                            <p>Feldar shows you each suggestion before it touches your text. If you dismiss it, the page stays as it was.</p>
-                        </li>
-                        <li>
-                            <svg class="rules-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 2.5l6 2.3v4.6c0 3.7-2.5 6.5-6 8.1-3.5-1.6-6-4.4-6-8.1V4.8z" /><path d="M7.4 10l1.8 1.8 3.4-3.6" /></svg>
-                            <h3>Your writing is not used for training.</h3>
-                            <p>Feldar does not train AI models on what you write.</p>
-                        </li>
-                        <li>
-                            <svg class="rules-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 5.4C8.4 4.2 6.2 3.8 3 3.9v11c3.2-.1 5.4.3 7 1.5 1.6-1.2 3.8-1.6 7-1.5v-11c-3.2-.1-5.4.3-7 1.5z" /><path d="M10 5.4v11" /></svg>
-                            <h3>You own your book.</h3>
-                            <p>What you write belongs to you, and you can export the whole book at any time.</p>
-                        </li>
-                        <li>
-                            <svg class="rules-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1.8 10c1.7-3.4 4.6-5.2 8.2-5.2s6.5 1.8 8.2 5.2c-1.7 3.4-4.6 5.2-8.2 5.2S3.5 13.4 1.8 10z" /><circle cx="10" cy="10" r="2.4" /></svg>
-                            <h3>You can see which words came from Feldar.</h3>
-                            <p>The Writing record is a private log of the words you typed and the words Feldar wrote.</p>
-                        </li>
-                    </ul>
+                    <div>
+                        <p class="sp-intro">Feldar marks problems in the text and shows how different readers might take the chapter.</p>
+                        <a class="sp-more" href="/features">See every feature</a>
+                    </div>
+                </div>
+                <div class="sp-body showcase-cards">
+                    <article class="sp-card showcase-card--wide">
+                        <div class="sp-stage" style="--w:776;--h:440;--sp-mx:372;--sp-mw:404" aria-hidden="true" data-nosnippet><div class="sp-stage-inner">
+                            <div class="sp-at au au-editor au-editor--sm" style="left:40px;top:36px;width:340px;height:440px;--au-ed-top:30px">
+                                <p>The ledger was in the bottom drawer of the bureau, under a seed catalogue from 1958 and a tin of the mints her father had sucked for his chest.</p>
+                                <p>His hand had not changed in thirty years. The same upright figures, the same small flourish on every four, the same habit of pressing so hard at the foot of a column that the total stood up from the paper like braille.</p>
+                            </div>
+                            <div class="au au-lens au-lens--top-32 sp-at" style="left:396px;top:36px;width:348px;height:440px">
+                                <div class="au-lens-reply">
+                                    <p class="au-lens-persona"><img src="../../assets/ui/persona-critic-20.svg" width="20" height="20" alt="" />Critic</p>
+                                    <p class="au-lens-text">Two letters and a sum carry more suspense than a locked door.</p>
+                                </div>
+                                <div class="au-lens-reply">
+                                    <p class="au-lens-persona"><img src="../../assets/ui/persona-poet-20.svg" width="20" height="20" alt="" />Poet</p>
+                                    <p class="au-lens-text">Keep the braille. It is the image this chapter will be remembered by.</p>
+                                </div>
+                                <div class="au-lens-reply">
+                                    <p class="au-lens-persona"><img src="../../assets/ui/persona-editor-20.svg" width="20" height="20" alt="" />Editor</p>
+                                    <p class="au-lens-text">The first sentence can lose a clause and keep its weight.</p>
+                                </div>
+                            </div>
+                        </div></div>
+                        <div class="sp-card-text">
+                            <h3 class="sp-card-title">Lens</h3>
+                            <p class="sp-card-desc">Six reader personas, such as the Critic and the Poet, respond to your page. Reader reactions shows what an audience such as book club readers would remember and ask.</p>
+                        </div>
+                    </article>
+                    <article class="sp-card">
+                        <div class="sp-stage" style="--w:388;--h:440" aria-hidden="true" data-nosnippet><div class="sp-stage-inner">
+                            <div class="au au-checks sp-at" style="left:28px;top:84px;width:332px">
+                                <p class="au-checks-title">Checks</p>
+                                <div class="au-checks-score">
+                                    <p class="au-checks-score-row"><span>Writing quality</span><span>91<small> / 100</small></span></p>
+                                    <div class="au-checks-meter" style="--au-score:91"></div>
+                                </div>
+                                <ul class="au-checks-list">
+                                    <li class="au-checks-item au-checks-item--red"><span class="au-checks-label">Fix critical mistakes</span><span class="au-checks-state">completed</span></li>
+                                    <li class="au-checks-item au-checks-item--blue"><span class="au-checks-label">Improve accuracy and clarity</span><span class="au-checks-state">completed</span></li>
+                                    <li class="au-checks-item au-checks-item--green"><span class="au-checks-label">Tighten word choice</span><span class="au-checks-state">completed</span></li>
+                                    <li class="au-checks-item au-checks-item--green"><span class="au-checks-label">Smooth dialogue transitions</span><span class="au-checks-state">completed</span></li>
+                                    <li class="au-checks-item au-checks-item--green"><span class="au-checks-label">Clarify character perspectives</span><span class="au-checks-state">completed</span></li>
+                                </ul>
+                            </div>
+                        </div></div>
+                        <div class="sp-card-text">
+                            <h3 class="sp-card-title">Checks</h3>
+                            <p class="sp-card-desc">Five editing checks mark each issue in the text and offer a fix you can accept or discard.</p>
+                        </div>
+                    </article>
                 </div>
             </section>
 
-            <!-- Testimonials Section -->
-            <section class="testimonials">
-                <div class="testimonials-container">
-                    <div class="testimonial-content">
-                        <blockquote class="testimonial-quote" aria-live="polite">
-                            "I can finally write collaboratively instead of worrying about the details."
-                        </blockquote>
-                        <div class="testimonial-author">
-                            <span class="testimonial-name">Jan</span>
+            <!-- Keep Section -->
+            <section class="sp-wrap sp-section" aria-labelledby="keep-title">
+                <div class="showcase-head">
+                    <div>
+                        <p class="showcase-label">Keep</p>
+                        <h2 class="sp-h2" id="keep-title">Keep your books together, with a record of how you wrote them.</h2>
+                    </div>
+                    <div>
+                        <p class="sp-intro">Your work stays in your Library, and you can take it out whenever you like.</p>
+                        <a class="sp-more" href="/blog/provenance">Why Feldar records provenance</a>
+                    </div>
+                </div>
+                <div class="sp-body showcase-cards showcase-cards--flipped">
+                    <article class="sp-card">
+                        <div class="sp-stage" style="--w:388;--h:440" aria-hidden="true" data-nosnippet><div class="sp-stage-inner">
+                            <div class="au au-library au-library--narrow sp-at" style="left:28px;top:52px;width:640px">
+                                <p class="au-library-title">Continue writing</p>
+                                <div class="au-library-grid">
+                                    <div class="au-library-book">
+                                        <span class="au-library-cover" style="--au-cover:#c8664a"></span>
+                                        <span class="au-library-meta"><span class="au-library-name">The Winter Ledger</span><span class="au-library-time">1h ago</span></span>
+                                    </div>
+                                    <div class="au-library-book">
+                                        <span class="au-library-cover" style="--au-cover:#55647e"></span>
+                                        <span class="au-library-meta"><span class="au-library-name">Low Water</span><span class="au-library-time">2d ago</span></span>
+                                    </div>
+                                    <div class="au-library-book">
+                                        <span class="au-library-cover" style="--au-cover:#5f7a52"></span>
+                                        <span class="au-library-meta"><span class="au-library-name">Glasshouse</span><span class="au-library-time">5d ago</span></span>
+                                    </div>
+                                    <div class="au-library-book">
+                                        <span class="au-library-cover" style="--au-cover:#b88483"></span>
+                                        <span class="au-library-meta"><span class="au-library-name">Kington Stories</span><span class="au-library-time">1w ago</span></span>
+                                    </div>
+                                    <div class="au-library-book">
+                                        <span class="au-library-cover" style="--au-cover:#c99a3a"></span>
+                                        <span class="au-library-meta"><span class="au-library-name">Ten Rivers</span><span class="au-library-time">1w ago</span></span>
+                                    </div>
+                                    <div class="au-library-book">
+                                        <span class="au-library-cover" style="--au-cover:#6f6a8c"></span>
+                                        <span class="au-library-meta"><span class="au-library-name">The Weighing House</span><span class="au-library-time">2w ago</span></span>
+                                    </div>
+                                    <div class="au-library-book">
+                                        <span class="au-library-cover" style="--au-cover:#8a5a44"></span>
+                                        <span class="au-library-meta"><span class="au-library-name">Salt Road</span><span class="au-library-time">3w ago</span></span>
+                                    </div>
+                                    <div class="au-library-book">
+                                        <span class="au-library-cover" style="--au-cover:#4f7a7a"></span>
+                                        <span class="au-library-meta"><span class="au-library-name">Hollin Staithe</span><span class="au-library-time">1mo ago</span></span>
+                                    </div>
+                                    <div class="au-library-book">
+                                        <span class="au-library-cover" style="--au-cover:#9a9486"></span>
+                                        <span class="au-library-meta"><span class="au-library-name">Pewter Sky</span><span class="au-library-time">2mo ago</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div>
+                        <div class="sp-card-text">
+                            <h3 class="sp-card-title">Library, import and export</h3>
+                            <p class="sp-card-desc">Every book sits in your Library. Import or export Word, PDF, Markdown or plain text.</p>
                         </div>
-                    </div>
-                    <div class="testimonial-nav">
-                        <button class="testimonial-nav-btn" type="button" aria-label="Previous testimonial">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11.25 4.5L6.75 9L11.25 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </button>
-                        <button class="testimonial-nav-btn" type="button" aria-label="Next testimonial">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6.75 4.5L11.25 9L6.75 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </button>
-                    </div>
+                    </article>
+                    <article class="sp-card showcase-card--wide">
+                        <div class="sp-stage" style="--w:776;--h:440;--sp-mx:113;--sp-mw:550" aria-hidden="true" data-nosnippet><div class="sp-stage-inner">
+                            <div class="au au-record sp-at" style="left:129px;top:72px;width:518px">
+                                <p class="au-record-kicker">The Winter Ledger</p>
+                                <p class="au-record-headline"><span>8,375 words entered.</span><span>92% by hand, 7% Feldar, 1% pasted.</span></p>
+                                <div class="au-record-bar">
+                                    <span class="au-record-seg au-record-seg--typed" style="flex-grow:422"></span>
+                                    <span class="au-record-seg au-record-seg--feldar" style="flex-grow:34"></span>
+                                    <span class="au-record-seg au-record-seg--pasted" style="flex-grow:11"></span>
+                                </div>
+                                <div class="au-record-legend">
+                                    <span class="au-record-key au-record-key--typed"><b>7,645</b> typed</span>
+                                    <span class="au-record-key au-record-key--feldar"><b>610</b> Feldar</span>
+                                    <span class="au-record-key au-record-key--pasted"><b>120</b> pasted</span>
+                                </div>
+                                <div class="au-record-divider"></div>
+                                <div class="au-record-stats">
+                                    <div class="au-record-stat"><p class="au-record-stat-label">Active days</p><p class="au-record-stat-value">15 days</p></div>
+                                    <div class="au-record-stat"><p class="au-record-stat-label">AI operations</p><p class="au-record-stat-value">15</p></div>
+                                    <div class="au-record-stat"><p class="au-record-stat-label">Active time</p><p class="au-record-stat-value">20h 42m</p></div>
+                                    <div class="au-record-stat"><p class="au-record-stat-label">Current saved manuscript</p><p class="au-record-stat-value">5,210 words</p></div>
+                                </div>
+                            </div>
+                        </div></div>
+                        <div class="sp-card-text">
+                            <h3 class="sp-card-title">Writing record</h3>
+                            <p class="sp-card-desc">A private count of the words you typed and the words that came from Feldar, with your active days and the models used.</p>
+                        </div>
+                    </article>
                 </div>
             </section>
 
             <!-- Plans Section -->
-            <section class="home-section plans" aria-labelledby="plans-title">
-                <div class="home-section-container">
-                    <div class="section-head">
-                        <h2 class="section-title" id="plans-title">The same workspace on every plan.</h2>
-                        <p class="section-lede">Plans differ in how many credits you get and which models you can use.</p>
-                        <a class="section-more" href="/pricing">See plans and pricing</a>
+            <section class="sp-wrap sp-section" aria-labelledby="plans-title">
+                <h2 class="sp-h2" id="plans-title">The same workspace on every plan.</h2>
+                <p class="sp-intro">Plans differ in how many credits you get and which models you can use.</p>
+                <a class="sp-more" href="/pricing">See plans and pricing</a>
+                <div class="sp-body sp-plans">
+                    <div class="sp-plan">
+                        <h3 class="sp-plan-name">Starter</h3>
+                        <p class="sp-plan-price"><span class="sp-plan-amount">Free</span></p>
+                        <p class="sp-plan-desc">500 credits to start. No credit card needed.</p>
                     </div>
-                    <ul class="ruled-list">
-                        <li>
-                            <h3>Starter</h3>
-                            <p class="plans-price">Free</p>
-                            <p>500 credits to start. No credit card needed.</p>
-                        </li>
-                        <li>
-                            <h3>Core</h3>
-                            <p class="plans-price">$20 a month</p>
-                            <p>20,000 credits a month. $180 if you pay yearly.</p>
-                        </li>
-                        <li>
-                            <h3>Pro</h3>
-                            <p class="plans-price">$40 a month</p>
-                            <p>45,000 credits a month. $400 if you pay yearly.</p>
-                        </li>
-                        <li>
-                            <h3>Ultra</h3>
-                            <p class="plans-price">$200 a month</p>
-                            <p>250,000 credits a month. $2,220 if you pay yearly.</p>
-                        </li>
-                    </ul>
+                    <div class="sp-plan">
+                        <h3 class="sp-plan-name">Core</h3>
+                        <p class="sp-plan-price"><span class="sp-plan-amount">$20</span><span class="sp-plan-unit">a month</span></p>
+                        <p class="sp-plan-desc">20,000 credits a month. $180 if you pay yearly.</p>
+                    </div>
+                    <div class="sp-plan">
+                        <h3 class="sp-plan-name">Pro</h3>
+                        <p class="sp-plan-price"><span class="sp-plan-amount">$40</span><span class="sp-plan-unit">a month</span></p>
+                        <p class="sp-plan-desc">45,000 credits a month. $400 if you pay yearly.</p>
+                    </div>
+                    <div class="sp-plan">
+                        <h3 class="sp-plan-name">Ultra</h3>
+                        <p class="sp-plan-price"><span class="sp-plan-amount">$200</span><span class="sp-plan-unit">a month</span></p>
+                        <p class="sp-plan-desc">250,000 credits a month. $2,220 if you pay yearly.</p>
+                    </div>
                 </div>
             </section>
 
             <!-- Questions Section -->
-            <section class="home-section questions" aria-labelledby="questions-title">
-                <div class="home-section-container questions-layout">
-                    <div class="section-head">
-                        <h2 class="section-title" id="questions-title">Common questions</h2>
-                        <p class="section-lede">If your question is not here, write to <a href="mailto:support@feldar.com">support@feldar.com</a>.</p>
-                    </div>
-                    <div class="questions-list">
-                        <details class="lp-faq-item" open><summary>Does Feldar write the book for me?</summary><p>No. Feldar writes when you ask it to. It can continue a scene from where you stopped, rewrite a passage you select, or draft a first pass of a page from your scene plan. Each of these waits for your decision before anything is kept.</p></details>
-                        <details class="lp-faq-item"><summary>Can I use Feldar without the AI?</summary><p>Yes. You can write, plan in the Outline, build the Canvas, and import or export your book without using the AI at all. None of that uses credits.</p></details>
-                        <details class="lp-faq-item"><summary>Does Feldar train AI on my writing?</summary><p>No. Feldar does not train AI models on your writing, and you own what you write. The details are in the <a href="/privacy">privacy policy</a>.</p></details>
-                        <details class="lp-faq-item"><summary>What is a credit?</summary><p>A credit is the unit Feldar uses to measure AI use. Things like rewrites, chat, checks and drafting a page cost credits, while typing and editing your book cost nothing. If you run out, the AI features pause until your plan renews, and you can keep writing.</p></details>
-                        <details class="lp-faq-item"><summary>Which AI models does Feldar use?</summary><p>GPT-6 Astra, Sol and Luna from OpenAI, and Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5 from Anthropic. Which ones you can use depends on your plan, and you choose the model in Settings.</p></details>
-                        <details class="lp-faq-item"><summary>Where does Feldar run?</summary><p>Feldar runs in your browser at feldar.com and as a Mac app. On Windows and Linux you can use it in the browser, and desktop apps for both are coming soon. The app is in English.</p></details>
-                        <details class="lp-faq-item"><summary>Can I import a manuscript and export my book?</summary><p>Yes. You can import Word, PDF, Markdown or plain text files of up to 20 MB each, and export the whole book or selected pages in the same four formats.</p></details>
-                    </div>
+            <section class="sp-wrap sp-section sp-faq" aria-labelledby="questions-title">
+                <div>
+                    <h2 class="sp-h2" id="questions-title">Common questions</h2>
+                    <p class="sp-intro">If your question is not here, write to <a href="mailto:support@feldar.com">support@feldar.com</a>.</p>
+                </div>
+                <div class="sp-faq-list">
+                    <details class="lp-faq-item" open><summary>Does Feldar write the book for me?</summary><p>No. Feldar writes when you ask it to. It can continue a scene from where you stopped, rewrite a passage you select, or draft a first pass of a page from your scene plan. What it writes is marked, and you decide what stays.</p></details>
+                    <details class="lp-faq-item"><summary>Can I use Feldar without the AI?</summary><p>Yes. You can write, plan in the Outline, build the Canvas, and import or export your book without using the AI at all. None of that uses credits.</p></details>
+                    <details class="lp-faq-item"><summary>Does Feldar train AI on my writing?</summary><p>No. Feldar does not train AI models on your writing, and you own what you write. The details are in the <a href="/privacy">privacy policy</a>.</p></details>
+                    <details class="lp-faq-item"><summary>What is a credit?</summary><p>A credit is the unit Feldar uses to measure AI use. Things like rewrites, chat, checks and drafting a page cost credits, while typing and editing your book cost nothing. The free plan comes with 500 credits once, and paid plans renew theirs every month. If you run out, the AI features pause and you can keep writing.</p></details>
+                    <details class="lp-faq-item"><summary>Which AI models does Feldar use?</summary><p>GPT-6 Astra, Sol and Luna from OpenAI, and Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5 from Anthropic. Which ones you can use depends on your plan, and you choose the model in Settings.</p></details>
+                    <details class="lp-faq-item"><summary>Where does Feldar run?</summary><p>Feldar runs in your browser at feldar.com and as a Mac app. On Windows and Linux you can use it in the browser, and desktop apps for both are coming soon. The app is in English.</p></details>
+                    <details class="lp-faq-item"><summary>Can I import a manuscript and export my book?</summary><p>Yes. You can import Word, PDF, Markdown or plain text files of up to 20 MB each, and export the whole book or selected pages in the same four formats.</p></details>
                 </div>
             </section>
 
@@ -852,9 +535,7 @@
                 <!-- CTA Banner -->
                 <div class="footer-cta" data-footer-shader-variant="home">
                     <div class="footer-cta-content">
-                        <h2 class="footer-cta-title">
-                            Try Feldar today.
-                        </h2>
+                        <h2 class="footer-cta-title">Write your novel in Feldar.</h2>
                         <a href="/login" class="btn btn-md btn-white" rel="nofollow">Start writing</a>
                     </div>
                 </div>
@@ -914,11 +595,10 @@
             </footer>
         </main>
 
-        <!-- (removed) -->
         <script type="module" src="home.js"></script>
         <nav class="pt-switch" aria-label="Prototypes">
             <a href="../index.html">All concepts</a>
-            <a href="index.html" aria-current="page">The home page, upgraded</a>
+            <a href="index.html" aria-current="page">The new home page</a>
         </nav>
         <script type="module" src="../review.js"></script>
     </body>

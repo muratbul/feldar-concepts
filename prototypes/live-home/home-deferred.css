@@ -1,4 +1,5 @@
-/* Deferred homepage CSS: below-the-fold sections. */
+/* Deferred homepage CSS: everything below the hero. The sections use the system the
+   search pages share, with the home page's own layouts on top. */
 /* Machine mode: HUMAN/MACHINE toggle and the raw-markdown page view. */
 
 .machine-mode-toggle {
@@ -105,6 +106,17 @@ html[data-view="machine"] .machine-view {
     color: #6b6b6b;
 }
 
+/* SEO pages, v3 template (Figma: Design-System / sites / "v3 · SEO page templates (Nov 6)").
+   Layout: 1180px column, stacked sections (H2, one line, content); the FAQ is the only
+   split section. Boxes only where they mean something: app visuals in cards, the one
+   tool, plans, the faint Feldar column in comparison tables. Everything else is text on
+   white with a thin top rule. Values are taken from the Figma frames.
+   Shared file: owned by /root. Page-specific rules go in styles/pages/seo/<page>.css. */
+
+/* App parts drawn in HTML and CSS, measured from feldar-production origin/master
+   and laid out at the sizes in Figma. Prefix: au-. One file per part, each owned
+   by one builder. */
+
 /* Shared base for app parts. */
 
 .au {
@@ -137,6 +149,324 @@ html[data-view="machine"] .machine-view {
 .au-spacer {
     flex: 1 0 0;
     min-width: 1px;
+}
+
+/* outline: the Scenes panel (Outline) and the "Continue from here" composer.
+   Measured from Figma 1349:3560 (/novel-writing-software), 1370:6840 (empty state)
+   and 1370:6879 (Continue from here). Owner: /root/au_writing.
+   Markup: docs/seo/app-ui/outline.html.
+
+   Size: the panel takes its size from the inline style (width/height in design px,
+   as in Figma). Rows, scroll fade and footer adapt to any width. To draw the whole
+   part at a different scale, set --au-scale on the root (scales from top left). */
+
+.au-outline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: hidden;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow:
+        0 5px 16px 0 rgba(8, 8, 8, 0.03),
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 3px 0 rgba(8, 8, 8, 0.08);
+    transform: scale(var(--au-scale, 1));
+    transform-origin: 0 0;
+}
+
+.au-outline-head {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 0 24px;
+}
+
+.au-outline-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.06px;
+    color: #0e0e0e;
+    white-space: nowrap;
+}
+
+.au-outline-head img {
+    width: 16px;
+    height: 16px;
+}
+
+/* PAGE 4 / CHAPTER 7: 30px below the header, 8px above the rows. */
+.au-outline-label {
+    flex-shrink: 0;
+    padding: 30px 24px 8px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.28px;
+    color: #888;
+    white-space: nowrap;
+}
+
+.au-outline-scenes {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 1px;
+    margin: 0;
+    padding: 0 12px;
+    overflow: hidden;
+    list-style: none;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -0.35px;
+    color: #0e0e0e;
+}
+
+.au-outline-scene {
+    display: flex;
+    flex-shrink: 0;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px;
+}
+
+.au-outline-num {
+    flex-shrink: 0;
+    width: 28px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 20px;
+}
+
+.au-outline-stack {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.au-outline-name {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 20px;
+}
+
+.au-outline-desc {
+    line-height: 28px;
+}
+
+/* White fade over the last rows, 96px tall, pinned to the bottom. */
+.au-outline-fade {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 96px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 55%, #fff 100%);
+    pointer-events: none;
+}
+
+/* Tools + Draft Page, 16px from the right and bottom edges. */
+.au-outline-foot {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.au-outline-tools {
+    display: flex;
+    gap: 2px;
+    padding: 4px 6px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow:
+        0 5px 16px 0 rgba(8, 8, 8, 0.03),
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 3px 0 rgba(8, 8, 8, 0.08);
+}
+
+.au-outline-tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+}
+
+.au-outline-tool img {
+    width: 16px;
+    height: 16px;
+}
+
+.au-outline-draft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 104px;
+    height: 36px;
+    border-radius: 12px;
+    background: #0e0e0e;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.1px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+/* Empty state (1370:6840): centered title, line and Generate scenes. */
+.au-outline-empty {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    min-height: 1px;
+    padding: 0 48px 40px;
+    text-align: center;
+}
+
+.au-outline-empty-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.au-outline-empty-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: -0.3px;
+    color: #0e0e0e;
+    white-space: nowrap;
+}
+
+.au-outline-empty-text {
+    width: 360px;
+    max-width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.13px;
+    color: #4d4d4d;
+}
+
+.au-outline-generate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 196px;
+    height: 32px;
+    border-radius: 10px;
+    background: #0e0e0e;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.1px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+/* ---------- Continue from here (1370:6879) ---------- */
+
+.au-continue {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 4px 0 rgba(8, 8, 8, 0.06),
+        0 4px 16px 0 rgba(8, 8, 8, 0.1);
+    transform: scale(var(--au-scale, 1));
+    transform-origin: 0 0;
+}
+
+.au-continue-head {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    height: 40px;
+    padding: 0 16px;
+    border-bottom: 1px solid #eee;
+    background: #f3f3f3;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.026px;
+    color: #4d4d4d;
+    white-space: nowrap;
+}
+
+.au-continue-body {
+    flex: 1 0 auto;
+    min-height: 92px;
+    padding: 20px 24px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    color: #0e0e0e;
+}
+
+.au-continue-foot {
+    display: flex;
+    flex-shrink: 0;
+    gap: 16px;
+    align-items: center;
+    height: 50px;
+    padding: 12px 16px;
+    border-top: 1px solid #eee;
+}
+
+.au-continue-count {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.1px;
+    color: #4d4d4d;
+}
+
+.au-continue-count img {
+    width: 14px;
+    height: 14px;
+}
+
+.au-continue-cancel {
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.026px;
+    color: #6f6f6f;
+    white-space: nowrap;
+}
+
+.au-continue-go {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 8px;
+    background: #eee;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.026px;
+    color: #0e0e0e;
+    white-space: nowrap;
 }
 
 /* editor: the white manuscript page with paragraphs and the blue AI continuation.
@@ -212,1193 +542,2058 @@ html[data-view="machine"] .machine-view {
     background: #0e0e0e;
 }
 
-/* sage: Sage on the writer's page. The marks Sage leaves in the margin, the comment a
-   mark opens and the words it points at, Sage's pointer, its speech bubble, its answer
-   with the Follow up row under it, and the Sage section of Settings with Memories.
-   Measured from feldar-production origin/master:
-     frontend/src/features/sage/components/SageMargin.tsx (marks 24px, 8px right of the
-       text; lit words take a 12% wash of the ink, radius 4)
-     frontend/src/features/sage/components/SageBubble.tsx (surface #f3f3f3, radius 16,
-       speech padding 8/12 with its corner by Sage at 4, answer radius 20 and padding
-       14 12 14 18, comments gap 4, kind label 12/500 #6f6f6f, words 14/1.43)
-     frontend/src/features/sage/presence/SagePresenceMenu.tsx (menu glyphs, 14px grid)
-     frontend/src/features/account/settings/sections/SettingsPlaneSageSection.tsx
-   Markup: docs/seo/app-ui/sage.html. */
+/* menus: Preview actions (Accept / Revise / Dismiss, "esc to dismiss"), the caret
+   menu (Continue from here, Extend paragraph, ...) and the model menu (Haiku, Opus,
+   Sonnet 5.5, GPT-6 Astra/Sol/Luna, Effort). Owner: /root/au_writing.
+   Measured from Figma 1349:3617 (Preview actions, /novel-writing-software),
+   1370:6353 (Caret menu, /ai-for-novelists) and 1374:4583 (Model menu, drawn at
+   1.1 scale; base size 200x241). Markup: docs/seo/app-ui/menus.html.
 
-.au-sage-mark {
-    display: grid;
-    place-items: center;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border: 0;
-    border-radius: 9999px;
-    background: transparent;
-    color: #6f6f6f;
-    cursor: pointer;
-    transition: background-color 150ms ease, color 150ms ease;
-    animation: au-sage-mark-appear 240ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
+   Size: menus are 192 (preview, caret) or 200 (model) wide at scale 1 and take their
+   height from the rows. Set --au-scale for a scaled copy (model menu: 1.1 on
+   /ai-for-novelists, 1.15 on /compare). Scaling is from the top left, so place the
+   part at the Figma left/top. */
 
-.au-sage-mark:hover,
-.au-sage-mark[aria-expanded="true"] {
-    background: #f3f3f3;
-    color: #0e0e0e;
-}
-
-.au-sage-mark svg {
-    display: block;
-}
-
-@keyframes au-sage-mark-appear {
-    from {
-        opacity: 0;
-        transform: scale(0.6);
-    }
-}
-
-/* The words an open comment is about. */
-.au-sage-quote {
-    border-radius: 4px;
-    transition: background-color 200ms ease;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-}
-
-.au-sage-quote.is-lit {
-    background: color-mix(in srgb, currentColor 12%, transparent);
-    color: #0e0e0e;
-}
-
-/* Sage's pointer, the look Sage takes on the page as a cursor. */
-.au-sage-pointer {
-    display: block;
-    width: 22px;
-    height: 22px;
-    background: url('../../assets/ui/sage-pointer-22.svg') center / 22px 22px no-repeat;
-    filter: drop-shadow(0 0 6px rgba(94, 192, 232, 0.55));
-}
-
-/* What goes with Sage: a column over a soft wash of the page, so the writing under it
-   fades away round it. */
-.au-sage-thread {
-    position: relative;
-    isolation: isolate;
+.au-menu {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 14px;
-    line-height: 1.43;
-    letter-spacing: -0.004em;
-    color: #0e0e0e;
-}
-
-.au-sage-thread::before {
-    content: "";
-    position: absolute;
-    inset: -12px;
-    z-index: -1;
-    border-radius: 16px;
-    background: #fff;
-    filter: blur(12px);
-    pointer-events: none;
-}
-
-.au-sage-bubble {
-    max-width: 100%;
-    padding: 8px 12px;
-    border-radius: 16px;
-    background: #f3f3f3;
-    overflow-wrap: anywhere;
-    animation: au-sage-reveal 180ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-
-/* A speech bubble's corner nearest Sage is sharper, pointing to it. */
-.au-sage-bubble--from-top-left {
-    border-top-left-radius: 4px;
-}
-
-.au-sage-answer {
-    max-width: 384px;
-    padding: 14px 12px 14px 18px;
-    border-radius: 20px;
-}
-
-@keyframes au-sage-reveal {
-    from {
-        opacity: 0;
-        transform: translateY(4px);
-    }
-}
-
-/* A line's comments from the margin: what kind each is over what Sage said. */
-.au-sage-comments {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.au-sage-kind {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.333;
-    letter-spacing: 0.01em;
-    color: #6f6f6f;
-}
-
-/* Under a bubble: the field Sage is followed up from on the left, what can be done
-   with what Sage said on the right. */
-.au-sage-row {
-    display: flex;
-    align-items: center;
-    align-self: stretch;
-    justify-content: space-between;
-    gap: 8px;
-}
-
-.au-sage-actions {
-    display: flex;
-    align-items: center;
     gap: 2px;
-    margin-inline-start: auto;
-}
-
-.au-sage-button {
-    display: inline-flex;
-    align-items: center;
-    height: 28px;
-    padding: 0 10px;
-    border: 1px solid #e8e8e8;
-    border-radius: 9999px;
+    align-items: stretch;
+    width: 192px;
+    padding: 4px;
+    border-radius: 12px;
     background: #fff;
-    color: #0e0e0e;
-    font: inherit;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 150ms ease;
+    box-shadow:
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 4px 0 rgba(8, 8, 8, 0.06),
+        0 4px 16px 0 rgba(8, 8, 8, 0.1);
+    transform: scale(var(--au-scale, 1));
+    transform-origin: 0 0;
 }
 
-.au-sage-button:hover {
-    background: #f3f3f3;
-}
-
-.au-sage-button--primary {
-    border-color: #0e0e0e;
-    background: #0e0e0e;
-    color: #fff;
-}
-
-.au-sage-button--primary:hover {
-    background: #333;
-}
-
-.au-sage-icon-button {
-    display: grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 9999px;
-    color: #4d4d4d;
-}
-
-.au-sage-field {
+.au-menu-item {
     display: flex;
-    flex: 1 1 auto;
-    align-items: center;
-    justify-content: space-between;
+    flex-shrink: 0;
     gap: 8px;
-    min-width: 0;
-    max-width: 260px;
+    align-items: center;
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #0e0e0e;
+    white-space: nowrap;
+}
+
+.au-menu-item > img {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+}
+
+/* Trailing icon or value pushed to the right edge (enter icon, "High"). */
+.au-menu-end {
+    margin-left: auto;
+}
+
+.au-menu-item > img.au-menu-end {
+    width: 14px;
+    height: 14px;
+}
+
+.au-menu-item.is-active {
+    background: #eee;
+}
+
+.au-menu-item.is-muted {
+    color: #6f6f6f;
+}
+
+.au-menu-divider {
+    flex-shrink: 0;
+    padding: 2px 8px;
+}
+
+.au-menu-divider::before {
+    content: "";
+    display: block;
+    height: 1px;
+    background: #eee;
+}
+
+.au-menu-hint {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
     height: 36px;
-    padding: 0 12px 0 14px;
-    border: 1px solid #e8e8e8;
-    border-radius: 9999px;
-    background: #fff;
+    padding: 0 8px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.026px;
     color: #6f6f6f;
     white-space: nowrap;
 }
 
-.au-sage-field-text {
+/* Model menu: 200 wide, 32px rows without gaps, lighter selected row. */
+.au-menu--model {
+    gap: 0;
+    width: 200px;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-.au-sage-field-text.is-typed {
-    color: #0e0e0e;
+.au-menu--model .au-menu-item {
+    gap: 0;
+    height: 32px;
 }
 
-/* Settings, Sage: the preferences card, then Memories. */
-.au-sage-settings {
+.au-menu--model .au-menu-item.is-active {
+    background: #f3f3f3;
+}
+
+.au-menu--model .au-menu-divider {
+    padding: 4px;
+}
+
+.au-menu--model .au-menu-item--effort {
+    padding-right: 6px;
+}
+
+.au-menu--model .au-menu-item--effort > img {
+    width: 14px;
+    height: 14px;
+}
+
+/* rewrite: the Rewrite card ("Deepen Description", text with the changed phrases in
+   blue, Refine, redo / insert / trash, Apply). Owner: /root/au_writing.
+   Measured from Figma 1370:6415 (456 wide, /ai-for-novelists) and 1349:3758
+   (316 wide, /compare/sudowrite). Markup: docs/seo/app-ui/rewrite.html.
+
+   Size: set the Figma width inline; height follows the text. The card on
+   /novel-writing-software (1349:3636, 489.4 wide) is the 456 card drawn at 1.0732:
+   use width 456 and --au-scale: 1.0732 at the Figma left/top. */
+
+.au-rewrite {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 24px;
-    border: 1px solid #e8e8e8;
+    align-items: stretch;
+    overflow: hidden;
+    padding: 0 4px 4px;
+    border-radius: 20px;
+    background: #f3f3f3;
+    box-shadow:
+        0 5px 16px 0 rgba(8, 8, 8, 0.03),
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 3px 0 rgba(8, 8, 8, 0.08);
+    transform: scale(var(--au-scale, 1));
+    transform-origin: 0 0;
+}
+
+.au-rewrite-bar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 8px 0 14px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.06px;
+    color: #4d4d4d;
+    white-space: nowrap;
+}
+
+.au-rewrite-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.au-rewrite-icon img {
+    width: 16px;
+    height: 16px;
+}
+
+.au-rewrite-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 12px 14px 14px;
     border-radius: 16px;
     background: #fff;
     box-shadow:
-        0 18px 44px 0 rgba(0, 0, 0, 0.05),
-        0 4px 12px 0 rgba(0, 0, 0, 0.06);
-    font-size: 14px;
-    line-height: 1.43;
+        0 5px 16px 0 rgba(8, 8, 8, 0.03),
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 3px 0 rgba(8, 8, 8, 0.08);
+}
+
+.au-rewrite-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.13px;
     color: #0e0e0e;
 }
 
-.au-sage-heading {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.375;
+/* Changed phrases. */
+.au-rewrite-text .au-new {
+    color: #0c70e5;
 }
 
-.au-sage-card {
-    border: 1px solid #eeeeee;
+.au-rewrite-foot {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.au-rewrite-refine,
+.au-rewrite-apply {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    height: 36px;
     border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.1px;
+    white-space: nowrap;
 }
 
-.au-sage-pref {
+.au-rewrite-refine {
+    margin-right: auto;
+    padding: 0 14px;
+    background: #e8e8e8;
+    color: #4d4d4d;
+}
+
+.au-rewrite-tools {
+    display: flex;
+}
+
+.au-rewrite-tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.au-rewrite-tool img {
+    width: 18px;
+    height: 18px;
+}
+
+.au-rewrite-apply {
+    gap: 6px;
+    padding: 0 12px 0 14px;
+    background: #0e0e0e;
+    color: #fff;
+}
+
+.au-rewrite-apply img {
+    width: 15px;
+    height: 15px;
+}
+
+/* generation: the Generation settings popover (Pages to generate stepper, Words per
+   page Auto switch, Regenerate existing pages switch, Save). Owner: /root/au_writing.
+   Measured from Figma 1370:5927 (/compare/plottr). Markup:
+   docs/seo/app-ui/generation.html.
+
+   Size: 312 wide at scale 1 (all three uses are 312x229). --au-scale scales it from
+   the top left if a page ever needs another size. */
+
+.au-gen {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 312px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 4px 0 rgba(8, 8, 8, 0.06),
+        0 4px 16px 0 rgba(8, 8, 8, 0.1);
+    transform: scale(var(--au-scale, 1));
+    transform-origin: 0 0;
+}
+
+.au-gen-head {
+    display: flex;
+    align-items: center;
+    height: 41px;
+    padding: 8px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #0e0e0e;
+    white-space: nowrap;
+}
+
+.au-gen-body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+    padding: 16px;
+}
+
+.au-gen-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-self: stretch;
+}
+
+.au-gen-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    height: 32px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #4d4d4d;
+    white-space: nowrap;
+}
+
+.au-gen-row > :first-child {
+    margin-right: auto;
+}
+
+.au-gen-value {
+    letter-spacing: -0.1px;
+    color: #0e0e0e;
+}
+
+.au-gen-muted {
+    color: #6f6f6f;
+}
+
+.au-gen-row img {
+    width: 16px;
+    height: 16px;
+}
+
+.au-gen-row img.au-gen-switch {
+    width: 32px;
+    height: 24px;
+}
+
+.au-gen-save {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 10px;
+    background: #0e0e0e;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.06px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+/* canvas: app part (owner /root/au_canvas). See styles/app-ui/index.css.
+   Canvas cards, relation lines with labels, card action rail and its panels,
+   card tray and tooltip. Measured from Figma 1377:4501, 1337:3780, 1337:3816
+   and cross-checked with feldar-production CanvasNode, CanvasRelationLayer,
+   CanvasCardActionRail and CanvasCardTray styles.
+   Markup and usage: docs/seo/app-ui/canvas.html */
+
+/* ---------- Card ---------- */
+
+.au-ccard {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    padding: 0 3px 3px;
+    border-radius: 15px;
+    background: #f3f3f3;
+    box-shadow: 0 6px 9px rgba(0, 0, 0, 0.04), 0 1px 1.5px rgba(0, 0, 0, 0.05);
+}
+
+/* Selected card: 2px focus ring drawn outside the card, as in the app. */
+.au-ccard.is-selected {
+    outline: 2px solid #358df5;
+    outline-offset: 0;
+}
+
+.au-ccard-head {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 12px;
+    overflow: hidden;
+}
+
+.au-ccard-title {
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.06px;
+    color: #0e0e0e;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.au-ccard-surface {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow:
+        0 5px 16px rgba(8, 8, 8, 0.03),
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 3px rgba(8, 8, 8, 0.08);
+}
+
+.au-ccard-body {
+    padding: 8px 16px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #4d4d4d;
+    overflow-wrap: break-word;
+}
+
+.au-ccard-foot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.12px;
+    color: #4d4d4d;
+}
+
+.au-ccard-foot img {
+    width: 12px;
+    height: 12px;
+}
+
+/* Kinds. Character, Location and Faction use the neutral card (default).
+   Plot beats are warm; Items and Notes are the parchment "lore" card. */
+.au-ccard--plot {
+    background: #efebe5;
+}
+
+.au-ccard--plot .au-ccard-surface {
+    background: #f9f5ef;
+}
+
+.au-ccard--plot .au-ccard-foot {
+    background: #f5f0e8;
+}
+
+.au-ccard--item,
+.au-ccard--note {
+    background: #eae6d7;
+}
+
+.au-ccard--item .au-ccard-surface,
+.au-ccard--note .au-ccard-surface {
+    background: #fff9e5;
+}
+
+/* ---------- Relation lines ----------
+   Place the element on the Figma line: left/top of the first line piece.
+   Horizontal: width = line length, label sits 5px above the line.
+   Vertical: height = full span between the two cards; the line is split
+   around the label (5px gap above and below it), as in Figma.
+   Default is the plain relation (1.5px, grey). Add .is-active for the
+   relations of the selected card (2px, blue). */
+
+.au-rel {
+    --au-rel-color: rgba(111, 111, 111, 0.44);
+    --au-rel-size: 1.5px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.au-rel.is-active {
+    --au-rel-color: #3465c9;
+    --au-rel-size: 2px;
+}
+
+.au-rel-label {
+    flex: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.12px;
+    color: #4d4d4d;
+    white-space: nowrap;
+}
+
+.au-rel--h {
+    height: var(--au-rel-size);
+    background: var(--au-rel-color);
+}
+
+.au-rel--h .au-rel-label {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 5px);
+    transform: translateX(-50%);
+}
+
+.au-rel--v {
+    flex-direction: column;
+    width: var(--au-rel-size);
+}
+
+.au-rel--v::before,
+.au-rel--v::after {
+    content: "";
+    flex: 1 0 0;
+    width: var(--au-rel-size);
+    background: var(--au-rel-color);
+}
+
+.au-rel--v .au-rel-label {
+    margin: 5px 0;
+}
+
+/* ---------- Shell shared by the rail, panels and tray ---------- */
+
+.au-rail,
+.au-cpanel,
+.au-tray {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 2px rgba(8, 8, 8, 0.06),
+        0 4px 8px rgba(8, 8, 8, 0.1);
+}
+
+/* ---------- Action rail (Develop, Branch, Connect, More) and tray ---------- */
+
+.au-rail,
+.au-tray {
+    width: 40px;
+}
+
+.au-rail-btn,
+.au-tray-btn {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+}
+
+.au-rail-btn.is-active,
+.au-tray-btn.is-active {
+    background: #eee;
+}
+
+/* ---------- Action panel (Branch / Develop list) ---------- */
+
+.au-cpanel {
+    width: 232px;
+}
+
+.au-cpanel-head {
+    display: flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.12px;
+    color: #6f6f6f;
+}
+
+.au-cpanel-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    min-height: 28px;
+    padding: 0 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #4d4d4d;
+    white-space: nowrap;
+}
+
+.au-cpanel-row.is-active {
+    padding: 4px 8px;
+    background: #eee;
+    color: #0e0e0e;
+}
+
+.au-cpanel-desc {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.12px;
+    color: #6f6f6f;
+}
+
+/* ---------- Tooltip (next to the tray) ---------- */
+
+.au-ctip {
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #1f1f1f;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+/* chat: app part (owner /root/au_canvas). See styles/app-ui/index.css.
+   Chat panel with a user message, an assistant line and a proposal card
+   ("Save card"). Measured from Figma 1374:4564 (/ai-for-novelists) and
+   cross-checked with feldar-production ChatProposalCard.
+   Markup and usage: docs/seo/app-ui/chat.html */
+
+.au-chat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    overflow: hidden;
+    padding: 28px 24px 24px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 24px;
+    background: #fff;
+    box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.au-chat-user {
+    align-self: flex-end;
+    max-width: 100%;
+    padding: 10px 16px;
+    border-radius: 16px;
+    background: #f3f3f3;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #0e0e0e;
+}
+
+.au-chat-reply {
+    width: 100%;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: -0.13px;
+    color: #0e0e0e;
+}
+
+/* Proposal card */
+.au-chat-proposal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 12px;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow:
+        0 5px 8px rgba(8, 8, 8, 0.03),
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 1.5px rgba(8, 8, 8, 0.08);
+}
+
+.au-chat-proposal-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.au-chat-proposal-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.06px;
+    color: #0e0e0e;
+    white-space: nowrap;
+}
+
+.au-chat-proposal-meta {
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.026px;
+    color: #6f6f6f;
+    white-space: nowrap;
+}
+
+.au-chat-proposal-body {
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #f3f3f3;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #0e0e0e;
+}
+
+.au-chat-proposal-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.au-chat-btn {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 10px;
+    background: #f3f3f3;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.06px;
+    color: #0e0e0e;
+    white-space: nowrap;
+}
+
+.au-chat-btn--primary {
+    background: #0e0e0e;
+    color: #fff;
+}
+
+/* Library: "Continue writing" grid of book covers.
+   Measured from Figma 1378:4501 (/novel-writing-software, 720x354, columns 216).
+   Also 1370:8000 (/features, 640x354, columns 189: add .au-library--narrow).
+   Markup: docs/seo/app-ui/library.html. Owner: /root/au_review. */
+
+.au-library {
+    --au-library-col: 216px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 20px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.au-library--narrow {
+    --au-library-col: 189px;
+}
+
+.au-library-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.13px;
+    color: #101010;
+    white-space: nowrap;
+}
+
+.au-library-grid {
+    display: grid;
+    grid-template-columns: repeat(3, var(--au-library-col));
+    column-gap: 16px;
+    row-gap: 16px;
+}
+
+.au-library-book {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    padding: 8px 0;
+}
+
+/* Cover: 44x62, color via --au-cover. Spine on the left, paper label with three lines. */
+.au-library-cover {
+    position: relative;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 62px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: var(--au-cover, #c8664a);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.au-library-cover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.14);
+}
+
+.au-library-cover::after {
+    content: "";
+    position: absolute;
+    top: 13px;
+    left: 15px;
+    width: 14px;
+    height: 14px;
+    border-radius: 1px;
+    background:
+        linear-gradient(rgba(58, 58, 58, 0.55), rgba(58, 58, 58, 0.55)) 3px 4px / 9px 1px no-repeat,
+        linear-gradient(rgba(58, 58, 58, 0.55), rgba(58, 58, 58, 0.55)) 3px 7px / 9px 1px no-repeat,
+        linear-gradient(rgba(58, 58, 58, 0.55), rgba(58, 58, 58, 0.55)) 3px 10px / 6px 1px no-repeat,
+        #f4eee2;
+}
+
+.au-library-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.au-library-name {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.1px;
+    color: #0e0e0e;
+}
+
+.au-library-time {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.06px;
+    color: #6f6f6f;
+}
+
+/* Import work dialog: header, dashed dropzone, file rows with checks.
+   Measured from Figma 1378:4596 (/novel-writing-software, 380x416).
+   Markup: docs/seo/app-ui/import.html. Owner: /root/au_review. */
+
+.au-import {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(8, 8, 8, 0.04),
+        0 1px 4px rgba(8, 8, 8, 0.06),
+        0 4px 16px rgba(8, 8, 8, 0.1);
+}
+
+.au-import-head {
+    display: flex;
+    align-items: center;
+    height: 24px;
+}
+
+.au-import-title {
+    flex: 1 0 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.13px;
+    color: #101010;
+    white-space: nowrap;
+}
+
+.au-import-drop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 216px;
+    border: 1px dashed #e0e0e0;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.au-import-hint {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #6f6f6f;
+    white-space: nowrap;
+}
+
+.au-import-hint strong {
+    font-weight: 500;
+    color: #0e0e0e;
+}
+
+.au-import-file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding-left: 10px;
+    border-radius: 8px;
+    background: #f3f3f3;
+}
+
+.au-import-name {
+    flex: 1 0 0;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #4d4d4d;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.au-import-done {
+    display: flex;
+    flex: 0 0 44px;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+}
+
+/* Checks panel: writing quality score, meter, list of passes.
+   Measured from Figma 1375:4506 (/novel-writing-software, 356x301).
+   Markup: docs/seo/app-ui/checks.html. Owner: /root/au_review. */
+
+.au-checks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.au-checks-title {
+    padding: 0 4px 4px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #101010;
+    white-space: nowrap;
+}
+
+.au-checks-score {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 4px;
+}
+
+.au-checks-score-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #4d4d4d;
+    white-space: nowrap;
+}
+
+.au-checks-score-row small {
+    font-size: 13px;
+    color: #6f6f6f;
+}
+
+/* Meter: --au-score is 0 to 100. */
+.au-checks-meter {
+    position: relative;
+    height: 7px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #e8e8e8;
+}
+
+.au-checks-meter::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(var(--au-score, 91) * 1%);
+    height: 100%;
+    border-radius: 4px;
+    background: #14743b;
+}
+
+.au-checks-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 4px 0;
+    list-style: none;
+}
+
+.au-checks-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 8px 0 4px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.06px;
+    color: #0e0e0e;
+    white-space: nowrap;
+}
+
+.au-checks-item::before {
+    content: "";
+    flex: 0 0 7px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--au-dot, #14743b);
+}
+
+.au-checks-item--red {
+    --au-dot: #b4232f;
+}
+
+.au-checks-item--blue {
+    --au-dot: #1750c7;
+}
+
+.au-checks-item--green {
+    --au-dot: #14743b;
+}
+
+.au-checks-label {
+    flex: 1 0 0;
+    min-width: 0;
+}
+
+.au-checks-state {
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.026px;
+    color: #6f6f6f;
+}
+
+/* Lens replies: persona sphere, persona name, reply text, stacked 40 apart.
+   Measured from Figma 1352:3635 (/novel-writing-software, 518x530, top padding 72).
+   Variants: 1375:4547 (/features, 400x560, top padding 32: .au-lens--top-32),
+   1370:6453 (/ai-for-novelists), 1370:5391 (/compare/novelcrafter, 316x349, top padding 68: .au-lens--top-68).
+   Figma padding is measured from the outer edge (stroke inside), so CSS padding is 1px less
+   than Figma to keep the reply text at the Figma width (454, 336, 252).
+   Spheres are the Figma vector exports in ../../assets/ui/persona-<name>-20.svg.
+   Markup: docs/seo/app-ui/lens.html. Owner: /root/au_review. */
+
+.au-lens {
+    --au-lens-pt: 71px;
+    --au-lens-px: 31px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: var(--au-lens-pt) var(--au-lens-px) 0;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 24px;
+    background: #fff;
+    box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.au-lens--top-32 {
+    --au-lens-pt: 31px;
+}
+
+.au-lens--top-68 {
+    --au-lens-pt: 67px;
+}
+
+.au-lens-reply {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.au-lens-persona {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.1px;
+    color: #0e0e0e;
+    white-space: nowrap;
+}
+
+.au-lens-persona img,
+.au-sphere {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.au-lens-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.13px;
+    color: #0e0e0e;
+}
+
+/* Writing record: project name, two-line headline, three-segment bar, legend,
+   divider, four stats. Measured from Figma 1370:8099 (/features, 518x295).
+   Markup: docs/seo/app-ui/record.html. Owner: /root/au_review. */
+
+.au-record {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.au-record-kicker {
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.026px;
+    color: #6f6f6f;
+    white-space: nowrap;
+}
+
+.au-record-headline {
+    padding-top: 10px;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+    color: #101010;
+}
+
+.au-record-headline span {
+    display: block;
+    white-space: nowrap;
+}
+
+/* Bar: give each segment its share with style="flex-grow:<n>" (Figma widths 422, 34, 11). */
+.au-record-bar {
+    display: flex;
+    gap: 2px;
+    height: 12px;
+    margin-top: 28px;
+}
+
+.au-record-seg {
+    flex: 1 1 0;
+    min-width: 4px;
+    height: 12px;
+    border-radius: 1px;
+}
+
+.au-record-seg:first-child {
+    border-radius: 6px 1px 1px 6px;
+}
+
+.au-record-seg:last-child {
+    border-radius: 1px 6px 6px 1px;
+}
+
+.au-record-seg--typed,
+.au-record-key--typed {
+    --au-dot: #0e0e0e;
+}
+
+.au-record-seg--feldar,
+.au-record-key--feldar {
+    --au-dot: #1a73e8;
+}
+
+.au-record-seg--pasted,
+.au-record-key--pasted {
+    --au-dot: #8a8a8a;
+}
+
+.au-record-seg {
+    background: var(--au-dot, #8a8a8a);
+}
+
+.au-record-legend {
+    display: flex;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.au-record-key {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #6f6f6f;
+    white-space: nowrap;
+}
+
+.au-record-key::before {
+    content: "";
+    flex: 0 0 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--au-dot);
+}
+
+.au-record-key b {
+    font-weight: 600;
+    color: #0e0e0e;
+}
+
+.au-record-divider {
+    height: 1px;
+    margin: 20px 0;
+    background: #eee;
+}
+
+.au-record-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 117px);
+}
+
+.au-record-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.au-record-stat-label {
+    width: 105px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #6f6f6f;
+}
+
+.au-record-stat-value {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.026px;
+    color: #0e0e0e;
+    white-space: nowrap;
+}
+
+/* Tool panels on the /tools hub cards: a small list panel with a header line and
+   44px rows (label left, value right). Measured from Figma 1370:8292 (name generator)
+   and 1370:8323 (word counter), both 420x318 in frame 1370:8260.
+   Markup: docs/seo/app-ui/tool-panels.html. Owner: /root/au_review. */
+
+.au-toolpanel {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.au-toolpanel-head {
+    padding: 10px 12px 8px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.026px;
+    color: #737373;
+    white-space: nowrap;
+}
+
+.au-toolpanel-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.au-toolpanel-row.is-active {
+    background: #f5f3f1;
+}
+
+.au-toolpanel-label {
+    flex: 1 0 0;
+    min-width: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.2px;
+    color: #101010;
+}
+
+.au-toolpanel-value {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.1px;
+    color: #737373;
+}
+
+
+
+@font-face {
+    font-family: 'Libre Baskerville';
+    src: url('../../assets/fonts/LibreBaskerville-latin.woff2') format('woff2');
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+.sp-page {
+    --sp-ink: #101010;
+    --sp-text: #262626;
+    --sp-soft: #5f5f5f;
+    --sp-faint: #737373;
+    --sp-rule: rgba(0, 0, 0, 0.1);
+    --sp-card: #f5f3f1;
+    --sp-card-border: #e7e7e7;
+    --sp-gutter: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background: #fff;
+    color: var(--sp-ink);
+    font-family: 'Inter Variable', 'Inter', system-ui, sans-serif;
+}
+
+.sp-wrap {
+    width: min(1180px, calc(100% - 2 * var(--sp-gutter)));
+    margin: 0 auto;
+}
+
+/* ---------- Header: H1, one line, buttons. No app picture. ---------- */
+
+.sp-hero {
+    padding-top: calc(52px + 96px);
+}
+
+.sp-h1 {
+    max-width: 640px;
+    margin: 0;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 52px;
+    letter-spacing: -0.312px;
+    color: var(--sp-ink);
+}
+
+.sp-lede {
+    max-width: 600px;
+    margin: 20px 0 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.09px;
+    color: var(--sp-soft);
+}
+
+.sp-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+}
+
+.sp-buttons .btn-md {
+    height: 34px;
+    padding: 0 12px;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: -0.07px;
+}
+
+/* ---------- Sections: H2 (36), one line, content ---------- */
+
+.sp-section {
+    padding-top: 138px;
+}
+
+.sp-h2 {
+    max-width: 640px;
+    margin: 0;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 42px;
+    letter-spacing: -0.234px;
+    color: var(--sp-ink);
+}
+
+.sp-intro {
+    max-width: 600px;
+    margin: 14px 0 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.09px;
+    color: var(--sp-soft);
+}
+
+.sp-intro a,
+.sp-prose a {
+    color: var(--sp-ink);
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 0, 0, 0.25);
+    text-underline-offset: 0.2em;
+}
+
+/* "Learn more" link with arrow under a section head. */
+.sp-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.1px;
+    color: #000;
+}
+
+.sp-more::after {
+    content: "";
+    width: 14px;
+    height: 14px;
+    background: url('../../assets/ui/icon-right-14.svg') center / 14px 14px no-repeat;
+    transition: transform 150ms ease;
+}
+
+.sp-more:hover::after,
+.sp-more:focus-visible::after {
+    transform: translateX(2px);
+}
+
+/* Content after a section head sits 40px below it. */
+.sp-body {
+    margin-top: 40px;
+}
+
+.sp-gap-16 {
+    margin-top: 16px;
+}
+
+.sp-gap-40 {
+    margin-top: 40px;
+}
+
+/* Running text, where a page has some (guides, comparisons). */
+.sp-prose {
+    max-width: 640px;
+    font-size: 17px;
+    line-height: 28px;
+    letter-spacing: -0.15px;
+    color: var(--sp-text);
+}
+
+.sp-prose > * {
+    margin: 0;
+}
+
+.sp-prose > * + * {
+    margin-top: 16px;
+}
+
+/* ---------- Cards with app visuals ---------- */
+
+.sp-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.sp-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--sp-card-border);
+    border-radius: 10px;
+    background: var(--sp-card);
+}
+
+.sp-card-text {
+    padding: 16px 33px 27px;
+}
+
+.sp-card-title,
+.sp-point-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 25px;
+    letter-spacing: -0.32px;
+    color: #000;
+}
+
+.sp-card-desc,
+.sp-point-desc {
+    margin: 2px 0 0;
+    max-width: 448px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: -0.32px;
+    color: var(--sp-soft);
+}
+
+.sp-card-desc {
+    color: #000;
+}
+
+.sp-point-desc {
+    margin-top: 6px;
+    max-width: 374px;
+}
+
+/* Stage: a fixed design-size canvas scaled to the width of its box.
+   Set style="--w: 580; --h: 496" (unitless design px). Children are absolutely
+   positioned in design px with .sp-at and inline left/top. stage-scale.ts sets
+   --sp-scale. Without JS the stage shows 1:1, cropped. */
+.sp-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--w) / var(--h);
+    overflow: hidden;
+}
+
+.sp-stage-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(var(--w) * 1px);
+    height: calc(var(--h) * 1px);
+    transform-origin: 0 0;
+    transform: translateX(var(--sp-offset, 0px)) scale(var(--sp-scale, 1));
+}
+
+.sp-at {
+    position: absolute;
+}
+
+/* Tinted card: at most one per section. Tints are the footer CTA gradients
+   lightened about 30 percent. Use the exact gradient from the Figma frame. */
+.sp-tint--sky {
+    background:
+        radial-gradient(60% 40% at 50% 72%, rgba(226, 242, 250, 0.6) 0%, rgba(226, 242, 250, 0) 72%),
+        linear-gradient(180deg, rgb(121, 165, 191) 0%, rgb(131, 178, 207) 15%, rgb(148, 193, 218) 30%, rgb(186, 221, 238) 55%, rgb(214, 236, 247) 75%, rgb(221, 237, 246) 100%);
+}
+
+.sp-tint--teal {
+    background:
+        radial-gradient(54% 42% at 36% 42%, rgba(171, 202, 208, 0.42) 0%, rgba(171, 202, 208, 0) 74%),
+        radial-gradient(60% 38% at 48% 80%, rgba(234, 245, 247, 0.6) 0%, rgba(234, 245, 247, 0) 72%),
+        linear-gradient(180deg, rgb(129, 164, 172) 0%, rgb(174, 205, 210) 50%, rgb(226, 237, 238) 100%);
+}
+
+/* ---------- Plain lists: points, links, steps (no boxes) ---------- */
+
+.sp-points {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.sp-point {
+    padding-top: 18px;
+    border-top: 1px solid var(--sp-rule);
+}
+
+.sp-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.sp-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-top: 20px;
+    border-top: 1px solid var(--sp-rule);
+    color: inherit;
+    text-decoration: none;
+}
+
+.sp-link-kicker {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.026px;
+    color: var(--sp-faint);
+}
+
+.sp-link-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 25px;
+    letter-spacing: -0.2px;
+    color: #000;
+}
+
+.sp-link-title::after {
+    content: "";
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    background: url('../../assets/ui/icon-right-15.svg') center / 15px 15px no-repeat;
+    transition: transform 150ms ease;
+}
+
+.sp-link:hover .sp-link-title::after,
+.sp-link:focus-visible .sp-link-title::after {
+    transform: translateX(2px);
+}
+
+.sp-link-desc {
+    max-width: 360px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: -0.1px;
+    color: var(--sp-soft);
+}
+
+/* ---------- Tables (never inside a box) ---------- */
+
+.sp-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.sp-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.sp-table th {
+    padding: 12px 24px 12px 0;
+    border-bottom: 1px solid var(--sp-rule);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.026px;
+    color: rgba(0, 0, 0, 0.54);
+    vertical-align: top;
+}
+
+.sp-table td,
+.sp-table tbody th {
+    padding: 16px 24px 16px 0;
+    border-bottom: 1px solid var(--sp-rule);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: -0.1px;
+    color: var(--sp-text);
+    vertical-align: top;
+}
+
+.sp-table tbody th,
+.sp-table td.sp-cell-name {
+    font-weight: 500;
+    color: var(--sp-ink);
+}
+
+/* ---------- Plans ---------- */
+
+.sp-plans {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.sp-plan {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 24px 24px 28px;
+    border: 1px solid var(--sp-card-border);
+    border-radius: 10px;
+    background: var(--sp-card);
+}
+
+.sp-plan-name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 25px;
+    letter-spacing: -0.32px;
+    color: var(--sp-ink);
+}
+
+.sp-plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin: 0;
+}
+
+.sp-plan-amount {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 42px;
+    letter-spacing: -0.234px;
+    color: var(--sp-ink);
+}
+
+.sp-plan-unit {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.1px;
+    color: var(--sp-faint);
+}
+
+.sp-plan-desc {
+    margin: 0;
+    font-size: 16px;
+    line-height: 25px;
+    letter-spacing: -0.32px;
+    color: #000;
+}
+
+/* ---------- FAQ: title left, questions right ---------- */
+
+.sp-faq {
+    display: grid;
+    grid-template-columns: 416px 584px;
+    justify-content: space-between;
+    column-gap: 180px;
+    align-items: start;
+}
+
+.sp-faq .sp-h2 {
+    max-width: 416px;
+}
+
+.sp-faq-list {
+    border-top: 1px solid var(--sp-rule);
+}
+
+.sp-faq .lp-faq-item {
+    border-top: 0;
+    border-bottom: 1px solid var(--sp-rule);
+}
+
+.sp-faq .lp-faq-item summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 14px 16px;
-}
-
-.au-sage-pref + .au-sage-pref {
-    border-top: 1px solid #eeeeee;
-}
-
-.au-sage-pref-label {
-    font-weight: 500;
-}
-
-.au-sage-pref-text {
-    margin-top: 2px;
-    font-size: 13px;
-    line-height: 1.38;
-    color: #6f6f6f;
-}
-
-.au-sage-select {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 6px;
-    height: 30px;
-    padding: 0 10px 0 12px;
-    border: 1px solid #e8e8e8;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.au-sage-switch {
-    flex-shrink: 0;
-    width: 32px;
-    height: 24px;
-    border: 0;
-    border-radius: 12px;
-    background: url('../../assets/ui/switch-off.svg') center / 32px 24px no-repeat;
+    padding: 22px 0;
     cursor: pointer;
-}
-
-.au-sage-switch[aria-checked="true"] {
-    background-image: url('../../assets/ui/switch-on.svg');
-}
-
-.au-sage-memories-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.au-sage-day {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.333;
-    letter-spacing: 0.01em;
-    color: #6f6f6f;
-}
-
-.au-sage-memories {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
     list-style: none;
-}
-
-/* A memory on its day's rail: the time, a dot on the line, what Sage keeps, and the
-   row's actions. */
-.au-sage-memory {
-    display: grid;
-    grid-template-columns: 40px 12px minmax(0, 1fr) auto;
-    column-gap: 10px;
-    align-items: start;
-    transition: opacity 200ms ease;
-}
-
-.au-sage-memory.is-forgotten {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.au-sage-time {
-    padding-top: 1px;
-    font-size: 12px;
-    line-height: 1.5;
-    color: #6f6f6f;
-    font-variant-numeric: tabular-nums;
-}
-
-.au-sage-rail {
-    position: relative;
-    align-self: stretch;
-}
-
-.au-sage-rail::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 5.5px;
-    border-left: 1px solid #e8e8e8;
-}
-
-.au-sage-memory:first-child .au-sage-rail::before {
-    top: 7px;
-}
-
-.au-sage-memory:last-child .au-sage-rail::before {
-    bottom: auto;
-    height: 7px;
-}
-
-.au-sage-rail::after {
-    content: "";
-    position: absolute;
-    top: 4px;
-    left: 2px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #c7c7c7;
-    box-shadow: 0 0 0 2px #fff;
-}
-
-.au-sage-memory-body {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-bottom: 16px;
-}
-
-.au-sage-memory-title {
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.38;
-}
-
-.au-sage-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin: 2px 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.au-sage-tag {
-    padding: 1px 8px;
-    border-radius: 9999px;
-    background: #f3f3f3;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
-    line-height: 1.5;
-    color: #4d4d4d;
+    line-height: 20px;
+    letter-spacing: -0.1px;
+    color: var(--sp-ink);
 }
 
-.au-sage-tag--thread {
-    background: #eef4fd;
-    color: #0c62c9;
-}
-
-.au-sage-forget {
-    display: grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    color: #6f6f6f;
-    cursor: pointer;
-    transition: background-color 150ms ease, color 150ms ease;
-}
-
-.au-sage-forget:hover {
-    background: #f3f3f3;
-    color: #0e0e0e;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .au-sage-mark,
-    .au-sage-bubble {
-        animation: none;
-    }
-}
-
-/* Sage on the home page: the four things Sage does on the left, and on the right a
-   page from the sample book showing each one. The drawings use the app-ui parts
-   (app-ui/editor.css, app-ui/sage.css); this file lays them out. */
-
-.sage-demo {
-    display: grid;
-    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
-    gap: var(--space-10) 3rem;
-    align-items: start;
-    margin-top: var(--space-10);
-}
-
-/* Several parts set their own display, which would otherwise beat the attribute. */
-.sage-demo [hidden] {
+.sp-faq .lp-faq-item summary::-webkit-details-marker {
     display: none;
 }
 
-/* The moments read like the features section's tabs turned on their side: a rule runs
-   down beside them, and the chosen one is marked on it. */
-.sage-moments {
-    display: flex;
-    flex-direction: column;
-    border-left: 1px solid var(--color-border);
-}
-
-.sage-moment {
-    display: grid;
-    grid-template-columns: 18px minmax(0, 1fr);
-    gap: var(--space-1) var(--space-3);
-    width: 100%;
-    margin-left: -1px;
-    padding: 14px 0 14px 20px;
-    border-left: 2px solid transparent;
-    text-align: left;
-    transition: border-color var(--transition-fast);
-}
-
-.sage-moment:hover {
-    border-left-color: var(--color-border-hover);
-}
-
-.sage-moment[aria-pressed="true"] {
-    border-left-color: var(--color-primary-alt);
-}
-
-.sage-moment-icon {
-    margin-top: 3px;
-    color: var(--color-muted);
-    transition: color var(--transition-fast);
-}
-
-.sage-moment[aria-pressed="true"] .sage-moment-icon {
-    color: #2b9fcf;
-}
-
-.sage-moment-name {
-    font-size: 1rem;
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.5rem;
-    color: var(--color-muted);
-    transition: color var(--transition-fast);
-}
-
-.sage-moment:hover .sage-moment-name,
-.sage-moment[aria-pressed="true"] .sage-moment-name {
-    color: var(--color-primary-alt);
-}
-
-.sage-moment-text {
-    grid-column: 2;
-    font-size: 0.9375rem;
-    line-height: 1.375rem;
-    color: var(--color-text-description);
-}
-
-/* Every scene shares one cell, so the stage keeps the height of the tallest and
-   nothing below it moves when the reader switches scenes. */
-.sage-stage {
-    display: grid;
-}
-
-.sage-scene {
-    grid-area: 1 / 1;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    transition: opacity 200ms ease;
-}
-
-.sage-scene:not(.is-active) {
-    visibility: hidden;
-    opacity: 0;
-}
-
-.sage-canvas {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    padding: 2.5rem 2.5rem 0;
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: 0.625rem;
-    background: var(--color-surface-secondary);
-    container-type: inline-size;
-}
-
-/* A page scene holds a full manuscript page, longer than the card. It takes the height
-   the stage has rather than adding its own, so the page fills the card and runs on
-   past its foot. */
-.sage-canvas--page {
-    flex-basis: 0;
-    min-height: 0;
-}
-
-/* The page runs past the bottom of the card. It leaves room on its right for what Sage
-   says beside it, and its own right margin for Sage's marks. On a wide stage it stops
-   at a book's line length rather than stretching. */
-.sage-page {
-    --au-ed-size: 17px;
-    --au-ed-lh: 28px;
-    --au-ed-gap: 18px;
-    --au-ed-top: 32px;
-    --au-ed-bottom: 32px;
-    flex: 1 1 auto;
-    width: calc(100% - 17.5rem);
-    max-width: 36rem;
-    padding-right: 3.25rem;
-    overflow: visible;
-    border-bottom: 0;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    transform: none;
-}
-
-/* A scene with nothing beside the page keeps the page's width and centres it. */
-.sage-page--centered {
-    margin-inline: auto;
-}
-
-.sage-settings {
-    margin-bottom: 2.5rem;
-}
-
-.sage-paragraph {
-    position: relative;
-}
-
-.sage-mark {
-    position: absolute;
-    top: 2px;
-    left: calc(100% + 8px);
-}
-
-/* A comment, or a recap, stands in the space right of the page, level with its line. */
-.sage-aside {
-    position: absolute;
-    top: -6px;
-    left: calc(100% + 5rem);
-    z-index: 1;
-    width: 15rem;
-}
-
-.sage-pointer {
-    position: absolute;
-    top: -16px;
-    left: -18px;
-}
-
-/* Sage's answer floats over the page, under the paragraph it was asked from; the
-   writing beneath fades away round it, as it does in the app. */
-.sage-answer {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    left: 18px;
-    z-index: 1;
-}
-
-/* The wash reaches the page's left margin, so no half-covered letters show beside the
-   answer. */
-.sage-answer::before {
-    inset: -14px -16px -16px -36px;
-}
-
-.sage-caret {
-    display: inline-block;
-    width: 2px;
-    height: 1.15em;
-    margin-left: 2px;
-    background: #0e0e0e;
-    vertical-align: -0.2em;
-    animation: sage-caret-blink 1100ms steps(2, jump-none) infinite;
-}
-
-@keyframes sage-caret-blink {
-    to {
-        opacity: 0;
-    }
-}
-
-/* The caret stays lit while the page's motion is paused. */
-[data-motion-paused] .sage-caret {
-    animation: none;
-}
-
-.sage-fixed {
-    border-radius: 4px;
-    animation: sage-fixed 1400ms ease both;
-}
-
-@keyframes sage-fixed {
-    from {
-        background: rgba(43, 159, 207, 0.22);
-    }
-}
-
-.sage-said-later {
-    visibility: hidden;
-}
-
-.sage-caption {
-    font-size: 0.9375rem;
-    line-height: 1.375rem;
-    color: var(--color-muted);
-}
-
-@container (max-width: 40rem) {
-    .sage-page {
-        width: 100%;
-    }
-
-    .sage-aside {
-        position: relative;
-        top: auto;
-        left: auto;
-        width: auto;
-        margin: 18px 0 4px 18px;
-    }
-}
-
-@media (max-width: 80em) {
-    .sage-demo {
-        grid-template-columns: minmax(0, 1fr);
-        gap: var(--space-6);
-    }
-
-    .sage-moments {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: var(--space-3);
-        border-left: 0;
-    }
-
-    /* Across the top, as the features section's tabs are. */
-    .sage-moment {
-        display: flex;
-        align-items: center;
-        gap: var(--space-2);
-        margin-left: 0;
-        padding: var(--space-3) 0 0;
-        border-top: 2px solid var(--color-border);
-        border-left: 0;
-    }
-
-    .sage-moment:hover {
-        border-top-color: var(--color-border-hover);
-    }
-
-    .sage-moment[aria-pressed="true"] {
-        border-top-color: var(--color-primary-alt);
-    }
-
-    .sage-moment-icon {
-        margin-top: 0;
-    }
-
-    .sage-moment-name {
-        font-size: 0.9375rem;
-        line-height: 1.25rem;
-    }
-
-    .sage-moment-text {
-        display: none;
-    }
-}
-
-/* On a phone each scene is as tall as itself: stacked, the short ones would leave a
-   screen of empty page. The stage sits under the buttons, so only what follows moves. */
-@media (max-width: 48em) {
-    .sage-moments {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .sage-scene:not(.is-active) {
-        display: none;
-    }
-
-    .sage-canvas {
-        padding: 0.75rem 0.75rem 0;
-    }
-
-    /* The page is as long as its text here, so it keeps to the paragraphs the scene is
-       about, with Sage's answer set under them. */
-    .sage-canvas--page {
-        flex-basis: auto;
-    }
-
-    .sage-paragraph--more {
-        display: none;
-    }
-
-    .sage-answer {
-        position: relative;
-        top: auto;
-        right: auto;
-        left: auto;
-        margin: 10px 0 4px 18px;
-    }
-
-    .sage-page {
-        --au-ed-size: 16px;
-        --au-ed-lh: 26px;
-        --au-ed-gap: 14px;
-        --au-ed-top: 22px;
-        --au-ed-bottom: 22px;
-        padding-left: 18px;
-        padding-right: 2.5rem;
-    }
-
-    .sage-settings {
-        margin-bottom: 1rem;
-        padding: 18px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .sage-scene,
-    .sage-moment {
-        transition: none;
-    }
-
-    .sage-caret,
-    .sage-fixed {
-        animation: none;
-    }
-}
-
-/* Features: the four parts of the work (Plan, Write, Revise, Keep) as tabs. Each panel
-   pairs one large capture from the app with a promise and the three tools that do that
-   work; every tool is listed on /features. Script: scripts/components/feature-tabs.ts. */
-
-.features-tabs {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-6);
-    margin-top: var(--space-10);
-}
-
-.features-tab {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    padding-top: var(--space-4);
-    border-top: 2px solid var(--color-border);
-    text-align: left;
-    transition: border-color var(--transition-fast);
-}
-
-.features-tab:hover {
-    border-top-color: var(--color-border-hover);
-}
-
-.features-tab[aria-selected="true"] {
-    border-top-color: var(--color-primary-alt);
-}
-
-.features-tab-name {
-    font-size: 1.0625rem;
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.5rem;
-    color: var(--color-muted);
-    transition: color var(--transition-fast);
-}
-
-.features-tab:hover .features-tab-name,
-.features-tab[aria-selected="true"] .features-tab-name {
-    color: var(--color-primary-alt);
-}
-
-.features-tab-note {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: var(--color-muted);
-}
-
-.features-panel {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: var(--space-8) 3.5rem;
-    align-items: center;
-    margin-top: var(--space-8);
-    animation: features-panel-in 280ms ease both;
-}
-
-.features-panel[hidden] {
-    display: none;
-}
-
-@keyframes features-panel-in {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
-}
-
-.features-chapter-title {
-    font-size: 1.75rem;
-    font-weight: var(--font-weight-semibold);
-    line-height: 2.125rem;
-    letter-spacing: -0.2px;
-    color: var(--color-primary-alt);
-}
-
-.features-promise {
-    margin-top: var(--space-3);
-    font-size: 1.125rem;
-    line-height: 1.6875rem;
-    color: var(--color-text-description);
-}
-
-.features-tools {
-    margin-top: var(--space-6);
-}
-
-.features-tools li {
-    padding: var(--space-3) 0;
-    border-top: 1px solid var(--color-border);
-}
-
-.features-tools h4 {
-    font-size: 1rem;
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.5rem;
-    color: var(--color-primary-alt);
-}
-
-.features-tools p {
-    margin-top: 2px;
-    font-size: 0.9375rem;
-    line-height: 1.375rem;
-    color: var(--color-text-description);
-}
-
-.features-copy .section-more {
-    margin-top: var(--space-4);
-}
-
-.features-shot {
-    --features-shot-padding: clamp(0.75rem, 2vw, 1.75rem);
-    /* Sets the pause button in the corner of the loop, not of the frame round it. */
-    --motion-toggle-inset: calc(var(--features-shot-padding) + 0.625rem);
-    position: relative;
-    padding: var(--features-shot-padding);
-    border: 1px solid var(--color-border);
-    border-radius: 0.625rem;
-    background: var(--color-surface-secondary);
-}
-
-.features-shot img,
-.features-shot video {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 10;
-    border-radius: 6px;
-    background: #fff;
-    box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.06),
-        0 12px 32px -12px rgba(0, 0, 0, 0.18);
-    object-fit: cover;
-}
-
-@media (max-width: 64em) {
-    .features-panel {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .features-shot {
-        order: -1;
-    }
-}
-
-@media (max-width: 48em) {
-    .features-tabs {
-        gap: var(--space-3);
-    }
-
-    .features-tab-note {
-        display: none;
-    }
-
-    .features-tab-name {
-        font-size: 1rem;
-    }
-
-    .features-chapter-title {
-        font-size: 1.5rem;
-        line-height: 1.875rem;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .features-panel {
-        animation: none;
-    }
-}
-
-/* A row of short items under thin rules: four across, two on a tablet, one on a phone.
-   Each item is a heading with a line or two beneath it. The house rules and the plans
-   are both set this way. */
-
-.ruled-list {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-8);
-    margin-top: var(--space-10);
-}
-
-.ruled-list li {
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--color-border);
-}
-
-.ruled-list h3 {
-    font-size: 1rem;
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.5rem;
-    color: var(--color-primary-alt);
-}
-
-.ruled-list p {
-    margin-top: var(--space-1);
-    font-size: 0.9375rem;
-    line-height: 1.375rem;
-    color: var(--color-text-description);
-}
-
-@media (max-width: 64em) {
-    .ruled-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 48em) {
-    .ruled-list {
-        grid-template-columns: minmax(0, 1fr);
-        gap: var(--space-4);
-    }
-}
-
-/* House rules: what Feldar's AI does and does not do with a writer's words, set as a
-   ruled list, each rule under a line icon. */
-
-.rules-icon {
-    margin-bottom: var(--space-3);
-    color: var(--color-primary-alt);
-}
-
-/* ============================================
-   TESTIMONIALS SECTION
-   ============================================ */
-
-/* Spaced above by the same measure as the home page's other sections. */
-.testimonials {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: var(--home-section-gap) var(--page-margin) 0;
-}
-
-.testimonials-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem; /* 40px */
-    align-items: center;
-    width: 100%;
-    margin-inline: auto;
-}
-
-.testimonial-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem; /* 32px */
-    max-width: 40rem; /* 640px */
-    text-align: center;
-}
-
-.testimonial-quote {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 2rem; /* 32px */
-    font-weight: var(--font-weight-medium);
-    line-height: 2.625rem; /* 42px */
-    letter-spacing: 0;
-    color: var(--color-primary-alt);
-    margin: 0;
-    width: 100%;
-    /* Two lines, which every quote runs to at this size, so the name below stays put
-       as the quotes change. */
-    min-height: 5.25rem;
-    display: block;
-    text-wrap: balance;
-}
-
-.testimonial-author {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1px;
-}
-
-.testimonial-name {
-    font-family: var(--font-display);
-    font-size: 0.875rem; /* 14px */
-    font-weight: var(--font-weight-medium);
-    line-height: 1.125rem; /* 18px */
-    letter-spacing: 0;
-    color: var(--color-primary);
-}
-
-.testimonial-nav {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem; /* 8px */
-}
-
-.testimonial-nav-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem; /* 32px */
-    height: 2rem; /* 32px */
-    background: var(--color-surface-active);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-
-.testimonial-nav-btn:hover {
-    background: var(--color-surface-active-hover);
-}
-
-.testimonial-nav-btn svg {
-    color: var(--color-primary-alt);
-}
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-
-/* Smaller type on a phone, where a quote can run to four lines. */
-@media (max-width: 48em) {
-    .testimonial-quote {
-        font-size: 1.5rem;
-        line-height: 2rem;
-        min-height: 8rem;
-    }
-}
-
-/* Plans: the four plans as a ruled list, each with its price, its credits and the models
-   it can use. The full comparison is on the pricing page. */
-
-.ruled-list .plans-price {
-    margin-top: var(--space-2);
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-semibold);
-    line-height: 2rem;
-    letter-spacing: -0.2px;
-    color: var(--color-primary-alt);
-}
-
-/* Common questions: the section head on the left and the questions beside it, as native
-   disclosures under thin rules. They carry the landing pages' .lp-faq-item class because
-   the build reads a page's FAQ markup from it. */
-
-.questions-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-    gap: var(--space-8);
-    align-items: start;
-}
-
-.questions .lp-faq-item {
-    border-top: 1px solid var(--color-border);
-}
-
-.questions .lp-faq-item:last-child {
-    border-bottom: 1px solid var(--color-border);
-}
-
-.questions summary {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-4);
-    padding: var(--space-5) 0;
-    font-size: 1.0625rem;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.5rem;
-    color: var(--color-primary-alt);
-    cursor: pointer;
-    list-style: none;
-}
-
-.questions summary::-webkit-details-marker {
-    display: none;
-}
-
-.questions summary::after {
+.sp-faq .lp-faq-item summary::after {
     content: "";
     flex-shrink: 0;
-    width: 14px;
-    height: 14px;
-    margin-top: 5px;
-    background: url('../../assets/ui/icon-down-14.svg') center / 14px 14px no-repeat;
-    transition: transform var(--transition-fast);
+    width: 18px;
+    height: 18px;
+    background: center / 18px 18px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M4.5 6.75L9 11.25L13.5 6.75' stroke='%23101010' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    transition: transform 150ms ease;
 }
 
-.questions [open] summary::after {
+.sp-faq .lp-faq-item[open] summary::after {
     transform: rotate(180deg);
 }
 
-.questions .lp-faq-item p {
-    max-width: 36rem;
-    padding-bottom: var(--space-5);
-    font-size: 1rem;
-    line-height: 1.625rem;
-    color: var(--color-text-description);
+.sp-faq .lp-faq-item p {
+    margin: -4px 0 0;
+    padding-bottom: 22px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.1px;
+    color: var(--sp-text);
 }
 
-.questions a {
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
+/* ---------- Footer spacing ---------- */
+
+.sp-page > .footer {
+    width: min(1180px, calc(100% - 2 * var(--sp-gutter)));
+    margin-top: 138px;
 }
 
-@media (max-width: 64em) {
-    .questions-layout {
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+    .sp-faq {
         grid-template-columns: minmax(0, 1fr);
+        row-gap: 32px;
+    }
+
+    .sp-faq .sp-h2 {
+        max-width: 640px;
+    }
+
+    .sp-plans {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 860px) {
+    .sp-cards,
+    .sp-points,
+    .sp-links {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .sp-points,
+    .sp-links {
+        gap: 24px;
+    }
+}
+
+@media (max-width: 640px) {
+    .sp-page {
+        --sp-gutter: 20px;
+    }
+
+    .sp-hero {
+        padding-top: calc(52px + 56px);
+    }
+
+    .sp-h1 {
+        font-size: 36px;
+        line-height: 40px;
+        letter-spacing: -0.234px;
+    }
+
+    .sp-lede,
+    .sp-intro {
+        font-size: 17px;
+        line-height: 26px;
+    }
+
+    .sp-section {
+        padding-top: 88px;
+    }
+
+    .sp-h2 {
+        font-size: 28px;
+        line-height: 34px;
+        letter-spacing: -0.18px;
+    }
+
+    .sp-body {
+        margin-top: 28px;
+    }
+
+    .sp-card-text {
+        padding: 14px 20px 22px;
+    }
+
+    .sp-plans {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .sp-page > .footer {
+        margin-top: 88px;
+    }
+}
+
+/* The home page's own layouts, on top of the system the search pages share
+   (pages/seo.css): the three points under the hero, the feature rows of one wide card
+   beside one regular card, and the single quotes set between the rows. */
+
+.home-points {
+    padding-top: 72px;
+}
+
+/* A feature row's head: the label and heading on the left, the one line and its link on
+   the right, their last lines level. */
+.showcase-head {
+    display: grid;
+    grid-template-columns: minmax(0, 640px) minmax(0, 420px);
+    justify-content: space-between;
+    align-items: end;
+    gap: 14px 80px;
+}
+
+.showcase-head .sp-intro {
+    margin-top: 0;
+}
+
+/* The small word above a feature heading: Plan, Write, Revise, Keep. */
+.showcase-label {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.026px;
+    color: var(--sp-faint);
+}
+
+/* A wide card is exactly twice a regular one, so their drawings (776 and 388 wide, both
+   440 tall) come out the same height at any width. */
+.showcase-cards {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 16px;
+}
+
+.showcase-cards--flipped {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+}
+
+/* A quote sits closer to the rows on either side than two rows sit to each other. */
+.home-quote {
+    margin-block: 0;
+    padding-top: 104px;
+}
+
+.home-quote + .sp-section {
+    padding-top: 104px;
+}
+
+.home-quote blockquote {
+    max-width: 760px;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: -0.3px;
+    color: var(--sp-ink);
+    text-wrap: balance;
+}
+
+.home-quote figcaption {
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: -0.1px;
+    color: var(--sp-faint);
+}
+
+@media (max-width: 1000px) {
+    .showcase-head {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 860px) {
+    .showcase-cards,
+    .showcase-cards--flipped {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* In one column a regular card would blow its drawing up to twice its size, so the
+   drawing is centred in a wider stage instead: (620 - 388) / 2 = 116 from the left. */
+@media (min-width: 641px) and (max-width: 860px) {
+    .showcase-cards .sp-card:not(.showcase-card--wide) .sp-stage {
+        --w: 620 !important;
+    }
+
+    .showcase-cards .sp-card:not(.showcase-card--wide) .sp-stage-inner {
+        left: calc(116 * var(--sp-scale, 1) * 1px);
+    }
+}
+
+/* Phones: a wide card shows a window of its stage (--sp-mx from the left, --sp-mw design
+   px wide) so the app parts stay readable instead of shrinking to 40 percent. */
+@media (max-width: 640px) {
+    .home-points {
+        padding-top: 48px;
+    }
+
+    .showcase-card--wide .sp-stage {
+        --w: var(--sp-mw) !important;
+    }
+
+    .showcase-card--wide .sp-stage-inner {
+        left: calc(var(--sp-mx) * var(--sp-scale, 1) * -1px);
+    }
+
+    .home-quote,
+    .home-quote + .sp-section {
+        padding-top: 72px;
+    }
+
+    .home-quote blockquote {
+        font-size: 22px;
+        line-height: 30px;
+        letter-spacing: -0.2px;
     }
 }
 
