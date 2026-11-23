@@ -1,4 +1,11 @@
-/* Critical homepage CSS: the page shell and the hero. */
+/* Hallmark · shape: Literary review · genre: editorial · theme: custom · redesign: full · job: sign up · idea: "A review's front page where the app is the plates and the reader decides on a suggestion" · vibe: "serious, bookish, plain, cloth-coloured plates"
+ * paper: oklch(98.2% 0.004 91) · accent: oklch(54.3% 0.198 261) · display: Libre Baskerville · body: Inter · hero: a broadsheet front, the headline across twelve columns over three ruled columns · nav: edge-aligned · footer: mast · imagery: screenshots 8, the app's own stills · signature: accepting the suggestion in the first screen
+ * axes: light/roman-serif/cool · posture: Full palette · surface: absolute · contrast: pass · fold: pass · draw: 8ef0b5 · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: H, the contents column could compete with the live chapter; its titles stay at title size under thin rules so the chapter leads */
+/* Hallmark · waive 7b · surface: absolute, on the live chapter and the mounts behind the stills only · those grounds are the app's own white page, set beside real captures of it */
+/* Hallmark · waive 26b · no control on the page is ever disabled · the live chapter puts its choices away rather than disabling them */
+/* Hallmark · hero-review: not run as its own step · finish-review: subagent · 8 findings · 6 resolved 2 partial · gap: the view toggle stays fixed on desktop, and at 1280 x 800 the plate's foot runs past the fold */
+/* Critical homepage CSS: the page shell, the front page and the points under it. */
 /* ============================================
    FELDAR DESIGN TOKENS
    ============================================ */
@@ -37,6 +44,15 @@
   font-weight: 100 900;
   font-style: italic;
   font-display: optional;
+}
+
+/* Libre Baskerville: the serif the app offers for manuscripts and sets its Outline in. */
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('../../assets/fonts/LibreBaskerville-latin.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
@@ -587,377 +603,837 @@ select {
   border-width: 0;
 }
 
-/* ============================================
-   NAVIGATION COMPONENT
-   ============================================ */
+/* The home page's own system, a literary review: its tokens, the twelve-column grid,
+   type roles, controls and the plates every section shares. The sections themselves
+   are in styles/sections/. */
 
-/* Sticky header wrapper */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3.25rem; /* 52px */
-  background: var(--color-surface);
-  border-bottom: 1px solid transparent;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color var(--transition-fast);
-  view-transition-name: feldar-header;
+:root {
+    --rv-paper: #faf9f6;
+    --rv-well: #f1efea;
+    --rv-ink: #151412;
+    --rv-ink-lift: #33302c;
+    --rv-soft: #54514c;
+    --rv-rule: #d8d4cc;
+
+    /* The app's own page: white stock, its paragraph grey and its floating shadow. */
+    --rv-page: #ffffff;
+    --rv-page-text: #4d4d4d;
+    --rv-page-shadow:
+        0 4px 16px rgba(8, 8, 8, 0.1),
+        0 1px 4px rgba(8, 8, 8, 0.06),
+        0 0 0 1px rgba(8, 8, 8, 0.04);
+
+    /* The app marks suggested text in #4f9cf6, which is 2.8:1 on white. This is the
+       same hue taken down to 5.2:1 so the marked lines read as text. */
+    --rv-mark: #2466e0;
+
+    /* The four parts, each a deeper cloth of one of Feldar's accent hues so that
+       review-stock type on it clears 7:1. Ochre is too light for that and only ever
+       mounts a still. */
+    --rv-plan: #385d46;
+    --rv-write: #3b5488;
+    --rv-revise: #b77a33;
+    --rv-keep: #74465f;
+
+    --rv-serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    --rv-size-display: clamp(2.25rem, 5.28vw, 4.75rem);
+    --rv-size-section: clamp(2rem, 3.62vw, 3.25rem);
+    --rv-size-title: 1.375rem;
+    --rv-size-lead: clamp(1.125rem, 1.39vw, 1.25rem);
+    --rv-size-text: 1rem;
+    --rv-size-small: 0.875rem;
+
+    --rv-container: 82rem;
+    --rv-gutter: clamp(1rem, 4.44vw, 4rem);
+    --rv-gap: 2rem;
+    --rv-section: clamp(5rem, 10vw, 9rem);
+    --rv-header: 3.25rem;
+    /* Above the page, below the machine-mode toggle. */
+    --rv-z-header: 1000;
+
+    --rv-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --rv-quick: 120ms;
+    /* The app lets accepted text settle into the page's ink over 1.26s. */
+    --rv-settle: 1260ms;
 }
 
-.header.is-scrolled {
-  border-bottom-color: var(--color-border);
+html,
+body {
+    overflow-x: clip;
 }
 
-.nav {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: calc(100% - var(--page-margin) - var(--page-margin));
-  max-width: 1180px;
-  height: 100%;
+html {
+    scrollbar-color: var(--rv-soft) var(--rv-paper);
+    scroll-padding-top: calc(var(--rv-header) + var(--space-6));
 }
 
-.nav-logo {
-  width: 3.6875rem; /* 59px */
-  height: 1.0625rem; /* 17px */
-  display: flex;
-  align-items: center;
+body {
+    background: var(--rv-paper);
+    color: var(--rv-ink);
+    caret-color: var(--rv-mark);
 }
 
-.nav-logo img,
-.nav-logo svg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+::selection {
+    background: color-mix(in oklab, var(--rv-mark) 22%, transparent);
+    color: var(--rv-ink);
 }
 
-.nav-cluster {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem; /* 20px */
+:focus-visible {
+    outline: 2px solid var(--rv-focus, var(--rv-ink));
+    outline-offset: 2px;
 }
 
-.nav-links {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem; /* 24px */
-  transform: translate(-50%, -50%);
-}
-
-.nav-divider {
-  display: none;
-}
-
-.nav-link {
-  font-family: var(--font-body);
-  font-size: 0.875rem; /* 14px */
-  font-weight: var(--font-weight-medium);
-  color: var(--color-primary);
-  letter-spacing: var(--letter-spacing-wide);
-  line-height: normal;
-  padding: 0.5rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 1.875rem; /* 30px */
-  white-space: nowrap;
-  transition: color var(--transition-fast);
-}
-
-.nav-link:hover,
-.nav-link:focus-visible {
-  color: var(--color-muted);
-}
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; /* 8px */
-}
-
-/* ============================================
-   BUTTON STYLES
-   ============================================ */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-body);
-  font-weight: var(--font-weight-medium);
-  line-height: normal;
-  letter-spacing: 0;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.btn-sm,
-.btn-md {
-  height: 2.125rem; /* 34px */
-  padding: 0 0.75rem; /* 12px */
-  font-size: 0.9375rem; /* 15px */
-  border-radius: var(--radius-button); /* 50px */
-}
-
-.btn-primary {
-  background: #000;
-  color: #fff;
-  border: none;
-  box-shadow:
-    0 3px 4px rgba(0, 0, 0, 0.06),
-    0 4px 24px rgba(0, 0, 0, 0.04),
-    0 0.6px 0.4px rgba(0, 0, 0, 0.04),
-    0 0 0 1px rgba(0, 0, 0, 0.06);
-}
-
-.btn-primary:hover {
-  background: var(--color-secondary);
-}
-
-.btn-secondary {
-  background: #fcfcf9;
-  color: var(--color-primary);
-  border: none;
-  box-shadow:
-    0 3px 4px rgba(0, 0, 0, 0.06),
-    0 4px 24px rgba(0, 0, 0, 0.04),
-    0 0 0 1px rgba(0, 0, 0, 0.06),
-    0 0.6px 0.4px rgba(0, 0, 0, 0.04);
-}
-
-.btn-secondary:hover {
-  background: var(--color-surface-hover);
-}
-
-/* ============================================
-   MOBILE NAVIGATION
-   ============================================ */
-
-/* Hamburger button - hidden on desktop */
-.nav-mobile-toggle {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.nav-mobile-toggle svg {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-/* Mobile nav overlay */
-.nav-mobile {
-  display: none;
-  position: fixed;
-  top: 3.25rem; /* Below header */
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--color-surface);
-  z-index: 999;
-  padding: 2rem var(--page-margin);
-  flex-direction: column;
-  gap: 2rem;
-  overflow-y: auto;
-}
-
-.nav-mobile.is-open {
-  display: flex;
-}
-
-.nav-mobile-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.nav-mobile-link {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: var(--font-weight-medium);
-  color: var(--color-primary);
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.nav-mobile-link:hover {
-  color: var(--color-muted);
-}
-
-.nav-mobile-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: auto;
-}
-
-.nav-mobile-actions .btn {
-  width: 100%;
-  justify-content: center;
-}
-
-/* Body scroll lock when menu is open */
-body.nav-open {
-  overflow: hidden;
-}
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-
-@media (max-width: 64em) {
-  .nav-links {
-    display: none;
-  }
-
-  .nav-divider {
-    display: none;
-  }
-  
-  .nav-actions .btn-secondary {
-    display: none;
-  }
-  
-  .nav-mobile-toggle {
-    display: flex;
-  }
-}
-
-@media (max-width: 48em) {
-  .nav-actions .btn-primary {
-    display: none;
-  }
-}
-
-/* The home page's hero: the headline, one line under it, the two buttons and the terms,
-   centred above a single screenshot of the app in a plain frame. Loaded with the critical
-   CSS, so it is drawn before the rest of the page's styles arrive. Its column and gutters
-   match the sections below (.sp-wrap in pages/seo.css). */
-
-.hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: min(1180px, calc(100% - 3rem));
-    margin-inline: auto;
-    padding-top: calc(3.25rem + clamp(3.5rem, 6vw, 5rem)); /* the fixed header, then air */
-    text-align: center;
-}
-
-.hero-title {
-    max-width: 15em;
-    font-family: var(--font-display);
-    font-size: clamp(2.25rem, 1.2rem + 3.6vw, 3.75rem);
-    font-weight: var(--title-weight);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    color: var(--color-primary-alt);
+h1,
+h2,
+h3 {
+    min-width: 0;
+    overflow-wrap: break-word;
     text-wrap: balance;
 }
 
-.hero-lede {
-    max-width: 38rem;
-    margin-top: 1.25rem;
-    font-size: 1.125rem;
-    line-height: 1.6875rem;
-    letter-spacing: -0.09px;
-    color: var(--color-text-description);
+/* A display set on a class would otherwise bring a hidden element back. */
+[hidden] {
+    display: none !important;
+}
+
+.rv-wrap {
+    width: min(var(--rv-container), 100% - 2 * var(--rv-gutter));
+    margin-inline: auto;
+}
+
+.rv-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--rv-gap);
+}
+
+.rv-h2,
+.rv-h3 {
+    font-family: var(--rv-serif);
+    font-weight: var(--font-weight-regular);
+}
+
+.rv-h2 {
+    font-size: var(--rv-size-section);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+}
+
+.rv-h3 {
+    font-size: var(--rv-size-title);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+}
+
+.rv-lead {
+    font-size: var(--rv-size-lead);
+    line-height: 1.45;
     text-wrap: pretty;
 }
 
-.hero-cta {
-    display: flex;
-    flex-wrap: wrap;
+.rv-text {
+    font-size: var(--rv-size-text);
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.rv-link {
+    font-size: var(--rv-size-text);
+    font-weight: var(--font-weight-medium);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.rv-link:hover {
+    text-decoration-thickness: 2px;
+}
+
+.rv-button {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-}
-
-/* Larger than the header's buttons: 44px, an easy target on a phone. */
-.hero-cta-button {
-    gap: 0.5rem;
-    height: 2.75rem;
-    padding: 0 1.125rem;
+    gap: var(--space-2);
+    min-height: 3rem;
+    padding: 0 var(--space-6);
     border-radius: var(--radius-button);
-    font-size: 1rem;
+    background: var(--rv-ink);
+    color: var(--rv-paper);
+    font-size: var(--rv-size-text);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+        background-color var(--rv-quick) ease-out,
+        transform var(--rv-quick) ease-out;
 }
 
-.hero-cta-icon {
-    margin-top: -2px;
+.rv-button:hover {
+    background: var(--rv-ink-lift);
 }
 
-/* A phone or tablet cannot run the Mac app, so the download is offered only where the
-   main pointer is a mouse or trackpad. */
+.rv-button:active {
+    transform: translateY(1px);
+}
+
+/* The small button keeps its size on screen and still takes a 44px target. */
+.rv-button--small {
+    position: relative;
+    min-height: 2.125rem;
+    padding-inline: var(--space-3);
+    font-size: 0.9375rem;
+}
+
+.rv-button--small::after {
+    content: "";
+    position: absolute;
+    inset: -0.3125rem 0;
+}
+
+.rv-button--quiet {
+    background: transparent;
+    color: var(--rv-ink);
+    box-shadow: inset 0 0 0 1px var(--rv-ink);
+}
+
+.rv-button--quiet:hover {
+    background: var(--rv-well);
+}
+
+.rv-button--paper {
+    background: var(--rv-paper);
+    color: var(--rv-ink);
+}
+
+.rv-button--paper:hover {
+    background: var(--rv-rule);
+}
+
+/* Each part of the page carries one cloth, from the contents list to its plates. */
+.rv-part--plan {
+    --rv-part: var(--rv-plan);
+}
+
+.rv-part--write {
+    --rv-part: var(--rv-write);
+}
+
+.rv-part--revise {
+    --rv-part: var(--rv-revise);
+}
+
+.rv-part--keep {
+    --rv-part: var(--rv-keep);
+}
+
+/* A plate: one still of the app mounted on a field of its part's cloth. */
+.rv-plate {
+    padding: var(--space-10);
+    background: var(--rv-part);
+}
+
+/* A shot shows one region of a 1200px-wide still. Set the region inline in the still's
+   own pixels: --x and --y for its top left corner, --w and --h for its size, and --r
+   for the corner radius of a floating card when the region is exactly that card. */
+.rv-shot {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: var(--w) / var(--h);
+    border-radius: calc(var(--r, 0) / var(--w) * 100%) / calc(var(--r, 0) / var(--h) * 100%);
+    background: var(--rv-page);
+}
+
+.rv-shot img {
+    position: absolute;
+    top: calc(var(--y) / var(--h) * -100%);
+    left: calc(var(--x) / var(--w) * -100%);
+    width: calc(1200 / var(--w) * 100%);
+    max-width: none;
+    height: auto;
+}
+
+.rv-note .rv-text {
+    margin-top: var(--space-2);
+    color: var(--rv-soft);
+}
+
+@media (max-width: 40rem) {
+    :root {
+        --rv-gap: 1rem;
+    }
+
+    .rv-plate {
+        padding: var(--space-4);
+    }
+
+    /* On a phone a shot may show a tighter region, set inline as --mx, --my, --mw
+       and --mh, so the app's own type stays readable. */
+    .rv-shot {
+        aspect-ratio: var(--mw, var(--w)) / var(--mh, var(--h));
+    }
+
+    .rv-shot img {
+        top: calc(var(--my, var(--y)) / var(--mh, var(--h)) * -100%);
+        left: calc(var(--mx, var(--x)) / var(--mw, var(--w)) * -100%);
+        width: calc(1200 / var(--mw, var(--w)) * 100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* The masthead. The home page does not load components/nav.css. These are the same
+   hooks scripts/components/navbar.ts drives, drawn in the review's own vocabulary so
+   the edges, the rule and the controls match the page beneath. */
+
+/* The first stop for a keyboard. It shows only while it has focus. */
+.skip-link {
+    position: fixed;
+    top: var(--space-2);
+    left: var(--space-2);
+    z-index: calc(var(--rv-z-header) + 1);
+    padding: var(--space-2) var(--space-4);
+    background: var(--rv-ink);
+    color: var(--rv-paper);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: none;
+}
+
+.header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: var(--rv-z-header);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--rv-header);
+    border-bottom: 3px solid var(--rv-ink);
+    background: var(--rv-paper);
+    view-transition-name: feldar-header;
+}
+
+.nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(var(--rv-container), 100% - 2 * var(--rv-gutter));
+    height: 100%;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    width: 3.6875rem;
+    min-height: 2.75rem;
+}
+
+.nav-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.nav-links {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    transform: translate(-50%, -50%);
+}
+
+.nav-link {
+    padding-block: var(--space-2);
+    font-size: var(--rv-size-small);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+    white-space: nowrap;
+    transition: color var(--rv-quick) ease-out;
+}
+
+.nav-link:hover,
+.nav-mobile-link:hover {
+    color: var(--rv-soft);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.nav-mobile-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+}
+
+.nav-mobile {
+    position: fixed;
+    inset: var(--rv-header) 0 0;
+    z-index: calc(var(--rv-z-header) - 1);
+    display: none;
+    flex-direction: column;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--rv-gutter);
+    overflow-y: auto;
+    background: var(--rv-paper);
+}
+
+.nav-mobile.is-open {
+    display: flex;
+}
+
+.nav-mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.nav-mobile-link {
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--rv-rule);
+    font-family: var(--rv-serif);
+    font-size: 1.5rem;
+    line-height: 1.25;
+}
+
+.nav-mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: auto;
+}
+
+/* The page behind an open menu stays where it is. */
+body.nav-open {
+    overflow-y: hidden;
+}
+
+@media (max-width: 64em) {
+    .nav-links,
+    .nav-actions .rv-button--quiet {
+        display: none;
+    }
+
+    .nav-mobile-toggle {
+        display: flex;
+    }
+}
+
+/* The front page: the headline across the full width, then three ruled columns holding
+   the offer, a live chapter and the contents list. */
+
+.hero {
+    padding-top: var(--rv-header);
+}
+
+.hero-title {
+    padding-block: var(--space-10) var(--space-8);
+    border-bottom: 1px solid var(--rv-rule);
+    font-family: var(--rv-serif);
+    font-size: var(--rv-size-display);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+}
+
+.hero-front {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-10) var(--rv-gap);
+    align-items: start;
+    padding-block: var(--space-8) var(--space-10);
+}
+
+.hero-offer {
+    grid-column: span 3;
+}
+
+.hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
+}
+
+/* The Mac app is no use on a phone or tablet. */
 @media (hover: none) and (pointer: coarse) {
-    .hero-cta-button--mac {
+    .hero-action--mac {
         display: none;
     }
 }
 
 .hero-terms {
-    margin-top: 0.875rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: var(--color-text-description);
+    margin-top: var(--space-5);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    color: var(--rv-soft);
+    text-wrap: balance;
 }
 
-/* The screenshot stands on the frame's lower edge, like a window on a desk. */
-.hero-shot {
+/* The plate: one page of the sample book with a suggestion waiting, and the menu
+   hanging under its last line as it does in the app. Every version of the suggestion
+   shares one grid cell and holds room for the menu, so the page is always as tall as
+   the longest. A choice changes the text in place and nothing around it moves. */
+.hero-plate {
+    /* The menu's height as the sum of its parts: three rows, the gaps and padding
+       around them, and the hint. */
+    --plate-row: 2.5rem;
+    --plate-hint: 2.5rem;
+    --plate-menu: calc(3 * var(--plate-row) + 4 * var(--space-1) + var(--plate-hint));
+    grid-column: span 6;
+}
+
+.plate-page {
+    padding: var(--space-7) var(--space-10) var(--space-6);
+    border: 1px solid var(--rv-rule);
+    background: var(--rv-page);
+    color: var(--rv-page-text);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+.plate-title {
+    margin-bottom: var(--space-4);
+    color: var(--rv-ink);
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.2;
+    letter-spacing: -0.022em;
+}
+
+.plate-suggestions {
+    display: grid;
+    margin-top: var(--space-4);
+}
+
+.plate-variant {
+    position: relative;
+    grid-area: 1 / 1;
+    align-self: start;
+    padding-bottom: calc(var(--plate-menu) + var(--space-4));
+    visibility: hidden;
+}
+
+.plate-variant.is-shown {
+    visibility: visible;
+}
+
+.plate-suggestion {
+    color: var(--rv-mark);
+}
+
+.plate-variant.is-shown .plate-suggestion {
+    animation: plate-arrive 600ms var(--rv-ease-out) backwards;
+}
+
+/* Only the settling is slow. Starting again puts the mark back at once. */
+.hero-plate[data-state="accepted"] .plate-suggestion {
+    color: inherit;
+    transition: color var(--rv-settle) var(--rv-ease-out);
+}
+
+.hero-plate[data-state="dismissed"] .plate-suggestion {
+    visibility: hidden;
+}
+
+.plate-menu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 13.5rem;
+    height: var(--plate-menu);
+    padding: var(--space-1);
+    border-radius: 0.75rem;
+    background: var(--rv-page);
+    box-shadow: var(--rv-page-shadow);
+    color: var(--rv-ink);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+}
+
+.hero-plate:not([data-state="pending"]) .plate-menu {
+    visibility: hidden;
+}
+
+.plate-choices {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.plate-choice {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     width: 100%;
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    padding: clamp(0.75rem, 4vw, 3rem) clamp(0.75rem, 4vw, 3rem) 0;
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    background: var(--color-surface-secondary);
+    height: var(--plate-row);
+    padding: 0 var(--space-2);
+    border-radius: 0.5rem;
+    text-align: left;
+    transition: background-color var(--rv-quick) ease-out;
 }
 
-.hero-shot img {
+.plate-choice:hover {
+    background: var(--rv-well);
+}
+
+.plate-choice:active {
+    background: var(--rv-rule);
+}
+
+.plate-hint {
+    display: flex;
+    align-items: center;
+    height: var(--plate-hint);
+    padding-inline: var(--space-2);
+    border-top: 1px solid var(--rv-well);
+    color: var(--rv-soft);
+}
+
+.plate-status {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: 1.5rem;
+    margin-top: var(--space-3);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    color: var(--rv-soft);
+}
+
+.plate-reset {
+    flex-shrink: 0;
+    color: var(--rv-ink);
+    font-weight: var(--font-weight-medium);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.plate-reset:hover {
+    text-decoration-thickness: 2px;
+}
+
+@keyframes plate-arrive {
+    from {
+        opacity: 0;
+    }
+}
+
+.hero-contents {
+    grid-column: span 3;
+}
+
+.hero-contents-item {
+    border-top: 3px solid var(--rv-part);
+}
+
+.hero-contents-link {
     display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 8px 8px 0 0;
-    box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.06),
-        0 18px 44px rgba(0, 0, 0, 0.05),
-        0 4px 12px rgba(0, 0, 0, 0.06);
+    padding-block: var(--space-3) var(--space-6);
 }
 
-/* On a phone the whole window would be too small to read, so the frame closes in on
-   the page of the book: the chapter's text, the suggested lines and their menu. */
-@media (max-width: 40em) {
+.hero-contents-title {
+    display: block;
+    font-family: var(--rv-serif);
+    font-size: var(--rv-size-title);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+}
+
+.hero-contents-link:hover .hero-contents-title {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.hero-contents-names {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    color: var(--rv-soft);
+}
+
+/* With all three columns the front page is the first screen and only the first screen.
+   The cap keeps a tall window from leaving the page empty under it. A hairline stands
+   in each gutter, as column rules do on a printed front page. */
+@media (min-width: 73.8125rem) {
     .hero {
-        width: calc(100% - 2.5rem);
+        min-height: min(100svh, 60rem);
     }
 
-    .hero-shot {
-        aspect-ratio: 4 / 5;
-        padding: 0;
+    .hero-plate,
+    .hero-contents {
+        position: relative;
     }
 
-    /* Twice the frame's width shows half the window: the column of text, which runs
-       from 37 to 84 percent of the way across. */
-    .hero-shot img {
-        width: 200%;
-        max-width: none;
-        border-radius: 0;
-        box-shadow: none;
-        transform: translateX(-35.5%);
+    .hero-plate::before,
+    .hero-contents::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(var(--rv-gap) / -2);
+        width: 1px;
+        background: var(--rv-rule);
+    }
+}
+
+@media (max-width: 73.75rem) {
+    /* In a narrower plate the line under it can wrap, so it always keeps two lines of
+       room and the plate stays one height in every state. */
+    .plate-status {
+        min-height: 2.9em;
+    }
+
+    .hero-offer {
+        grid-column: span 5;
+    }
+
+    .hero-plate {
+        grid-column: span 7;
+    }
+
+    .hero-contents {
+        grid-column: 1 / -1;
+    }
+
+    .hero-contents-list {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        column-gap: var(--rv-gap);
+    }
+}
+
+@media (max-width: 56.25rem) {
+    .hero-contents-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* On a phone the chapter comes straight after the headline, so its three choices are in
+   the first screen. The masthead already carries the main action. */
+@media (max-width: 45rem) {
+    .hero-front {
+        row-gap: var(--space-5);
+    }
+
+    .hero-offer {
+        display: contents;
+    }
+
+    .hero-offer > *,
+    .hero-plate {
+        grid-column: 1 / -1;
+    }
+
+    .hero-plate {
+        order: -1;
+    }
+
+    .hero-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 0;
+    }
+
+    /* Slightly tighter, so both actions share one row. */
+    .hero-actions .rv-button {
+        padding-inline: var(--space-4);
+        font-size: 0.9375rem;
+    }
+
+    .hero-terms {
+        margin-top: 0;
+    }
+
+    .hero-contents-list {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .plate-page {
+        padding-inline: var(--space-5);
+    }
+}
+
+/* A finger needs a taller row than a pointer, and has no escape key to be told about. */
+@media (pointer: coarse) {
+    .hero-plate {
+        --plate-row: 2.75rem;
+        --plate-hint: 0rem;
+    }
+
+    .plate-hint {
+        display: none;
+    }
+}
+
+/* Three standing points under the front page, set as ruled columns. */
+
+.points {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--rv-gap);
+    border-block: 1px solid var(--rv-rule);
+}
+
+.points-item {
+    position: relative;
+    padding-block: var(--space-8);
+}
+
+.points-item + .points-item::before {
+    content: "";
+    position: absolute;
+    top: var(--space-8);
+    bottom: var(--space-8);
+    left: calc(var(--rv-gap) / -2);
+    width: 1px;
+    background: var(--rv-rule);
+}
+
+.points-item .rv-text {
+    margin-top: var(--space-2);
+    color: var(--rv-soft);
+}
+
+@media (max-width: 45rem) {
+    .points {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .points-item {
+        padding-block: var(--space-5);
+    }
+
+    .points-item + .points-item {
+        border-top: 1px solid var(--rv-rule);
+    }
+
+    .points-item + .points-item::before {
+        content: none;
     }
 }
 
