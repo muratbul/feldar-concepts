@@ -1,7 +1,8 @@
 /* Prototype: the home page's front page with a working sample of the editor in place of
    the three ruled columns. It stands on the home page's own system (tokens, type, the
-   masthead, the headline, buttons) and adds only what is new here: the offer row, the
-   desk with its manuscript ground, the parts strip and the editor window. */
+   masthead, the headline, buttons) and adds the offer row, the desk with its manuscript
+   ground, the strip of things to try and the foot under the window. The window itself is
+   the app's and is in app-window.css. */
 /* Hallmark · shape: Literary review · genre: editorial · theme: custom · redesign: full · job: sign up · idea: "A review's front page where the app is the plates and the reader decides on a suggestion" · vibe: "serious, bookish, plain, cloth-coloured plates"
  * paper: oklch(98.2% 0.004 91) · accent: oklch(54.3% 0.198 261) · display: Libre Baskerville · body: Inter · hero: a broadsheet front, the headline across twelve columns over three ruled columns · nav: edge-aligned · footer: mast · imagery: screenshots 8, the app's own stills · signature: accepting the suggestion in the first screen
  * axes: light/roman-serif/cool · posture: Full palette · surface: absolute · contrast: pass · fold: pass · draw: 8ef0b5 · v2.0.0 */
@@ -1460,18 +1461,1207 @@ body.nav-open {
 }
 
 
+/* The app's window at its own size, drawn from the production source (feldar-production
+   origin/master at 3843e86cd, light theme) and checked against the app captures in
+   assets/product. Everything here is the app's, not the home page's: its tokens are copied
+   into the --app- block below, its measures are in px as the app has them, and the icons
+   in app-icons.svg are the app's own. The caret menu, the rewrite card and the scene rows
+   follow styles/app-ui, which measured the same parts. */
 
 :root {
-    /* The window's own measures, taken from the app at about three quarters of its size. */
-    --eh-height: 33.5rem;
-    --eh-side: 12.5rem;
-    --eh-panel: 20rem;
-    --eh-bar: 2.75rem;
-    --eh-row: 2.25rem;
-    --eh-radius: 0.75rem;
-    --eh-text: 1.0625rem;
-    --eh-small: 0.875rem;
+    --app-canvas: #fafafa;
+    --app-surface: #ffffff;
+    --app-tertiary: #f3f3f3;
+    --app-hover: #eeeeee;
+    --app-active: #e8e8e8;
+    --app-border: #e8e8e8;
+    --app-border-subtle: #eeeeee;
+    --app-text: #0e0e0e;
+    --app-text-secondary: #4d4d4d;
+    --app-text-tertiary: #6f6f6f;
+    --app-text-disabled: #a0a0a0;
+    --app-text-muted: #888888;
+    --app-accent: #0c70e5;
+    --app-ai: #4f9cf6;
+    --app-inverse: #0e0e0e;
+    --app-inverse-hover: #343434;
+    --app-veil: rgba(255, 255, 255, 0.74);
+    /* The selection bubble and its menus are dark in the light app too. */
+    --app-dark: #1e1e1e;
+    --app-dark-hover: #333333;
+    --app-dark-text: #fcfcfc;
+    --app-dark-danger: #b91c1c;
+    --app-shadow-floating: 0 4px 16px rgba(8, 8, 8, 0.1), 0 1px 4px rgba(8, 8, 8, 0.06), 0 0 0 1px rgba(8, 8, 8, 0.04);
+    --app-shadow-raised: 0 1px 3px rgba(8, 8, 8, 0.08), 0 0 0 1px rgba(8, 8, 8, 0.04), 0 5px 16px rgba(8, 8, 8, 0.03);
+    --app-shadow-dark: 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 6px 20px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
+    --app-font: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* The manuscript's default face is the reader's own system font, as it is in the app. */
+    --app-font-manuscript: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --app-font-serif: 'Libre Baskerville', Georgia, serif;
+    --app-height: 600px;
+    --app-menu-row: 28px;
+    --app-dark-row: 28px;
 }
+
+.app {
+    /* The caret menu's height: three rows, their gaps, the padding and the hint. It is
+       worked out here, not with the tokens, so that a taller row on a touch screen counts. */
+    --app-menu-height: calc(3 * var(--app-menu-row) + 4px + 8px + 36px);
+
+    display: flex;
+    height: var(--app-height);
+    padding: 3px 3px 3px 0;
+    background: var(--app-canvas);
+    color: var(--app-text);
+    font: 400 14px/20px var(--app-font);
+    letter-spacing: -0.056px;
+    text-align: left;
+}
+
+.app-icon {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+}
+
+.app-icon--16 {
+    width: 16px;
+    height: 16px;
+}
+
+.app-icon--settings {
+    width: 15px;
+    height: 16px;
+}
+
+.app-icon--regenerate {
+    width: 15px;
+    height: 14px;
+}
+
+.app-icon--scribble {
+    width: 13px;
+    height: 11px;
+}
+
+.app-iconbox,
+.app-iconbutton {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    color: var(--app-text-tertiary);
+}
+
+.app-iconbutton:hover,
+.app-iconbutton[aria-pressed="true"] {
+    background: var(--app-hover);
+    color: var(--app-text);
+}
+
+.app-iconbutton:active {
+    background: var(--app-active);
+}
+
+.app-button {
+    flex-shrink: 0;
+    height: 32px;
+    padding-inline: 12px;
+    border: 1px solid var(--app-inverse);
+    border-radius: 12px;
+    background: var(--app-inverse);
+    color: var(--app-surface);
+    font: 500 14px/18px var(--app-font);
+    letter-spacing: -0.056px;
+    white-space: nowrap;
+}
+
+.app-button:hover {
+    border-color: var(--app-inverse-hover);
+    background: var(--app-inverse-hover);
+}
+
+.app-button--wide {
+    width: 196px;
+}
+
+/* Sidebar */
+.app-sidebar {
+    display: flex;
+    flex: 0 0 288px;
+    flex-direction: column;
+}
+
+.app-brand {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin-top: 1px;
+    padding-inline: 10px;
+}
+
+.app-wordmark {
+    width: 46.2px;
+    height: 13.3px;
+    margin-left: 10px;
+}
+
+.app-brand-actions {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+}
+
+.app-nav,
+.app-chapters {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-inline: 10px;
+}
+
+.app-nav {
+    margin-top: 2px;
+}
+
+.app-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: 28px;
+    padding: 0 2px 0 10px;
+    border-radius: 8px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+button.app-row:hover,
+.app-row.is-current {
+    background: var(--app-hover);
+}
+
+.app-book {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    margin: 16px 10px 4px;
+    padding-left: 10px;
+    color: var(--app-text-tertiary);
+}
+
+.app-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    margin: auto 10px 8px;
+    padding-left: 9px;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0;
+}
+
+.app-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--app-border);
+    border-radius: 50%;
+    background: var(--app-tertiary);
+    font: 500 12px/16px var(--app-font);
+    letter-spacing: 0.12px;
+}
+
+.app-user-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-user-plan {
+    color: var(--app-text-tertiary);
+}
+
+.app-user .app-iconbox {
+    margin-left: auto;
+}
+
+/* Main panel and its header */
+.app-panel {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--app-border);
+    border-radius: 12px;
+    background: var(--app-surface);
+}
+
+.app-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    height: 41px;
+    padding: 4px 6px 4px 16px;
+    border-bottom: 1px solid var(--app-border);
+}
+
+.app-crumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    color: var(--app-text-tertiary);
+    white-space: nowrap;
+}
+
+.app-slash {
+    flex-shrink: 0;
+    width: 5px;
+    height: 12px;
+}
+
+.app-crumb-page {
+    color: var(--app-text);
+}
+
+.app-header-end {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    margin-left: 8px;
+}
+
+.app-count {
+    color: var(--app-text-tertiary);
+    white-space: nowrap;
+}
+
+.app-divider {
+    width: 1px;
+    height: 12px;
+    margin-inline: 16px;
+    border-radius: 9999px;
+    background: var(--app-border-subtle);
+}
+
+.app-header-tools {
+    display: flex;
+    gap: 6px;
+}
+
+/* The manuscript page */
+.app-view {
+    position: relative;
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.app-view[hidden] {
+    display: none;
+}
+
+.app-scroll {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    padding: 32px clamp(24px, 7cqw, 56px) 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--app-border) transparent;
+}
+
+.app-column {
+    align-self: center;
+    width: min(100%, clamp(608px, 64%, 768px));
+}
+
+.app-title {
+    margin-bottom: 24px;
+    font: 500 32px/38px var(--app-font);
+    letter-spacing: -0.64px;
+}
+
+.app-prose {
+    padding-bottom: 32px;
+    color: var(--app-text-secondary);
+    font: 400 20px/32px var(--app-font-manuscript);
+    font-variant-ligatures: none;
+    letter-spacing: 0;
+}
+
+.app-prose > * + *,
+.app-draft > p + p {
+    margin-top: 20px;
+}
+
+.app-placeholder {
+    color: var(--app-text-tertiary);
+}
+
+.app-draft {
+    animation: app-arrive 600ms ease-out backwards;
+}
+
+/* The Checks button floats at the top right of the page and scrolls with it. */
+.app-checks {
+    position: absolute;
+    top: 12px;
+    right: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    background: var(--app-surface);
+    box-shadow: var(--app-shadow-floating);
+    color: var(--app-text-tertiary);
+}
+
+/* Continue from here. Every version of the suggestion shares one grid cell and holds
+   room for the menu, so a choice changes the text in place and the page keeps its height. */
+.eh-variants {
+    display: grid;
+}
+
+.eh-variant {
+    position: relative;
+    grid-area: 1 / 1;
+    align-self: start;
+    padding-bottom: calc(var(--app-menu-height) + 8px);
+    visibility: hidden;
+}
+
+.eh-variant.is-shown {
+    visibility: visible;
+}
+
+.eh-suggestion {
+    color: var(--app-ai);
+}
+
+.eh-variant.is-shown .eh-suggestion {
+    animation: app-arrive 600ms ease-out backwards;
+}
+
+/* The app lets accepted text settle into the page's grey over 1.26s. Starting again
+   puts the blue back at once. */
+[data-state="accepted"] .eh-suggestion {
+    color: inherit;
+    transition: color 1260ms ease-out;
+}
+
+[data-state="dismissed"] .eh-suggestion,
+[data-view="continue"]:not([data-state="pending"]) .app-menu {
+    visibility: hidden;
+}
+
+.app-menu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: 192px;
+    padding: 4px;
+    border-radius: 12px;
+    background: var(--app-surface);
+    box-shadow: var(--app-shadow-floating);
+    color: var(--app-text);
+    font: 400 14px/20px var(--app-font);
+    letter-spacing: -0.06px;
+}
+
+.app-menu-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.app-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: var(--app-menu-row);
+    padding-inline: 8px;
+    border-radius: 8px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.app-menu-item:hover {
+    background: var(--app-hover);
+}
+
+.app-menu-item:active {
+    background: var(--app-active);
+}
+
+.app-menu-hint {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    margin-top: 4px;
+    padding-inline: 8px;
+    border-top: 1px solid var(--app-border-subtle);
+    color: var(--app-text-tertiary);
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.026px;
+}
+
+/* The Scenes panel */
+.app-scenes {
+    position: relative;
+    display: flex;
+    flex: 0 0 clamp(380px, 40cqw, 480px);
+    flex-direction: column;
+    min-height: 0;
+    border-left: 1px solid var(--app-border);
+}
+
+[data-panel="closed"] .app-scenes {
+    display: none;
+}
+
+.app-scenes-head {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 6px 0 24px;
+}
+
+.app-scenes-title {
+    font-weight: 500;
+}
+
+.app-scenes-empty {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 48px 40px;
+    text-align: center;
+}
+
+.app-scenes-empty-title {
+    font: 400 24px/32px var(--app-font-serif);
+    letter-spacing: -0.3px;
+}
+
+.app-scenes-empty-text {
+    max-width: 360px;
+    margin: 10px 0 24px;
+    color: var(--app-text-secondary);
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.13px;
+}
+
+.app-scenes-body {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.app-scenes-status {
+    flex-shrink: 0;
+    padding: 8px 24px;
+}
+
+.app-scenes-label {
+    flex-shrink: 0;
+    padding: 20px 24px 8px;
+    color: var(--app-text-muted);
+    font: 500 13px/16px var(--app-font);
+    letter-spacing: 0;
+}
+
+.app-scenes-list {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+    padding: 0 12px 72px;
+    overflow-y: auto;
+    font-size: 16px;
+    letter-spacing: -0.35px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--app-border) transparent;
+    /* The last rows fade out above the footer, as they do in the app. */
+    mask-image: linear-gradient(180deg, var(--app-text) calc(100% - 96px), transparent);
+}
+
+.app-scene {
+    display: flex;
+    flex-shrink: 0;
+    gap: 10px;
+    padding: 12px;
+}
+
+.app-scene-number {
+    flex-shrink: 0;
+    width: 28px;
+}
+
+.app-scene-number,
+.app-scene-name {
+    font-family: var(--app-font-serif);
+    line-height: 20px;
+}
+
+.app-scene-text {
+    margin-top: 6px;
+    line-height: 28px;
+}
+
+.app-scenes-foot {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 12px 12px 12px 24px;
+}
+
+.app-credit {
+    margin-right: auto;
+    color: var(--app-text-tertiary);
+    font: 500 12px/16px var(--app-font);
+    letter-spacing: 0.12px;
+    text-decoration: underline dotted;
+    text-decoration-skip-ink: none;
+}
+
+.app-tools {
+    display: flex;
+    gap: 4px;
+    border-radius: 12px;
+    background: var(--app-surface);
+    box-shadow: var(--app-shadow-floating);
+    color: var(--app-text-tertiary);
+}
+
+.app-tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+/* The card that shows while scenes or a page are being made, over a veil. */
+.app-veil {
+    position: absolute;
+    inset: 40px 0 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: var(--app-veil);
+    backdrop-filter: blur(3px);
+}
+
+.app-veil[hidden] {
+    display: none;
+}
+
+.app-progress {
+    width: 228px;
+    height: 212px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--app-canvas);
+    box-shadow: var(--app-shadow-floating);
+    font: 500 14px/18px var(--app-font);
+    animation: app-rise 180ms ease-out backwards;
+}
+
+.app-progress-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding-inline: 14px;
+    color: var(--app-text-secondary);
+}
+
+.app-progress-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.app-steps {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: var(--app-surface);
+}
+
+.app-steps[hidden] {
+    display: none;
+}
+
+/* The script puts a mark in front of each step and swaps the app's icon in it. */
+.app-step {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    color: var(--app-text-tertiary);
+}
+
+.app-step-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: var(--app-text-disabled);
+}
+
+.app-step[data-step="running"],
+.app-step[data-step="running"] .app-step-mark {
+    color: var(--app-text);
+}
+
+.app-step[data-step="running"] .app-icon {
+    animation: app-spin 420ms linear infinite;
+}
+
+.app-step[data-step="done"] .app-step-mark {
+    width: 16px;
+    height: 16px;
+    margin: 2px;
+    border-radius: 50%;
+    background: var(--app-tertiary);
+    color: var(--app-text-tertiary);
+}
+
+.app-step[data-step="done"] .app-icon {
+    width: 8px;
+    height: 7px;
+}
+
+/* Rewrite a passage: the range, the dark bubble over it, its menus and the card. */
+.app-select {
+    position: relative;
+}
+
+.app-range {
+    border-radius: 6px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+[data-state="selected"] .app-range,
+[data-state="choosing"] .app-range {
+    background: var(--app-active);
+}
+
+[data-state="rewriting"] .app-range,
+[data-state="rewritten"] .app-range {
+    background: var(--app-hover);
+    box-shadow: 0 0 0 0.1em var(--app-hover);
+}
+
+.app-range mark,
+.app-rewrite-text mark {
+    background: none;
+    color: var(--app-accent);
+}
+
+[data-state="applied"] .app-range mark {
+    color: inherit;
+    transition: color 1260ms ease-out;
+}
+
+.app-bubble {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 36px;
+    padding: 4px;
+    border-radius: 12px;
+    background: var(--app-dark);
+    box-shadow: var(--app-shadow-dark);
+    color: var(--app-dark-text);
+    font: 500 14px/18px var(--app-font);
+    letter-spacing: -0.056px;
+    white-space: nowrap;
+}
+
+.app-bubble[hidden] {
+    display: none;
+}
+
+.app-bubble-item {
+    --rv-focus: var(--app-dark-text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding-inline: 10px;
+    border-radius: 8px;
+}
+
+.app-bubble-item .app-icon {
+    margin: 1px;
+}
+
+button.app-bubble-item:hover,
+.app-bubble-item[aria-expanded="true"] {
+    background: var(--app-dark-hover);
+}
+
+.app-bubble-ask {
+    width: 2px;
+    height: 14px;
+    border-radius: 9999px;
+    background: var(--app-dark-danger);
+}
+
+.app-bubble-divider {
+    width: 1px;
+    height: 16px;
+    margin-inline: 2px;
+    background: var(--app-dark-hover);
+}
+
+.app-bubble-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+}
+
+.app-bubble-pointer {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 20px;
+    height: 6px;
+    margin-left: -10px;
+    color: var(--app-dark);
+}
+
+/* The Define dropdown hangs from its button, and a group's list opens beside it,
+   overlapping it by 6px and level with its row. The script sets --define-left. */
+.app-darkmenu {
+    --rv-focus: var(--app-dark-text);
+    position: absolute;
+    top: -8px;
+    /* Never past the right edge of the text column. */
+    left: min(var(--define-left, 0px), calc(100% - 192px));
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 192px;
+    padding: 4px;
+    border-radius: 12px;
+    background: var(--app-dark);
+    box-shadow: var(--app-shadow-dark);
+    color: var(--app-dark-text);
+    font: 400 14px/20px var(--app-font);
+    letter-spacing: -0.056px;
+}
+
+.app-darkmenu[hidden] {
+    display: none;
+}
+
+.app-darkmenu--list {
+    left: min(calc(var(--define-left, 0px) + 186px), calc(100% - 192px));
+    z-index: 4;
+}
+
+.app-darkmenu--list[data-level="deepen"] {
+    top: calc(var(--app-dark-row) - 6px);
+}
+
+.app-darkmenu--list[data-level="enhance"] {
+    top: calc(2 * var(--app-dark-row) - 4px);
+}
+
+.app-darkmenu-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: var(--app-dark-row);
+    padding-inline: 8px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+button.app-darkmenu-row:hover,
+.app-darkmenu-row.is-open {
+    background: var(--app-dark-hover);
+}
+
+/* A rewrite the app offers that this sample has no prepared answer for. */
+.app-darkmenu-row--away {
+    color: var(--app-text-disabled);
+}
+
+.app-rewrite {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 2;
+    width: min(456px, 100%);
+    padding: 0 4px 4px;
+    border-radius: 20px;
+    background: var(--app-tertiary);
+    box-shadow: var(--app-shadow-raised);
+    font-family: var(--app-font);
+}
+
+.app-rewrite-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 12px 0 14px;
+    color: var(--app-text-secondary);
+    font: 500 14px/18px var(--app-font);
+    letter-spacing: -0.06px;
+}
+
+.app-rewrite-body {
+    padding: 12px 14px 14px;
+    border-radius: 16px;
+    background: var(--app-surface);
+    box-shadow: var(--app-shadow-raised);
+}
+
+.app-rewrite-text {
+    color: var(--app-text);
+    font: 400 16px/24px var(--app-font);
+    letter-spacing: -0.13px;
+}
+
+.app-rewrite-foot {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.app-rewrite-foot[hidden] {
+    display: none;
+}
+
+.app-rewrite-refine,
+.app-rewrite-apply {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    border-radius: 12px;
+    font: 500 14px/18px var(--app-font);
+    letter-spacing: -0.1px;
+    white-space: nowrap;
+}
+
+.app-rewrite-refine {
+    margin-right: auto;
+    padding-inline: 14px;
+    background: var(--app-active);
+    color: var(--app-text-secondary);
+}
+
+.app-rewrite-tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+}
+
+button.app-rewrite-tool:hover {
+    background: var(--app-hover);
+}
+
+.app-rewrite-apply {
+    gap: 6px;
+    margin-left: 8px;
+    padding: 0 12px 0 14px;
+    background: var(--app-inverse);
+    color: var(--app-surface);
+}
+
+.app-rewrite-apply:hover {
+    background: var(--app-inverse-hover);
+}
+
+/* The Writing record is a page of its own in the app: no sidebar, no header. */
+[data-part="record"] .app {
+    padding: 0;
+}
+
+[data-part="record"] .app-sidebar,
+[data-part="record"] .app-header {
+    display: none;
+}
+
+[data-part="record"] .app-panel {
+    border: 0;
+    border-radius: 0;
+}
+
+.app-record {
+    position: relative;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.app-record-back {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+}
+
+.app-record-column {
+    width: min(712px, 100% - 96px);
+    margin-inline: auto;
+    padding-top: 72px;
+}
+
+.app-record-book {
+    color: var(--app-text-secondary);
+    font: 500 14px/18px var(--app-font);
+}
+
+.app-record-headline {
+    margin-top: 20px;
+    font: 500 32px/38px var(--app-font);
+    letter-spacing: -0.64px;
+    font-variant-numeric: tabular-nums;
+}
+
+.app-record-headline > span {
+    display: block;
+}
+
+.app-record-bar {
+    display: flex;
+    gap: 2px;
+    height: 22px;
+    margin-top: 48px;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.app-record-part {
+    min-width: 2px;
+    transition: flex-grow 1260ms ease-out;
+}
+
+.app-record-part--typed,
+.app-record-key--typed::before {
+    background: var(--app-text);
+}
+
+.app-record-part--feldar,
+.app-record-key--feldar::before {
+    background: var(--app-accent);
+}
+
+.app-record-part--pasted,
+.app-record-key--pasted::before {
+    background: var(--app-text-tertiary);
+}
+
+.app-record-keys {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    margin-top: 8px;
+    color: var(--app-text-tertiary);
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.app-record-key {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.app-record-key::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    margin-right: 2px;
+    border-radius: 50%;
+}
+
+.app-record-key strong {
+    color: var(--app-text);
+    font-weight: 700;
+}
+
+.app-record-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--app-border-subtle);
+}
+
+.app-record-stats dt {
+    color: var(--app-text-tertiary);
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0;
+}
+
+.app-record-stats dd {
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+@keyframes app-arrive {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes app-rise {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+}
+
+@keyframes app-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Under 1024px the app drops its sidebar. What it does below that is its own small
+   layout, which this copy does not follow: it keeps the desktop parts and stacks them. */
+@container (max-width: 1023px) {
+    .app {
+        padding-left: 3px;
+    }
+
+    .app-sidebar {
+        display: none;
+    }
+}
+
+@container (max-width: 760px) {
+    .app {
+        height: auto;
+        min-height: 520px;
+    }
+
+    .app-view {
+        flex-direction: column;
+    }
+
+    .app-scroll {
+        flex: none;
+        overflow-y: visible;
+    }
+
+    .app-scenes {
+        flex: 1 0 auto;
+        min-height: 320px;
+        border-top: 1px solid var(--app-border);
+        border-left: 0;
+    }
+
+    .app-scenes-list {
+        overflow-y: visible;
+        mask-image: none;
+        padding-bottom: 12px;
+    }
+
+    /* No room beside the dropdown here, so a group's list opens under it. */
+    .app-darkmenu--list[data-level] {
+        top: calc(3 * var(--app-dark-row) + 8px);
+        left: min(var(--define-left, 0px), calc(100% - 192px));
+    }
+
+    .app-crumb > :not(.app-crumb-page) {
+        display: none;
+    }
+
+    .app-rewrite {
+        position: static;
+        margin-top: 8px;
+    }
+
+    .app-record {
+        overflow-y: visible;
+        padding-bottom: 40px;
+    }
+
+    .app-record-column {
+        width: calc(100% - 48px);
+    }
+
+    .app-record-headline {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .app-record-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+}
+
+/* A touch screen gets menu rows tall enough to press. */
+@media (pointer: coarse) {
+    .app {
+        --app-menu-row: 40px;
+        --app-dark-row: 40px;
+    }
+}
+
 
 /* The headline keeps its size and gives up some of its air, so the window starts higher. */
 .hero-title {
@@ -1485,12 +2675,12 @@ body.nav-open {
 }
 
 .eh-lead {
-    grid-column: span 6;
+    grid-column: span 7;
 }
 
 .eh-start {
     display: flex;
-    grid-column: 8 / span 5;
+    grid-column: 9 / span 4;
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
@@ -1530,14 +2720,18 @@ body.nav-open {
     height: 100%;
 }
 
+/* The stage is as wide as the app was when it was captured, 1280px, and no wider. It is
+   the container the window measures itself against, as the app does its viewport. */
 .eh-stage {
     position: relative;
-    grid-column: 2 / span 10;
+    width: min(100%, 1282px);
+    margin-inline: auto;
     border: 1px solid var(--rv-rule);
     background: var(--rv-paper);
+    container-type: inline-size;
 }
 
-/* The parts strip: what there is to try, each under a rule in its part's cloth. */
+/* The strip of things to try, each under a rule in its part's cloth. */
 .eh-parts {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1548,6 +2742,10 @@ body.nav-open {
     border-top: 3px solid var(--rv-part);
     border-bottom: 1px solid var(--rv-rule);
     color: var(--rv-soft);
+    font-family: var(--rv-serif);
+    font-size: 1.1875rem;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
     text-align: left;
     transition:
         background-color var(--rv-quick) ease-out,
@@ -1568,577 +2766,8 @@ body.nav-open {
 }
 
 .eh-part[aria-selected="true"] {
-    border-bottom-color: var(--rv-page);
     background: var(--rv-page);
     color: var(--rv-ink);
-}
-
-.eh-part-title {
-    font-family: var(--rv-serif);
-    font-size: 1.1875rem;
-    line-height: 1.25;
-    letter-spacing: -0.005em;
-}
-
-/* The window: the app's own page, drawn with the app's measures and its white stock. */
-.eh-window {
-    display: grid;
-    grid-template-columns: var(--eh-side) minmax(0, 1fr);
-    grid-template-rows: minmax(0, 1fr);
-    height: var(--eh-height);
-    background: var(--rv-page);
-    color: var(--rv-ink);
-    font-size: 0.9375rem;
-    line-height: 1.45;
-}
-
-.eh-side {
-    padding: var(--space-4) var(--space-2);
-    border-right: 1px solid var(--rv-rule);
-    background: var(--rv-paper);
-}
-
-.eh-side-logo {
-    margin: var(--space-1) var(--space-3) var(--space-4);
-}
-
-.eh-side-item {
-    padding: var(--space-1) var(--space-3);
-    border-radius: 0.5rem;
-    line-height: 1.6;
-}
-
-.eh-side-item.is-current {
-    background: var(--rv-well);
-}
-
-.eh-side-book {
-    padding: var(--space-5) var(--space-3) var(--space-2);
-    color: var(--rv-soft);
-}
-
-.eh-main {
-    display: grid;
-    grid-template-rows: var(--eh-bar) minmax(0, 1fr);
-    min-width: 0;
-    min-height: 0;
-}
-
-.eh-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
-    padding-inline: var(--space-5);
-    border-bottom: 1px solid var(--rv-rule);
-    color: var(--rv-soft);
-}
-
-.eh-crumb-page {
-    color: var(--rv-ink);
-}
-
-.eh-count {
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-}
-
-.eh-view {
-    min-height: 0;
-}
-
-.eh-view--split {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) var(--eh-panel);
-    grid-template-rows: minmax(0, 1fr);
-}
-
-.eh-page {
-    height: 100%;
-    padding: var(--space-5) var(--space-10) var(--space-8);
-    overflow-y: auto;
-    color: var(--rv-page-text);
-    font-size: var(--eh-text);
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-    scrollbar-width: thin;
-}
-
-.eh-page > p,
-.eh-draft > p,
-.eh-select {
-    max-width: 30rem;
-}
-
-.eh-page p + p,
-.eh-page p + .eh-variants,
-.eh-page p + .eh-select,
-.eh-select + p {
-    margin-top: var(--space-4);
-}
-
-.eh-page-title {
-    color: var(--rv-ink);
-    font-size: 1.75rem;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.2;
-    letter-spacing: -0.022em;
-}
-
-.eh-placeholder {
-    color: var(--rv-soft);
-}
-
-/* Continue from here. Every version of the suggestion shares one grid cell and holds
-   room for the menu, so a choice changes the text in place and the page keeps its height. */
-.eh-variants {
-    --eh-menu-height: calc(3 * var(--eh-row) + 4 * var(--space-1) + var(--eh-row));
-    display: grid;
-    max-width: 30rem;
-}
-
-.eh-variant {
-    position: relative;
-    grid-area: 1 / 1;
-    align-self: start;
-    padding-bottom: calc(var(--eh-menu-height) + var(--space-3));
-    visibility: hidden;
-}
-
-.eh-variant.is-shown {
-    visibility: visible;
-}
-
-.eh-suggestion {
-    color: var(--rv-mark);
-}
-
-.eh-variant.is-shown .eh-suggestion {
-    animation: eh-arrive 600ms var(--rv-ease-out) backwards;
-}
-
-/* Only the settling is slow. Starting again puts the mark back at once. */
-[data-state="accepted"] .eh-suggestion {
-    color: inherit;
-    transition: color var(--rv-settle) var(--rv-ease-out);
-}
-
-[data-state="dismissed"] .eh-suggestion,
-[data-view="continue"]:not([data-state="pending"]) .eh-menu {
-    visibility: hidden;
-}
-
-/* The app's floating menu, used at the caret and under Define. */
-.eh-menu {
-    position: absolute;
-    left: 0;
-    z-index: 2;
-    width: 13.5rem;
-    padding: var(--space-1);
-    border-radius: var(--eh-radius);
-    background: var(--rv-page);
-    box-shadow: var(--rv-page-shadow);
-    color: var(--rv-ink);
-    font-size: 0.9375rem;
-    line-height: 1.45;
-    letter-spacing: 0;
-}
-
-.eh-menu--caret {
-    bottom: 0;
-}
-
-.eh-menu--define {
-    top: calc(var(--eh-row) + var(--space-2));
-    left: 7.5rem;
-}
-
-.eh-choices {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-}
-
-.eh-choice {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    width: 100%;
-    height: var(--eh-row);
-    padding-inline: var(--space-2);
-    border-radius: 0.5rem;
-    text-align: left;
-    transition: background-color var(--rv-quick) ease-out;
-}
-
-button.eh-choice:hover {
-    background: var(--rv-well);
-}
-
-button.eh-choice:active {
-    background: var(--rv-rule);
-}
-
-/* A rewrite the app offers that this sample has no prepared answer for. */
-.eh-choice--away {
-    color: var(--rv-soft);
-}
-
-.eh-menu-hint {
-    display: flex;
-    align-items: center;
-    min-height: var(--eh-row);
-    padding: var(--space-1) var(--space-2);
-    border-top: 1px solid var(--rv-well);
-    color: var(--rv-soft);
-    font-size: var(--eh-small);
-}
-
-/* Plan scenes: the Scenes panel beside the page. */
-.eh-panel {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    padding: var(--space-4) var(--space-5) 0;
-    border-left: 1px solid var(--rv-rule);
-}
-
-.eh-panel-title {
-    font-weight: var(--font-weight-medium);
-}
-
-.eh-panel-empty {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-3);
-    padding-bottom: var(--space-10);
-    color: var(--rv-soft);
-    text-align: center;
-    text-wrap: balance;
-}
-
-.eh-panel-empty-title,
-.eh-scene-name {
-    font-family: var(--rv-serif);
-    color: var(--rv-ink);
-}
-
-.eh-panel-empty-title {
-    font-size: 1.25rem;
-}
-
-.eh-app-button {
-    display: inline-flex;
-    align-items: center;
-    height: var(--eh-row);
-    padding-inline: var(--space-4);
-    border-radius: var(--eh-radius);
-    background: var(--rv-ink);
-    color: var(--rv-page);
-    font-weight: var(--font-weight-medium);
-    white-space: nowrap;
-    transition: background-color var(--rv-quick) ease-out;
-}
-
-.eh-app-button:hover {
-    background: var(--rv-ink-lift);
-}
-
-.eh-app-button:active {
-    transform: translateY(1px);
-}
-
-.eh-steps {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    align-self: center;
-    margin-block: auto;
-    padding: var(--space-4) var(--space-5);
-    border-radius: var(--eh-radius);
-    box-shadow: var(--rv-page-shadow);
-    color: var(--rv-soft);
-}
-
-/* A step's mark is a ring while it waits and fills once the step is done. */
-.eh-steps li {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-}
-
-.eh-steps li::before {
-    content: "";
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 1px currentColor;
-}
-
-.eh-steps li[data-step] {
-    color: var(--rv-ink);
-}
-
-.eh-steps li[data-step="done"]::before {
-    background: currentColor;
-}
-
-.eh-plan {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    min-height: 0;
-    margin-top: var(--space-3);
-}
-
-.eh-panel-label {
-    margin-top: var(--space-4);
-    color: var(--rv-soft);
-    font-size: var(--eh-small);
-}
-
-.eh-scenes {
-    flex: 1;
-    min-height: 0;
-    margin-top: var(--space-2);
-    padding-right: var(--space-2);
-    overflow-y: auto;
-    counter-reset: scene;
-    scrollbar-width: thin;
-}
-
-.eh-scenes li {
-    position: relative;
-    padding: 0 0 var(--space-5) var(--space-8);
-    counter-increment: scene;
-}
-
-.eh-scenes li::before {
-    content: counter(scene);
-    position: absolute;
-    left: 0;
-    font-family: var(--rv-serif);
-    font-size: 1.0625rem;
-    line-height: 1.5;
-}
-
-.eh-scene-name {
-    font-size: 1.0625rem;
-    line-height: 1.5;
-}
-
-.eh-panel-foot {
-    display: flex;
-    justify-content: flex-end;
-    padding-block: var(--space-3);
-    border-top: 1px solid var(--rv-well);
-}
-
-/* Rewrite a passage: the selection, the menu over it and the card beside it. */
-.eh-select {
-    position: relative;
-    padding-top: calc(var(--eh-row) + var(--space-2));
-}
-
-.eh-bubble {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    height: var(--eh-row);
-    padding-inline: var(--space-1);
-    border-radius: var(--eh-radius);
-    background: var(--rv-ink);
-    color: color-mix(in oklab, var(--rv-page) 62%, var(--rv-ink));
-    font-size: 0.9375rem;
-    letter-spacing: 0;
-}
-
-.eh-bubble-item {
-    display: flex;
-    align-items: center;
-    height: calc(var(--eh-row) - var(--space-2));
-    padding-inline: var(--space-3);
-    border-radius: 0.5rem;
-}
-
-.eh-bubble-item--live {
-    --rv-focus: var(--rv-page);
-    color: var(--rv-page);
-    font-weight: var(--font-weight-medium);
-}
-
-.eh-bubble-item--live:hover,
-.eh-bubble-item--live[aria-expanded="true"] {
-    background: var(--rv-ink-lift);
-}
-
-.eh-passage {
-    border-radius: 0.25rem;
-}
-
-[data-state="selected"] .eh-passage,
-[data-state="rewriting"] .eh-passage,
-[data-state="rewritten"] .eh-passage {
-    background: var(--rv-well);
-    box-shadow: 0 0 0 0.25rem var(--rv-well);
-}
-
-.eh-passage mark,
-.eh-card-text mark {
-    background: none;
-    color: var(--rv-mark);
-}
-
-[data-state="applied"] .eh-passage mark {
-    color: inherit;
-    transition: color var(--rv-settle) var(--rv-ease-out);
-}
-
-.eh-card {
-    position: absolute;
-    top: calc(var(--eh-row) + var(--space-2));
-    left: calc(100% + var(--space-6));
-    z-index: 1;
-    width: 20rem;
-    padding: 0 var(--space-1) var(--space-1);
-    border-radius: 1.25rem;
-    background: var(--rv-well);
-    box-shadow: var(--rv-page-shadow);
-    color: var(--rv-ink);
-    font-size: 0.9375rem;
-    line-height: 1.5;
-    letter-spacing: 0;
-}
-
-.eh-card-bar {
-    display: flex;
-    align-items: center;
-    height: 2.5rem;
-    padding-inline: var(--space-3);
-    color: var(--rv-page-text);
-    font-weight: var(--font-weight-medium);
-}
-
-.eh-card-body {
-    padding: var(--space-3) var(--space-4) var(--space-4);
-    border-radius: 1rem;
-    background: var(--rv-page);
-    box-shadow: var(--rv-page-shadow);
-}
-
-.eh-card-foot {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: var(--space-4);
-}
-
-.eh-card-keep {
-    height: var(--eh-row);
-    padding-inline: var(--space-4);
-    border-radius: var(--eh-radius);
-    background: var(--rv-well);
-    color: var(--rv-page-text);
-    font-weight: var(--font-weight-medium);
-    transition: background-color var(--rv-quick) ease-out;
-}
-
-.eh-card-keep:hover {
-    background: var(--rv-rule);
-}
-
-/* Writing record. */
-.eh-record {
-    max-width: 36rem;
-    padding: var(--space-10);
-}
-
-.eh-record-book {
-    color: var(--rv-soft);
-}
-
-.eh-record-headline {
-    display: flex;
-    flex-direction: column;
-    margin-top: var(--space-2);
-    font-size: 1.375rem;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.3;
-    letter-spacing: -0.015em;
-    font-variant-numeric: tabular-nums;
-}
-
-.eh-record-headline > span + span {
-    color: var(--rv-soft);
-    font-weight: var(--font-weight-regular);
-}
-
-.eh-record-bar {
-    display: flex;
-    gap: 2px;
-    height: 0.75rem;
-    margin-top: var(--space-6);
-}
-
-.eh-record-part {
-    min-width: 2px;
-    transition: flex-grow var(--rv-settle) var(--rv-ease-out);
-}
-
-.eh-record-part--typed,
-.eh-record-key--typed::before {
-    background: var(--rv-ink);
-}
-
-.eh-record-part--feldar,
-.eh-record-key--feldar::before {
-    background: var(--rv-mark);
-}
-
-.eh-record-part--pasted,
-.eh-record-key--pasted::before {
-    background: var(--rv-soft);
-}
-
-.eh-record-keys {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-6);
-    margin-top: var(--space-4);
-    color: var(--rv-soft);
-    font-variant-numeric: tabular-nums;
-}
-
-.eh-record-key {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-}
-
-.eh-record-key::before {
-    content: "";
-    width: 0.375rem;
-    height: 0.375rem;
-    border-radius: 50%;
-}
-
-.eh-record-key b {
-    color: var(--rv-ink);
-    font-weight: var(--font-weight-medium);
-}
-
-.eh-record-visit {
-    max-width: 30rem;
-    margin-top: var(--space-6);
-    padding-top: var(--space-5);
-    border-top: 1px solid var(--rv-well);
-    color: var(--rv-page-text);
-    text-wrap: pretty;
 }
 
 /* The foot of the stage: what just happened, a way back, and what the sample is. */
@@ -2149,12 +2778,8 @@ button.eh-choice:active {
     gap: var(--space-1) var(--space-5);
     padding: var(--space-3) var(--space-5);
     border-top: 1px solid var(--rv-rule);
-    font-size: var(--eh-small);
+    font-size: var(--rv-size-small);
     line-height: 1.45;
-}
-
-.eh-status {
-    color: var(--rv-ink);
 }
 
 .eh-reset {
@@ -2173,17 +2798,7 @@ button.eh-choice:active {
     color: var(--rv-soft);
 }
 
-@keyframes eh-arrive {
-    from {
-        opacity: 0;
-    }
-}
-
 @media (max-width: 73.75rem) {
-    .eh-stage {
-        grid-column: 1 / -1;
-    }
-
     .eh-lead,
     .eh-start {
         grid-column: 1 / -1;
@@ -2191,35 +2806,7 @@ button.eh-choice:active {
     }
 }
 
-/* Below this width there is no room for the app's sidebar, and the rewrite card sits
-   under its passage instead of beside it. */
-@media (max-width: 62.5rem) {
-    :root {
-        --eh-panel: 17rem;
-    }
-
-    .eh-window {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .eh-side {
-        display: none;
-    }
-
-    .eh-card {
-        position: static;
-        width: auto;
-        max-width: 24rem;
-        margin-top: var(--space-4);
-    }
-}
-
 @media (max-width: 40rem) {
-    :root {
-        --eh-height: 31rem;
-        --eh-text: 1rem;
-    }
-
     .eh-desk {
         padding-block: var(--space-5) var(--space-10);
     }
@@ -2230,60 +2817,14 @@ button.eh-choice:active {
 
     .eh-part {
         padding: var(--space-2) var(--space-3) var(--space-3);
+        font-size: 1.0625rem;
     }
 
     .eh-part:nth-child(odd) {
         border-left: 0;
     }
 
-    .eh-part-title {
-        font-size: 1.0625rem;
-    }
-
-    /* A phone has one scroll, the page's own. The window grows with what is in it, and
-       the Scenes panel follows the chapter instead of standing beside it. */
-    .eh-window {
-        height: auto;
-        min-height: var(--eh-height);
-    }
-
-    .eh-view--split {
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: auto minmax(0, 1fr);
-    }
-
-    .eh-panel {
-        min-height: 17rem;
-        border-top: 1px solid var(--rv-rule);
-        border-left: 0;
-    }
-
-    .eh-page {
-        height: auto;
-        padding: var(--space-5) var(--space-4) var(--space-6);
-        overflow-y: visible;
-    }
-
-    .eh-scenes {
-        overflow-y: visible;
-    }
-
-    .eh-record {
-        padding: var(--space-5) var(--space-4);
-    }
-
-    .eh-menu--define {
-        left: 0;
-    }
-
     .eh-sample {
         margin-left: 0;
-    }
-}
-
-/* A touch screen gets rows tall enough to press. */
-@media (pointer: coarse) {
-    :root {
-        --eh-row: 2.75rem;
     }
 }

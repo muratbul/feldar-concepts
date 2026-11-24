@@ -41,9 +41,9 @@
         <main id="main">
             <section class="hero">
                 <div class="rv-wrap">
-                    <h1 class="hero-title">The novel writing app where AI suggests and you decide</h1>
+                    <h1 class="hero-title">You stay the author.</h1>
                     <div class="rv-grid eh-offer">
-                        <p class="rv-lead eh-lead">Feldar keeps your chapters, scene plans and story world in one place, so the help you ask for draws on your book.</p>
+                        <p class="rv-lead eh-lead">Feldar is a novel writing app where AI suggests and you decide. It keeps your chapters, scene plans and story world in one place, so the help you ask for draws on your book.</p>
                         <div class="eh-start">
                             <div class="eh-actions">
                                 <a href="/login" class="rv-button" rel="nofollow">Start writing free</a>
@@ -60,52 +60,73 @@
                 <!-- The desk: a manuscript page that writes itself in, with the sample editor on it -->
                 <div class="eh-desk" data-editor-hero data-part="continue" data-nosnippet>
                     <canvas class="eh-ground" data-ink-ground aria-hidden="true"></canvas>
-                    <div class="rv-wrap rv-grid">
+                    <div class="rv-wrap">
                         <div class="eh-stage" data-ink-clear>
                             <div class="eh-parts" role="tablist" aria-label="Things to try in the sample book">
-                                <button type="button" class="eh-part rv-part--plan" role="tab" id="eh-tab-plan" aria-controls="eh-view-plan" aria-selected="false" tabindex="-1" data-part="plan">
-                                    <span class="eh-part-title">Plan scenes</span>
-                                </button>
-                                <button type="button" class="eh-part rv-part--write" role="tab" id="eh-tab-continue" aria-controls="eh-view-continue" aria-selected="true" data-part="continue">
-                                    <span class="eh-part-title">Continue from here</span>
-                                </button>
-                                <button type="button" class="eh-part rv-part--write" role="tab" id="eh-tab-rewrite" aria-controls="eh-view-rewrite" aria-selected="false" tabindex="-1" data-part="rewrite">
-                                    <span class="eh-part-title">Rewrite a passage</span>
-                                </button>
-                                <button type="button" class="eh-part rv-part--keep" role="tab" id="eh-tab-record" aria-controls="eh-view-record" aria-selected="false" tabindex="-1" data-part="record">
-                                    <span class="eh-part-title">Writing record</span>
-                                </button>
+                                <button type="button" class="eh-part rv-part--plan" role="tab" id="eh-tab-plan" aria-controls="eh-view-plan" aria-selected="false" tabindex="-1" data-part="plan">Plan scenes</button>
+                                <button type="button" class="eh-part rv-part--write" role="tab" id="eh-tab-continue" aria-controls="eh-view-continue" aria-selected="true" data-part="continue">Continue from here</button>
+                                <button type="button" class="eh-part rv-part--write" role="tab" id="eh-tab-rewrite" aria-controls="eh-view-rewrite" aria-selected="false" tabindex="-1" data-part="rewrite">Rewrite a passage</button>
+                                <button type="button" class="eh-part rv-part--keep" role="tab" id="eh-tab-record" aria-controls="eh-view-record" aria-selected="false" tabindex="-1" data-part="record">Writing record</button>
                             </div>
 
-                            <div class="eh-window">
-                                <div class="eh-side" aria-hidden="true">
-                                    <img class="eh-side-logo" src="../../assets/logo-nav.svg" alt="" width="59" height="17" />
-                                    <p class="eh-side-item">Library</p>
-                                    <p class="eh-side-item">Canvas</p>
-                                    <p class="eh-side-item">New page</p>
-                                    <p class="eh-side-book">The Winter Ledger</p>
-                                    <p class="eh-side-item" data-chapter-row>The Burying Field</p>
-                                    <p class="eh-side-item" data-chapter-row>The Ledger</p>
-                                    <p class="eh-side-item is-current" data-chapter-row>Pryce’s Gate</p>
-                                    <p class="eh-side-item" data-chapter-row>Hard Frost</p>
-                                    <p class="eh-side-item" data-chapter-row>Wassail</p>
+                            <!-- The app window, drawn from the production source. See app-window.css. -->
+                            <div class="app">
+                                <div class="app-sidebar">
+                                    <div class="app-brand">
+                                        <svg class="app-wordmark" aria-hidden="true"><use href="app-icons.svg#wordmark" /></svg>
+                                        <span class="app-brand-actions" aria-hidden="true">
+                                            <span class="app-iconbox"><svg class="app-icon"><use href="app-icons.svg#search" /></svg></span>
+                                            <span class="app-iconbox"><svg class="app-icon"><use href="app-icons.svg#sidebar" /></svg></span>
+                                        </span>
+                                    </div>
+                                    <div class="app-nav">
+                                        <p class="app-row"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#library" /></svg>Library</p>
+                                        <p class="app-row"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#canvas" /></svg>Canvas</p>
+                                        <p class="app-row"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#new-page" /></svg>New page</p>
+                                    </div>
+                                    <p class="app-book">The Winter Ledger</p>
+                                    <div class="app-chapters">
+                                        <p class="app-row" data-chapter-row>The Burying Field</p>
+                                        <button type="button" class="app-row" data-chapter-row data-open-part="rewrite">The Ledger</button>
+                                        <button type="button" class="app-row is-current" data-chapter-row data-open-part="continue">Pryce's Gate</button>
+                                        <button type="button" class="app-row" data-chapter-row data-open-part="plan">Hard Frost</button>
+                                        <p class="app-row" data-chapter-row>Wassail</p>
+                                    </div>
+                                    <div class="app-user" aria-hidden="true">
+                                        <span class="app-avatar">R</span>
+                                        <span class="app-user-text"><span>Ruth</span><span class="app-user-plan">Pro plan</span></span>
+                                        <span class="app-iconbox"><svg class="app-icon"><use href="app-icons.svg#download" /></svg></span>
+                                    </div>
                                 </div>
 
-                                <div class="eh-main">
-                                    <div class="eh-bar">
-                                        <p class="eh-crumb">The Winter Ledger <span aria-hidden="true">/</span> <span class="eh-crumb-page" data-crumb>Pryce’s Gate</span></p>
-                                        <p class="eh-count"><span data-count>21</span> words</p>
+                                <div class="app-panel">
+                                    <div class="app-header">
+                                        <p class="app-crumb">
+                                            <span>The Winter Ledger</span>
+                                            <svg class="app-slash" aria-hidden="true"><use href="app-icons.svg#slash" /></svg>
+                                            <span class="app-crumb-page" data-crumb>Pryce's Gate</span>
+                                        </p>
+                                        <div class="app-header-end">
+                                            <p class="app-count"><span data-count>21</span> words</p>
+                                            <span class="app-divider" aria-hidden="true"></span>
+                                            <div class="app-header-tools">
+                                                <button type="button" class="app-iconbutton" data-scenes-toggle aria-label="Show or hide the Scenes panel" aria-pressed="false"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#scenes" /></svg></button>
+                                                <span class="app-iconbox" aria-hidden="true"><svg class="app-icon"><use href="app-icons.svg#chat" /></svg></span>
+                                                <span class="app-iconbox" aria-hidden="true"><svg class="app-icon"><use href="app-icons.svg#more" /></svg></span>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <!-- Plan scenes -->
                                     <div
-                                        class="eh-view eh-view--split"
+                                        class="app-view"
                                         id="eh-view-plan"
                                         role="tabpanel"
                                         aria-labelledby="eh-tab-plan"
                                         data-view="plan"
                                         data-chapter="Hard Frost"
                                         data-state="empty"
+                                        data-panel="open"
                                         data-status-empty="An empty chapter in the sample book. Press Generate scenes."
                                         data-status-planning="Feldar is reading the book and planning the chapter."
                                         data-status-planned="Five scenes, yours to edit. Draft Page writes a first pass from them."
@@ -113,62 +134,105 @@
                                         data-status-drafted="A first pass to rework. It is counted in the Writing record."
                                         hidden
                                     >
-                                        <div class="eh-page">
-                                            <p class="eh-page-title">Hard Frost</p>
-                                            <p class="eh-placeholder" data-placeholder>Write your story here…</p>
-                                            <div class="eh-draft" data-draft hidden>
-                                                <p data-prose>Daniel would not say. He stood with his back to the press while she held the ledger open between them, and when she read the two letters aloud he looked at the door, as though someone might come through it.</p>
-                                                <p data-prose>“Ask my mother,” he said at last. “It’s hers to tell, not mine.”</p>
-                                                <p data-prose>Then he took the lantern from its nail and went out to the low rows, where the smudge pots stood in their lines between the Foxwhelps, and she understood that she was meant to follow him or go home.</p>
-                                                <p data-prose>She followed him. The cold had a weight to it now, a stillness that pressed the smoke flat along the ground, and the fires they lit one after another made small rooms of light in the dark, each with a tree standing in it like a guest no one had expected.</p>
+                                        <div class="app-scroll">
+                                            <span class="app-checks" aria-hidden="true"><svg class="app-icon"><use href="app-icons.svg#checks" /></svg></span>
+                                            <div class="app-column">
+                                                <p class="app-title">Hard Frost</p>
+                                                <div class="app-prose">
+                                                    <p class="app-placeholder" data-placeholder>Write your story here...</p>
+                                                    <div class="app-draft" data-draft hidden>
+                                                        <p data-prose>Daniel would not say. He stood with his back to the press while she held the ledger open between them, and when she read the two letters aloud he looked at the door, as though someone might come through it.</p>
+                                                        <p data-prose>"Ask my mother," he said at last. "It's hers to tell, not mine."</p>
+                                                        <p data-prose>Then he took the lantern from its nail and went out to the low rows, where the smudge pots stood in their lines between the Foxwhelps, and she understood that she was meant to follow him or go home.</p>
+                                                        <p data-prose>She followed him. The cold had a weight to it now, a stillness that pressed the smoke flat along the ground, and the fires they lit one after another made small rooms of light in the dark, each with a tree standing in it like a guest no one had expected.</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="eh-panel">
-                                            <p class="eh-panel-title">Scenes</p>
-                                            <div class="eh-panel-empty" data-plan-empty>
-                                                <p class="eh-panel-empty-title">Outline your story</p>
-                                                <p>Scenes are the small moments that shape your story. Generate them or write them yourself.</p>
-                                                <button type="button" class="eh-app-button" data-generate>Generate scenes</button>
+                                        <div class="app-scenes">
+                                            <div class="app-scenes-head">
+                                                <p class="app-scenes-title">Scenes</p>
+                                                <button type="button" class="app-iconbutton" data-scenes-close aria-label="Hide the Scenes panel"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#close" /></svg></button>
                                             </div>
-                                            <ol class="eh-steps" data-plan-steps hidden>
-                                                <li>Preparing scenes</li>
-                                                <li>Reading story context</li>
-                                                <li>Planning scene beats</li>
-                                                <li>Writing scene descriptions</li>
-                                                <li>Refining scene flow</li>
-                                            </ol>
-                                            <div class="eh-plan" data-plan-scenes hidden>
+                                            <div class="app-scenes-empty" data-plan-empty>
+                                                <p class="app-scenes-empty-title">Outline your story</p>
+                                                <p class="app-scenes-empty-text">Scenes are the small moments that shape your story. Generate them or write them yourself.</p>
+                                                <button type="button" class="app-button app-button--wide" data-generate>Generate scenes</button>
+                                            </div>
+                                            <div class="app-scenes-body" data-plan-scenes hidden>
                                                 <p
-                                                    class="eh-panel-note"
+                                                    class="app-scenes-status"
                                                     data-plan-note
                                                     data-planned="Generated 5 scenes successfully!"
                                                     data-drafted="Complete! Generated 1 page ({words} words)"
                                                 >Generated 5 scenes successfully!</p>
-                                                <p class="eh-panel-label">PAGE 4</p>
-                                                <ol class="eh-scenes">
-                                                    <li>
-                                                        <p class="eh-scene-name">Daniel will not say</p>
-                                                        <p>In the cider house Daniel will not tell Nell who M.P. is. He says she should ask his mother, then goes out to light the smudge pots before she can answer.</p>
+                                                <p class="app-scenes-label">PAGE 4</p>
+                                                <ol class="app-scenes-list">
+                                                    <li class="app-scene">
+                                                        <span class="app-scene-number">1</span>
+                                                        <div>
+                                                            <p class="app-scene-name">Daniel will not say</p>
+                                                            <p class="app-scene-text">In the cider house Daniel will not tell Nell who M.P. is. He says she should ask his mother, then goes out to light the smudge pots before she can answer.</p>
+                                                        </div>
                                                     </li>
-                                                    <li>
-                                                        <p class="eh-scene-name">Fires in the low rows</p>
-                                                        <p>They work through the night lighting fires between the Foxwhelps. In the smoke and the cold he starts to tell her about the winter of 1932, and stops.</p>
+                                                    <li class="app-scene">
+                                                        <span class="app-scene-number">2</span>
+                                                        <div>
+                                                            <p class="app-scene-name">Fires in the low rows</p>
+                                                            <p class="app-scene-text">They work through the night lighting fires between the Foxwhelps. In the smoke and the cold he starts to tell her about the winter of 1932, and stops.</p>
+                                                        </div>
                                                     </li>
-                                                    <li>
-                                                        <p class="eh-scene-name">Agnes at the gate</p>
-                                                        <p>At first light Nell walks down to Pryce’s Gate. Agnes is already there in her good coat, as if she has been expecting this visit for thirty years.</p>
+                                                    <li class="app-scene">
+                                                        <span class="app-scene-number">3</span>
+                                                        <div>
+                                                            <p class="app-scene-name">Agnes at the gate</p>
+                                                            <p class="app-scene-text">At first light Nell walks down to Pryce's Gate. Agnes is already there in her good coat, as if she has been expecting this visit for thirty years.</p>
+                                                        </div>
                                                     </li>
-                                                    <li>
-                                                        <p class="eh-scene-name">The page of births</p>
-                                                        <p>In Agnes’s kitchen the family Bible lies open at its page of births.</p>
+                                                    <li class="app-scene">
+                                                        <span class="app-scene-number">4</span>
+                                                        <div>
+                                                            <p class="app-scene-name">The page of births</p>
+                                                            <p class="app-scene-text">In Agnes's kitchen the family Bible lies open at its page of births.</p>
+                                                        </div>
                                                     </li>
-                                                    <li>
-                                                        <p class="eh-scene-name">Two pounds a month</p>
-                                                        <p>Agnes tells Nell what the two pounds were for, and asks what she means to do now that she knows.</p>
+                                                    <li class="app-scene">
+                                                        <span class="app-scene-number">5</span>
+                                                        <div>
+                                                            <p class="app-scene-name">Two pounds a month</p>
+                                                            <p class="app-scene-text">Agnes tells Nell what the two pounds were for, and asks what she means to do now that she knows.</p>
+                                                        </div>
                                                     </li>
                                                 </ol>
-                                                <div class="eh-panel-foot">
-                                                    <button type="button" class="eh-app-button" data-draft-page>Draft Page</button>
+                                                <div class="app-scenes-foot">
+                                                    <p class="app-credit">No credits used</p>
+                                                    <span class="app-tools" aria-hidden="true">
+                                                        <span class="app-tool"><svg class="app-icon app-icon--settings"><use href="app-icons.svg#settings" /></svg></span>
+                                                        <span class="app-tool"><svg class="app-icon app-icon--regenerate"><use href="app-icons.svg#regenerate" /></svg></span>
+                                                    </span>
+                                                    <button type="button" class="app-button" data-draft-page>Draft Page</button>
+                                                </div>
+                                            </div>
+                                            <div class="app-veil" data-plan-progress hidden>
+                                                <div class="app-progress">
+                                                    <p class="app-progress-head">
+                                                        <span class="app-progress-mark"><svg class="app-icon app-icon--scribble" aria-hidden="true"><use href="app-icons.svg#scribble" /></svg></span>
+                                                        <span data-progress-title data-scenes="Generating scenes" data-draft="Drafting page">Generating scenes</span>
+                                                    </p>
+                                                    <ol class="app-steps" data-steps="scenes">
+                                                        <li class="app-step">Preparing scenes</li>
+                                                        <li class="app-step">Reading story context</li>
+                                                        <li class="app-step">Planning scene beats</li>
+                                                        <li class="app-step">Writing scene descriptions</li>
+                                                        <li class="app-step">Refining scene flow</li>
+                                                    </ol>
+                                                    <ol class="app-steps" data-steps="draft" hidden>
+                                                        <li class="app-step">Preparing scenes</li>
+                                                        <li class="app-step">Gathering context</li>
+                                                        <li class="app-step">Analyze story</li>
+                                                        <li class="app-step">Write page</li>
+                                                        <li class="app-step">Save page</li>
+                                                    </ol>
                                                 </div>
                                             </div>
                                         </div>
@@ -176,45 +240,50 @@
 
                                     <!-- Continue from here -->
                                     <div
-                                        class="eh-view"
+                                        class="app-view"
                                         id="eh-view-continue"
                                         role="tabpanel"
                                         aria-labelledby="eh-tab-continue"
                                         data-view="continue"
-                                        data-chapter="Pryce’s Gate"
+                                        data-chapter="Pryce's Gate"
                                         data-state="pending"
                                         data-status-pending="A suggestion is waiting on a sample chapter. Try Accept, Revise or Dismiss."
                                         data-status-accepted="Accepted. The lines are part of the chapter now, and counted in the Writing record."
                                         data-status-dismissed="Dismissed. The page is as you left it."
                                     >
-                                        <div class="eh-page">
-                                            <p class="eh-page-title">Pryce’s Gate</p>
-                                            <p data-prose>She took out the ledger and opened it on the press between them, at the column of two pounds, and waited.</p>
-                                            <div class="eh-variants">
-                                                <div class="eh-variant is-shown" data-variant="first">
-                                                    <p class="eh-suggestion">He looked at the page for a long time without touching it. Then he wiped his hands on the sack tied round his waist, slowly, one finger at a time, as if there were a great deal of cider on them and he meant to have every drop.</p>
-                                                    <div class="eh-menu eh-menu--caret" data-menu inert>
-                                                        <div class="eh-choices" data-choices="main">
-                                                            <button type="button" class="eh-choice" data-choice="accept"><img src="../../assets/ui/icon-check-16.svg" alt="" width="16" height="16" />Accept</button>
-                                                            <button type="button" class="eh-choice" data-choice="revise"><img src="../../assets/ui/icon-revise-16.svg" alt="" width="16" height="16" />Revise</button>
-                                                            <button type="button" class="eh-choice" data-choice="dismiss"><img src="../../assets/ui/icon-x-ink-16.svg" alt="" width="16" height="16" />Dismiss</button>
+                                        <div class="app-scroll">
+                                            <span class="app-checks" aria-hidden="true"><svg class="app-icon"><use href="app-icons.svg#checks" /></svg></span>
+                                            <div class="app-column">
+                                                <p class="app-title">Pryce's Gate</p>
+                                                <div class="app-prose">
+                                                    <p data-prose>She took out the ledger and opened it on the press between them, at the column of two pounds, and waited.</p>
+                                                    <div class="eh-variants">
+                                                        <div class="eh-variant is-shown" data-variant="first">
+                                                            <p class="eh-suggestion">He looked at the page for a long time without touching it. Then he wiped his hands on the sack tied round his waist, slowly, one finger at a time, as if there were a great deal of cider on them and he meant to have every drop.</p>
+                                                            <div class="app-menu" data-menu inert>
+                                                                <div class="app-menu-rows" data-choices="main">
+                                                                    <button type="button" class="app-menu-item" data-choice="accept"><img src="../../assets/ui/icon-check-16.svg" alt="" width="16" height="16" />Accept</button>
+                                                                    <button type="button" class="app-menu-item" data-choice="revise"><img src="../../assets/ui/icon-revise-16.svg" alt="" width="16" height="16" />Revise</button>
+                                                                    <button type="button" class="app-menu-item" data-choice="dismiss"><img src="../../assets/ui/icon-x-ink-16.svg" alt="" width="16" height="16" />Dismiss</button>
+                                                                </div>
+                                                                <div class="app-menu-rows" data-choices="revise" hidden>
+                                                                    <button type="button" class="app-menu-item" data-show="again">Try again</button>
+                                                                    <button type="button" class="app-menu-item" data-show="shorter">Shorter</button>
+                                                                    <button type="button" class="app-menu-item" data-show="longer">Longer</button>
+                                                                </div>
+                                                                <p class="app-menu-hint">esc to dismiss</p>
+                                                            </div>
                                                         </div>
-                                                        <div class="eh-choices" data-choices="revise" hidden>
-                                                            <button type="button" class="eh-choice" data-show="again">Try again</button>
-                                                            <button type="button" class="eh-choice" data-show="shorter">Shorter</button>
-                                                            <button type="button" class="eh-choice" data-show="longer">Longer</button>
+                                                        <div class="eh-variant" data-variant="again">
+                                                            <p class="eh-suggestion">He did not come any closer. He read the two letters from where he stood, the way a man reads a notice nailed to a gate, and then he looked at her instead of the page.</p>
                                                         </div>
-                                                        <p class="eh-menu-hint">esc to dismiss</p>
+                                                        <div class="eh-variant" data-variant="shorter">
+                                                            <p class="eh-suggestion">He looked at the page for a long time without touching it. Then he wiped his hands on the sack at his waist, one finger at a time.</p>
+                                                        </div>
+                                                        <div class="eh-variant" data-variant="longer">
+                                                            <p class="eh-suggestion">He looked at the page for a long time without touching it. Then he wiped his hands on the sack tied round his waist, slowly, one finger at a time, as if there were a great deal of cider on them and he meant to have every drop. Then he folded the sack over once, like a letter he did not mean to answer.</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="eh-variant" data-variant="again">
-                                                    <p class="eh-suggestion">He did not come any closer. He read the two letters from where he stood, the way a man reads a notice nailed to a gate, and then he looked at her instead of the page.</p>
-                                                </div>
-                                                <div class="eh-variant" data-variant="shorter">
-                                                    <p class="eh-suggestion">He looked at the page for a long time without touching it. Then he wiped his hands on the sack at his waist, one finger at a time.</p>
-                                                </div>
-                                                <div class="eh-variant" data-variant="longer">
-                                                    <p class="eh-suggestion">He looked at the page for a long time without touching it. Then he wiped his hands on the sack tied round his waist, slowly, one finger at a time, as if there were a great deal of cider on them and he meant to have every drop. Then he folded the sack over once, like a letter he did not mean to answer.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -222,7 +291,7 @@
 
                                     <!-- Rewrite a passage -->
                                     <div
-                                        class="eh-view"
+                                        class="app-view"
                                         id="eh-view-rewrite"
                                         role="tabpanel"
                                         aria-labelledby="eh-tab-rewrite"
@@ -230,97 +299,114 @@
                                         data-chapter="The Ledger"
                                         data-state="selected"
                                         data-status-selected="A passage is selected. Open Define and pick a rewrite."
+                                        data-status-choosing="This sample has one rewrite ready in each group. They are Tighten, Deepen description and Add foreshadowing."
                                         data-status-rewriting="Feldar is rewriting the passage."
-                                        data-status-rewritten="The new words are marked. Apply the rewrite or keep your own."
+                                        data-status-rewritten="The new words are marked. Apply the rewrite, or press the bin to keep your own."
                                         data-status-applied="Applied. The new words are counted in the Writing record."
                                         hidden
                                     >
-                                        <div class="eh-page">
-                                            <p data-prose>But it was the other column that held her. On the first of every month, beneath the rates and the wages and the price of sulphur, he had written the same two letters and the same sum. M.P. Two pounds.</p>
-                                            <div class="eh-select">
-                                                <div class="eh-bubble" data-bubble>
-                                                    <span class="eh-bubble-item">Ask</span>
-                                                    <span class="eh-bubble-item">Instruct</span>
-                                                    <button type="button" class="eh-bubble-item eh-bubble-item--live" data-define aria-expanded="false" aria-controls="eh-define-menu">Define</button>
-                                                </div>
-                                                <div class="eh-menu eh-menu--define" id="eh-define-menu" data-define-menu hidden>
-                                                    <div class="eh-choices" data-level="groups">
-                                                        <button type="button" class="eh-choice" data-group="polish">Polish</button>
-                                                        <button type="button" class="eh-choice" data-group="deepen">Deepen</button>
-                                                        <button type="button" class="eh-choice" data-group="enhance">Enhance</button>
-                                                    </div>
-                                                    <div class="eh-choices" data-level="polish" hidden>
-                                                        <button type="button" class="eh-choice" data-rewrite="tighten">Tighten</button>
-                                                        <span class="eh-choice eh-choice--away">Smooth flow</span>
-                                                        <span class="eh-choice eh-choice--away">Clarify</span>
-                                                    </div>
-                                                    <div class="eh-choices" data-level="deepen" hidden>
-                                                        <button type="button" class="eh-choice" data-rewrite="deepen">Deepen description</button>
-                                                        <span class="eh-choice eh-choice--away">Add interiority</span>
-                                                        <span class="eh-choice eh-choice--away">Strengthen voice</span>
-                                                    </div>
-                                                    <div class="eh-choices" data-level="enhance" hidden>
-                                                        <button type="button" class="eh-choice" data-rewrite="foreshadow">Add foreshadowing</button>
-                                                        <span class="eh-choice eh-choice--away">Improve dialogue</span>
-                                                        <span class="eh-choice eh-choice--away">Change POV</span>
-                                                    </div>
-                                                    <p class="eh-menu-hint">One rewrite in each group is prepared here</p>
-                                                </div>
-                                                <p class="eh-passage" data-passage data-prose>She sat with the book open on her knees while the kitchen clock went on with its business. Outside, the frost was already coming down over the Lugg meadows, silvering the grass between the rows, and the old trees stood in it with their arms raised, as if someone had asked them a question.</p>
-                                                <div class="eh-card" data-card hidden>
-                                                    <p class="eh-card-bar" data-card-title></p>
-                                                    <div class="eh-card-body">
-                                                        <p class="eh-card-text" data-card-text></p>
-                                                        <div class="eh-card-foot" data-card-foot hidden>
-                                                            <button type="button" class="eh-card-keep" data-keep>Keep mine</button>
-                                                            <button type="button" class="eh-app-button" data-apply>Apply</button>
+                                        <div class="app-scroll">
+                                            <span class="app-checks" aria-hidden="true"><svg class="app-icon"><use href="app-icons.svg#checks" /></svg></span>
+                                            <div class="app-column">
+                                                <div class="app-prose">
+                                                    <p data-prose>On the first of every month, beneath the rates and the wages and the price of sulphur, he had written the same two letters and the same sum. M.P. Two pounds.</p>
+                                                    <div class="app-select">
+                                                        <div class="app-bubble" data-bubble>
+                                                            <span class="app-bubble-item">Ask<span class="app-bubble-ask" aria-hidden="true"></span></span>
+                                                            <span class="app-bubble-divider" aria-hidden="true"></span>
+                                                            <span class="app-bubble-item"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#instruct" /></svg>Instruct</span>
+                                                            <button type="button" class="app-bubble-item" data-define aria-expanded="false" aria-controls="eh-define-menu"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#define" /></svg>Define</button>
+                                                            <span class="app-bubble-icon" aria-hidden="true"><svg class="app-icon app-icon--16"><use href="app-icons.svg#ellipsis" /></svg></span>
+                                                            <span class="app-bubble-divider" aria-hidden="true"></span>
+                                                            <span class="app-bubble-icon" aria-hidden="true"><svg class="app-icon"><use href="app-icons.svg#highlight" /></svg></span>
+                                                            <svg class="app-bubble-pointer" aria-hidden="true"><use href="app-icons.svg#pointer-down" /></svg>
+                                                        </div>
+                                                        <div class="app-darkmenu app-darkmenu--groups" id="eh-define-menu" data-define-menu hidden>
+                                                            <button type="button" class="app-darkmenu-row" data-group="polish"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#polish" /></svg>Polish</button>
+                                                            <button type="button" class="app-darkmenu-row" data-group="deepen"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#deepen" /></svg>Deepen</button>
+                                                            <button type="button" class="app-darkmenu-row" data-group="enhance"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#enhance" /></svg>Enhance</button>
+                                                        </div>
+                                                        <div class="app-darkmenu app-darkmenu--list" data-level="polish" hidden>
+                                                            <span class="app-darkmenu-row app-darkmenu-row--away">Smooth flow</span>
+                                                            <button type="button" class="app-darkmenu-row" data-rewrite="tighten">Tighten</button>
+                                                            <span class="app-darkmenu-row app-darkmenu-row--away">Clarify</span>
+                                                        </div>
+                                                        <div class="app-darkmenu app-darkmenu--list" data-level="deepen" hidden>
+                                                            <button type="button" class="app-darkmenu-row" data-rewrite="deepen">Deepen description</button>
+                                                            <span class="app-darkmenu-row app-darkmenu-row--away">Add interiority</span>
+                                                            <span class="app-darkmenu-row app-darkmenu-row--away">Strengthen voice</span>
+                                                        </div>
+                                                        <div class="app-darkmenu app-darkmenu--list" data-level="enhance" hidden>
+                                                            <button type="button" class="app-darkmenu-row" data-rewrite="foreshadow">Add foreshadowing</button>
+                                                            <span class="app-darkmenu-row app-darkmenu-row--away">Improve dialogue</span>
+                                                            <span class="app-darkmenu-row app-darkmenu-row--away">Change POV</span>
+                                                            <span class="app-darkmenu-row app-darkmenu-row--away">Change tense</span>
+                                                        </div>
+                                                        <p data-prose><span class="app-range" data-passage>She sat with the book open on her knees while the kitchen clock went on with its business. Outside, the frost was already coming down over the Lugg meadows, silvering the grass between the rows, and the old trees stood in it with their arms raised, as if someone had asked them a question.</span></p>
+                                                        <div class="app-rewrite" data-card hidden>
+                                                            <p class="app-rewrite-bar">
+                                                                <span data-card-title></span>
+                                                                <img src="../../assets/ui/icon-minus-faint-16.svg" alt="" width="16" height="16" />
+                                                            </p>
+                                                            <div class="app-rewrite-body">
+                                                                <p class="app-rewrite-text" data-card-text></p>
+                                                                <div class="app-rewrite-foot" data-card-foot hidden>
+                                                                    <span class="app-rewrite-refine" aria-hidden="true">Refine</span>
+                                                                    <span class="app-rewrite-tool" aria-hidden="true"><img src="../../assets/ui/icon-redo-18.svg" alt="" width="18" height="18" /></span>
+                                                                    <span class="app-rewrite-tool" aria-hidden="true"><img src="../../assets/ui/icon-insert-18.svg" alt="" width="18" height="18" /></span>
+                                                                    <button type="button" class="app-rewrite-tool" data-keep aria-label="Discard the rewrite and keep your own words"><img src="../../assets/ui/icon-trash-18.svg" alt="" width="18" height="18" /></button>
+                                                                    <button type="button" class="app-rewrite-apply" data-apply>Apply<img src="../../assets/ui/icon-enter-white-15.svg" alt="" width="15" height="15" /></button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <p data-prose>Two pounds was what he paid the pickers for a week. Two pounds was the coat she had wanted at fourteen and not been given, because, he said, there was no money for coats that year.</p>
                                                 </div>
                                             </div>
-                                            <p data-prose>Two pounds was what he paid the pickers for a week. Two pounds was the coat she had wanted at fourteen and not been given, because, he said, there was no money for coats that year.</p>
                                         </div>
                                         <template data-rewrite-text="tighten" data-label="Tighten">She sat with the book open on her knees while the kitchen clock <mark>kept on</mark>. Outside, frost was coming down over the Lugg meadows, silvering the grass between the rows. The old trees stood in it with their arms raised, as if someone had asked them a question.</template>
                                         <template data-rewrite-text="deepen" data-label="Deepen Description">She sat with the book open on her knees while the kitchen clock went on with its business, <mark>loud in the way clocks are only loud in an empty house</mark>. Outside, the frost was already coming down over the Lugg meadows, silvering the grass between the rows <mark>and stiffening the last windfalls where they lay</mark>, and the old trees stood in it with their arms raised, <mark>black against a sky the colour of pewter</mark>, as if someone had asked them a question.</template>
                                         <template data-rewrite-text="foreshadow" data-label="Add Foreshadowing">She sat with the book open on her knees while the kitchen clock went on with its business. Outside, the frost was already coming down over the Lugg meadows, silvering the grass between the rows, and the old trees stood in it with their arms raised, as if someone had asked them a question <mark>they had been told, long ago, not to answer</mark>.</template>
                                     </div>
 
-                                    <!-- Writing record -->
+                                    <!-- Writing record: a page of its own in the app, without the sidebar or header -->
                                     <div
-                                        class="eh-view"
+                                        class="app-view"
                                         id="eh-view-record"
                                         role="tabpanel"
                                         aria-labelledby="eh-tab-record"
                                         data-view="record"
                                         data-chapter="The Ledger"
-                                        data-crumb="Writing record"
-                                        data-no-count
                                         data-state="resting"
                                         data-status-resting="A private count of the words you typed and the words that came from Feldar."
+                                        data-status-some="{words} of Feldar's words here are from this visit, counted because you accepted or applied them."
                                         hidden
                                     >
-                                        <div class="eh-record" data-record data-typed="7645" data-feldar="610" data-pasted="120">
-                                            <p class="eh-record-book">The Winter Ledger</p>
-                                            <p class="eh-record-headline">
-                                                <span><span data-total>8,375</span> words entered.</span>
-                                                <span><span data-share="typed">92%</span> by hand, <span data-share="feldar">7%</span> Feldar, <span data-share="pasted">1%</span> pasted.</span>
-                                            </p>
-                                            <div class="eh-record-bar">
-                                                <span class="eh-record-part eh-record-part--typed" data-segment="typed" style="flex-grow: 7645"></span>
-                                                <span class="eh-record-part eh-record-part--feldar" data-segment="feldar" style="flex-grow: 610"></span>
-                                                <span class="eh-record-part eh-record-part--pasted" data-segment="pasted" style="flex-grow: 120"></span>
+                                        <div class="app-record" data-record data-typed="7645" data-feldar="610" data-pasted="120">
+                                            <button type="button" class="app-iconbutton app-record-back" data-record-back aria-label="Back to the editor"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#back" /></svg></button>
+                                            <div class="app-record-column">
+                                                <p class="app-record-book">The Winter Ledger</p>
+                                                <p class="app-record-headline">
+                                                    <span><span data-total>8,375</span> words entered.</span>
+                                                    <span><span data-share="typed">92%</span> by hand, <span data-share="feldar">7%</span> Feldar, <span data-share="pasted">1%</span> pasted.</span>
+                                                </p>
+                                                <div class="app-record-bar">
+                                                    <span class="app-record-part app-record-part--typed" data-segment="typed" style="flex-grow: 7645"></span>
+                                                    <span class="app-record-part app-record-part--feldar" data-segment="feldar" style="flex-grow: 610"></span>
+                                                    <span class="app-record-part app-record-part--pasted" data-segment="pasted" style="flex-grow: 120"></span>
+                                                </div>
+                                                <ul class="app-record-keys">
+                                                    <li class="app-record-key app-record-key--typed"><strong data-count-of="typed">7,645</strong> typed</li>
+                                                    <li class="app-record-key app-record-key--feldar"><strong data-count-of="feldar">610</strong> Feldar</li>
+                                                    <li class="app-record-key app-record-key--pasted"><strong data-count-of="pasted">120</strong> pasted</li>
+                                                </ul>
+                                                <dl class="app-record-stats">
+                                                    <div><dt>Active days</dt><dd>15 days</dd></div>
+                                                    <div><dt>AI operations</dt><dd>15</dd></div>
+                                                    <div><dt>Active time</dt><dd>20h 42m</dd></div>
+                                                    <div><dt>Current saved manuscript</dt><dd>5,210 words</dd></div>
+                                                </dl>
                                             </div>
-                                            <ul class="eh-record-keys">
-                                                <li class="eh-record-key eh-record-key--typed"><b data-count-of="typed">7,645</b> typed</li>
-                                                <li class="eh-record-key eh-record-key--feldar"><b data-count-of="feldar">610</b> Feldar</li>
-                                                <li class="eh-record-key eh-record-key--pasted"><b data-count-of="pasted">120</b> pasted</li>
-                                            </ul>
-                                            <p
-                                                class="eh-record-visit"
-                                                data-visit
-                                                data-none="Nothing from this visit yet. Accept a suggestion, apply a rewrite or draft a page, and its words are counted here as Feldar’s."
-                                                data-some="{words} words from this visit are counted as Feldar’s, because you accepted or applied them."
-                                            >Nothing from this visit yet. Accept a suggestion, apply a rewrite or draft a page, and its words are counted here as Feldar’s.</p>
                                         </div>
                                     </div>
                                 </div>

@@ -5,7 +5,8 @@
 import { paintInkGround } from "./ink-ground.js";
 
 const WORD_MS = 22;
-const STEP_MS = 620;
+const STEP_MS = 520;
+const ICONS = "app-icons.svg";
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const wholeNumber = new Intl.NumberFormat("en-US");
@@ -19,7 +20,7 @@ function wait(milliseconds, signal) {
             resolve(false);
             return;
         }
-        const timer = setTimeout(() => resolve(true), milliseconds);
+        const timer = setTimeout(() => resolve(true), reducedMotion.matches ? 0 : milliseconds);
         signal.addEventListener(
             "abort",
             () => {
@@ -53,9 +54,14 @@ async function streamNodes(target, nodes, signal) {
     return true;
 }
 
-function createRecord(view) {
+// A progress step shows one of the app's three marks: waiting, running or done.
+function markStep(step, state) {
+    step.dataset.step = state;
+    step.querySelector("use").setAttribute("href", `${ICONS}#step-${state}`);
+}
+
+function createRecord(view, onVisitWords) {
     const record = view.querySelector("[data-record]");
-    const visitLine = record.querySelector("[data-visit]");
     const counts = {
         typed: Number(record.dataset.typed),
         feldar: Number(record.dataset.feldar),
@@ -78,9 +84,6 @@ function createRecord(view) {
             record.querySelector(`[data-segment="${source}"]`).style.flexGrow = String(count);
         }
         record.querySelector("[data-total]").textContent = wholeNumber.format(total);
-        visitLine.textContent = fromVisit
-            ? visitLine.dataset.some.replace("{words}", wholeNumber.format(fromVisit))
-            : visitLine.dataset.none;
     };
 
     return {
@@ -88,6 +91,7 @@ function createRecord(view) {
             counts.feldar += words;
             fromVisit += words;
             show();
+            onVisitWords(wholeNumber.format(fromVisit));
         },
     };
 }
@@ -163,65 +167,75 @@ function initContinue(view, hero) {
 
 function initPlan(view, hero) {
     const empty = view.querySelector("[data-plan-empty]");
-    const steps = view.querySelector("[data-plan-steps]");
     const scenes = view.querySelector("[data-plan-scenes]");
     const note = view.querySelector("[data-plan-note]");
     const placeholder = view.querySelector("[data-placeholder]");
     const draft = view.querySelector("[data-draft]");
     const draftButton = view.querySelector("[data-draft-page]");
-    const paragraphs = [...draft.children];
-    const preparedDraft = paragraphs.map((paragraph) => paragraph.textContent);
+    const veil = view.querySelector("[data-plan-progress]");
+    const progressTitle = veil.querySelector("[data-progress-title]");
+    const stepLists = [...veil.querySelectorAll("[data-steps]")];
     let run = new AbortController();
+    let draftCounted = false;
+
+    for (const step of veil.querySelectorAll(".app-step")) {
+        const mark = document.createElement("span");
+        mark.className = "app-step-mark";
+        mark.innerHTML = '<svg class="app-icon" aria-hidden="true"><use></use></svg>';
+        step.prepend(mark);
+    }
+
+    // The app's progress card, over a veil: its steps tick through one at a time.
+    const showProgress = async (kind, signal) => {
+        const steps = [...veil.querySelectorAll(`[data-steps="${kind}"] .app-step`)];
+        progressTitle.textContent = progressTitle.dataset[kind];
+        for (const list of stepLists) list.hidden = list.dataset.steps !== kind;
+        for (const step of steps) markStep(step, "waiting");
+        veil.hidden = false;
+
+        for (const step of steps) {
+            markStep(step, "running");
+            if (!(await wait(STEP_MS, signal))) return false;
+            markStep(step, "done");
+        }
+        veil.hidden = true;
+        return true;
+    };
 
     const generateScenes = async () => {
-        const { signal } = run;
-        empty.hidden = true;
-        steps.hidden = false;
         hero.setState(view, "planning");
+        if (!(await showProgress("scenes", run.signal))) return;
 
-        for (const step of steps.children) {
-            step.dataset.step = "doing";
-            if (!(await wait(reducedMotion.matches ? 0 : STEP_MS, signal))) return;
-            step.dataset.step = "done";
-        }
-
-        steps.hidden = true;
+        empty.hidden = true;
         scenes.hidden = false;
         hero.setState(view, "planned");
         draftButton.focus();
     };
 
     const draftPage = async () => {
-        const { signal } = run;
-        draftButton.hidden = true;
-        placeholder.hidden = true;
-        for (const paragraph of paragraphs) paragraph.textContent = "";
-        draft.hidden = false;
         hero.setState(view, "drafting");
+        if (!(await showProgress("draft", run.signal))) return;
 
-        for (const [index, paragraph] of paragraphs.entries()) {
-            if (!(await streamWords(paragraph, preparedDraft[index], signal))) return;
-            hero.showCount(view);
-        }
-
-        const words = countWords(preparedDraft.join(" "));
+        const words = countWords(draft.textContent);
+        placeholder.hidden = true;
+        draft.hidden = false;
         note.textContent = note.dataset.drafted.replace("{words}", wholeNumber.format(words));
-        hero.record.add(words);
+        // A page drafted again in the same visit is the same words, so it is counted once.
+        if (!draftCounted) hero.record.add(words);
+        draftCounted = true;
         hero.setState(view, "drafted");
     };
 
     const reset = () => {
         run.abort();
         run = new AbortController();
-        for (const step of steps.children) step.removeAttribute("data-step");
-        for (const [index, paragraph] of paragraphs.entries()) paragraph.textContent = preparedDraft[index];
         note.textContent = note.dataset.planned;
+        veil.hidden = true;
         empty.hidden = false;
-        steps.hidden = true;
         scenes.hidden = true;
         draft.hidden = true;
-        draftButton.hidden = false;
         placeholder.hidden = false;
+        view.dataset.panel = "open";
         hero.setState(view, "empty");
     };
 
@@ -232,10 +246,12 @@ function initPlan(view, hero) {
 
 function initRewrite(view, hero) {
     const passage = view.querySelector("[data-passage]");
+    const selection = passage.closest(".app-select");
     const bubble = view.querySelector("[data-bubble]");
     const defineButton = view.querySelector("[data-define]");
     const menu = view.querySelector("[data-define-menu]");
-    const levels = [...menu.querySelectorAll("[data-level]")];
+    const groupRows = [...menu.querySelectorAll("[data-group]")];
+    const lists = [...view.querySelectorAll("[data-level]")];
     const card = view.querySelector("[data-card]");
     const cardTitle = card.querySelector("[data-card-title]");
     const cardText = card.querySelector("[data-card-text]");
@@ -243,20 +259,24 @@ function initRewrite(view, hero) {
     const ownWords = passage.textContent;
     let run = new AbortController();
 
-    const showLevel = (name) => {
-        for (const level of levels) level.hidden = level.dataset.level !== name;
-        menu.querySelector(`[data-level="${name}"] button`).focus();
+    // A group's list opens beside the dropdown, which stays where it is.
+    const openGroup = (name) => {
+        for (const list of lists) list.hidden = list.dataset.level !== name;
+        for (const row of groupRows) row.classList.toggle("is-open", row.dataset.group === name);
     };
 
     const closeMenu = () => {
         menu.hidden = true;
+        openGroup(null);
         defineButton.setAttribute("aria-expanded", "false");
     };
 
     const openMenu = () => {
+        selection.style.setProperty("--define-left", `${bubble.offsetLeft + defineButton.offsetLeft}px`);
         menu.hidden = false;
         defineButton.setAttribute("aria-expanded", "true");
-        showLevel("groups");
+        hero.setState(view, "choosing");
+        groupRows[0].focus();
     };
 
     const showRewrite = async (name) => {
@@ -268,13 +288,14 @@ function initRewrite(view, hero) {
         cardText.textContent = "";
         cardFoot.hidden = true;
         card.hidden = false;
-        card.scrollIntoView({ block: "nearest" });
         hero.setState(view, "rewriting");
+        card.scrollIntoView({ block: "nearest" });
 
         if (!(await streamNodes(cardText, prepared.content.childNodes, signal))) return;
 
         cardFoot.hidden = false;
         hero.setState(view, "rewritten");
+        card.scrollIntoView({ block: "nearest" });
         cardFoot.querySelector("[data-apply]").focus();
     };
 
@@ -301,24 +322,42 @@ function initRewrite(view, hero) {
         if (!button) return;
 
         if (button === defineButton) {
-            if (menu.hidden) openMenu();
-            else closeMenu();
+            if (menu.hidden) {
+                openMenu();
+                return;
+            }
+            closeMenu();
+            hero.setState(view, "selected");
             return;
         }
-        if (button.dataset.group) showLevel(button.dataset.group);
-        else if (button.dataset.rewrite) showRewrite(button.dataset.rewrite);
+        if (button.dataset.group) {
+            openGroup(button.dataset.group);
+            view.querySelector(`[data-level="${button.dataset.group}"] button`).focus();
+        } else if (button.dataset.rewrite) showRewrite(button.dataset.rewrite);
         else if (button.hasAttribute("data-apply")) applyRewrite();
         else if (button.hasAttribute("data-keep")) keepOwnWords();
     });
 
-    // Escape steps back the way it came: from a group to the groups, then out of the menu.
+    // Escape steps back the way it came: out of a list, out of the menu, or, as in the
+    // app, out of a rewrite, which keeps the writer's own words.
     view.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape" || menu.hidden) return;
-        if (menu.querySelector('[data-level="groups"]').hidden) {
-            showLevel("groups");
+        if (event.key !== "Escape") return;
+
+        if (!card.hidden) {
+            keepOwnWords();
+            defineButton.focus();
+            return;
+        }
+        if (menu.hidden) return;
+
+        const openRow = groupRows.find((row) => row.classList.contains("is-open"));
+        if (openRow) {
+            openGroup(null);
+            openRow.focus();
             return;
         }
         closeMenu();
+        hero.setState(view, "selected");
         defineButton.focus();
     });
 
@@ -332,15 +371,17 @@ function initEditorHero(root) {
     const resetButton = root.querySelector("[data-reset]");
     const crumb = root.querySelector("[data-crumb]");
     const count = root.querySelector("[data-count]");
+    const scenesToggle = root.querySelector("[data-scenes-toggle]");
     const chapterRows = [...root.querySelectorAll("[data-chapter-row]")];
     const firstStates = new Map([...views].map(([part, view]) => [part, view.dataset.state]));
+    // Where Back on the Writing record leads: the page that was open before it.
+    let editorPart = root.dataset.part;
 
     const onScreen = () => views.get(root.dataset.part);
+    const tabFor = (part) => tabs.find((tab) => tab.dataset.part === part);
 
     // The header's count is the manuscript's: prose that is on the page and kept.
     const showCount = (view) => {
-        if (view !== onScreen()) return;
-        count.parentElement.hidden = view.hasAttribute("data-no-count");
         const prose = [...view.querySelectorAll("[data-prose]")].filter((paragraph) => !paragraph.closest("[hidden]"));
         count.textContent = wholeNumber.format(countWords(prose.map((paragraph) => paragraph.textContent).join(" ")));
     };
@@ -349,14 +390,17 @@ function initEditorHero(root) {
         const { state } = view.dataset;
         status.textContent = view.dataset[`status${state[0].toUpperCase()}${state.slice(1)}`];
         resetButton.hidden = state === firstStates.get(view.dataset.view);
-        crumb.textContent = view.dataset.crumb ?? view.dataset.chapter;
+        crumb.textContent = view.dataset.chapter;
+        scenesToggle.setAttribute("aria-pressed", String(view.dataset.panel === "open"));
         for (const row of chapterRows) row.classList.toggle("is-current", row.textContent === view.dataset.chapter);
         showCount(view);
     };
 
+    const recordView = views.get("record");
     const hero = {
-        record: createRecord(views.get("record")),
-        showCount,
+        record: createRecord(recordView, (visitWords) => {
+            recordView.dataset.statusResting = recordView.dataset.statusSome.replace("{words}", visitWords);
+        }),
         setState(view, state) {
             view.dataset.state = state;
             if (view === onScreen()) showView(view);
@@ -377,10 +421,28 @@ function initEditorHero(root) {
             views.get(other.dataset.part).hidden = !isSelected;
         }
         root.dataset.part = tab.dataset.part;
+        if (tab.dataset.part !== "record") editorPart = tab.dataset.part;
         showView(onScreen());
     };
 
-    for (const tab of tabs) tab.addEventListener("click", () => select(tab));
+    // The Scenes panel opens and closes from the header and from its own close button,
+    // on the chapter that has one.
+    const toggleScenes = () => {
+        const view = onScreen();
+        if (!view.dataset.panel) return;
+        view.dataset.panel = view.dataset.panel === "open" ? "closed" : "open";
+        showView(view);
+    };
+
+    root.addEventListener("click", (event) => {
+        const tab = event.target.closest('[role="tab"]');
+        const chapter = event.target.closest("[data-open-part]");
+
+        if (tab) select(tab);
+        else if (chapter) select(tabFor(chapter.dataset.openPart));
+        else if (event.target.closest("[data-record-back]")) select(tabFor(editorPart));
+        else if (event.target.closest("[data-scenes-toggle], [data-scenes-close]")) toggleScenes();
+    });
 
     root.querySelector('[role="tablist"]').addEventListener("keydown", (event) => {
         const move = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
@@ -392,7 +454,7 @@ function initEditorHero(root) {
 
     resetButton.addEventListener("click", () => {
         resets[root.dataset.part]();
-        tabs.find((tab) => tab.dataset.part === root.dataset.part).focus();
+        tabFor(root.dataset.part).focus();
     });
 
     showView(onScreen());
