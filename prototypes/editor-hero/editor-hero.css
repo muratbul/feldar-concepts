@@ -2701,8 +2701,11 @@ button.app-rewrite-tool:hover {
    manuscript page: the wash is laid here and the canvas over it carries the rules, the
    hand and the marks. Text never stands on the ground, only on the stage. */
 .eh-desk {
+    /* The ruled page's line spacing. Below the window there is room for three lines and
+       the phrases written above them. */
+    --ground-line: 38px;
     position: relative;
-    padding-block: var(--space-6) var(--space-20);
+    padding-block: var(--space-6) calc(4 * var(--ground-line));
     border-block: 1px solid var(--rv-rule);
     background:
         radial-gradient(60% 80% at 4% 100%, color-mix(in oklab, var(--rv-ink) 7%, transparent), transparent 70%),
@@ -2710,10 +2713,17 @@ button.app-rewrite-tool:hover {
         var(--rv-well);
 }
 
+/* The author writes in Playwrite GB J, a joined hand taught in British schools, loaded
+   from Google Fonts while this is a prototype. Their marks are in a darker ink than the
+   page, and Feldar's phrases are in the app's blue. */
 .eh-ground {
+    --ground-face: 'Playwrite GB J', cursive;
+    --ground-size: 16px;
+    --ground-weight: 300;
     --ground-rule: color-mix(in oklab, var(--rv-ink) 9%, var(--rv-well));
-    --ground-hand: color-mix(in oklab, var(--rv-ink) 34%, var(--rv-well));
-    --ground-mark: color-mix(in oklab, var(--rv-mark) 72%, var(--rv-well));
+    --ground-hand: color-mix(in oklab, var(--rv-ink) 44%, var(--rv-well));
+    --ground-author: color-mix(in oklab, var(--rv-ink) 72%, var(--rv-well));
+    --ground-mark: color-mix(in oklab, var(--rv-mark) 85%, var(--rv-well));
     position: absolute;
     inset: 0;
     width: 100%;
