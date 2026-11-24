@@ -643,6 +643,9 @@ select {
     --rv-size-lead: clamp(1.125rem, 1.39vw, 1.25rem);
     --rv-size-text: 1rem;
     --rv-size-small: 0.875rem;
+    /* Libre Baskerville's tall letters and tails together take 1.11 of the type size. A
+       heading set tighter than that lets one line's tails touch the next line's tops. */
+    --rv-leading-heading: 1.18;
 
     --rv-container: 82rem;
     --rv-gutter: clamp(1rem, 4.44vw, 4rem);
@@ -716,7 +719,7 @@ h3 {
 
 .rv-h2 {
     font-size: var(--rv-size-section);
-    line-height: 1.1;
+    line-height: var(--rv-leading-heading);
     letter-spacing: -0.015em;
 }
 
@@ -1050,7 +1053,7 @@ body.nav-open {
     font-family: var(--rv-serif);
     font-size: var(--rv-size-display);
     font-weight: var(--font-weight-regular);
-    line-height: 1.06;
+    line-height: var(--rv-leading-heading);
     letter-spacing: -0.02em;
 }
 

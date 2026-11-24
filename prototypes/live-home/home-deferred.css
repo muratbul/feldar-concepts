@@ -641,7 +641,7 @@ html[data-view="machine"] .machine-view {
     font-family: var(--rv-serif);
     font-size: var(--rv-size-display);
     font-weight: var(--font-weight-regular);
-    line-height: 1.06;
+    line-height: var(--rv-leading-heading);
     letter-spacing: -0.02em;
 }
 
