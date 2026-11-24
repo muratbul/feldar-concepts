@@ -1,0 +1,2286 @@
+/* Prototype: the home page's front page with a working sample of the editor in place of
+   the three ruled columns. It stands on the home page's own system (tokens, type, the
+   masthead, the headline, buttons) and adds only what is new here: the offer row, the
+   desk with its manuscript ground, the parts strip and the editor window. */
+/* Hallmark · shape: Literary review · genre: editorial · theme: custom · redesign: full · job: sign up · idea: "A review's front page where the app is the plates and the reader decides on a suggestion" · vibe: "serious, bookish, plain, cloth-coloured plates"
+ * paper: oklch(98.2% 0.004 91) · accent: oklch(54.3% 0.198 261) · display: Libre Baskerville · body: Inter · hero: a broadsheet front, the headline across twelve columns over three ruled columns · nav: edge-aligned · footer: mast · imagery: screenshots 8, the app's own stills · signature: accepting the suggestion in the first screen
+ * axes: light/roman-serif/cool · posture: Full palette · surface: absolute · contrast: pass · fold: pass · draw: 8ef0b5 · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: H, the contents column could compete with the live chapter; its titles stay at title size under thin rules so the chapter leads */
+/* Hallmark · waive 7b · surface: absolute, on the live chapter and the mounts behind the stills only · those grounds are the app's own white page, set beside real captures of it */
+/* Hallmark · waive 26b · no control on the page is ever disabled · the live chapter puts its choices away rather than disabling them */
+/* Hallmark · waive 28b · the player holds no recording until a link under a still is pressed · that still already shows the screen a poster would */
+/* Hallmark · hero-review: not run as its own step · finish-review: subagent · 8 findings · 6 resolved 2 partial · gap: the view toggle stays fixed on desktop, and at 1280 x 800 the plate's foot runs past the fold */
+/* Critical homepage CSS: the page shell, the front page and the limits under it. */
+/* ============================================
+   FELDAR DESIGN TOKENS
+   ============================================ */
+
+/* ==========================================
+   FONT FACES - Inter
+   ========================================== */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../../assets/fonts/InterVariable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: optional;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../../assets/fonts/InterVariable-Italic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: optional;
+}
+
+@font-face {
+  font-family: 'Inter Variable';
+  src: url('../../assets/fonts/InterVariable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: optional;
+}
+
+@font-face {
+  font-family: 'Inter Variable';
+  src: url('../../assets/fonts/InterVariable-Italic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: optional;
+}
+
+/* Libre Baskerville: the serif the app offers for manuscripts and sets its Outline in. */
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('../../assets/fonts/LibreBaskerville-latin.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ==========================================
+   * COLORS
+   * ========================================== */
+  
+  /* Primary palette */
+  --color-primary: #0a0a0a;
+  --color-primary-alt: #101010;
+  --color-secondary: #262626;
+  --color-tertiary: #444444;
+  --color-muted: #737373;
+  --color-muted-light: #969696;
+  --color-text-nav: #303030;
+  --color-text-description: #5f5f5f;
+  --color-text-light: #606060;
+  
+  /* Surfaces */
+  --color-surface: #ffffff;
+  --color-surface-secondary: #F5F3F1;  /* Feature cards, pricing cards */
+  --color-surface-tertiary: #fafafa;
+  --color-surface-elevated: #fafafa;
+  --color-surface-hover: #f1f1f1;      /* Card hover state */
+  --color-surface-active: #eeeeee;     /* Buttons, toggles, active states */
+  --color-surface-active-hover: #e5e5e5; /* Button hover */
+  
+  /* Borders */
+  --color-border: #e7e7e7;
+  --color-border-light: #ededed;
+  --color-border-muted: #dedede;
+  --color-border-button: #cbcbcb;
+  --color-border-faq: #e6e6e6;         /* FAQ dividers */
+  --color-border-hover: #d4d4d4;       /* Card hover border */
+  
+  /* Accents */
+  --color-accent-loader: #a3a3a3;
+  --color-accent-green: #507d5d;
+  --color-accent-green-bg: #edf2ef;
+  --color-accent-blue: #5672a5;
+  --color-accent-blue-bg: #eef1f6;
+  --color-accent-orange: #bd7e3c;
+  --color-accent-orange-bg: rgba(252, 245, 233, 0.35);
+  --color-accent-pink: #98637e;
+  --color-accent-pink-bg: #f5eff2;
+  
+  /* ==========================================
+   * TYPOGRAPHY
+   * ========================================== */
+  
+  /* Font families */
+  --font-display: 'Inter Variable', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-ui: var(--font-body);
+  --font-serif: var(--font-display);
+  --font-system: var(--font-body);
+  --font-editor: var(--font-body);
+  
+  /* Font sizes - Using clamp for fluid scaling */
+  --font-size-display: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  --font-size-h1: clamp(1.75rem, 1.35rem + 2vw, 2.75rem);
+  --font-size-h2: 1.125rem;
+  --font-size-body: 1.125rem;
+  --font-size-body-sm: 1rem;
+  --font-size-nav: 0.875rem;
+  --font-size-button: 0.875rem;
+  --font-size-button-lg: 1rem;
+  --font-size-caption: 0.75rem;
+  
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-book: 450;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Line heights */
+  --line-height-tight: 1.07;
+  --line-height-heading: 1.14;
+  --line-height-body: 1.44;
+  --line-height-relaxed: 1.625;
+  
+  /* Letter spacing (3 tiers: tight for large, normal for body, wide for small) */
+  --letter-spacing-tight: -0.008em;   /* Display, headlines (44px+) */
+  --letter-spacing-normal: -0.005em;  /* Body, buttons, nav (14-18px) */
+  --letter-spacing-wide: -0.002em;    /* Small text (12-14px) */
+
+  /* Shared marketing/page title treatment (Figma: Inter 48px / 550 / 52px / -0.312px) */
+  --title-size: 3rem;                 /* 48px */
+  --title-weight: 600;
+  --title-line-height: 1.0833;        /* 52px at 48px */
+  --title-letter-spacing: -0.0065em;  /* -0.312px at 48px */
+  --title-max-width: 46.25rem;
+
+  /* Shared section title treatment (Figma: Inter Variable 36px / 550 / 42px / -0.234px) */
+  --section-title-size: 2.25rem;
+  --section-title-weight: 600;
+  --section-title-line-height: 2.625rem;
+  --section-title-letter-spacing: -0.234px;
+  --section-title-max-width: 26rem;
+  
+  /* ==========================================
+   * SPACING (4px base grid with flexibility)
+   * ========================================== */
+  
+  --space-0: 0;
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-7: 1.75rem;   /* 28px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-14: 3.5rem;   /* 56px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+  --space-40: 10rem;    /* 160px */
+  --space-48: 12rem;    /* 192px */
+  
+  /* ==========================================
+   * TEXT SIZES (rem for accessibility)
+   * ========================================== */
+  
+  --text-2xs: 0.6875rem;  /* 11px */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-md: 1.125rem;    /* 18px */
+  --text-lg: 1.25rem;     /* 20px */
+  --text-xl: 1.5rem;      /* 24px */
+  --text-2xl: 2rem;       /* 32px */
+  --text-3xl: 2.5rem;     /* 40px */
+  
+  /* Fluid spacing */
+  --space-section: clamp(4rem, 3rem + 5vw, 11.5rem);
+  --space-hero: clamp(3rem, 2rem + 5vw, 8rem);
+  --space-card-padding: clamp(1.125rem, 2vw, 3rem);
+  --container-padding: clamp(1rem, 5vw, 1.5rem);
+  
+  /* ==========================================
+   * LAYOUT
+   * ========================================== */
+  
+  --container-max: 83.75rem;    /* 1340px - max content width */
+  --container-max-large: 83.75rem; /* 1340px - same for consistency */
+  --container-text: 46.25rem;   /* 740px */
+  --container-narrow: 37.5rem;  /* 600px */
+  
+  /* 
+   * Responsive margin system:
+   * 
+   * ≥ 1440px: Fixed 1340px content, margins absorb extra space
+   *   - At 1440px → 50px margins, 1340px content
+   *   - At 1920px → 290px margins, 1340px content
+   *   - At 2560px → 610px margins, 1340px content
+   * 
+   * < 1440px: Proportional scaling with fluid margins
+   */
+  --page-margin: 2rem;
+  
+  /* Fluid container padding - scales with viewport */
+  --container-padding-fluid: clamp(1rem, 4vw, 1.5rem);
+  
+  /* ==========================================
+   * BORDERS & RADII
+   * ========================================== */
+  
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 0.875rem;  /* 14px */
+  --radius-full: 2.5rem;  /* 40px - pill buttons */
+  --radius-button: 3.125rem; /* 50px */
+  
+  /* ==========================================
+   * SHADOWS
+   * ========================================== */
+  
+  --shadow-sm: 
+    0 0.035rem 0.105rem rgba(0,0,0,0.08),
+    0 0 0.035rem rgba(0,0,0,0.25),
+    0 0.175rem 0.5625rem rgba(0,0,0,0.03);
+    
+  --shadow-md: 
+    0 0.25rem 0.5rem rgba(0,0,0,0.06),
+    0 0.375rem 1.5rem rgba(0,0,0,0.04),
+    0 0 0 0.0625rem rgba(0,0,0,0.06);
+    
+  --shadow-lg: 
+    0 0.5rem 1rem rgba(0,0,0,0.04),
+    0 0.25rem 0.5rem rgba(0,0,0,0.08);
+  
+  /* ==========================================
+   * TRANSITIONS
+   * ========================================== */
+  
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+  
+  /* ==========================================
+   * Z-INDEX SCALE
+   * ========================================== */
+  
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}
+
+/* ============================================
+   RESPONSIVE OVERRIDES
+   ============================================ */
+
+/* Large screens (≥1440px) - Full size, fixed content width */
+@media (min-width: 90em) {
+  :root {
+    --page-margin: 2rem;
+  }
+}
+
+/* Tablet/Desktop (1024px - 1439px) - Intermediate scaling */
+@media (max-width: 89.9375em) {
+  :root {
+    /* Text sizes scale down, 14px minimum */
+    --text-3xl: 2rem;       /* 32px (was 40px) */
+    --text-2xl: 1.75rem;    /* 28px (was 32px) */
+    --text-xl: 1.375rem;    /* 22px (was 24px) */
+    --text-lg: 1.125rem;    /* 18px (was 20px) */
+    --text-md: 1rem;        /* 16px (was 18px) */
+    --text-base: 1rem;      /* 16px - unchanged */
+    --text-sm: 0.875rem;    /* 14px - minimum */
+    --text-xs: 0.875rem;    /* 14px - bumped to minimum */
+    --text-2xs: 0.875rem;   /* 14px - bumped to minimum */
+    
+    /* Spacing scales down proportionally */
+    --space-48: 10rem;      /* 160px (was 192px) */
+    --space-40: 8rem;       /* 128px (was 160px) */
+    --space-32: 6rem;       /* 96px (was 128px) */
+    --space-24: 5rem;       /* 80px (was 96px) */
+    --space-20: 4rem;       /* 64px (was 80px) */
+    --space-16: 3rem;       /* 48px (was 64px) */
+    --space-14: 2.5rem;     /* 40px (was 56px) */
+    --space-12: 2rem;       /* 32px (was 48px) */
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 64em) {
+  :root {
+    --page-margin: 2rem;
+    
+    /* Text sizes scale down further */
+    --text-3xl: 1.75rem;    /* 28px */
+    --text-2xl: 1.5rem;     /* 24px */
+    --text-xl: 1.25rem;     /* 20px */
+    --text-lg: 1.125rem;    /* 18px */
+    --text-md: 1rem;        /* 16px */
+    
+    /* Spacing continues to scale */
+    --space-48: 8rem;       /* 128px */
+    --space-40: 6rem;       /* 96px */
+    --space-32: 5rem;       /* 80px */
+    --space-24: 4rem;       /* 64px */
+    --space-20: 3rem;       /* 48px */
+    --space-16: 2.5rem;     /* 40px */
+    --space-14: 2rem;       /* 32px */
+    --space-12: 1.5rem;     /* 24px */
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 48em) {
+  :root {
+    --page-margin: 2rem;
+    
+    /* Marketing/page titles scale down on small screens */
+    --title-size: 2.25rem;  /* 36px */
+
+    /* Text sizes at mobile minimum */
+    --text-3xl: 1.5rem;     /* 24px */
+    --text-2xl: 1.375rem;   /* 22px */
+    --text-xl: 1.25rem;     /* 20px */
+    --text-lg: 1.125rem;    /* 18px */
+    --text-md: 1rem;        /* 16px */
+    
+    /* Tighter spacing on mobile */
+    --space-48: 6rem;       /* 96px */
+    --space-40: 5rem;       /* 80px */
+    --space-32: 4rem;       /* 64px */
+    --space-24: 3rem;       /* 48px */
+    --space-20: 2.5rem;     /* 40px */
+    --space-16: 2rem;       /* 32px */
+    --space-14: 1.5rem;     /* 24px */
+    --space-12: 1.25rem;    /* 20px */
+    --space-10: 1.5rem;     /* 24px */
+    --space-8: 1.25rem;     /* 20px */
+  }
+}
+
+/* Small mobile (< 480px) */
+@media (max-width: 30em) {
+  :root {
+    --page-margin: 2rem;
+    
+    --title-size: 2rem;     /* 32px */
+    --section-title-size: 2rem;
+    --section-title-line-height: 2.375rem;
+
+    /* Smallest comfortable text */
+    --text-3xl: 1.375rem;   /* 22px */
+    --text-2xl: 1.25rem;    /* 20px */
+    --text-xl: 1.125rem;    /* 18px */
+    --text-lg: 1rem;        /* 16px */
+    --text-md: 1rem;        /* 16px */
+  }
+}
+
+/* ============================================
+   FELDAR BASE STYLES
+   ============================================ */
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Reduce cross-browser typography drift (features/kerning/optical sizing). */
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  font-optical-sizing: auto;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-normal);
+  color: var(--color-primary);
+  background-color: var(--color-surface);
+  min-height: 100vh;
+  /* Don’t let browsers fake bold/italic differently. */
+  font-synthesis: none;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(root) {
+  animation-duration: 180ms;
+  animation-timing-function: ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root) {
+    animation-duration: 1ms;
+  }
+}
+
+/* Images */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Typography reset */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Buttons */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+/* Lists */
+ul, ol {
+  list-style: none;
+}
+
+/* Form elements */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ============================================
+   TYPOGRAPHY STYLES
+   ============================================ */
+
+.display {
+  font-family: var(--font-display);
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-primary);
+}
+
+.h1 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-primary);
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-heading);
+  color: var(--color-secondary);
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-normal);
+  color: var(--color-muted);
+}
+
+.body-sm {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-muted);
+}
+
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding-fluid);
+  padding-right: var(--container-padding-fluid);
+}
+
+/* 
+ * Full-bleed container that respects page margins
+ * Uses fluid margins that scale with viewport
+ */
+.container-bleed {
+  width: 100%;
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+}
+
+/* 
+ * Inner container within bleed - max-width centered content
+ */
+.container-inner {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-text {
+  max-width: var(--container-text);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.section {
+  padding-top: var(--space-section);
+  padding-bottom: var(--space-section);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* The home page's own system, a literary review: its tokens, the twelve-column grid,
+   type roles, controls and the plates every section shares. The sections themselves
+   are in styles/sections/. */
+
+:root {
+    --rv-paper: #faf9f6;
+    --rv-well: #f1efea;
+    --rv-ink: #151412;
+    --rv-ink-lift: #33302c;
+    --rv-soft: #54514c;
+    --rv-rule: #d8d4cc;
+
+    /* The app's own page: white stock, its paragraph grey and its floating shadow. */
+    --rv-page: #ffffff;
+    --rv-page-text: #4d4d4d;
+    --rv-page-shadow:
+        0 4px 16px rgba(8, 8, 8, 0.1),
+        0 1px 4px rgba(8, 8, 8, 0.06),
+        0 0 0 1px rgba(8, 8, 8, 0.04);
+
+    /* The app marks suggested text in #4f9cf6, which is 2.8:1 on white. This is the
+       same hue taken down to 5.2:1 so the marked lines read as text. */
+    --rv-mark: #2466e0;
+
+    /* The four parts, each a deeper cloth of one of Feldar's accent hues so that
+       review-stock type on it clears 7:1. Ochre is too light for that and only ever
+       mounts a still. */
+    --rv-plan: #385d46;
+    --rv-write: #3b5488;
+    --rv-revise: #b77a33;
+    --rv-keep: #74465f;
+
+    --rv-serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    --rv-size-display: clamp(2.25rem, 5.28vw, 4.75rem);
+    --rv-size-section: clamp(2rem, 3.62vw, 3.25rem);
+    --rv-size-title: 1.375rem;
+    --rv-size-lead: clamp(1.125rem, 1.39vw, 1.25rem);
+    --rv-size-text: 1rem;
+    --rv-size-small: 0.875rem;
+
+    --rv-container: 82rem;
+    --rv-gutter: clamp(1rem, 4.44vw, 4rem);
+    --rv-gap: 2rem;
+    --rv-section: clamp(5rem, 10vw, 9rem);
+    --rv-header: 3.25rem;
+    /* Above the page, below the machine-mode toggle. */
+    --rv-z-header: 1000;
+
+    --rv-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --rv-quick: 120ms;
+    /* The app lets accepted text settle into the page's ink over 1.26s. */
+    --rv-settle: 1260ms;
+}
+
+html,
+body {
+    overflow-x: clip;
+}
+
+html {
+    scrollbar-color: var(--rv-soft) var(--rv-paper);
+    scroll-padding-top: calc(var(--rv-header) + var(--space-6));
+}
+
+body {
+    background: var(--rv-paper);
+    color: var(--rv-ink);
+    caret-color: var(--rv-mark);
+}
+
+::selection {
+    background: color-mix(in oklab, var(--rv-mark) 22%, transparent);
+    color: var(--rv-ink);
+}
+
+:focus-visible {
+    outline: 2px solid var(--rv-focus, var(--rv-ink));
+    outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+    min-width: 0;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+}
+
+/* A display set on a class would otherwise bring a hidden element back. */
+[hidden] {
+    display: none !important;
+}
+
+.rv-wrap {
+    width: min(var(--rv-container), 100% - 2 * var(--rv-gutter));
+    margin-inline: auto;
+}
+
+.rv-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--rv-gap);
+}
+
+.rv-h2,
+.rv-h3 {
+    font-family: var(--rv-serif);
+    font-weight: var(--font-weight-regular);
+}
+
+.rv-h2 {
+    font-size: var(--rv-size-section);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+}
+
+.rv-h3 {
+    font-size: var(--rv-size-title);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+}
+
+.rv-lead {
+    font-size: var(--rv-size-lead);
+    line-height: 1.45;
+    text-wrap: pretty;
+}
+
+.rv-text {
+    font-size: var(--rv-size-text);
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.rv-link {
+    font-size: var(--rv-size-text);
+    font-weight: var(--font-weight-medium);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.rv-link:hover {
+    text-decoration-thickness: 2px;
+}
+
+.rv-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 3rem;
+    padding: 0 var(--space-6);
+    border-radius: var(--radius-button);
+    background: var(--rv-ink);
+    color: var(--rv-paper);
+    font-size: var(--rv-size-text);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+        background-color var(--rv-quick) ease-out,
+        transform var(--rv-quick) ease-out;
+}
+
+.rv-button:hover {
+    background: var(--rv-ink-lift);
+}
+
+.rv-button:active {
+    transform: translateY(1px);
+}
+
+/* The small button keeps its size on screen and still takes a 44px target. */
+.rv-button--small {
+    position: relative;
+    min-height: 2.125rem;
+    padding-inline: var(--space-3);
+    font-size: 0.9375rem;
+}
+
+.rv-button--small::after {
+    content: "";
+    position: absolute;
+    inset: -0.3125rem 0;
+}
+
+.rv-button--quiet {
+    background: transparent;
+    color: var(--rv-ink);
+    box-shadow: inset 0 0 0 1px var(--rv-ink);
+}
+
+.rv-button--quiet:hover {
+    background: var(--rv-well);
+}
+
+.rv-button--paper {
+    background: var(--rv-paper);
+    color: var(--rv-ink);
+}
+
+.rv-button--paper:hover {
+    background: var(--rv-rule);
+}
+
+/* Each part of the page carries one cloth, from the contents list to its plates. */
+.rv-part--plan {
+    --rv-part: var(--rv-plan);
+}
+
+.rv-part--write {
+    --rv-part: var(--rv-write);
+}
+
+.rv-part--revise {
+    --rv-part: var(--rv-revise);
+}
+
+.rv-part--keep {
+    --rv-part: var(--rv-keep);
+}
+
+/* A plate: one still of the app mounted on a field of its part's cloth. */
+.rv-plate {
+    padding: var(--space-10);
+    background: var(--rv-part);
+}
+
+/* A shot shows one region of a 1200px-wide still. Set the region inline in the still's
+   own pixels: --x and --y for its top left corner, --w and --h for its size, and --r
+   for the corner radius of a floating card when the region is exactly that card. */
+.rv-shot {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: var(--w) / var(--h);
+    border-radius: calc(var(--r, 0) / var(--w) * 100%) / calc(var(--r, 0) / var(--h) * 100%);
+    background: var(--rv-page);
+}
+
+.rv-shot img {
+    position: absolute;
+    top: calc(var(--y) / var(--h) * -100%);
+    left: calc(var(--x) / var(--w) * -100%);
+    width: calc(1200 / var(--w) * 100%);
+    max-width: none;
+    height: auto;
+}
+
+.rv-note .rv-text {
+    margin-top: var(--space-2);
+    color: var(--rv-soft);
+}
+
+@media (max-width: 40rem) {
+    :root {
+        --rv-gap: 1rem;
+    }
+
+    .rv-plate {
+        padding: var(--space-4);
+    }
+
+    /* On a phone a shot may show a tighter region, set inline as --mx, --my, --mw
+       and --mh, so the app's own type stays readable. */
+    .rv-shot {
+        aspect-ratio: var(--mw, var(--w)) / var(--mh, var(--h));
+    }
+
+    .rv-shot img {
+        top: calc(var(--my, var(--y)) / var(--mh, var(--h)) * -100%);
+        left: calc(var(--mx, var(--x)) / var(--mw, var(--w)) * -100%);
+        width: calc(1200 / var(--mw, var(--w)) * 100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* The masthead. The home page does not load components/nav.css. These are the same
+   hooks scripts/components/navbar.ts drives, drawn in the review's own vocabulary so
+   the edges, the rule and the controls match the page beneath. */
+
+/* The first stop for a keyboard. It shows only while it has focus. */
+.skip-link {
+    position: fixed;
+    top: var(--space-2);
+    left: var(--space-2);
+    z-index: calc(var(--rv-z-header) + 1);
+    padding: var(--space-2) var(--space-4);
+    background: var(--rv-ink);
+    color: var(--rv-paper);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: none;
+}
+
+.header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: var(--rv-z-header);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--rv-header);
+    border-bottom: 3px solid var(--rv-ink);
+    background: var(--rv-paper);
+    view-transition-name: feldar-header;
+}
+
+.nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(var(--rv-container), 100% - 2 * var(--rv-gutter));
+    height: 100%;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    width: 3.6875rem;
+    min-height: 2.75rem;
+}
+
+.nav-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.nav-links {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    transform: translate(-50%, -50%);
+}
+
+.nav-link {
+    padding-block: var(--space-2);
+    font-size: var(--rv-size-small);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+    white-space: nowrap;
+    transition: color var(--rv-quick) ease-out;
+}
+
+.nav-link:hover,
+.nav-mobile-link:hover {
+    color: var(--rv-soft);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.nav-mobile-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+}
+
+.nav-mobile {
+    position: fixed;
+    inset: var(--rv-header) 0 0;
+    z-index: calc(var(--rv-z-header) - 1);
+    display: none;
+    flex-direction: column;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--rv-gutter);
+    overflow-y: auto;
+    background: var(--rv-paper);
+}
+
+.nav-mobile.is-open {
+    display: flex;
+}
+
+.nav-mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.nav-mobile-link {
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--rv-rule);
+    font-family: var(--rv-serif);
+    font-size: 1.5rem;
+    line-height: 1.25;
+}
+
+.nav-mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: auto;
+}
+
+/* The page behind an open menu stays where it is. */
+body.nav-open {
+    overflow-y: hidden;
+}
+
+@media (max-width: 64em) {
+    .nav-links,
+    .nav-actions .rv-button--quiet {
+        display: none;
+    }
+
+    .nav-mobile-toggle {
+        display: flex;
+    }
+}
+
+/* The front page: the headline across the full width, then three ruled columns holding
+   the offer, a live chapter and the contents list. */
+
+.hero {
+    padding-top: var(--rv-header);
+}
+
+.hero-title {
+    padding-block: var(--space-10) var(--space-8);
+    border-bottom: 1px solid var(--rv-rule);
+    font-family: var(--rv-serif);
+    font-size: var(--rv-size-display);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+}
+
+.hero-front {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-10) var(--rv-gap);
+    align-items: start;
+    padding-block: var(--space-8) var(--space-10);
+}
+
+.hero-offer {
+    grid-column: span 3;
+}
+
+.hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
+}
+
+/* The Mac app is no use on a phone or tablet. */
+@media (hover: none) and (pointer: coarse) {
+    .hero-action--mac {
+        display: none;
+    }
+}
+
+.hero-terms {
+    margin-top: var(--space-5);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    color: var(--rv-soft);
+    text-wrap: balance;
+}
+
+/* The plate: one page of the sample book with a suggestion waiting, and the menu
+   hanging under its last line as it does in the app. Every version of the suggestion
+   shares one grid cell and holds room for the menu, so the page is always as tall as
+   the longest. A choice changes the text in place and nothing around it moves. */
+.hero-plate {
+    /* The menu's height as the sum of its parts: three rows, the gaps and padding
+       around them, and the hint. */
+    --plate-row: 2.5rem;
+    --plate-hint: 2.5rem;
+    --plate-menu: calc(3 * var(--plate-row) + 4 * var(--space-1) + var(--plate-hint));
+    grid-column: span 6;
+}
+
+.plate-page {
+    padding: var(--space-7) var(--space-10) var(--space-6);
+    border: 1px solid var(--rv-rule);
+    background: var(--rv-page);
+    color: var(--rv-page-text);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+.plate-title {
+    margin-bottom: var(--space-4);
+    color: var(--rv-ink);
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.2;
+    letter-spacing: -0.022em;
+}
+
+.plate-suggestions {
+    display: grid;
+    margin-top: var(--space-4);
+}
+
+.plate-variant {
+    position: relative;
+    grid-area: 1 / 1;
+    align-self: start;
+    padding-bottom: calc(var(--plate-menu) + var(--space-4));
+    visibility: hidden;
+}
+
+.plate-variant.is-shown {
+    visibility: visible;
+}
+
+.plate-suggestion {
+    color: var(--rv-mark);
+}
+
+.plate-variant.is-shown .plate-suggestion {
+    animation: plate-arrive 600ms var(--rv-ease-out) backwards;
+}
+
+/* Only the settling is slow. Starting again puts the mark back at once. */
+.hero-plate[data-state="accepted"] .plate-suggestion {
+    color: inherit;
+    transition: color var(--rv-settle) var(--rv-ease-out);
+}
+
+.hero-plate[data-state="dismissed"] .plate-suggestion {
+    visibility: hidden;
+}
+
+.plate-menu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 13.5rem;
+    height: var(--plate-menu);
+    padding: var(--space-1);
+    border-radius: 0.75rem;
+    background: var(--rv-page);
+    box-shadow: var(--rv-page-shadow);
+    color: var(--rv-ink);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+}
+
+.hero-plate:not([data-state="pending"]) .plate-menu {
+    visibility: hidden;
+}
+
+.plate-choices {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.plate-choice {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    height: var(--plate-row);
+    padding: 0 var(--space-2);
+    border-radius: 0.5rem;
+    text-align: left;
+    transition: background-color var(--rv-quick) ease-out;
+}
+
+.plate-choice:hover {
+    background: var(--rv-well);
+}
+
+.plate-choice:active {
+    background: var(--rv-rule);
+}
+
+.plate-hint {
+    display: flex;
+    align-items: center;
+    height: var(--plate-hint);
+    padding-inline: var(--space-2);
+    border-top: 1px solid var(--rv-well);
+    color: var(--rv-soft);
+}
+
+.plate-status {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: 1.5rem;
+    margin-top: var(--space-3);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    color: var(--rv-soft);
+}
+
+.plate-reset {
+    flex-shrink: 0;
+    color: var(--rv-ink);
+    font-weight: var(--font-weight-medium);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.plate-reset:hover {
+    text-decoration-thickness: 2px;
+}
+
+@keyframes plate-arrive {
+    from {
+        opacity: 0;
+    }
+}
+
+.hero-contents {
+    grid-column: span 3;
+}
+
+.hero-contents-item {
+    border-top: 3px solid var(--rv-part);
+}
+
+.hero-contents-link {
+    display: block;
+    padding-block: var(--space-3) var(--space-6);
+}
+
+.hero-contents-title {
+    display: block;
+    font-family: var(--rv-serif);
+    font-size: var(--rv-size-title);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+}
+
+.hero-contents-link:hover .hero-contents-title {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.hero-contents-names {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    color: var(--rv-soft);
+}
+
+/* With all three columns the front page is the first screen and only the first screen.
+   The cap keeps a tall window from leaving the page empty under it. A hairline stands
+   in each gutter, as column rules do on a printed front page. */
+@media (min-width: 73.8125rem) {
+    .hero {
+        min-height: min(100svh, 60rem);
+    }
+
+    .hero-plate,
+    .hero-contents {
+        position: relative;
+    }
+
+    .hero-plate::before,
+    .hero-contents::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(var(--rv-gap) / -2);
+        width: 1px;
+        background: var(--rv-rule);
+    }
+}
+
+@media (max-width: 73.75rem) {
+    /* In a narrower plate the line under it can wrap, so it always keeps two lines of
+       room and the plate stays one height in every state. */
+    .plate-status {
+        min-height: 2.9em;
+    }
+
+    .hero-offer {
+        grid-column: span 5;
+    }
+
+    .hero-plate {
+        grid-column: span 7;
+    }
+
+    .hero-contents {
+        grid-column: 1 / -1;
+    }
+
+    .hero-contents-list {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        column-gap: var(--rv-gap);
+    }
+}
+
+@media (max-width: 56.25rem) {
+    .hero-contents-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* On a phone the chapter comes straight after the headline, so its three choices are in
+   the first screen. The masthead already carries the main action. */
+@media (max-width: 45rem) {
+    .hero-front {
+        row-gap: var(--space-5);
+    }
+
+    .hero-offer {
+        display: contents;
+    }
+
+    .hero-offer > *,
+    .hero-plate {
+        grid-column: 1 / -1;
+    }
+
+    .hero-plate {
+        order: -1;
+    }
+
+    .hero-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 0;
+    }
+
+    /* Slightly tighter, so both actions share one row. */
+    .hero-actions .rv-button {
+        padding-inline: var(--space-4);
+        font-size: 0.9375rem;
+    }
+
+    .hero-terms {
+        margin-top: 0;
+    }
+
+    .hero-contents-list {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .plate-page {
+        padding-inline: var(--space-5);
+    }
+}
+
+/* A finger needs a taller row than a pointer, and has no escape key to be told about. */
+@media (pointer: coarse) {
+    .hero-plate {
+        --plate-row: 2.75rem;
+        --plate-hint: 0rem;
+    }
+
+    .plate-hint {
+        display: none;
+    }
+}
+
+/* What Feldar will not do, under the front page. The heading takes the first three
+   columns, as the offer does above it, and the four statements are ruled beside it. */
+
+.limits {
+    padding-top: var(--rv-section);
+}
+
+.limits-title {
+    grid-column: span 3;
+}
+
+.limits-list {
+    display: grid;
+    grid-column: span 9;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--rv-gap);
+}
+
+.limits-item {
+    padding-block: var(--space-5) var(--space-10);
+    border-top: 1px solid var(--rv-ink);
+}
+
+.limits-item .rv-text {
+    max-width: 34ch;
+    margin-top: var(--space-2);
+    color: var(--rv-soft);
+}
+
+.limits-item a {
+    color: var(--rv-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.limits-item a:hover {
+    text-decoration-thickness: 2px;
+}
+
+@media (max-width: 62.5rem) {
+    .limits-title,
+    .limits-list {
+        grid-column: 1 / -1;
+    }
+
+    .limits-title {
+        margin-bottom: var(--space-10);
+    }
+}
+
+@media (max-width: 40rem) {
+    .limits-list {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .limits-item {
+        padding-bottom: var(--space-6);
+    }
+}
+
+
+
+:root {
+    /* The window's own measures, taken from the app at about three quarters of its size. */
+    --eh-height: 33.5rem;
+    --eh-side: 12.5rem;
+    --eh-panel: 20rem;
+    --eh-bar: 2.75rem;
+    --eh-row: 2.25rem;
+    --eh-radius: 0.75rem;
+    --eh-text: 1.0625rem;
+    --eh-small: 0.875rem;
+}
+
+/* The headline keeps its size and gives up some of its air, so the window starts higher. */
+.hero-title {
+    padding-block: var(--space-8) var(--space-6);
+}
+
+.eh-offer {
+    align-items: center;
+    row-gap: var(--space-5);
+    padding-block: var(--space-4);
+}
+
+.eh-lead {
+    grid-column: span 6;
+}
+
+.eh-start {
+    display: flex;
+    grid-column: 8 / span 5;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-3) var(--space-6);
+}
+
+.eh-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.eh-start .hero-terms {
+    margin-top: 0;
+}
+
+/* The desk runs the full width of the page, as the part bands do. Its ground is a ruled
+   manuscript page: the wash is laid here and the canvas over it carries the rules, the
+   hand and the marks. Text never stands on the ground, only on the stage. */
+.eh-desk {
+    position: relative;
+    padding-block: var(--space-6) var(--space-20);
+    border-block: 1px solid var(--rv-rule);
+    background:
+        radial-gradient(60% 80% at 4% 100%, color-mix(in oklab, var(--rv-ink) 7%, transparent), transparent 70%),
+        radial-gradient(45% 70% at 98% 8%, color-mix(in oklab, var(--rv-ink) 5%, transparent), transparent 70%),
+        var(--rv-well);
+}
+
+.eh-ground {
+    --ground-rule: color-mix(in oklab, var(--rv-ink) 9%, var(--rv-well));
+    --ground-hand: color-mix(in oklab, var(--rv-ink) 34%, var(--rv-well));
+    --ground-mark: color-mix(in oklab, var(--rv-mark) 72%, var(--rv-well));
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.eh-stage {
+    position: relative;
+    grid-column: 2 / span 10;
+    border: 1px solid var(--rv-rule);
+    background: var(--rv-paper);
+}
+
+/* The parts strip: what there is to try, each under a rule in its part's cloth. */
+.eh-parts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.eh-part {
+    padding: var(--space-3) var(--space-5) var(--space-4);
+    border-top: 3px solid var(--rv-part);
+    border-bottom: 1px solid var(--rv-rule);
+    color: var(--rv-soft);
+    text-align: left;
+    transition:
+        background-color var(--rv-quick) ease-out,
+        color var(--rv-quick) ease-out;
+}
+
+.eh-part + .eh-part {
+    border-left: 1px solid var(--rv-rule);
+}
+
+.eh-part:hover {
+    background: var(--rv-well);
+    color: var(--rv-ink);
+}
+
+.eh-part:focus-visible {
+    outline-offset: -2px;
+}
+
+.eh-part[aria-selected="true"] {
+    border-bottom-color: var(--rv-page);
+    background: var(--rv-page);
+    color: var(--rv-ink);
+}
+
+.eh-part-title {
+    font-family: var(--rv-serif);
+    font-size: 1.1875rem;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+}
+
+/* The window: the app's own page, drawn with the app's measures and its white stock. */
+.eh-window {
+    display: grid;
+    grid-template-columns: var(--eh-side) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    height: var(--eh-height);
+    background: var(--rv-page);
+    color: var(--rv-ink);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+}
+
+.eh-side {
+    padding: var(--space-4) var(--space-2);
+    border-right: 1px solid var(--rv-rule);
+    background: var(--rv-paper);
+}
+
+.eh-side-logo {
+    margin: var(--space-1) var(--space-3) var(--space-4);
+}
+
+.eh-side-item {
+    padding: var(--space-1) var(--space-3);
+    border-radius: 0.5rem;
+    line-height: 1.6;
+}
+
+.eh-side-item.is-current {
+    background: var(--rv-well);
+}
+
+.eh-side-book {
+    padding: var(--space-5) var(--space-3) var(--space-2);
+    color: var(--rv-soft);
+}
+
+.eh-main {
+    display: grid;
+    grid-template-rows: var(--eh-bar) minmax(0, 1fr);
+    min-width: 0;
+    min-height: 0;
+}
+
+.eh-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-inline: var(--space-5);
+    border-bottom: 1px solid var(--rv-rule);
+    color: var(--rv-soft);
+}
+
+.eh-crumb-page {
+    color: var(--rv-ink);
+}
+
+.eh-count {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.eh-view {
+    min-height: 0;
+}
+
+.eh-view--split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--eh-panel);
+    grid-template-rows: minmax(0, 1fr);
+}
+
+.eh-page {
+    height: 100%;
+    padding: var(--space-5) var(--space-10) var(--space-8);
+    overflow-y: auto;
+    color: var(--rv-page-text);
+    font-size: var(--eh-text);
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    scrollbar-width: thin;
+}
+
+.eh-page > p,
+.eh-draft > p,
+.eh-select {
+    max-width: 30rem;
+}
+
+.eh-page p + p,
+.eh-page p + .eh-variants,
+.eh-page p + .eh-select,
+.eh-select + p {
+    margin-top: var(--space-4);
+}
+
+.eh-page-title {
+    color: var(--rv-ink);
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.2;
+    letter-spacing: -0.022em;
+}
+
+.eh-placeholder {
+    color: var(--rv-soft);
+}
+
+/* Continue from here. Every version of the suggestion shares one grid cell and holds
+   room for the menu, so a choice changes the text in place and the page keeps its height. */
+.eh-variants {
+    --eh-menu-height: calc(3 * var(--eh-row) + 4 * var(--space-1) + var(--eh-row));
+    display: grid;
+    max-width: 30rem;
+}
+
+.eh-variant {
+    position: relative;
+    grid-area: 1 / 1;
+    align-self: start;
+    padding-bottom: calc(var(--eh-menu-height) + var(--space-3));
+    visibility: hidden;
+}
+
+.eh-variant.is-shown {
+    visibility: visible;
+}
+
+.eh-suggestion {
+    color: var(--rv-mark);
+}
+
+.eh-variant.is-shown .eh-suggestion {
+    animation: eh-arrive 600ms var(--rv-ease-out) backwards;
+}
+
+/* Only the settling is slow. Starting again puts the mark back at once. */
+[data-state="accepted"] .eh-suggestion {
+    color: inherit;
+    transition: color var(--rv-settle) var(--rv-ease-out);
+}
+
+[data-state="dismissed"] .eh-suggestion,
+[data-view="continue"]:not([data-state="pending"]) .eh-menu {
+    visibility: hidden;
+}
+
+/* The app's floating menu, used at the caret and under Define. */
+.eh-menu {
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    width: 13.5rem;
+    padding: var(--space-1);
+    border-radius: var(--eh-radius);
+    background: var(--rv-page);
+    box-shadow: var(--rv-page-shadow);
+    color: var(--rv-ink);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    letter-spacing: 0;
+}
+
+.eh-menu--caret {
+    bottom: 0;
+}
+
+.eh-menu--define {
+    top: calc(var(--eh-row) + var(--space-2));
+    left: 7.5rem;
+}
+
+.eh-choices {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.eh-choice {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    height: var(--eh-row);
+    padding-inline: var(--space-2);
+    border-radius: 0.5rem;
+    text-align: left;
+    transition: background-color var(--rv-quick) ease-out;
+}
+
+button.eh-choice:hover {
+    background: var(--rv-well);
+}
+
+button.eh-choice:active {
+    background: var(--rv-rule);
+}
+
+/* A rewrite the app offers that this sample has no prepared answer for. */
+.eh-choice--away {
+    color: var(--rv-soft);
+}
+
+.eh-menu-hint {
+    display: flex;
+    align-items: center;
+    min-height: var(--eh-row);
+    padding: var(--space-1) var(--space-2);
+    border-top: 1px solid var(--rv-well);
+    color: var(--rv-soft);
+    font-size: var(--eh-small);
+}
+
+/* Plan scenes: the Scenes panel beside the page. */
+.eh-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: var(--space-4) var(--space-5) 0;
+    border-left: 1px solid var(--rv-rule);
+}
+
+.eh-panel-title {
+    font-weight: var(--font-weight-medium);
+}
+
+.eh-panel-empty {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding-bottom: var(--space-10);
+    color: var(--rv-soft);
+    text-align: center;
+    text-wrap: balance;
+}
+
+.eh-panel-empty-title,
+.eh-scene-name {
+    font-family: var(--rv-serif);
+    color: var(--rv-ink);
+}
+
+.eh-panel-empty-title {
+    font-size: 1.25rem;
+}
+
+.eh-app-button {
+    display: inline-flex;
+    align-items: center;
+    height: var(--eh-row);
+    padding-inline: var(--space-4);
+    border-radius: var(--eh-radius);
+    background: var(--rv-ink);
+    color: var(--rv-page);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+    transition: background-color var(--rv-quick) ease-out;
+}
+
+.eh-app-button:hover {
+    background: var(--rv-ink-lift);
+}
+
+.eh-app-button:active {
+    transform: translateY(1px);
+}
+
+.eh-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    align-self: center;
+    margin-block: auto;
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--eh-radius);
+    box-shadow: var(--rv-page-shadow);
+    color: var(--rv-soft);
+}
+
+/* A step's mark is a ring while it waits and fills once the step is done. */
+.eh-steps li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.eh-steps li::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.eh-steps li[data-step] {
+    color: var(--rv-ink);
+}
+
+.eh-steps li[data-step="done"]::before {
+    background: currentColor;
+}
+
+.eh-plan {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    margin-top: var(--space-3);
+}
+
+.eh-panel-label {
+    margin-top: var(--space-4);
+    color: var(--rv-soft);
+    font-size: var(--eh-small);
+}
+
+.eh-scenes {
+    flex: 1;
+    min-height: 0;
+    margin-top: var(--space-2);
+    padding-right: var(--space-2);
+    overflow-y: auto;
+    counter-reset: scene;
+    scrollbar-width: thin;
+}
+
+.eh-scenes li {
+    position: relative;
+    padding: 0 0 var(--space-5) var(--space-8);
+    counter-increment: scene;
+}
+
+.eh-scenes li::before {
+    content: counter(scene);
+    position: absolute;
+    left: 0;
+    font-family: var(--rv-serif);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+}
+
+.eh-scene-name {
+    font-size: 1.0625rem;
+    line-height: 1.5;
+}
+
+.eh-panel-foot {
+    display: flex;
+    justify-content: flex-end;
+    padding-block: var(--space-3);
+    border-top: 1px solid var(--rv-well);
+}
+
+/* Rewrite a passage: the selection, the menu over it and the card beside it. */
+.eh-select {
+    position: relative;
+    padding-top: calc(var(--eh-row) + var(--space-2));
+}
+
+.eh-bubble {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    height: var(--eh-row);
+    padding-inline: var(--space-1);
+    border-radius: var(--eh-radius);
+    background: var(--rv-ink);
+    color: color-mix(in oklab, var(--rv-page) 62%, var(--rv-ink));
+    font-size: 0.9375rem;
+    letter-spacing: 0;
+}
+
+.eh-bubble-item {
+    display: flex;
+    align-items: center;
+    height: calc(var(--eh-row) - var(--space-2));
+    padding-inline: var(--space-3);
+    border-radius: 0.5rem;
+}
+
+.eh-bubble-item--live {
+    --rv-focus: var(--rv-page);
+    color: var(--rv-page);
+    font-weight: var(--font-weight-medium);
+}
+
+.eh-bubble-item--live:hover,
+.eh-bubble-item--live[aria-expanded="true"] {
+    background: var(--rv-ink-lift);
+}
+
+.eh-passage {
+    border-radius: 0.25rem;
+}
+
+[data-state="selected"] .eh-passage,
+[data-state="rewriting"] .eh-passage,
+[data-state="rewritten"] .eh-passage {
+    background: var(--rv-well);
+    box-shadow: 0 0 0 0.25rem var(--rv-well);
+}
+
+.eh-passage mark,
+.eh-card-text mark {
+    background: none;
+    color: var(--rv-mark);
+}
+
+[data-state="applied"] .eh-passage mark {
+    color: inherit;
+    transition: color var(--rv-settle) var(--rv-ease-out);
+}
+
+.eh-card {
+    position: absolute;
+    top: calc(var(--eh-row) + var(--space-2));
+    left: calc(100% + var(--space-6));
+    z-index: 1;
+    width: 20rem;
+    padding: 0 var(--space-1) var(--space-1);
+    border-radius: 1.25rem;
+    background: var(--rv-well);
+    box-shadow: var(--rv-page-shadow);
+    color: var(--rv-ink);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    letter-spacing: 0;
+}
+
+.eh-card-bar {
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    padding-inline: var(--space-3);
+    color: var(--rv-page-text);
+    font-weight: var(--font-weight-medium);
+}
+
+.eh-card-body {
+    padding: var(--space-3) var(--space-4) var(--space-4);
+    border-radius: 1rem;
+    background: var(--rv-page);
+    box-shadow: var(--rv-page-shadow);
+}
+
+.eh-card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-4);
+}
+
+.eh-card-keep {
+    height: var(--eh-row);
+    padding-inline: var(--space-4);
+    border-radius: var(--eh-radius);
+    background: var(--rv-well);
+    color: var(--rv-page-text);
+    font-weight: var(--font-weight-medium);
+    transition: background-color var(--rv-quick) ease-out;
+}
+
+.eh-card-keep:hover {
+    background: var(--rv-rule);
+}
+
+/* Writing record. */
+.eh-record {
+    max-width: 36rem;
+    padding: var(--space-10);
+}
+
+.eh-record-book {
+    color: var(--rv-soft);
+}
+
+.eh-record-headline {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-2);
+    font-size: 1.375rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    font-variant-numeric: tabular-nums;
+}
+
+.eh-record-headline > span + span {
+    color: var(--rv-soft);
+    font-weight: var(--font-weight-regular);
+}
+
+.eh-record-bar {
+    display: flex;
+    gap: 2px;
+    height: 0.75rem;
+    margin-top: var(--space-6);
+}
+
+.eh-record-part {
+    min-width: 2px;
+    transition: flex-grow var(--rv-settle) var(--rv-ease-out);
+}
+
+.eh-record-part--typed,
+.eh-record-key--typed::before {
+    background: var(--rv-ink);
+}
+
+.eh-record-part--feldar,
+.eh-record-key--feldar::before {
+    background: var(--rv-mark);
+}
+
+.eh-record-part--pasted,
+.eh-record-key--pasted::before {
+    background: var(--rv-soft);
+}
+
+.eh-record-keys {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    margin-top: var(--space-4);
+    color: var(--rv-soft);
+    font-variant-numeric: tabular-nums;
+}
+
+.eh-record-key {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.eh-record-key::before {
+    content: "";
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 50%;
+}
+
+.eh-record-key b {
+    color: var(--rv-ink);
+    font-weight: var(--font-weight-medium);
+}
+
+.eh-record-visit {
+    max-width: 30rem;
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--rv-well);
+    color: var(--rv-page-text);
+    text-wrap: pretty;
+}
+
+/* The foot of the stage: what just happened, a way back, and what the sample is. */
+.eh-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-5);
+    padding: var(--space-3) var(--space-5);
+    border-top: 1px solid var(--rv-rule);
+    font-size: var(--eh-small);
+    line-height: 1.45;
+}
+
+.eh-status {
+    color: var(--rv-ink);
+}
+
+.eh-reset {
+    font-weight: var(--font-weight-medium);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.eh-reset:hover {
+    text-decoration-thickness: 2px;
+}
+
+.eh-sample {
+    margin-left: auto;
+    color: var(--rv-soft);
+}
+
+@keyframes eh-arrive {
+    from {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 73.75rem) {
+    .eh-stage {
+        grid-column: 1 / -1;
+    }
+
+    .eh-lead,
+    .eh-start {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+    }
+}
+
+/* Below this width there is no room for the app's sidebar, and the rewrite card sits
+   under its passage instead of beside it. */
+@media (max-width: 62.5rem) {
+    :root {
+        --eh-panel: 17rem;
+    }
+
+    .eh-window {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .eh-side {
+        display: none;
+    }
+
+    .eh-card {
+        position: static;
+        width: auto;
+        max-width: 24rem;
+        margin-top: var(--space-4);
+    }
+}
+
+@media (max-width: 40rem) {
+    :root {
+        --eh-height: 31rem;
+        --eh-text: 1rem;
+    }
+
+    .eh-desk {
+        padding-block: var(--space-5) var(--space-10);
+    }
+
+    .eh-parts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .eh-part {
+        padding: var(--space-2) var(--space-3) var(--space-3);
+    }
+
+    .eh-part:nth-child(odd) {
+        border-left: 0;
+    }
+
+    .eh-part-title {
+        font-size: 1.0625rem;
+    }
+
+    /* A phone has one scroll, the page's own. The window grows with what is in it, and
+       the Scenes panel follows the chapter instead of standing beside it. */
+    .eh-window {
+        height: auto;
+        min-height: var(--eh-height);
+    }
+
+    .eh-view--split {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .eh-panel {
+        min-height: 17rem;
+        border-top: 1px solid var(--rv-rule);
+        border-left: 0;
+    }
+
+    .eh-page {
+        height: auto;
+        padding: var(--space-5) var(--space-4) var(--space-6);
+        overflow-y: visible;
+    }
+
+    .eh-scenes {
+        overflow-y: visible;
+    }
+
+    .eh-record {
+        padding: var(--space-5) var(--space-4);
+    }
+
+    .eh-menu--define {
+        left: 0;
+    }
+
+    .eh-sample {
+        margin-left: 0;
+    }
+}
+
+/* A touch screen gets rows tall enough to press. */
+@media (pointer: coarse) {
+    :root {
+        --eh-row: 2.75rem;
+    }
+}
