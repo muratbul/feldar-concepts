@@ -6,9 +6,9 @@
         <meta name="robots" content="noindex,nofollow" />
         <meta
             name="description"
-            content="A prototype of the Feldar home page hero as a working sample of the editor, on a manuscript page that writes itself in."
+            content="A prototype of the Feldar home page with a working sample of the editor as its hero, and the features under it shown as pieces of the app."
         />
-        <title>Working editor hero - Feldar</title>
+        <title>Home page with working editor - Feldar</title>
 
         <link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png" />
         <link rel="preload" href="../../assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
@@ -61,7 +61,7 @@
                 </div>
 
                 <!-- The desk: a manuscript page that writes itself in, with the sample editor on it -->
-                <div class="eh-desk" data-editor-hero data-part="continue" data-nosnippet>
+                <div class="eh-desk" id="eh-desk" data-editor-hero data-part="continue" data-nosnippet>
                     <canvas class="eh-ground" data-ink-ground aria-hidden="true"></canvas>
                     <div class="rv-wrap">
                         <div class="eh-stage" data-ink-clear>
@@ -424,6 +424,729 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Limits Section -->
+            <section class="limits" aria-labelledby="limits-title">
+                <div class="rv-wrap rv-grid">
+                    <h2 class="rv-h2 limits-title" id="limits-title">What Feldar will not do</h2>
+                    <div class="limits-list">
+                        <div class="limits-item">
+                            <h3 class="rv-h3">It does not write unless you ask.</h3>
+                            <p class="rv-text">Every suggestion begins with a request from you, and what Feldar writes is marked so you can review it.</p>
+                        </div>
+                        <div class="limits-item">
+                            <h3 class="rv-h3">It does not train AI on your writing.</h3>
+                            <p class="rv-text">You own what you write. The details are in the <a href="/privacy">privacy policy</a>.</p>
+                        </div>
+                        <div class="limits-item">
+                            <h3 class="rv-h3">It does not need the AI to work.</h3>
+                            <p class="rv-text">You can write, plan and organize a whole book without it, and none of that uses credits.</p>
+                        </div>
+                        <div class="limits-item">
+                            <h3 class="rv-h3">It does not ask for a card to start.</h3>
+                            <p class="rv-text">The Starter plan is free.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Plan: the ruled grid -->
+            <section class="part rv-part--plan" id="plan" aria-labelledby="plan-title">
+                <div class="rv-wrap">
+                    <div class="rv-grid part-head">
+                        <h2 class="rv-h2" id="plan-title">Plan a chapter as scenes</h2>
+                        <div class="part-head-side">
+                            <p class="rv-lead">Outline the chapter yourself or have Feldar suggest scenes, with your characters and places on linked cards beside it.</p>
+                            <a class="rv-link part-more" href="#eh-desk" data-try="plan">Try Generate scenes above</a>
+                        </div>
+                    </div>
+                    <div class="sc-tier">
+                        <div class="sc-cell sc-cell--large">
+                            <div class="sc-plate" aria-hidden="true" data-nosnippet>
+                                <div class="app-piece app-piece--scenes">
+                                    <div class="app-scenes">
+                                        <div class="app-scenes-head">
+                                            <p class="app-scenes-title">Scenes</p>
+                                            <span class="app-iconbox"><svg class="app-icon"><use href="app-icons.svg#close" /></svg></span>
+                                        </div>
+                                        <p class="app-scenes-status">Generated 5 scenes successfully!</p>
+                                        <p class="app-scenes-label">PAGE 4</p>
+                                        <ol class="app-scenes-list">
+                                            <li class="app-scene">
+                                                <span class="app-scene-number">1</span>
+                                                <div>
+                                                    <p class="app-scene-name">Daniel will not say</p>
+                                                    <p class="app-scene-text">In the cider house Daniel will not tell Nell who M.P. is. He says she should ask his mother, then goes out to light the smudge pots before she can answer.</p>
+                                                </div>
+                                            </li>
+                                            <li class="app-scene">
+                                                <span class="app-scene-number">2</span>
+                                                <div>
+                                                    <p class="app-scene-name">Fires in the low rows</p>
+                                                    <p class="app-scene-text">They work through the night lighting fires between the Foxwhelps. In the smoke and the cold he starts to tell her about the winter of 1932, and stops.</p>
+                                                </div>
+                                            </li>
+                                            <li class="app-scene">
+                                                <span class="app-scene-number">3</span>
+                                                <div>
+                                                    <p class="app-scene-name">Agnes at the gate</p>
+                                                    <p class="app-scene-text">At first light Nell walks down to Pryce's Gate. Agnes is already there in her good coat, as if she has been expecting this visit for thirty years.</p>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="rv-h3">Generate scenes</h3>
+                            <p class="rv-text">Feldar suggests scenes for an empty chapter from your story so far, and you edit them as you would your own.</p>
+                            <a
+                                class="rv-button rv-button--small rv-button--quiet rv-play"
+                                href="../../assets/demo/loop-outline-scenes.mp4"
+                                data-recording
+                                data-focus="100%"
+                                data-title="Generate scenes planning five scenes for an empty chapter"
+                                >Watch Generate scenes</a
+                            >
+                        </div>
+                        <div class="sc-cell sc-cell--large">
+                            <div class="sc-plate" aria-hidden="true" data-nosnippet>
+                                <div class="app-piece app-piece--board">
+                                    <div class="app-board">
+                                        <svg class="app-board-lines" width="1280" height="800" viewBox="0 0 1280 800">
+                                            <line class="app-board-line" x1="631" y1="131" x2="1051" y2="131" />
+                                            <line class="app-board-line" x1="211" y1="326" x2="211" y2="521" />
+                                            <line class="app-board-line" x1="631" y1="521" x2="1051" y2="326" />
+                                            <line class="app-board-line app-board-line--held" x1="211" y1="131" x2="631" y2="326" />
+                                            <line class="app-board-line app-board-line--held" x1="631" y1="131" x2="631" y2="326" />
+                                            <line class="app-board-line app-board-line--held" x1="211" y1="326" x2="631" y2="326" />
+                                            <line class="app-board-line app-board-line--held" x1="631" y1="326" x2="631" y2="521" />
+                                            <text class="app-board-label" x="421" y="222.5">Her father</text>
+                                            <text class="app-board-label" x="631" y="222.5">Comes home</text>
+                                            <text class="app-board-label" x="421" y="320">Keeps it</text>
+                                            <text class="app-board-label" x="631" y="417.5">Asks him</text>
+                                        </svg>
+                                        <div class="app-card" style="left: 71px; top: 56px">
+                                            <p class="app-card-title">Tom Ashby</p>
+                                            <div class="app-card-surface"><p class="app-card-body">Her father. Forty years on the same eleven acres. Paid every bill on the first of the month and never once explained himself.</p></div>
+                                        </div>
+                                        <div class="app-card" style="left: 491px; top: 56px">
+                                            <p class="app-card-title">Ashby's Orchard</p>
+                                            <div class="app-card-surface"><p class="app-card-body">Eleven acres above the Lugg meadows. Kingston Blacks and Foxwhelps, half of them past bearing. The frost settles first in the low rows.</p></div>
+                                        </div>
+                                        <div class="app-card app-card--item" style="left: 911px; top: 56px">
+                                            <p class="app-card-title">Wassail night</p>
+                                            <div class="app-card-surface"><p class="app-card-body">Twelfth Night in the old trees. Cider poured on the roots, toast left in the branches, the orchard shouted awake for the year.</p></div>
+                                        </div>
+                                        <div class="app-card app-card--item" style="left: 71px; top: 251px">
+                                            <p class="app-card-title">The ledger</p>
+                                            <div class="app-card-surface"><p class="app-card-body">Green cloth, black at the corners. Thirty years of rates, wages and sulphur, and on the first of every month: M.P., two pounds.</p></div>
+                                        </div>
+                                        <div class="app-card is-selected" style="left: 491px; top: 251px">
+                                            <p class="app-card-title">Nell Ashby</p>
+                                            <div class="app-card-surface"><p class="app-card-body">Thirty-one. Teaches in Bristol. Came home for the funeral and stayed for the frost. Carries her father's ledger in her coat and reads it like a letter.</p></div>
+                                        </div>
+                                        <div class="app-card" style="left: 911px; top: 251px">
+                                            <p class="app-card-title">Agnes Pryce</p>
+                                            <div class="app-card-surface"><p class="app-card-body">Daniel's mother, behind the gate at the end of the lane. Sent a cake on the day of the funeral, and no card.</p></div>
+                                        </div>
+                                        <div class="app-card app-card--plot" style="left: 71px; top: 446px">
+                                            <p class="app-card-title">Payments to M.P.</p>
+                                            <div class="app-card-surface">
+                                                <p class="app-card-body">Two pounds a month since 1932, through the flood and the year her mother died. Paid to whom?</p>
+                                                <p class="app-card-foot"><span class="app-card-act"><svg class="app-icon app-icon--12"><use href="app-icons.svg#plot-act" /></svg>Act</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="app-card" style="left: 491px; top: 446px">
+                                            <p class="app-card-title">Daniel Pryce</p>
+                                            <div class="app-card-surface"><p class="app-card-body">Has worked the orchard since the war. Makes the cider, mends the ladders, looks at the ground when Nell asks a straight question.</p></div>
+                                        </div>
+                                        <div class="app-card" style="left: 911px; top: 446px">
+                                            <p class="app-card-title">Hale and Sons, Leominster</p>
+                                            <div class="app-card-surface"><p class="app-card-body">The bank. Mr Hale has written twice since the funeral, both times about the overdraft, both times with sympathy.</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="rv-h3">The Canvas</h3>
+                            <p class="rv-text">Characters, places and plot beats as linked cards. Feldar draws on them when it writes.</p>
+                        </div>
+                        <div class="sc-cell sc-cell--small">
+                            <h3 class="rv-h3">Outline</h3>
+                            <p class="rv-text">Every page has an outline of scenes. Write them yourself or use Generate scenes.</p>
+                        </div>
+                        <div class="sc-cell sc-cell--small">
+                            <h3 class="rv-h3">Draft Page</h3>
+                            <p class="rv-text">Write the chapter from your plan, or press Draft Page for a first pass to rework.</p>
+                        </div>
+                        <div class="sc-cell sc-cell--small">
+                            <h3 class="rv-h3">Planning by hand</h3>
+                            <p class="rv-text">An outline and cards you write yourself use no credits.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Write: a band, its tools listed beside the open one -->
+            <section class="part-band rv-part--write" id="write" aria-labelledby="write-title">
+                <div class="rv-wrap">
+                    <div class="rv-grid part-head">
+                        <h2 class="rv-h2" id="write-title">Write with help you ask for</h2>
+                        <p class="rv-lead part-head-side">Feldar writes when you ask. What it writes is marked so you can review it.</p>
+                    </div>
+                    <div class="rv-grid sc-index" data-index>
+                        <div class="sc-rows">
+                            <div class="sc-row">
+                                <h3><button type="button" class="sc-row-toggle" id="write-continue" aria-expanded="true" aria-controls="write-continue-body" data-shows="write-continue-shot">Continue from here</button></h3>
+                                <div class="sc-row-body" id="write-continue-body">
+                                    <p class="rv-text">Feldar continues from your caret. Accept the lines, ask for another version, or dismiss them.</p>
+                                    <div class="sc-row-links">
+                                        <a class="rv-link" href="#eh-desk" data-try="continue">Try it above</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-row">
+                                <h3><button type="button" class="sc-row-toggle" id="write-rewrites" aria-expanded="false" aria-controls="write-rewrites-body" data-shows="write-rewrites-shot">Polish, Deepen, Enhance</button></h3>
+                                <div class="sc-row-body" id="write-rewrites-body">
+                                    <p class="rv-text">Select a passage and pick a rewrite. The new version shows what changed, and you apply it or keep your own.</p>
+                                    <dl class="sc-groups">
+                                        <div class="sc-group"><dt>Polish</dt><dd>Sharpen Prose, Smooth Flow, Tighten, Clarify</dd></div>
+                                        <div class="sc-group"><dt>Deepen</dt><dd>Deepen Description, Cut Exposition, Dramatize, Add Interiority, Strengthen Voice</dd></div>
+                                        <div class="sc-group"><dt>Enhance</dt><dd>Raise Tension, Add Foreshadowing, Improve Dialogue, Change POV, Change Tense</dd></div>
+                                    </dl>
+                                    <p class="sc-groups-note">Sharpen Prose, Cut Exposition, Dramatize and Raise Tension appear when the passage you select suits them.</p>
+                                    <div class="sc-row-links">
+                                        <a class="rv-link" href="#eh-desk" data-try="rewrite">Try it above</a>
+                                        <a
+                                            class="rv-button rv-button--small rv-button--paper rv-play"
+                                            href="../../assets/demo/loop-define-rewrite-card.mp4"
+                                            data-recording
+                                            data-focus="69%"
+                                            data-title="A paragraph rewritten with Deepen Description, then applied to the page"
+                                            >Watch a rewrite</a
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-row">
+                                <h3><button type="button" class="sc-row-toggle" id="write-instruct" aria-expanded="false" aria-controls="write-instruct-body" data-shows="write-instruct-shot">Instruct</button></h3>
+                                <div class="sc-row-body" id="write-instruct-body">
+                                    <p class="rv-text">Type what you want changed in plain words, such as slow it down.</p>
+                                </div>
+                            </div>
+                            <div class="sc-row">
+                                <h3><button type="button" class="sc-row-toggle" id="write-voice" aria-expanded="false" aria-controls="write-voice-body" data-shows="write-voice-shot">Voice &amp; Style</button></h3>
+                                <div class="sc-row-body" id="write-voice-body">
+                                    <p class="rv-text">Paste a sample of your prose and Feldar writes toward it.</p>
+                                    <div class="sc-row-links">
+                                        <a class="rv-link" href="/ai-for-novelists">How Feldar’s AI behaves</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sc-stage" aria-hidden="true" data-nosnippet>
+                            <div class="sc-shot" id="write-continue-shot">
+                                <div class="app-piece app-piece--page">
+                                    <div class="app-prose">
+                                        <p>She took out the ledger and opened it on the press between them, at the column of two pounds, and waited.</p>
+                                        <div>
+                                            <p class="eh-suggestion">He looked at the page for a long time without touching it. Then he wiped his hands on the sack tied round his waist, slowly, one finger at a time, as if there were a great deal of cider on them and he meant to have every drop.</p>
+                                            <div class="app-menu">
+                                                <div class="app-menu-rows">
+                                                    <span class="app-menu-item"><img src="../../assets/ui/icon-check-16.svg" alt="" width="16" height="16" />Accept</span>
+                                                    <span class="app-menu-item"><img src="../../assets/ui/icon-revise-16.svg" alt="" width="16" height="16" />Revise</span>
+                                                    <span class="app-menu-item"><img src="../../assets/ui/icon-x-ink-16.svg" alt="" width="16" height="16" />Dismiss</span>
+                                                </div>
+                                                <p class="app-menu-hint">esc to dismiss</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-shot" id="write-rewrites-shot" hidden>
+                                <div class="app-piece app-piece--page" data-state="rewritten">
+                                    <div class="app-prose">
+                                        <p><span class="app-range">She sat with the book open on her knees while the kitchen clock went on with its business. Outside, the frost was already coming down over the Lugg meadows, silvering the grass between the rows, and the old trees stood in it with their arms raised, as if someone had asked them a question.</span></p>
+                                        <div class="app-rewrite">
+                                            <p class="app-rewrite-bar">
+                                                <span>Deepen Description</span>
+                                                <img src="../../assets/ui/icon-minus-faint-16.svg" alt="" width="16" height="16" />
+                                            </p>
+                                            <div class="app-rewrite-body">
+                                                <p class="app-rewrite-text">She sat with the book open on her knees while the kitchen clock went on with its business, <mark>loud in the way clocks are only loud in an empty house</mark>. Outside, the frost was already coming down over the Lugg meadows, silvering the grass between the rows <mark>and stiffening the last windfalls where they lay</mark>, and the old trees stood in it with their arms raised, <mark>black against a sky the colour of pewter</mark>, as if someone had asked them a question.</p>
+                                                <div class="app-rewrite-foot">
+                                                    <span class="app-rewrite-refine">Refine</span>
+                                                    <span class="app-rewrite-tool"><img src="../../assets/ui/icon-redo-18.svg" alt="" width="18" height="18" /></span>
+                                                    <span class="app-rewrite-tool"><img src="../../assets/ui/icon-insert-18.svg" alt="" width="18" height="18" /></span>
+                                                    <span class="app-rewrite-tool"><img src="../../assets/ui/icon-trash-18.svg" alt="" width="18" height="18" /></span>
+                                                    <span class="app-rewrite-apply">Apply<img src="../../assets/ui/icon-enter-white-15.svg" alt="" width="15" height="15" /></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-shot" id="write-instruct-shot" hidden>
+                                <div class="app-piece app-piece--page app-piece--instruct">
+                                    <div class="app-prose">
+                                        <p>She sat with the book open on her knees while the kitchen clock went on with its business. Outside, the frost was already coming down over the Lugg meadows, silvering the grass between the rows, and the old trees stood in it with their arms raised, as if someone had asked them a question.</p>
+                                        <div class="app-select">
+                                            <div class="app-composer">
+                                                <div class="app-composer-body">
+                                                    <span class="app-composer-field">How should Feldar edit this?</span>
+                                                    <span class="app-composer-send"><svg class="app-icon"><use href="app-icons.svg#arrow-up" /></svg></span>
+                                                </div>
+                                                <div class="app-composer-suggestions">
+                                                    <span class="app-composer-chip">Vary the repeated “pounds”</span>
+                                                    <span class="app-composer-chip">Add depth and sensory detail</span>
+                                                    <span class="app-composer-chip">Make meaning clearer</span>
+                                                </div>
+                                            </div>
+                                            <p><span class="app-range app-range--held">Two pounds was what he paid the pickers for a week. Two pounds was the coat she had wanted at fourteen and not been given, because, he said, there was no money for coats that year.</span></p>
+                                        </div>
+                                        <p>"Who were you paying?" she said to the page, and was ashamed of how loud it sounded in the empty house.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-shot" id="write-voice-shot" hidden>
+                                <div class="app-piece app-piece--settings">
+                                    <p class="app-settings-heading">Voice conditioning</p>
+                                    <div class="app-settings-card">
+                                        <div class="app-settings-row">
+                                            <div class="app-settings-copy">
+                                                <p class="app-settings-title">Project</p>
+                                                <p class="app-settings-help">Choose the project whose writing voice you want to shape.</p>
+                                            </div>
+                                            <span class="app-select-trigger">The Winter Ledger<svg class="app-icon app-icon--12"><use href="app-icons.svg#chevron-down" /></svg></span>
+                                        </div>
+                                        <div class="app-settings-block app-settings-block--divided">
+                                            <div class="app-settings-copy">
+                                                <p class="app-settings-title">Project voice</p>
+                                                <p class="app-settings-help">Optional. Describe this project’s voice in a few words, for example “concise and direct”. Caret and Page Draft follow it in this project, after your own instructions.</p>
+                                            </div>
+                                            <p class="app-textarea">Close third person, past tense, British English. Plain words and long sentences that turn at the end. Let the weather and the objects carry the feeling.</p>
+                                            <p class="app-settings-count">152 of 500 characters</p>
+                                            <span class="app-settings-actions"><span class="app-settings-button">Save voice</span></span>
+                                        </div>
+                                        <div class="app-settings-block">
+                                            <div class="app-settings-copy">
+                                                <p class="app-settings-title">Writing sample</p>
+                                                <p class="app-settings-help">Optional. Paste 600–2,000 words of your own writing to help match your voice. Feldar uses this sample until your manuscript grows longer, then follows your manuscript’s voice.</p>
+                                            </div>
+                                            <div class="app-textarea app-textarea--sample">
+                                                <p>The summer the reservoir went down, the village came back. First the church spire, a dark finger in the water that the fishermen steered around without remarking on it, the way you might step around a sleeping dog. Then the roof of the chapel, then the long wall of the Pughs' orchard, the stones still standing in their courses as if they had only been waiting for the water to grow tired of them.</p>
+                                                <p>My grandmother would not go and look. She had been born in that village, christened in that church, and married, the first time, from the house at the bottom of the hill whose chimney was now drying in the sun with weed hanging from it like washing. When the water took it she had been twenty-six. She said she had done her looking then.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Revise: the ruled grid -->
+            <section class="part rv-part--revise" id="revise" aria-labelledby="revise-title">
+                <div class="rv-wrap">
+                    <div class="rv-grid part-head">
+                        <h2 class="rv-h2" id="revise-title">Revise before you send it out</h2>
+                        <div class="part-head-side">
+                            <p class="rv-lead">Feldar marks problems in the text and shows how different readers might take the chapter.</p>
+                            <a class="rv-link part-more" href="/features">See every feature</a>
+                        </div>
+                    </div>
+                    <div class="sc-tier">
+                        <div class="sc-cell sc-cell--large">
+                            <div class="sc-plate" aria-hidden="true" data-nosnippet>
+                                <div class="app-piece app-piece--page app-piece--checks">
+                                    <div class="app-prose">
+                                        <p>His hand had not changed in thirty years. <span class="app-issue app-issue--craft">The same upright figures, the same small flourish on every four, the same habit</span> of pressing so hard at the foot of a column that the total stood up from the paper like braille. Feed for the ewes. Two new ladders. Sixpence for the boy who came about the wasps.</p>
+                                        <p>Nell turned back a year, then ten. The orchard had been losing money since before she left for Bristol, a little each season, the way a tree loses ground to canker: nothing you could point to, and then a limb on the grass one morning.</p>
+                                        <p>But it was the other column that held her. On the first of every month, beneath the rates and the wages and the price of sulphur, he had written the same two letters and the same sum. <span class="app-issue app-issue--clarity">M.P</span>. Two pounds. It ran back through the bad winters and the good ones, through the year of the flood and the year her mother died, as steady as a pulse.</p>
+                                    </div>
+                                    <span class="app-checks-tool"><span class="app-checks-button"><svg class="app-icon"><use href="app-icons.svg#checks" /></svg></span></span>
+                                    <div class="app-checks-panel">
+                                        <p class="app-checks-title">Checks</p>
+                                        <div class="app-checks-quality">
+                                            <p class="app-checks-row"><span>Writing quality</span><span class="app-checks-score">91<span class="app-checks-max"> / 100</span></span></p>
+                                            <span class="app-checks-meter"><span class="app-checks-fill" style="width: 91%"></span></span>
+                                        </div>
+                                        <ul class="app-checks-list">
+                                            <li class="app-checks-item"><span class="app-checks-label"><span class="app-checks-dot app-checks-dot--critical"></span>Fix critical mistakes</span><span class="app-checks-status">completed</span></li>
+                                            <li class="app-checks-item"><span class="app-checks-label"><span class="app-checks-dot app-checks-dot--clarity"></span>Improve accuracy and clarity</span><span class="app-checks-status">completed</span></li>
+                                            <li class="app-checks-item"><span class="app-checks-label"><span class="app-checks-dot app-checks-dot--craft"></span>Tighten word choice</span><span class="app-checks-status">completed</span></li>
+                                            <li class="app-checks-item"><span class="app-checks-label"><span class="app-checks-dot app-checks-dot--craft"></span>Smooth dialogue transitions</span><span class="app-checks-status">completed</span></li>
+                                            <li class="app-checks-item"><span class="app-checks-label"><span class="app-checks-dot app-checks-dot--craft"></span>Clarify character perspectives</span><span class="app-checks-status">completed</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="rv-h3">Checks</h3>
+                            <p class="rv-text">Five editing checks mark each issue in the text and offer a fix you can accept or discard.</p>
+                        </div>
+                        <div class="sc-cell sc-cell--large">
+                            <div class="sc-plate" aria-hidden="true" data-nosnippet>
+                                <div class="app-piece app-piece--chat">
+                                    <div class="app-chat-head">
+                                        <p class="app-chat-title">New chat<svg class="app-icon app-icon--12"><use href="app-icons.svg#chevron-down" /></svg></p>
+                                        <span class="app-iconbox"><svg class="app-icon"><use href="app-icons.svg#close" /></svg></span>
+                                    </div>
+                                    <div class="app-chat-log">
+                                        <p class="app-chat-user">What is working on this page, and what isn't?</p>
+                                        <div class="app-chat-reply">
+                                            <p class="app-chat-persona">
+                                                <svg class="app-persona" viewBox="0 0 100 100">
+                                                    <defs>
+                                                        <filter id="sc-mesh-blur-critic" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="15" result="blur" /><feColorMatrix type="saturate" values="1.8" /></filter>
+                                                        <clipPath id="sc-mesh-clip-critic"><circle cx="50" cy="50" r="48" /></clipPath>
+                                                        <radialGradient id="sc-mesh-glass-critic" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="white" stop-opacity="0.5" /><stop offset="50%" stop-color="white" stop-opacity="0" /><stop offset="100%" stop-color="black" stop-opacity="0.6" /></radialGradient>
+                                                    </defs>
+                                                    <g clip-path="url(#sc-mesh-clip-critic)">
+                                                        <rect width="100" height="100" fill="#ff2a40" />
+                                                        <g filter="url(#sc-mesh-blur-critic)"><circle cx="20" cy="80" r="55" fill="#4d0d13" /><circle cx="80" cy="20" r="50" fill="#fe9840" /><circle cx="30" cy="30" r="35" fill="#ffd4d9" /></g>
+                                                    </g>
+                                                    <circle cx="50" cy="50" r="48" stroke-width="1" fill="none" stroke="rgba(255, 255, 255, 0.2)" />
+                                                    <circle class="app-persona-glass" cx="50" cy="50" r="48" fill="url(#sc-mesh-glass-critic)" />
+                                                </svg>
+                                                Critic
+                                            </p>
+                                            <p class="app-chat-text">The ledger is a strong engine: two letters and a sum carry more suspense than a locked door. My concern is the middle. The canker and the coat make the same point about money, and the coat is better because it is hers. Cut the canker. The last line works because the answer is in Daniel's posture, not in his mouth.</p>
+                                            <span class="app-chat-actions">
+                                                <span class="app-chat-action"><svg class="app-icon"><use href="app-icons.svg#copy" /></svg></span>
+                                                <span class="app-chat-action"><svg class="app-icon"><use href="app-icons.svg#read-aloud" /></svg></span>
+                                            </span>
+                                        </div>
+                                        <div class="app-chat-reply">
+                                            <p class="app-chat-persona">
+                                                <svg class="app-persona" viewBox="0 0 100 100">
+                                                    <defs>
+                                                        <filter id="sc-mesh-blur-poet" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="15" result="blur" /><feColorMatrix type="saturate" values="1.8" /></filter>
+                                                        <clipPath id="sc-mesh-clip-poet"><circle cx="50" cy="50" r="48" /></clipPath>
+                                                        <radialGradient id="sc-mesh-glass-poet" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="white" stop-opacity="0.5" /><stop offset="50%" stop-color="white" stop-opacity="0" /><stop offset="100%" stop-color="black" stop-opacity="0.6" /></radialGradient>
+                                                    </defs>
+                                                    <g clip-path="url(#sc-mesh-clip-poet)">
+                                                        <rect width="100" height="100" fill="#c2c8f7" />
+                                                        <g filter="url(#sc-mesh-blur-poet)"><circle cx="20" cy="80" r="55" fill="#3a3c4a" /><circle cx="80" cy="20" r="50" fill="#7db7fb" /><circle cx="30" cy="30" r="35" fill="#f3f4fd" /></g>
+                                                    </g>
+                                                    <circle cx="50" cy="50" r="48" stroke-width="1" fill="none" stroke="rgba(255, 255, 255, 0.2)" />
+                                                    <circle class="app-persona-glass" cx="50" cy="50" r="48" fill="url(#sc-mesh-glass-poet)" />
+                                                </svg>
+                                                Poet
+                                            </p>
+                                            <p class="app-chat-text">The old trees with their arms raised, as if someone had asked them a question, is the image this chapter will be remembered by. "The same" three times is a chant. Keep it if you want the ledger to sound like a prayer.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="rv-h3">Lens</h3>
+                            <p class="rv-text">Six reader personas, such as the Critic and the Poet, respond to your page in Chat.</p>
+                        </div>
+                        <div class="sc-cell sc-cell--small">
+                            <h3 class="rv-h3">Six readers</h3>
+                            <p class="rv-text">Critic, Cheerleader, Poet, Editor, Plotter and Reader. Ask one or several at once.</p>
+                        </div>
+                        <div class="sc-cell sc-cell--small">
+                            <h3 class="rv-h3">Chat</h3>
+                            <p class="rv-text">Ask about the manuscript in Chat, with the whole project as context.</p>
+                        </div>
+                        <div class="sc-cell sc-cell--small">
+                            <h3 class="rv-h3">Fixes you approve</h3>
+                            <p class="rv-text">A fix from Checks changes the text only when you accept it.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Keep: a band, its tools listed beside the open one -->
+            <section class="part-band rv-part--keep" id="keep" aria-labelledby="keep-title">
+                <div class="rv-wrap">
+                    <div class="rv-grid part-head">
+                        <h2 class="rv-h2" id="keep-title">Keep the book and its record</h2>
+                        <p class="rv-lead part-head-side">Your work stays in your Library, and you can take it out whenever you like.</p>
+                    </div>
+                    <div class="rv-grid sc-index" data-index>
+                        <div class="sc-rows">
+                            <div class="sc-row">
+                                <h3><button type="button" class="sc-row-toggle" id="keep-record" aria-expanded="true" aria-controls="keep-record-body" data-shows="keep-record-shot">Writing record</button></h3>
+                                <div class="sc-row-body" id="keep-record-body">
+                                    <p class="rv-text">A private count of the words you typed and the words that came from Feldar.</p>
+                                    <div class="sc-row-links">
+                                        <a class="rv-link" href="#eh-desk" data-try="record">Try it above</a>
+                                        <a class="rv-link" href="/blog/provenance">Why Feldar records provenance</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-row">
+                                <h3><button type="button" class="sc-row-toggle" id="keep-library" aria-expanded="false" aria-controls="keep-library-body" data-shows="keep-library-shot">Library</button></h3>
+                                <div class="sc-row-body" id="keep-library-body">
+                                    <p class="rv-text">Every book you write sits in your Library.</p>
+                                </div>
+                            </div>
+                            <div class="sc-row">
+                                <h3><button type="button" class="sc-row-toggle" id="keep-files" aria-expanded="false" aria-controls="keep-files-body" data-shows="keep-files-shot">Import and export</button></h3>
+                                <div class="sc-row-body" id="keep-files-body">
+                                    <p class="rv-text">Bring a manuscript in or take the book out as Word, PDF, Markdown or plain text, up to 20 MB a file.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sc-stage" aria-hidden="true" data-nosnippet>
+                            <div class="sc-shot" id="keep-record-shot">
+                                <div class="app-piece app-piece--record">
+                                    <div class="app-record-column">
+                                        <p class="app-record-book">The Winter Ledger</p>
+                                        <p class="app-record-headline">
+                                            <span>8,375 words entered.</span>
+                                            <span>92% by hand, 7% Feldar, 1% pasted.</span>
+                                        </p>
+                                        <div class="app-record-bar">
+                                            <span class="app-record-part app-record-part--typed" style="flex-grow: 7645"></span>
+                                            <span class="app-record-part app-record-part--feldar" style="flex-grow: 610"></span>
+                                            <span class="app-record-part app-record-part--pasted" style="flex-grow: 120"></span>
+                                        </div>
+                                        <ul class="app-record-keys">
+                                            <li class="app-record-key app-record-key--typed"><strong>7,645</strong> typed</li>
+                                            <li class="app-record-key app-record-key--feldar"><strong>610</strong> Feldar</li>
+                                            <li class="app-record-key app-record-key--pasted"><strong>120</strong> pasted</li>
+                                        </ul>
+                                        <dl class="app-record-stats">
+                                            <div><dt>Active days</dt><dd>15 days</dd></div>
+                                            <div><dt>AI operations</dt><dd>15</dd></div>
+                                            <div><dt>Active time</dt><dd>20h 42m</dd></div>
+                                            <div><dt>Current saved manuscript</dt><dd>5,210 words</dd></div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-shot" id="keep-library-shot" hidden>
+                                <div class="app-piece app-piece--library">
+                                    <p class="app-library-greeting">Good evening, Ruth</p>
+                                    <p class="app-library-heading">Pinned</p>
+                                    <div class="app-library-pinned">
+                                        <div class="app-pinned app-palette--terracotta">
+                                            <span class="app-cover app-cover--standard app-palette--terracotta">
+                                                <span class="app-cover-art"><img class="app-cover-card" src="cover-card.svg" alt="" width="45" height="45" /><span class="app-cover-genre">Literary fiction</span><img class="app-cover-spine" src="cover-spine.png" alt="" width="9" height="178" /></span>
+                                            </span>
+                                            <span class="app-pinned-copy">
+                                                <span class="app-pinned-title">The Winter Ledger</span>
+                                                <span class="app-pinned-preview">The ledger was in the bottom drawer of the bureau, under a seed catalogue from 1958 and a tin of the mints her father had sucked for his chest.</span>
+                                                <span class="app-pinned-time">1h ago</span>
+                                            </span>
+                                        </div>
+                                        <div class="app-pinned app-palette--slate-blue">
+                                            <span class="app-cover app-cover--standard app-palette--slate-blue">
+                                                <span class="app-cover-art"><img class="app-cover-card" src="cover-card.svg" alt="" width="45" height="45" /><span class="app-cover-genre">Literary fiction</span><img class="app-cover-spine" src="cover-spine.png" alt="" width="9" height="178" /></span>
+                                            </span>
+                                            <span class="app-pinned-copy">
+                                                <span class="app-pinned-title">Low Water</span>
+                                                <span class="app-pinned-preview">The river gave the village back its church spire every dry summer, and every dry summer someone went down to look at it.</span>
+                                                <span class="app-pinned-time">2d ago</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <p class="app-library-heading app-library-heading--next">Continue writing</p>
+                                    <div class="app-library-continue">
+                                        <div class="app-continue">
+                                            <span class="app-cover app-cover--compact app-palette--terracotta">
+                                                <span class="app-cover-art"><img class="app-cover-card" src="cover-card.svg" alt="" width="45" height="45" /><span class="app-cover-genre">Literary fiction</span><img class="app-cover-spine" src="cover-spine.png" alt="" width="9" height="178" /></span>
+                                            </span>
+                                            <span class="app-continue-copy"><span class="app-continue-title">The Winter Ledger</span><span class="app-continue-time">1h ago</span></span>
+                                        </div>
+                                        <div class="app-continue">
+                                            <span class="app-cover app-cover--compact app-palette--slate-blue">
+                                                <span class="app-cover-art"><img class="app-cover-card" src="cover-card.svg" alt="" width="45" height="45" /><span class="app-cover-genre">Literary fiction</span><img class="app-cover-spine" src="cover-spine.png" alt="" width="9" height="178" /></span>
+                                            </span>
+                                            <span class="app-continue-copy"><span class="app-continue-title">Low Water</span><span class="app-continue-time">2d ago</span></span>
+                                        </div>
+                                        <div class="app-continue">
+                                            <span class="app-cover app-cover--compact app-palette--moss">
+                                                <span class="app-cover-art"><img class="app-cover-card" src="cover-card.svg" alt="" width="45" height="45" /><span class="app-cover-genre">Novel</span><img class="app-cover-spine" src="cover-spine.png" alt="" width="9" height="178" /></span>
+                                            </span>
+                                            <span class="app-continue-copy"><span class="app-continue-title">Glasshouse</span><span class="app-continue-time">5d ago</span></span>
+                                        </div>
+                                        <div class="app-continue">
+                                            <span class="app-cover app-cover--compact app-palette--dusty-rose">
+                                                <span class="app-cover-art"><img class="app-cover-card" src="cover-card.svg" alt="" width="45" height="45" /><span class="app-cover-genre">Short stories</span><img class="app-cover-spine" src="cover-spine.png" alt="" width="9" height="178" /></span>
+                                            </span>
+                                            <span class="app-continue-copy"><span class="app-continue-title">Kington Stories</span><span class="app-continue-time">1w ago</span></span>
+                                        </div>
+                                        <div class="app-continue">
+                                            <span class="app-cover app-cover--compact app-palette--ochre">
+                                                <span class="app-cover-art"><img class="app-cover-card" src="cover-card.svg" alt="" width="45" height="45" /><span class="app-cover-genre">Essays</span><img class="app-cover-spine" src="cover-spine.png" alt="" width="9" height="178" /></span>
+                                            </span>
+                                            <span class="app-continue-copy"><span class="app-continue-title">Ten Rivers</span><span class="app-continue-time">1w ago</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-shot" id="keep-files-shot" hidden>
+                                <div class="app-dialog">
+                                    <div class="app-dialog-head">
+                                        <p class="app-dialog-title">Import work</p>
+                                        <span class="app-dialog-close"><svg class="app-icon"><use href="app-icons.svg#close" /></svg></span>
+                                    </div>
+                                    <div class="app-dialog-body">
+                                        <p class="app-dropzone">
+                                            <svg class="app-dropzone-icon"><use href="app-icons.svg#import-drop" /></svg>
+                                            <span>Drag and drop or <strong>Choose file</strong> to upload</span>
+                                        </p>
+                                        <ul class="app-files">
+                                            <li class="app-file">
+                                                <svg class="app-icon app-icon--16"><use href="app-icons.svg#file" /></svg>
+                                                <span class="app-file-name">the-winter-ledger-draft.docx</span>
+                                                <span class="app-file-state"><svg class="app-icon"><use href="app-icons.svg#check" /></svg></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="app-dialog-foot"><span class="app-dialog-button">Import</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What's new: the last three releases -->
+            <section class="part" id="releases" aria-labelledby="releases-title">
+                <div class="rv-wrap">
+                    <div class="rv-grid part-head">
+                        <h2 class="rv-h2" id="releases-title">What's new in Feldar</h2>
+                        <div class="part-head-side">
+                            <p class="rv-lead">Each release is written up in the changelog.</p>
+                            <a class="rv-link part-more" href="/changelog">Read the changelog</a>
+                        </div>
+                    </div>
+                    <div class="sc-releases">
+                        <article class="sc-release">
+                            <p class="sc-release-meta"><span>Version 1.2</span><time datetime="2026-11-02">November 2, 2026</time></p>
+                            <h3 class="rv-h3">Sage, beside you as you write</h3>
+                            <p class="rv-text">A companion you can talk to while you write, a faster editor, more from Chat and a native app for Mac.</p>
+                        </article>
+                        <article class="sc-release">
+                            <p class="sc-release-meta"><span>Version 1.1</span><time datetime="2026-10-02">October 2, 2026</time></p>
+                            <h3 class="rv-h3">A more personal writing workspace</h3>
+                            <p class="rv-text">Writing that sounds like you, newer models, and drafting that keeps its place across sessions.</p>
+                        </article>
+                        <article class="sc-release">
+                            <p class="sc-release-meta"><span>Version 1.0.2</span><time datetime="2026-08-24">August 24, 2026</time></p>
+                            <h3 class="rv-h3">Provenance for your writing</h3>
+                            <p class="rv-text">A private record of how a manuscript was made, telling your own writing apart from what came from Feldar.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Plans Section -->
+            <section class="part" id="plans" aria-labelledby="plans-title">
+                <div class="rv-wrap">
+                    <div class="rv-grid part-head">
+                        <h2 class="rv-h2" id="plans-title">The same workspace on every plan</h2>
+                        <div class="part-head-side">
+                            <p class="rv-lead">Plans differ in how many credits you get and which models you can use.</p>
+                            <a class="rv-link part-more" href="/pricing">See plans and pricing</a>
+                        </div>
+                    </div>
+                    <table class="plans-table">
+                        <thead>
+                            <tr><th scope="col">Plan</th> <th scope="col">Paid monthly</th> <th scope="col">Paid yearly</th> <th scope="col">Credits</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">Starter</th> <td data-label="Paid monthly">Free</td> <td data-label="Paid yearly">Free</td> <td data-label="Credits">500 to start</td></tr>
+                            <tr><th scope="row">Core</th> <td data-label="Paid monthly">$20 a month</td> <td data-label="Paid yearly">$180 a year</td> <td data-label="Credits">20,000 a month</td></tr>
+                            <tr><th scope="row">Pro</th> <td data-label="Paid monthly">$40 a month</td> <td data-label="Paid yearly">$400 a year</td> <td data-label="Credits">45,000 a month</td></tr>
+                            <tr><th scope="row">Ultra</th> <td data-label="Paid monthly">$200 a month</td> <td data-label="Paid yearly">$2,220 a year</td> <td data-label="Credits">250,000 a month</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="plans-terms">Starter needs no credit card. Its 500 credits come once, and paid plans renew theirs every month.</p>
+                </div>
+            </section>
+
+            <!-- Questions Section -->
+            <section class="part" id="questions" aria-labelledby="questions-title">
+                <div class="rv-wrap rv-grid">
+                    <div class="questions-head">
+                        <h2 class="rv-h2" id="questions-title">Common questions</h2>
+                        <p class="rv-lead">If your question is not here, write to <a href="mailto:support@feldar.com">support@feldar.com</a>.</p>
+                    </div>
+                    <div class="questions-list">
+                        <details class="lp-faq-item" open><summary>Does Feldar write the book for me?</summary><p>No. Feldar writes when you ask it to. It can continue a scene from where you stopped, rewrite a passage you select, or draft a first pass of a page from your scene plan. What it writes is marked, and you decide what stays.</p></details>
+                        <details class="lp-faq-item"><summary>Can I use Feldar without the AI?</summary><p>Yes. You can write, plan in the Outline, build the Canvas, and import or export your book without using the AI at all. None of that uses credits.</p></details>
+                        <details class="lp-faq-item"><summary>Does Feldar train AI on my writing?</summary><p>No. Feldar does not train AI models on your writing, and you own what you write. The details are in the <a href="/privacy">privacy policy</a>.</p></details>
+                        <details class="lp-faq-item"><summary>What is a credit?</summary><p>A credit is the unit Feldar uses to measure AI use. Things like rewrites, chat, checks and drafting a page cost credits, while typing and editing your book cost nothing. The free plan comes with 500 credits once, and paid plans renew theirs every month. If you run out, the AI features pause and you can keep writing.</p></details>
+                        <details class="lp-faq-item"><summary>Which AI models does Feldar use?</summary><p>GPT-6 Astra, Sol and Luna from OpenAI, and Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5 from Anthropic. Which ones you can use depends on your plan, and you choose the model in Settings.</p></details>
+                        <details class="lp-faq-item"><summary>Where does Feldar run?</summary><p>Feldar runs in your browser at feldar.com and as a Mac app. On Windows and Linux you can use it in the browser, and desktop apps for both are coming soon. The app is in English.</p></details>
+                        <details class="lp-faq-item"><summary>Can I import a manuscript and export my book?</summary><p>Yes. You can import Word, PDF, Markdown or plain text files of up to 20 MB each, and export the whole book or selected pages in the same four formats.</p></details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recording Player -->
+            <dialog class="rv-player" aria-labelledby="recording-title" data-recording-player>
+                <video class="rv-player-video" controls loop muted playsinline preload="none" width="1440" height="900"></video>
+                <form class="rv-player-foot" method="dialog">
+                    <p class="rv-player-title" id="recording-title" data-recording-title></p>
+                    <button class="rv-button rv-button--small rv-button--paper">Close</button>
+                </form>
+            </dialog>
+
+            <!-- Footer Section -->
+            <footer>
+                <div class="close-band">
+                    <div class="rv-wrap close-statement">
+                        <h2 class="close-title">Write your novel in Feldar.</h2>
+                        <a href="/login" class="rv-button rv-button--paper" rel="nofollow">Start writing free</a>
+                    </div>
+                </div>
+
+                <div class="rv-wrap close-mast">
+                    <a href="/" class="close-logo" aria-label="Feldar home">
+                        <img src="../../assets/logo-footer.svg" alt="Feldar" width="106" height="30" loading="lazy" />
+                    </a>
+                    <div class="close-columns">
+                        <div>
+                            <p class="close-column-title">Product</p>
+                            <div class="close-column-links">
+                                <a href="/download">Download</a>
+                                <a href="/pricing">Pricing</a>
+                                <a href="/features">Features</a>
+                                <a href="/changelog">Changelog</a>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="close-column-title">For writers</p>
+                            <div class="close-column-links">
+                                <a href="/novel-writing-software">Novel writing software</a>
+                                <a href="/ai-for-novelists">AI for novelists</a>
+                                <a href="/compare">Compare</a>
+                                <a href="/guides/how-to-outline-a-novel">Outline a novel</a>
+                                <a href="/tools">Free tools</a>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="close-column-title">Company</p>
+                            <div class="close-column-links">
+                                <a href="/about">About</a>
+                                <a href="/blog">Blog</a>
+                                <a href="/careers">Careers</a>
+                                <a href="mailto:support@feldar.com">Support</a>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="close-column-title">Connect</p>
+                            <div class="close-column-links">
+                                <a href="https://x.com/feldarai">X</a>
+                                <a href="https://www.linkedin.com/company/feldar">LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer-bottom">
+                        <div class="footer-legal">
+                            <a href="/terms">Terms of Use</a>
+                            <a href="/privacy">Privacy Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </main>
 
         <nav class="pt-switch" aria-label="Prototypes">
@@ -431,6 +1154,8 @@
             <a href="index.html" aria-current="page">Working editor hero</a>
         </nav>
         <script type="module" src="editor-hero.js"></script>
+        <script type="module" src="showcase.js"></script>
+        <script type="module" src="recording-player.js"></script>
         <script type="module" src="../review.js"></script>
     </body>
 </html>

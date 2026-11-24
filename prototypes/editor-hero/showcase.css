@@ -1,0 +1,255 @@
+/* Prototype: the page under the working editor. It stands on the home page's own
+   sections (limits, plans, questions, the closing band) and replaces its four parts with
+   two arrangements that alternate. Plan and Revise are a ruled grid: two large cells, each
+   a plate of the part's cloth with a piece of the app on it, over a row of small cells of
+   text. Write and Keep are bands: a list of the part's tools, one open at a time, beside
+   the piece of the app the open one shows. The pieces are cut from the app at its own
+   size and are in pieces.css. */
+@import '../../styles/home-deferred.css';
+@import './pieces.css';
+
+/* The ruled grid. The rules are the grid's own background showing between its cells. */
+.sc-tier {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: var(--space-12);
+    border: 1px solid var(--rv-rule);
+    background: var(--rv-rule);
+}
+
+.sc-cell {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--space-6) var(--space-6) var(--space-8);
+    background: var(--rv-paper);
+}
+
+.sc-cell--large {
+    grid-column: span 3;
+}
+
+.sc-cell--small {
+    grid-column: span 2;
+}
+
+.sc-cell .rv-text {
+    margin-top: var(--space-2);
+    color: var(--rv-soft);
+}
+
+.sc-cell .rv-play {
+    --rv-focus: var(--rv-ink);
+    align-self: flex-start;
+}
+
+/* A plate of the part's cloth. The piece stands in its top left corner and runs off the
+   bottom edge, as a page runs off the bottom of the app window. */
+.sc-plate {
+    position: relative;
+    height: 28rem;
+    margin-bottom: var(--space-6);
+    padding: var(--space-10) var(--space-10) 0;
+    overflow: hidden;
+    background: var(--rv-part);
+}
+
+/* The band's list. Each tool is a row under a rule; the open row shows its line and links,
+   and the stage beside the list shows that tool in the app. */
+.sc-index {
+    align-items: start;
+    margin-top: var(--space-12);
+}
+
+.sc-rows {
+    grid-column: span 5;
+    border-top: 1px solid var(--rv-band-rule);
+}
+
+.sc-row {
+    border-bottom: 1px solid var(--rv-band-rule);
+}
+
+.sc-row-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    width: 100%;
+    padding-block: var(--space-4);
+    color: color-mix(in oklab, var(--rv-paper) 78%, var(--rv-part));
+    font-family: var(--rv-serif);
+    font-size: var(--rv-size-title);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    text-align: left;
+    transition: color var(--rv-quick) ease-out;
+}
+
+.sc-row-toggle:hover,
+.sc-row-toggle[aria-expanded="true"] {
+    color: var(--rv-paper);
+}
+
+/* A plus that loses its upright when the row is open. */
+.sc-row-toggle::after {
+    content: "";
+    flex-shrink: 0;
+    width: 0.75rem;
+    height: 0.75rem;
+    background:
+        linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+}
+
+.sc-row-toggle[aria-expanded="true"]::after {
+    background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat;
+}
+
+.sc-row-body {
+    padding-bottom: var(--space-6);
+}
+
+.sc-row-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-6);
+    margin-top: var(--space-5);
+}
+
+.sc-row-links .part-more,
+.sc-row-links .rv-play {
+    margin-top: 0;
+}
+
+/* The app's rewrite menu, one line per group. */
+.sc-groups {
+    margin-top: var(--space-5);
+}
+
+.sc-group {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: var(--space-3);
+    padding-block: var(--space-2);
+    border-top: 1px solid var(--rv-band-rule);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+}
+
+.sc-group dt {
+    font-weight: var(--font-weight-medium);
+}
+
+.sc-groups-note {
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--rv-band-rule);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+    text-wrap: pretty;
+}
+
+.sc-stage {
+    position: relative;
+    grid-column: 7 / span 6;
+    height: 36rem;
+    padding: var(--space-10) var(--space-10) 0;
+    overflow: hidden;
+    background: color-mix(in oklab, var(--rv-paper) 9%, var(--rv-part));
+}
+
+.sc-shot[hidden] {
+    display: none;
+}
+
+.sc-shot {
+    animation: sc-arrive 320ms var(--rv-ease-out) backwards;
+}
+
+/* What's new: the last three releases, from the changelog. */
+.sc-releases {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: var(--space-12);
+    border: 1px solid var(--rv-rule);
+    background: var(--rv-rule);
+}
+
+.sc-release {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-6) var(--space-6) var(--space-8);
+    background: var(--rv-paper);
+}
+
+.sc-release-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    color: var(--rv-soft);
+    font-size: var(--rv-size-small);
+    line-height: 1.45;
+}
+
+.sc-release .rv-h3 {
+    margin-top: var(--space-6);
+}
+
+.sc-release .rv-text {
+    margin-top: var(--space-2);
+    color: var(--rv-soft);
+}
+
+@keyframes sc-arrive {
+    from {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 62.5rem) {
+    .sc-cell--large {
+        grid-column: 1 / -1;
+    }
+
+    .sc-cell--small {
+        grid-column: span 3;
+    }
+
+    .sc-index {
+        row-gap: var(--space-8);
+    }
+
+    .sc-rows,
+    .sc-stage {
+        grid-column: 1 / -1;
+    }
+
+    /* The open tool's picture comes first, then the list that changes it. */
+    .sc-stage {
+        grid-row: 1;
+        height: 30rem;
+    }
+
+    .sc-releases {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 40rem) {
+    .sc-cell {
+        padding: var(--space-4) var(--space-4) var(--space-6);
+    }
+
+    .sc-cell--small {
+        grid-column: 1 / -1;
+    }
+
+    .sc-plate,
+    .sc-stage {
+        height: 24rem;
+        padding: var(--space-5) var(--space-5) 0;
+    }
+}
