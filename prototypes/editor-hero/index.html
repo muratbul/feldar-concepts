@@ -61,15 +61,15 @@
                 </div>
 
                 <!-- The desk: a manuscript page that writes itself in, with the sample editor on it -->
-                <div class="eh-desk" id="eh-desk" data-editor-hero data-part="continue" data-nosnippet>
+                <div class="eh-desk" id="eh-desk" data-editor-hero data-part="rewrite" data-nosnippet>
                     <canvas class="eh-ground" data-ink-ground aria-hidden="true"></canvas>
                     <div class="rv-wrap">
                         <div class="eh-stage" data-ink-clear>
                             <!-- In the order of the chapters they open in the sidebar: The Ledger,
                                  Pryce's Gate, Hard Frost, then the record of the whole book. -->
                             <div class="eh-parts" role="tablist" aria-label="Things to try in the sample book">
-                                <button type="button" class="eh-part rv-part--write" role="tab" id="eh-tab-rewrite" aria-controls="eh-view-rewrite" aria-selected="false" tabindex="-1" data-part="rewrite">Rewrite a passage</button>
-                                <button type="button" class="eh-part rv-part--write" role="tab" id="eh-tab-continue" aria-controls="eh-view-continue" aria-selected="true" data-part="continue">Continue from here</button>
+                                <button type="button" class="eh-part rv-part--write" role="tab" id="eh-tab-rewrite" aria-controls="eh-view-rewrite" aria-selected="true" data-part="rewrite">Rewrite a passage</button>
+                                <button type="button" class="eh-part rv-part--write" role="tab" id="eh-tab-continue" aria-controls="eh-view-continue" aria-selected="false" tabindex="-1" data-part="continue">Continue from here</button>
                                 <button type="button" class="eh-part rv-part--plan" role="tab" id="eh-tab-plan" aria-controls="eh-view-plan" aria-selected="false" tabindex="-1" data-part="plan">Plan scenes</button>
                                 <button type="button" class="eh-part rv-part--keep" role="tab" id="eh-tab-record" aria-controls="eh-view-record" aria-selected="false" tabindex="-1" data-part="record">Writing record</button>
                             </div>
@@ -92,8 +92,8 @@
                                     <p class="app-book">The Winter Ledger</p>
                                     <div class="app-chapters">
                                         <p class="app-row" data-chapter-row>The Burying Field</p>
-                                        <button type="button" class="app-row" data-chapter-row data-open-part="rewrite">The Ledger</button>
-                                        <button type="button" class="app-row is-current" data-chapter-row data-open-part="continue">Pryce's Gate</button>
+                                        <button type="button" class="app-row is-current" data-chapter-row data-open-part="rewrite">The Ledger</button>
+                                        <button type="button" class="app-row" data-chapter-row data-open-part="continue">Pryce's Gate</button>
                                         <button type="button" class="app-row" data-chapter-row data-open-part="plan">Hard Frost</button>
                                         <p class="app-row" data-chapter-row>Wassail</p>
                                     </div>
@@ -109,10 +109,10 @@
                                         <p class="app-crumb">
                                             <span>The Winter Ledger</span>
                                             <svg class="app-slash" aria-hidden="true"><use href="app-icons.svg#slash" /></svg>
-                                            <span class="app-crumb-page" data-crumb>Pryce's Gate</span>
+                                            <span class="app-crumb-page" data-crumb>The Ledger</span>
                                         </p>
                                         <div class="app-header-end">
-                                            <p class="app-count"><span data-count>21</span> words</p>
+                                            <p class="app-count"><span data-count>121</span> words</p>
                                             <span class="app-divider" aria-hidden="true"></span>
                                             <div class="app-header-tools">
                                                 <button type="button" class="app-iconbutton" data-scenes-toggle aria-label="Show or hide the Scenes panel" aria-pressed="false"><svg class="app-icon" aria-hidden="true"><use href="app-icons.svg#scenes" /></svg></button>
@@ -255,6 +255,7 @@
                                         data-status-pending="A suggestion is waiting on a sample chapter. Try Accept, Revise or Dismiss."
                                         data-status-accepted="Accepted. The lines are part of the chapter now, and counted in the Writing record."
                                         data-status-dismissed="Dismissed. The page is as you left it."
+                                        hidden
                                     >
                                         <div class="app-scroll">
                                             <span class="app-checks" aria-hidden="true"><svg class="app-icon"><use href="app-icons.svg#checks" /></svg></span>
@@ -308,7 +309,6 @@
                                         data-status-rewriting="Feldar is rewriting the passage."
                                         data-status-rewritten="The new words are marked. Apply the rewrite, or press the bin to keep your own."
                                         data-status-applied="Applied. The new words are counted in the Writing record."
-                                        hidden
                                     >
                                         <div class="app-scroll">
                                             <span class="app-checks" aria-hidden="true"><svg class="app-icon"><use href="app-icons.svg#checks" /></svg></span>
