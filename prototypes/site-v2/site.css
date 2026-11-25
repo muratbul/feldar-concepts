@@ -3473,6 +3473,28 @@ button.app-rewrite-tool:hover {
     max-width: 384px;
 }
 
+/* 2.7: the bubble opens line by line as Sage speaks, and each word fades in. */
+.sg-bubble--saying {
+    overflow: hidden;
+    transition: height 120ms var(--sg-enter);
+}
+
+.sg-word {
+    opacity: 0;
+    transition: opacity 120ms ease-out;
+}
+
+.sg-word.is-said {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sg-bubble--saying,
+    .sg-word {
+        transition: none;
+    }
+}
+
 /* 2.6: the status line, with its shimmer band passing over the words. */
 .sg-bubble--status {
     max-width: none;

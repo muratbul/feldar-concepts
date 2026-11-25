@@ -41,7 +41,7 @@ const STATUS = {
         done: "Done. The margin is clean again.",
     },
     memories: {
-        menu: "Right-click Sage for its menu. Memories opens what Sage remembers, in Settings.",
+        menu: "Sage's menu is open. Memories opens what Sage remembers, in Settings.",
     },
 };
 
@@ -50,18 +50,59 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const pause = (milliseconds) =>
     new Promise((resolve) => setTimeout(resolve, reducedMotion.matches ? 0 : milliseconds));
 
-// Stops early, leaving what it has said, once isCurrent says the moment has moved on.
-async function speak(target, text, firstMs, wordMs, isCurrent = () => true) {
+const wordsOf = (text) => text.match(/\s*\S+\s*/g) ?? [];
+
+// The bubble's border-box height that holds every line up to the given word's. Lines are
+// counted from where the words sit, then sized by the line height, since a word's own box
+// is shorter than its line.
+function heightTo(bubble, firstWord, word) {
+    const style = getComputedStyle(bubble);
+    const lineHeight = parseFloat(style.lineHeight);
+    const lines = Math.round((word.offsetTop - firstWord.offsetTop) / lineHeight) + 1;
+    const frame = ["paddingTop", "paddingBottom", "borderTopWidth", "borderBottomWidth"]
+        .reduce((sum, side) => sum + parseFloat(style[side]), 0);
+    return frame + lines * lineHeight;
+}
+
+// 2.7: the bubble is laid out with the whole saying from the start, so it never changes
+// width; each word fades in, and the bubble opens to the lines said so far. Stops early,
+// leaving what it has said, once isCurrent says the moment has moved on.
+async function speak(bubble, text, isCurrent = () => true) {
+    const words = wordsOf(text).map((part) => {
+        const word = document.createElement("span");
+        word.className = "sg-word";
+        word.textContent = part;
+        return word;
+    });
+    bubble.style.height = "";
+    bubble.replaceChildren(...words);
+    if (reducedMotion.matches) {
+        for (const word of words) word.classList.add("is-said");
+        return;
+    }
+    const [firstWord] = words;
+    bubble.style.height = `${heightTo(bubble, firstWord, firstWord)}px`;
+    await pause(SAY_FIRST_MS);
+    for (const word of words) {
+        if (!isCurrent()) return;
+        word.classList.add("is-said");
+        bubble.style.height = `${heightTo(bubble, firstWord, word)}px`;
+        await pause(SAY_WORD_MS);
+    }
+    bubble.style.height = "";
+}
+
+// An answer streams in as it arrives, with no per-word animation (2.6).
+async function stream(target, text, isCurrent) {
     target.textContent = "";
     if (reducedMotion.matches) {
         target.textContent = text;
         return;
     }
-    await pause(firstMs);
-    for (const word of text.match(/\s*\S+\s*/g) ?? []) {
+    for (const word of wordsOf(text)) {
         if (!isCurrent()) return;
         target.append(word);
-        await pause(wordMs);
+        await pause(ANSWER_WORD_MS);
     }
 }
 
@@ -110,7 +151,7 @@ function initAsk(view, setState) {
             input.value = "";
             showSendOrVoice();
             saying.hidden = false;
-            await speak(saying, SAMPLE_ENDS, SAY_FIRST_MS, SAY_WORD_MS);
+            await speak(saying, SAMPLE_ENDS);
             return;
         }
 
@@ -122,7 +163,7 @@ function initAsk(view, setState) {
         if (thisRun !== run) return;
         status.hidden = true;
         answer.hidden = false;
-        await speak(answerText, ANSWER, 0, ANSWER_WORD_MS, () => thisRun === run);
+        await stream(answerText, ANSWER, () => thisRun === run);
         if (thisRun !== run) return;
         input.value = "";
         input.placeholder = "Follow up";
@@ -187,7 +228,7 @@ function initFollow(view, column, setState) {
         mark.hidden = false;
         placeSaying(point);
         saying.hidden = false;
-        speak(saying, line, SAY_FIRST_MS, SAY_WORD_MS, () => thisWalk === walk);
+        speak(saying, line, () => thisWalk === walk);
     };
 
     const enter = async () => {
