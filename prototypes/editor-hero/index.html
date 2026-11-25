@@ -165,50 +165,77 @@
                                                 <button type="button" class="app-button app-button--wide" data-generate>Generate scenes</button>
                                             </div>
                                             <div class="app-scenes-body" data-plan-scenes hidden>
-                                                <p
-                                                    class="app-scenes-status"
-                                                    data-plan-note
-                                                    data-planned="Generated 5 scenes successfully!"
-                                                    data-drafted="Complete! Generated 1 page ({words} words)"
-                                                >Generated 5 scenes successfully!</p>
+                                                <p class="app-scenes-status" role="status" aria-label="Scene generation">Scene framework ready! Review and customize the scenes to match your vision, then continue</p>
+                                                <p class="app-scenes-status" role="status" aria-label="Page generation" data-plan-note data-drafted="Complete! Generated 1 page ({words} words)" hidden></p>
                                                 <p class="app-scenes-label">PAGE 4</p>
-                                                <ol class="app-scenes-list">
-                                                    <li class="app-scene">
-                                                        <span class="app-scene-number">1</span>
-                                                        <div>
-                                                            <p class="app-scene-name">Daniel will not say</p>
-                                                            <p class="app-scene-text">In the cider house Daniel will not tell Nell who M.P. is. He says she should ask his mother, then goes out to light the smudge pots before she can answer.</p>
-                                                        </div>
+                                                <ol class="app-scenes-list" data-scene-list>
+                                                    <li class="app-scene-entry">
+                                                        <article class="app-scene" aria-label="Scene 1" data-rewrite-name="The lantern on its nail" data-rewrite-text="Nell reads the two letters aloud in the cider house. Daniel takes the lantern down, says it is his mother's business and not his, and goes out into the cold.">
+                                                            <button type="button" class="app-scene-number" aria-label="Select scene 1" aria-pressed="false" data-scene-number>1</button>
+                                                            <div class="app-scene-body">
+                                                                <div class="app-scene-copy">
+                                                                    <p class="app-scene-name" aria-label="Scene 1 title" data-scene-name>Daniel will not say</p>
+                                                                    <p class="app-scene-text" aria-label="Scene 1 description" data-scene-text>In the cider house Daniel will not tell Nell who M.P. is. He says she should ask his mother, then goes out to light the smudge pots before she can answer.</p>
+                                                                </div>
+                                                            </div>
+                                                        </article>
                                                     </li>
-                                                    <li class="app-scene">
-                                                        <span class="app-scene-number">2</span>
-                                                        <div>
-                                                            <p class="app-scene-name">Fires in the low rows</p>
-                                                            <p class="app-scene-text">They work through the night lighting fires between the Foxwhelps. In the smoke and the cold he starts to tell her about the winter of 1932, and stops.</p>
-                                                        </div>
+                                                    <li class="app-scene-entry">
+                                                        <article class="app-scene" aria-label="Scene 2" data-rewrite-name="Smoke along the ground" data-rewrite-text="All night they keep the smudge pots burning between the Foxwhelps. Near dawn Daniel says the year 1932 and nothing after it.">
+                                                            <button type="button" class="app-scene-number" aria-label="Select scene 2" aria-pressed="false" data-scene-number>2</button>
+                                                            <div class="app-scene-body">
+                                                                <div class="app-scene-copy">
+                                                                    <p class="app-scene-name" aria-label="Scene 2 title" data-scene-name>Fires in the low rows</p>
+                                                                    <p class="app-scene-text" aria-label="Scene 2 description" data-scene-text>They work through the night lighting fires between the Foxwhelps. In the smoke and the cold he starts to tell her about the winter of 1932, and stops.</p>
+                                                                </div>
+                                                            </div>
+                                                        </article>
                                                     </li>
-                                                    <li class="app-scene">
-                                                        <span class="app-scene-number">3</span>
-                                                        <div>
-                                                            <p class="app-scene-name">Agnes at the gate</p>
-                                                            <p class="app-scene-text">At first light Nell walks down to Pryce's Gate. Agnes is already there in her good coat, as if she has been expecting this visit for thirty years.</p>
-                                                        </div>
+                                                    <li class="app-scene-entry">
+                                                        <article class="app-scene" aria-label="Scene 3" data-rewrite-name="The good coat" data-rewrite-text="Nell goes down to Pryce's Gate as the light comes. Agnes opens it before she can knock, dressed for a visit she has waited thirty years to have.">
+                                                            <button type="button" class="app-scene-number" aria-label="Select scene 3" aria-pressed="false" data-scene-number>3</button>
+                                                            <div class="app-scene-body">
+                                                                <div class="app-scene-copy">
+                                                                    <p class="app-scene-name" aria-label="Scene 3 title" data-scene-name>Agnes at the gate</p>
+                                                                    <p class="app-scene-text" aria-label="Scene 3 description" data-scene-text>At first light Nell walks down to Pryce's Gate. Agnes is already there in her good coat, as if she has been expecting this visit for thirty years.</p>
+                                                                </div>
+                                                            </div>
+                                                        </article>
                                                     </li>
-                                                    <li class="app-scene">
-                                                        <span class="app-scene-number">4</span>
-                                                        <div>
-                                                            <p class="app-scene-name">The page of births</p>
-                                                            <p class="app-scene-text">In Agnes's kitchen the family Bible lies open at its page of births.</p>
-                                                        </div>
+                                                    <li class="app-scene-entry">
+                                                        <article class="app-scene" aria-label="Scene 4" data-rewrite-name="A name in the Bible" data-rewrite-text="Agnes lays the family Bible open on the kitchen table. Under the births, in a hand Nell knows from the ledger, is one more name.">
+                                                            <button type="button" class="app-scene-number" aria-label="Select scene 4" aria-pressed="false" data-scene-number>4</button>
+                                                            <div class="app-scene-body">
+                                                                <div class="app-scene-copy">
+                                                                    <p class="app-scene-name" aria-label="Scene 4 title" data-scene-name>The page of births</p>
+                                                                    <p class="app-scene-text" aria-label="Scene 4 description" data-scene-text>In Agnes's kitchen the family Bible lies open at its page of births.</p>
+                                                                </div>
+                                                            </div>
+                                                        </article>
                                                     </li>
-                                                    <li class="app-scene">
-                                                        <span class="app-scene-number">5</span>
-                                                        <div>
-                                                            <p class="app-scene-name">Two pounds a month</p>
-                                                            <p class="app-scene-text">Agnes tells Nell what the two pounds were for, and asks what she means to do now that she knows.</p>
-                                                        </div>
+                                                    <li class="app-scene-entry">
+                                                        <article class="app-scene" aria-label="Scene 5" data-rewrite-name="What the money bought" data-rewrite-text="Agnes tells Nell what her father paid for, month after month, and waits to hear what Nell will do with it.">
+                                                            <button type="button" class="app-scene-number" aria-label="Select scene 5" aria-pressed="false" data-scene-number>5</button>
+                                                            <div class="app-scene-body">
+                                                                <div class="app-scene-copy">
+                                                                    <p class="app-scene-name" aria-label="Scene 5 title" data-scene-name>Two pounds a month</p>
+                                                                    <p class="app-scene-text" aria-label="Scene 5 description" data-scene-text>Agnes tells Nell what the two pounds were for, and asks what she means to do now that she knows.</p>
+                                                                </div>
+                                                            </div>
+                                                        </article>
                                                     </li>
                                                 </ol>
+                                                <!-- Continue from here draws on these, in order, after the scene it is asked from. -->
+                                                <template data-scene-continuations>
+                                                    <article data-name="The ledger by lamplight" data-rewrite-name="A month missing" data-rewrite-text="Turning the ledger pages by lamplight, Nell sees that one spring the two pounds were not paid, and that the next month her father paid four." data-text="Alone in the cider house, Nell turns back through the ledger and finds the two pounds stop for one month in the spring of 1933, then start again."></article>
+                                                    <article data-name="Frost on the press" data-rewrite-name="Tea on the bench" data-rewrite-text="Frost has whitened the press overnight. Daniel clears it without speaking, and there is tea on the bench when she comes down." data-text="By morning the press is white with frost. Daniel scrapes it clean without a word and leaves a mug of tea on the bench where she will see it."></article>
+                                                    <article data-name="The second hand" data-rewrite-name="Dates on a loose page" data-rewrite-text="Tucked in the back of the ledger is a loose page of dates, written in a hand Nell does not know." data-text="On a loose page at the back of the ledger Nell finds a list of dates in a hand that is not her father's."></article>
+                                                    <article data-name="Walking the low rows" data-rewrite-name="What the night cost" data-rewrite-text="At noon Nell walks the low rows. The fires saved most of the Foxwhelps, but three trees by the wall are lost." data-text="Nell walks the low rows at noon to see what the night cost them. Most of the Foxwhelps held. Three trees by the wall did not."></article>
+                                                    <article data-name="A letter to Bristol" data-rewrite-name="Not back after Christmas" data-rewrite-text="Nell writes to the school in Bristol to say she will not return after Christmas, and cannot get past the second line." data-text="Nell starts a letter to the school to say she will not be back after Christmas, and stops at the second line."></article>
+                                                    <article data-name="Daniel at the wall" data-rewrite-name="Stones the frost lifted" data-rewrite-text="Daniel is putting back the stones the frost lifted from the wall. Without looking up, he asks what she means to do with the orchard." data-text="Daniel is mending the wall where the frost lifted the stones. He asks what she will do with the orchard, and does not look at her when he asks."></article>
+                                                    <article data-name="The postmistress" data-rewrite-name="Mondays in 1932" data-rewrite-text="The postmistress tells Nell who came for the letters to M.P. in 1932. It was always a Monday, she says, and always the same person." data-text="In the village the postmistress remembers who collected the letters for M.P. in 1932, and that it was always on a Monday."></article>
+                                                    <article data-name="The kitchen clock" data-rewrite-name="Sitting up with the clock" data-rewrite-text="With the ledger closed in front of her and her father's clock ticking, Nell sits up late deciding whether to go back to Pryce's Gate." data-text="Nell sits up with her father's kitchen clock ticking and the ledger shut on the table, deciding whether to go back to Pryce's Gate."></article>
+                                                </template>
                                                 <div class="app-scenes-foot">
                                                     <p class="app-credit">No credits used</p>
                                                     <span class="app-tools" aria-hidden="true">
@@ -551,7 +578,7 @@
                                             <p class="app-scenes-title">Scenes</p>
                                             <span class="app-iconbox"><svg class="app-icon"><use href="app-icons.svg#close" /></svg></span>
                                         </div>
-                                        <p class="app-scenes-status">Generated 5 scenes successfully!</p>
+                                        <p class="app-scenes-status">Scene framework ready! Review and customize the scenes to match your vision, then continue</p>
                                         <p class="app-scenes-label">PAGE 4</p>
                                         <ol class="app-scenes-list">
                                             <li class="app-scene">

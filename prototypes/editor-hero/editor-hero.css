@@ -1501,6 +1501,12 @@ body.nav-open {
     --app-height: 600px;
     --app-menu-row: 28px;
     --app-dark-row: 28px;
+    /* The Scenes panel's row highlight and the shared tooltip, from
+       docs/seo/app-ui/production-scenes-spec.md 0.2 and 3.5. */
+    --app-scene-highlight: #f6f5f2;
+    --app-tooltip: #242424;
+    --app-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --app-ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .app {
@@ -2033,6 +2039,511 @@ button.app-row:hover,
 .app-scene-text {
     margin-top: 6px;
     line-height: 28px;
+}
+
+/* The live list: each scene entry is its row and the Add here slot under it, which also
+   makes the gap between rows, so the list itself has none (spec 2.1 to 4.1). */
+.app-scenes-list[data-scene-list] {
+    gap: 0;
+}
+
+.app-scene-entry {
+    flex-shrink: 0;
+}
+
+.app-scene-entry .app-scene {
+    border-radius: 12px;
+    transition: background-color 180ms var(--app-ease-standard);
+}
+
+.app-scenes-list:not([data-suppressed]) .app-scene-entry:is(:hover, :focus-within) .app-scene,
+.app-scene-entry[data-pinned] .app-scene {
+    background: var(--app-scene-highlight);
+}
+
+button.app-scene-number {
+    display: flex;
+    justify-content: flex-start;
+    height: 28px;
+    margin: -4px 4px 0 -4px;
+    padding: 0 0 0 4px;
+    border-radius: 6px;
+    font-size: 16px;
+    letter-spacing: -0.35px;
+}
+
+button.app-scene-number:hover {
+    background: var(--app-hover);
+}
+
+button.app-scene-number:active {
+    background: var(--app-active);
+}
+
+.app-scene-body {
+    display: flex;
+    flex: 1;
+    align-items: flex-start;
+    gap: 32px;
+    min-width: 0;
+}
+
+.app-scene-copy {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+.app-scene-copy .app-scene-text {
+    white-space: pre-wrap;
+}
+
+button.app-scene-number:focus-visible,
+.app-scene-copy [contenteditable]:focus-visible,
+.app-scene-action:focus-visible,
+.app-scene-add:focus-visible,
+.app-scene-menu button:focus-visible {
+    outline: 2px solid var(--app-focus);
+    outline-offset: 2px;
+}
+
+.app-scene-copy [contenteditable] {
+    outline: none;
+}
+
+/* A blank scene shows its placeholders until they are written over (3.3, 3.6). */
+.app-scene-copy [data-placeholder-shown] {
+    color: var(--app-text-tertiary);
+}
+
+.app-scene-text[data-placeholder-shown] {
+    font-style: italic;
+}
+
+.app-scene-entry[data-blank]:has(.app-scene-name[data-placeholder-shown]):has(.app-scene-text[data-placeholder-shown]) .app-scene-number {
+    color: var(--app-text-tertiary);
+}
+
+/* Delete and Rewrite fade in on hover or focus; they leave at once (3.4, 3.5). */
+.app-scene-actions {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: 4px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 120ms var(--app-ease-standard);
+}
+
+.app-scenes-list:not([data-suppressed]) .app-scene-entry:is(:hover, :focus-within) .app-scene-actions,
+.app-scenes-list:not([data-suppressed]) .app-scene-entry[data-pinned] .app-scene-actions {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.app-scene-action {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--app-text-tertiary);
+    transition: color 120ms var(--app-ease-standard);
+}
+
+.app-scene-action:hover,
+.app-scene-action:active {
+    color: var(--app-text);
+}
+
+.app-scene-action:disabled {
+    color: var(--app-text-disabled);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* The app's tooltip, to the left of its button after a 500ms hover. */
+.app-scene-action::after {
+    position: absolute;
+    top: 50%;
+    right: calc(100% + 6px);
+    z-index: 2;
+    padding: 2px 8px;
+    border-radius: 8px;
+    background: var(--app-tooltip);
+    box-shadow: var(--app-shadow-floating);
+    color: var(--app-surface);
+    font: 500 12px/16px var(--app-font);
+    letter-spacing: 0.12px;
+    white-space: nowrap;
+    content: attr(data-tip);
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 -50%;
+    pointer-events: none;
+    transition:
+        opacity 180ms var(--app-ease-standard),
+        visibility 180ms var(--app-ease-standard);
+}
+
+.app-scene-action:is(:hover, :focus-visible)::after {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 500ms;
+}
+
+.app-scene-spinner {
+    width: 12px;
+    height: 12px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: app-spin 420ms linear infinite;
+}
+
+/* Add here: an 8px gap that opens to a 52px slot under the row in use (4.1). */
+.app-scene-slot {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 8px;
+    padding-inline: 12px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        height 120ms var(--app-ease-standard),
+        opacity 120ms var(--app-ease-standard);
+}
+
+.app-scene-slot::before,
+.app-scene-slot::after {
+    flex-grow: 1;
+    height: 1px;
+    background: var(--app-border-subtle);
+    content: "";
+}
+
+.app-scenes-list:not([data-suppressed]) .app-scene-entry:is(:hover, :focus-within) .app-scene-slot {
+    height: 52px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.app-scene-add {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 6px;
+    min-height: 28px;
+    padding: 0 10px;
+    border: 1px solid var(--app-border);
+    border-radius: 8px;
+    color: var(--app-text-tertiary);
+    font: 500 14px/18px var(--app-font);
+    letter-spacing: -0.056px;
+    transition:
+        color 120ms var(--app-ease-standard),
+        background-color 120ms var(--app-ease-standard);
+}
+
+.app-scene-add:hover {
+    background: var(--app-hover);
+    color: var(--app-text);
+}
+
+.app-scene-add:active {
+    background: var(--app-active);
+    color: var(--app-text);
+}
+
+.app-scene-add-mark {
+    display: grid;
+    place-items: center;
+    width: 12px;
+    height: 12px;
+}
+
+.app-scene-add-mark .app-icon {
+    width: 8px;
+    height: 8px;
+}
+
+/* The Add scene menu takes the slot's place (4.2). */
+.app-scene-band {
+    padding: 20px 12px 24px;
+    animation: app-scene-band-in 120ms var(--app-ease-enter);
+}
+
+@keyframes app-scene-band-in {
+    from {
+        opacity: 0;
+    }
+}
+
+.app-scene-menu {
+    width: 100%;
+    max-width: 512px;
+    margin-inline: auto;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--app-surface);
+    box-shadow: var(--app-shadow-floating);
+}
+
+.app-scene-menu-head {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    padding-inline: 16px;
+    border-bottom: 1px solid var(--app-border-subtle);
+    background: var(--app-tertiary);
+    color: var(--app-text-secondary);
+    font: 500 13px/16px var(--app-font);
+    letter-spacing: 0;
+}
+
+.app-scene-menu-item,
+.app-scene-menu-cancel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 28px;
+    padding: 10px 8px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.app-scene-menu-item:hover,
+.app-scene-menu-cancel:hover {
+    background: var(--app-hover);
+}
+
+.app-scene-menu-label {
+    font: 500 14px/18px var(--app-font);
+    letter-spacing: -0.056px;
+}
+
+.app-scene-menu-hint {
+    margin-top: 2px;
+    color: var(--app-text-tertiary);
+    font: 400 13px/18px var(--app-font);
+}
+
+.app-scene-menu-foot {
+    min-height: 40px;
+    border-top: 1px solid var(--app-border-subtle);
+}
+
+.app-scene-menu-cancel {
+    color: var(--app-text-tertiary);
+    font: 400 13px/18px var(--app-font);
+}
+
+.app-scene-menu-item:disabled {
+    color: var(--app-text-disabled);
+    cursor: not-allowed;
+}
+
+.app-scene-menu-item:disabled:hover {
+    background: none;
+}
+
+/* Continue from here: a nudge, how many scenes, then Generate (4.3). */
+.app-scene-continue-body {
+    min-height: 124px;
+    padding: 20px 24px 24px;
+}
+
+.app-scene-nudge {
+    display: block;
+    width: 100%;
+    resize: none;
+    border: 0;
+    background: none;
+    color: var(--app-text);
+    font: 400 16px/28px var(--app-font);
+    letter-spacing: -0.35px;
+    outline: none;
+}
+
+.app-scene-nudge::placeholder {
+    color: var(--app-text-tertiary);
+}
+
+.app-scene-continue-foot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    min-height: 52px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--app-border-subtle);
+}
+
+.app-scene-count {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: auto;
+}
+
+.app-scene-count-button {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    color: var(--app-text-tertiary);
+}
+
+.app-scene-count-button .app-icon {
+    width: 10px;
+    height: 10px;
+}
+
+.app-scene-count-button:hover {
+    background: var(--app-hover);
+    color: var(--app-text);
+}
+
+.app-scene-count-button:disabled {
+    background: none;
+    color: var(--app-text-disabled);
+    cursor: not-allowed;
+}
+
+.app-scene-count-value {
+    min-width: 14px;
+    color: var(--app-text-secondary);
+    font: 500 12px/16px var(--app-font);
+    letter-spacing: 0.12px;
+    text-align: center;
+}
+
+.app-scene-small {
+    height: 24px;
+    padding: 0 8px;
+    border-radius: 6px;
+    color: var(--app-text-tertiary);
+    font: 500 13px/16px var(--app-font);
+}
+
+.app-scene-small--strong {
+    color: var(--app-text);
+}
+
+.app-scene-small:hover {
+    background: var(--app-hover);
+    color: var(--app-text);
+}
+
+.app-scene-count-button:focus-visible,
+.app-scene-small:focus-visible {
+    outline: 2px solid var(--app-focus);
+    outline-offset: 2px;
+}
+
+/* While Feldar drafts: the count, then a skeleton row for each scene to come. */
+.app-scene-drafting-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-inline: 12px;
+    color: var(--app-text-secondary);
+    font: 500 14px/16px var(--app-font);
+    letter-spacing: -0.1px;
+}
+
+.app-scene-spinner--14 {
+    width: 14px;
+    height: 14px;
+}
+
+.app-scene-skeletons {
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+    margin-top: 26px;
+    padding-inline: 12px;
+}
+
+.app-scene-skeleton {
+    display: flex;
+    gap: 18px;
+}
+
+.app-scene-skeleton-number {
+    color: var(--app-text-muted);
+    font: 400 16px/20px var(--app-font-serif);
+    letter-spacing: -0.35px;
+}
+
+.app-scene-skeleton-lines {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 2px;
+}
+
+.app-scene-skeleton-lines span {
+    height: 16px;
+    border-radius: 9999px;
+    background: rgba(111, 111, 111, 0.1);
+    animation: app-skeleton-pulse 2s var(--app-ease-standard) infinite;
+}
+
+.app-scene-skeleton-lines span:nth-child(1) {
+    width: 34%;
+}
+
+.app-scene-skeleton-lines span:nth-child(2) {
+    width: 78%;
+}
+
+.app-scene-skeleton-lines span:nth-child(3) {
+    width: 53%;
+}
+
+@keyframes app-skeleton-pulse {
+    50% {
+        background: rgba(111, 111, 111, 0.18);
+    }
+}
+
+/* While the menu is open no row answers the pointer (3.4, suppressed). */
+.app-scenes-list[data-suppressed] .app-scene {
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .app-scene-entry .app-scene,
+    .app-scene-actions,
+    .app-scene-action,
+    .app-scene-action::after,
+    .app-scene-slot,
+    .app-scene-add {
+        transition: none;
+    }
+
+    .app-scene-band {
+        animation: none;
+    }
+
+    .app-scene-spinner,
+    .app-scene-skeleton-lines span {
+        animation: none;
+    }
+
+    .app-scene-spinner {
+        border-top-color: currentColor;
+    }
 }
 
 .app-scenes-foot {
