@@ -1,12 +1,12 @@
 // The working sample of the editor. Each thing to try has its page in the markup, set at
 // its first frame, and its responses are prepared there too. This script only moves a
 // page from one state to the next, the way the app would. Nothing is sent anywhere.
-
-import { paintInkGround } from "./ink-ground.js";
+// Pages that show the editor import initEditorHero and call it on their own markup.
 
 const WORD_MS = 22;
 const STEP_MS = 520;
-const ICONS = "app-icons.svg";
+// Resolved from this module, so a page in another folder still finds the sprite.
+const ICONS = new URL("app-icons.svg", import.meta.url).href;
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const wholeNumber = new Intl.NumberFormat("en-US");
@@ -364,7 +364,7 @@ function initRewrite(view, hero) {
     return keepOwnWords;
 }
 
-function initEditorHero(root) {
+export function initEditorHero(root) {
     const tabs = [...root.querySelectorAll('[role="tab"]')];
     const views = new Map([...root.querySelectorAll("[data-view]")].map((view) => [view.dataset.view, view]));
     const status = root.querySelector("[data-status]");
@@ -458,11 +458,4 @@ function initEditorHero(root) {
     });
 
     showView(onScreen());
-}
-
-const editorHero = document.querySelector("[data-editor-hero]");
-
-if (editorHero) {
-    initEditorHero(editorHero);
-    paintInkGround(editorHero.querySelector("[data-ink-ground]"), editorHero.querySelector("[data-ink-clear]"));
 }

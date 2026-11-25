@@ -1,0 +1,451 @@
+/* Sage on the sample page. Every value is from docs/seo/app-ui/production-sage-spec.md
+   (origin/master a344e855f, light theme); section numbers refer to that file. The page
+   itself is the editor's main panel and column, as in app-window.css. */
+
+:root {
+    --sg-tertiary: #f3f3f3;
+    --sg-hover: #eeeeee;
+    --sg-active: #e8e8e8;
+    --sg-border: #e8e8e8;
+    --sg-border-subtle: #eeeeee;
+    --sg-text: #0e0e0e;
+    --sg-text-secondary: #4d4d4d;
+    --sg-text-tertiary: #6f6f6f;
+    --sg-text-disabled: #a0a0a0;
+    --sg-inverse: #0e0e0e;
+    --sg-inverse-hover: #343434;
+    --sg-focus: #358df5;
+    --sg-raised: 0 1px 3px rgba(8, 8, 8, 0.08), 0 0 0 1px rgba(8, 8, 8, 0.04), 0 5px 16px rgba(8, 8, 8, 0.03);
+    --sg-floating: 0 4px 16px rgba(8, 8, 8, 0.1), 0 1px 4px rgba(8, 8, 8, 0.06), 0 0 0 1px rgba(8, 8, 8, 0.04);
+    --sg-enter: cubic-bezier(0.16, 1, 0.3, 1);
+    --sg-standard: cubic-bezier(0.2, 0, 0, 1);
+    --sg-font: "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --sg-font-manuscript: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* The gradients and filters Sage's mark uses, kept out of the layout. */
+.sg-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.sg-icon {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.sg-icon path {
+    vector-effect: non-scaling-stroke;
+}
+
+.sg-icon--12 {
+    width: 12px;
+    height: 12px;
+}
+
+/* The page: the editor's main panel with its manuscript column. */
+.sg-page {
+    min-height: 560px;
+    padding: 40px 48px;
+    border: 1px solid var(--sg-border);
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: var(--sg-raised);
+}
+
+.sg-column {
+    position: relative;
+    width: min(100%, 608px);
+    margin-inline: auto;
+}
+
+.sg-title {
+    margin-bottom: 24px;
+    color: var(--sg-text);
+    font: 500 32px/38px var(--sg-font);
+    letter-spacing: -0.4px;
+}
+
+.sg-prose {
+    color: var(--sg-text-secondary);
+    font: 400 20px/32px var(--sg-font-manuscript);
+    font-variant-ligatures: none;
+}
+
+.sg-prose > p + p {
+    margin-top: 20px;
+}
+
+/* 4.2: the words a reaction is about, washed while its card is open. */
+.sg-about {
+    border-radius: 4px;
+    transition: background-color 120ms var(--sg-standard);
+}
+
+/* Washed only while a reaction card is open in the mode on screen. */
+.sg-column:has(.sg-view:not([hidden]) [data-sage-card]:not([hidden])) .sg-about {
+    background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+/* Sage under the text (2.5): the point sits 19px below the text, here 32px in from the
+   column. The mark's viewBox puts the point 24px in from its corner. */
+.sg-under {
+    --sg-point: 32px;
+    position: relative;
+    display: flow-root;
+    margin-top: 19px;
+}
+
+/* A saying beside Sage and Sage's menu are placed out of the flow, so the space under
+   the text keeps room for them: three lines of a saying, and the menu's five rows, divider
+   and three rows (5.2) less the 11px it rises above Sage's point. */
+.sg-view[data-sage-view="follow"] .sg-under {
+    min-height: 72px;
+}
+
+.sg-view[data-sage-view="memories"] .sg-under {
+    min-height: 236px;
+}
+
+.sg-mark {
+    position: absolute;
+    left: calc(var(--sg-point) - 24px);
+    top: -24px;
+    width: 70px;
+    height: 72px;
+    overflow: visible;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 2.1: the thread, with a blurred white wash behind it. Below Sage its left edge is 5px
+   left of the point and its top 33px below it. */
+.sg-thread {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    max-width: 384px;
+}
+
+.sg-thread::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    z-index: -1;
+    border-radius: 16px;
+    background: #ffffff;
+    filter: blur(12px);
+}
+
+.sg-under > .sg-thread {
+    margin-left: calc(var(--sg-point) - 5px);
+    margin-top: 33px;
+}
+
+/* 2.2 and 2.3: the answer bubble. */
+.sg-bubble {
+    max-width: 384px;
+    padding: 14px 12px 14px 18px;
+    border-radius: 20px;
+    background: var(--sg-tertiary);
+    color: var(--sg-text);
+    font: 400 14px/20px var(--sg-font);
+    letter-spacing: -0.056px;
+    overflow-wrap: anywhere;
+    animation: sg-enter 120ms var(--sg-enter) both;
+}
+
+@keyframes sg-enter {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+}
+
+/* 2.7: the speech bubble for statuses and sayings, its corner nearest Sage squared to
+   4px (Sage is above and to the left). */
+.sg-bubble--status,
+.sg-bubble--saying {
+    max-width: 192px;
+    padding: 8px 12px;
+    border-radius: 4px 16px 16px;
+}
+
+.sg-bubble--saying {
+    max-width: 384px;
+}
+
+/* 2.6: the status line, with its shimmer band passing over the words. */
+.sg-bubble--status {
+    max-width: none;
+}
+
+.sg-shimmer {
+    background-image: linear-gradient(90deg, var(--sg-text-tertiary) 0 40%, color-mix(in srgb, var(--sg-text) 78%, transparent) 47% 53%, var(--sg-text-tertiary) 60% 100%);
+    background-size: 300% 100%;
+    background-clip: text;
+    color: transparent;
+    animation: sg-shimmer 3s linear infinite;
+}
+
+@keyframes sg-shimmer {
+    0% {
+        background-position: 100% 0;
+    }
+
+    60%,
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* 2.5: a brief saying beside Sage, 8px right of the body box, its top 11px above the
+   point, here at the body box's top. */
+.sg-bubble--beside {
+    position: absolute;
+    left: calc(var(--sg-point) + 24px + 8px);
+    top: -11px;
+    max-width: 192px;
+}
+
+/* 3: the field under an answer, and the answer's actions. */
+.sg-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    justify-content: space-between;
+}
+
+.sg-field {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 256px;
+    min-height: 36px;
+    padding: 4px 4px 4px 12px;
+    border-radius: 9999px;
+    background: #ffffff;
+    box-shadow: var(--sg-raised);
+}
+
+.sg-field[data-tall] {
+    align-items: flex-end;
+    border-radius: 16px;
+}
+
+.sg-field:focus-within {
+    outline: 2px solid var(--sg-focus);
+    outline-offset: 2px;
+}
+
+.sg-input {
+    flex: 0 0 188px;
+    width: 188px;
+    min-height: 24px;
+    max-height: 120px;
+    padding: 2px 8px;
+    border: 0;
+    background: transparent;
+    color: var(--sg-text);
+    font: 400 13px/18px var(--sg-font);
+    resize: none;
+    outline: none;
+}
+
+/* The field draws the focus ring, round its whole shape. */
+.sg-input:focus-visible {
+    outline: none;
+}
+
+.sg-input::placeholder {
+    color: var(--sg-text-tertiary);
+}
+
+.sg-send,
+.sg-well,
+.sg-icon-button,
+.sg-action {
+    display: inline-grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    transition:
+        color 120ms var(--sg-standard),
+        background-color 120ms var(--sg-standard),
+        box-shadow 120ms var(--sg-standard);
+}
+
+.sg-send {
+    background: var(--sg-inverse);
+    color: #ffffff;
+}
+
+.sg-send:hover {
+    background: var(--sg-inverse-hover);
+}
+
+.sg-well {
+    background: var(--sg-tertiary);
+    color: var(--sg-text-tertiary);
+}
+
+.sg-well:hover {
+    background: var(--sg-active);
+    color: var(--sg-text);
+}
+
+.sg-actions {
+    display: flex;
+    gap: 2px;
+    margin-left: auto;
+}
+
+.sg-action {
+    color: var(--sg-text-secondary);
+}
+
+.sg-action:hover {
+    background: #ffffff;
+    box-shadow: var(--sg-raised);
+    color: var(--sg-text);
+}
+
+/* 4.1: the mark in the margin, 8px right of the text column, on the line it is about. */
+.sg-margin-mark {
+    position: absolute;
+    left: calc(100% + 8px);
+    top: var(--sg-mark-top, 0);
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    color: var(--sg-text-tertiary);
+    transition: color 120ms var(--sg-standard);
+    animation: sg-pop 180ms var(--sg-enter) both;
+}
+
+.sg-margin-mark .sg-icon {
+    width: 12px;
+    height: 12px;
+}
+
+.sg-margin-mark:hover,
+.sg-margin-mark[aria-expanded="true"] {
+    color: var(--sg-text);
+}
+
+@keyframes sg-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+}
+
+/* 4.2: the open card. With no room to the mark's right it opens to its left, 8px clear. */
+.sg-card {
+    position: absolute;
+    right: 0;
+    top: var(--sg-mark-top, 0);
+    z-index: 2;
+    width: max-content;
+    max-width: 384px;
+}
+
+.sg-card .sg-bubble {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sg-card .sg-actions {
+    margin-left: 0;
+}
+
+.sg-kind {
+    color: var(--sg-text-tertiary);
+    font: 500 12px/16px var(--sg-font);
+    letter-spacing: 0.12px;
+}
+
+/* 5.2: Sage's menu, right of the box Sage covers and top aligned with it. */
+.sg-menu {
+    position: absolute;
+    left: calc(var(--sg-point) + 24px + 8px);
+    top: -11px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 192px;
+    padding: 4px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: var(--sg-floating);
+}
+
+.sg-menu-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 28px;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: var(--sg-text);
+    font: 400 14px/20px var(--sg-font);
+    letter-spacing: -0.056px;
+    transition: background-color 120ms var(--sg-standard);
+}
+
+.sg-menu-row:hover,
+.sg-menu-row.is-active {
+    background: var(--sg-hover);
+}
+
+.sg-menu-divider {
+    height: 1px;
+    margin-block: 4px;
+    background: var(--sg-border-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sg-bubble,
+    .sg-shimmer,
+    .sg-margin-mark {
+        animation: none;
+    }
+}
+
+/* Stacked under the copy, the page is as tall as what it holds. */
+@media (max-width: 960px) {
+    .sg-page {
+        min-height: 0;
+    }
+}
+
+/* On a phone the page keeps just enough room on the right for a margin mark (8px gap and
+   a 24px mark), and the reaction card opens under its line so the words it is about stay
+   in view. */
+@media (max-width: 720px) {
+    .sg-page {
+        padding: 28px 36px 28px 20px;
+    }
+
+    .sg-card {
+        top: calc(var(--sg-mark-top, 0px) + 36px);
+    }
+}
