@@ -1,5 +1,6 @@
-// Site v2 prototype: the sample editor in the hero, kept at the app's proportions, and
-// Sage on the page under it.
+// Site v2 prototype: the sample editor in the hero, kept at the app's proportions, Sage on
+// the page under it, and the pieces of the app in the connected book section.
+import { mountPieces } from "./app-pieces.js";
 import { mountEditor } from "./editor-window.js";
 import { initSage } from "./sage.js";
 
@@ -7,7 +8,7 @@ initSage(document.querySelector("[data-sage-stage]").closest("section"));
 
 const stage = document.querySelector("[data-editor-mount]");
 
-await mountEditor(stage);
+await Promise.all([mountEditor(stage), mountPieces(document.querySelector(".sv-book"))]);
 
 const appWindow = stage.querySelector(".app");
 const windowWidth = parseFloat(getComputedStyle(stage).getPropertyValue("--sv-window"));

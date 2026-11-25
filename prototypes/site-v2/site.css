@@ -3722,35 +3722,77 @@ body {
     line-height: 1.5;
 }
 
+/* The modes sit in one white panel, as the app's own menus do, so every one reads as
+   something to press. Each carries its icon from Sage's menu; the open one shows its line. */
 .sv-sage-modes {
     display: grid;
-    gap: 6px;
+    gap: 2px;
     margin-top: 32px;
+    padding: 6px;
+    border: 1px solid var(--sv-rule);
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: var(--app-shadow-raised);
 }
 
 .sv-sage-mode {
     display: grid;
-    gap: 4px;
-    padding: 14px 18px;
-    border-radius: 14px;
+    grid-template-columns: 28px minmax(0, 1fr) 16px;
+    column-gap: 12px;
+    row-gap: 4px;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 12px;
+    color: var(--sv-ink);
     text-align: left;
     transition: background-color var(--sv-quick) ease-out;
 }
 
 .sv-sage-mode:hover {
-    background: color-mix(in oklab, var(--sv-well) 70%, transparent);
+    background: var(--sv-well);
 }
 
 .sv-sage-mode[aria-selected="true"] {
-    background: var(--sv-paper);
-    box-shadow: var(--app-shadow-raised);
+    background: var(--sv-well);
+}
+
+.sv-sage-mode-icon {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--sv-well);
+    color: var(--sv-ink);
+}
+
+.sv-sage-mode[aria-selected="true"] .sv-sage-mode-icon {
+    background: var(--sv-ink);
+    color: #ffffff;
 }
 
 .sv-sage-mode-name {
     font-weight: 500;
 }
 
+/* A chevron on the modes that are not open, pointing to the page they open on. */
+.sv-sage-mode::after {
+    content: "";
+    grid-area: 1 / 3;
+    width: 7px;
+    height: 7px;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    opacity: 0.45;
+}
+
+.sv-sage-mode[aria-selected="true"]::after {
+    opacity: 0;
+}
+
 .sv-sage-mode-text {
+    grid-area: 2 / 2 / 3 / 4;
     color: var(--sv-soft);
     font-size: 0.9375rem;
     line-height: 1.45;
@@ -3769,5 +3811,125 @@ body {
     .sv-sage-inner {
         grid-template-columns: minmax(0, 1fr);
         gap: 40px;
+    }
+}
+
+/* The connected book, on an ink band so the page changes key after the two light
+   sections. The board's dots carry on in a light ink, and each plate holds a piece of the
+   app at its own size, cut where the plate ends. */
+.sv-book {
+    --sv-book-ink: #151412;
+    --sv-book-plate: #22201d;
+    --sv-book-text: #f3efe6;
+    --sv-book-soft: #b9b3a9;
+    padding: 120px var(--sv-gutter) 140px;
+    background-color: var(--sv-book-ink);
+    background-image: conic-gradient(at 2px 2px, transparent 0 75%, rgb(255 255 255 / 0.07) 0);
+    background-size: 28px 28px;
+    color: var(--sv-book-text);
+}
+
+.sv-book-inner {
+    max-width: var(--sv-max);
+    margin-inline: auto;
+}
+
+.sv-book-head {
+    display: grid;
+    grid-template-columns: minmax(0, 560px) minmax(0, 440px);
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px 64px;
+}
+
+.sv-book-head .sv-h2 {
+    margin-top: 0;
+}
+
+.sv-book-lead {
+    color: var(--sv-book-soft);
+    font-size: 1.125rem;
+    line-height: 1.5;
+}
+
+.sv-plates {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+}
+
+.sv-plate-frame {
+    position: relative;
+    height: 26rem;
+    padding: 28px 28px 0;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: 16px;
+    background: var(--sv-book-plate);
+}
+
+.sv-plate-title {
+    margin-top: 20px;
+    font-family: var(--sv-serif);
+    font-size: 1.375rem;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+}
+
+.sv-plate-text {
+    max-width: 26rem;
+    margin-top: 8px;
+    color: var(--sv-book-soft);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+}
+
+/* Stacked, each plate becomes a row: the piece, with its title and line beside it, so a
+   piece narrower than the row does not leave the plate half empty. */
+@media (max-width: 1100px) {
+    .sv-plates {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+    }
+
+    .sv-plate {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+        grid-template-rows: auto auto;
+        column-gap: 40px;
+        align-content: center;
+    }
+
+    .sv-plate-frame {
+        grid-row: 1 / 3;
+    }
+
+    .sv-plate-title {
+        align-self: end;
+        margin-top: 0;
+    }
+
+    .sv-book-head {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 720px) {
+    .sv-book {
+        padding-block: 80px 96px;
+    }
+
+    .sv-plate {
+        display: block;
+    }
+
+    .sv-plate-frame {
+        height: 22rem;
+        padding: 20px 20px 0;
+    }
+
+    .sv-plate-title {
+        margin-top: 20px;
     }
 }

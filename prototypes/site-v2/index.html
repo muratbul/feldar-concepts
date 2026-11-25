@@ -86,14 +86,17 @@
 
                         <div class="sv-sage-modes" role="tablist" aria-label="What Sage does">
                             <button type="button" class="sv-sage-mode" role="tab" id="sage-tab-ask" aria-controls="sage-view-ask" aria-selected="true" data-sage-mode="ask">
+                                <span class="sv-sage-mode-icon" aria-hidden="true"><svg class="sg-icon"><use href="#sg-ask" /></svg></span>
                                 <span class="sv-sage-mode-name">Ask Sage</span>
                                 <span class="sv-sage-mode-text">Ask where you left off or what is in your library, and Sage can open the page for you.</span>
                             </button>
                             <button type="button" class="sv-sage-mode" role="tab" id="sage-tab-follow" aria-controls="sage-view-follow" aria-selected="false" tabindex="-1" data-sage-mode="follow">
+                                <span class="sv-sage-mode-icon" aria-hidden="true"><svg class="sg-icon"><use href="#sg-follow" /></svg></span>
                                 <span class="sv-sage-mode-name">Follow me</span>
                                 <span class="sv-sage-mode-text">Sage reads along as you write, keeps track of story details and leaves comments in the margin beside your writing.</span>
                             </button>
                             <button type="button" class="sv-sage-mode" role="tab" id="sage-tab-memories" aria-controls="sage-view-memories" aria-selected="false" tabindex="-1" data-sage-mode="memories">
+                                <span class="sv-sage-mode-icon" aria-hidden="true"><svg class="sg-icon"><use href="#sg-memory" /></svg></span>
                                 <span class="sv-sage-mode-name">Memories</span>
                                 <span class="sv-sage-mode-text">Review what Sage remembers, forget a single memory, or turn learning off. Right-click Sage for its menu.</span>
                             </button>
@@ -213,6 +216,34 @@
                             <button type="button" class="sv-text-button" data-sage-reset hidden>Start again</button>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- The connected book: three pieces of the app, copied from prototypes/editor-hero. -->
+            <section class="sv-book" aria-labelledby="book-title">
+                <div class="sv-book-inner">
+                    <div class="sv-book-head">
+                        <h2 class="sv-h2" id="book-title">The whole book lives in one place.</h2>
+                        <p class="sv-book-lead">Your chapters, the scenes you plan for them and the people and places in them stay together in Feldar. That is why the help you ask for knows your book.</p>
+                    </div>
+
+                    <ul class="sv-plates">
+                        <li class="sv-plate">
+                            <div class="sv-plate-frame" aria-hidden="true" data-nosnippet data-app-piece=".app-piece--scenes"></div>
+                            <h3 class="sv-plate-title">Plan a chapter as scenes</h3>
+                            <p class="sv-plate-text">Outline a chapter yourself, or press Generate scenes for a first set to edit. Draft Page writes a first pass from them.</p>
+                        </li>
+                        <li class="sv-plate">
+                            <div class="sv-plate-frame" aria-hidden="true" data-nosnippet data-app-piece=".app-piece--board"></div>
+                            <h3 class="sv-plate-title">Keep the story world on the Canvas</h3>
+                            <p class="sv-plate-text">Characters, places, items and plot beats sit on linked cards, and Feldar reads them when it writes for you.</p>
+                        </li>
+                        <li class="sv-plate">
+                            <div class="sv-plate-frame" aria-hidden="true" data-nosnippet data-app-piece=".app-piece--checks"></div>
+                            <h3 class="sv-plate-title">Revise with Checks and Lens</h3>
+                            <p class="sv-plate-text">Five editing checks mark each issue in the text and offer a fix you can accept or discard. Lens adds six reader personas in Chat.</p>
+                        </li>
+                    </ul>
                 </div>
             </section>
         </main>
