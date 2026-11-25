@@ -2,6 +2,7 @@
 // the page under it, and the pieces of the app in the connected book section.
 import { mountPieces } from "./app-pieces.js";
 import { mountEditor } from "./editor-window.js";
+import { initLinks } from "./links.js";
 import { initPlans } from "./plans.js";
 import { initLineReveal } from "./reveal.js";
 import { initSage } from "./sage.js";
@@ -76,6 +77,9 @@ const windowCell = document.createElement("div");
 windowCell.className = "sv-window-cell";
 appWindow.before(windowCell);
 windowCell.append(appWindow);
+
+// The links tie the cards to the window and the window to Sage, so they wait for both.
+initLinks();
 
 const windowWidth = parseFloat(getComputedStyle(stage).getPropertyValue("--sv-window"));
 
