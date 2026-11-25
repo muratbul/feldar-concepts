@@ -3816,6 +3816,8 @@ button.app-rewrite-tool:hover {
     /* The window runs taller than the 600px capture, about as tall as the app stands on a
        laptop screen. It is never faded: its footers hold controls the tries use. */
     --sv-window-height: 760px;
+    /* The hero's Canvas cards, laid out at the app's own size. */
+    --sv-board-width: 616px;
 }
 
 /* A display set on a class would otherwise bring a hidden element back. The editor's
@@ -3964,10 +3966,11 @@ body {
     box-sizing: content-box;
 }
 
+/* While the Canvas cards show, the offer keeps clear of them. */
 .sv-intro {
     position: relative;
     z-index: 2;
-    width: min(100%, 640px);
+    width: min(100%, 640px, 100% - var(--sv-board-width) - 48px);
 }
 
 .sv-title {
@@ -3997,7 +4000,7 @@ body {
     position: absolute;
     top: 32px;
     right: var(--sv-gutter);
-    width: 616px;
+    width: var(--sv-board-width);
     height: 440px;
 }
 
@@ -4157,8 +4160,10 @@ body {
     }
 }
 
-/* The desk: the things to try in a panel on the left and the real window beside them.
-   The window keeps the app's width and proportions; site.js zooms it to its column. */
+/* The desk: the real window across the whole container, so it stands at the app's own
+   size beside the Canvas cards above it, and the things to try in one row under it.
+   The window keeps the app's width and proportions; site.js zooms it to its column only
+   where the container is narrower than the app. */
 .sv-desk {
     position: relative;
     z-index: 1;
@@ -4169,19 +4174,20 @@ body {
 .sv-stage {
     --app-height: var(--sv-window-height);
     display: grid;
-    grid-template-columns: minmax(0, var(--sv-side)) minmax(0, 1fr);
-    grid-template-rows: auto 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-        "parts window"
-        "foot window";
-    gap: 14px var(--sv-side-gap);
-    align-items: start;
+        "window"
+        "parts"
+        "foot";
+    row-gap: 20px;
     max-width: var(--sv-max);
     margin-inline: auto;
 }
 
 .sv-stage .eh-parts {
     grid-area: parts;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: start;
 }
 
 .sv-stage .eh-foot {
@@ -4218,35 +4224,32 @@ body {
 }
 
 .sv-window-cell .app {
-    /* The container the window measures itself against, at the app's own width. */
-    width: var(--sv-window);
+    /* The container the window measures itself against: the app's own width, or the whole
+       column where that is wider, so the window meets the container's edges. */
+    width: max(var(--sv-window), 100%);
     container-type: inline-size;
     border-radius: 14px;
     box-shadow: 0 0 0 1px rgb(0 0 0 / 0.06), 0 40px 80px -40px rgb(30 25 15 / 0.35);
 }
 
-/* Beside the panel the window falls to about 60% of its size on narrower screens, so
-   there the window comes first at the full width and the things to try follow under it,
-   one row each. */
-@media (max-width: 1300px) {
+/* Four across leaves each try too narrow for its line, so they stand one row each. */
+@media (max-width: 1240px) {
     .sv-desk {
         margin-top: 32px;
     }
 
-    .sv-stage {
+    .sv-stage .eh-parts {
         grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: none;
-        grid-template-areas:
-            "window"
-            "parts"
-            "foot";
-        row-gap: 20px;
     }
 }
 
 @media (max-width: 1240px) {
     .sv-board {
         display: none;
+    }
+
+    .sv-intro {
+        width: min(100%, 640px);
     }
 
     .sv-hero-top {
