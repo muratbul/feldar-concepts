@@ -95,6 +95,29 @@
     background: color-mix(in srgb, currentColor 12%, transparent);
 }
 
+/* Choosing a mode eases its moment in under the page's text: the view fades, and the block
+   under the text rises a little. This is the marketing page's own motion, not Sage's. The
+   view itself is not moved, so the margin mark and card keep their place on the column. */
+.sg-view:not([hidden]) {
+    animation: sg-view-in 240ms ease-out both;
+}
+
+.sg-view:not([hidden]) .sg-under {
+    animation: sg-rise-in 280ms var(--sg-enter) both;
+}
+
+@keyframes sg-view-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes sg-rise-in {
+    from {
+        transform: translateY(6px);
+    }
+}
+
 /* Sage under the text (2.5): the point sits 19px below the text, here 32px in from the
    column. The mark's viewBox puts the point 24px in from its corner. */
 .sg-under {
@@ -423,6 +446,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .sg-view:not([hidden]),
+    .sg-view:not([hidden]) .sg-under,
     .sg-bubble,
     .sg-shimmer,
     .sg-margin-mark {

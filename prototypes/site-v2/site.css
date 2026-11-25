@@ -3364,6 +3364,29 @@ button.app-rewrite-tool:hover {
     background: color-mix(in srgb, currentColor 12%, transparent);
 }
 
+/* Choosing a mode eases its moment in under the page's text: the view fades, and the block
+   under the text rises a little. This is the marketing page's own motion, not Sage's. The
+   view itself is not moved, so the margin mark and card keep their place on the column. */
+.sg-view:not([hidden]) {
+    animation: sg-view-in 240ms ease-out both;
+}
+
+.sg-view:not([hidden]) .sg-under {
+    animation: sg-rise-in 280ms var(--sg-enter) both;
+}
+
+@keyframes sg-view-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes sg-rise-in {
+    from {
+        transform: translateY(6px);
+    }
+}
+
 /* Sage under the text (2.5): the point sits 19px below the text, here 32px in from the
    column. The mark's viewBox puts the point 24px in from its corner. */
 .sg-under {
@@ -3692,6 +3715,8 @@ button.app-rewrite-tool:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .sg-view:not([hidden]),
+    .sg-view:not([hidden]) .sg-under,
     .sg-bubble,
     .sg-shimmer,
     .sg-margin-mark {
@@ -3734,6 +3759,7 @@ button.app-rewrite-tool:hover {
     --sv-max: 1312px;
     --sv-window: 1282px;
     --sv-quick: 160ms;
+    --sv-enter: cubic-bezier(0.16, 1, 0.3, 1);
     /* The window runs taller than the 600px capture, about as tall as the app stands on a
        laptop screen. It is never faded: its footers hold controls the tries use. */
     --sv-window-height: 760px;
@@ -3908,6 +3934,8 @@ body {
    so every one reads as something to press. Each carries an icon from the app, and the
    open one shows its line. The hero's tries and Sage's modes both use it. */
 .sv-modes {
+    /* Lets the open line's height ease to and from auto where the browser supports it. */
+    interpolate-size: allow-keywords;
     display: grid;
     gap: 2px;
     padding: 6px;
@@ -3917,21 +3945,28 @@ body {
     box-shadow: var(--app-shadow-raised);
 }
 
+/* On press a mode gives slightly; on opening, its icon tile pops as it turns to ink and its
+   line unfolds. */
 .sv-mode {
     display: grid;
     grid-template-columns: 28px minmax(0, 1fr) 16px;
     column-gap: 12px;
-    row-gap: 4px;
     align-items: center;
     padding: 12px 14px;
     border-radius: 12px;
     color: var(--sv-ink);
     text-align: left;
-    transition: background-color var(--sv-quick) ease-out;
+    transition:
+        background-color var(--sv-quick) ease-out,
+        transform 120ms ease-out;
 }
 
 .sv-mode:hover {
     background: var(--sv-well);
+}
+
+.sv-mode:active {
+    transform: scale(0.985);
 }
 
 .sv-mode[aria-selected="true"] {
@@ -3946,18 +3981,37 @@ body {
     border-radius: 8px;
     background: var(--sv-well);
     color: var(--sv-ink);
+    transition:
+        background-color 180ms ease-out,
+        color 180ms ease-out;
 }
 
 .sv-mode[aria-selected="true"] .sv-mode-icon {
     background: var(--sv-ink);
     color: #ffffff;
+    animation: sv-icon-pop 320ms var(--sv-enter);
+}
+
+@keyframes sv-icon-pop {
+    0% {
+        transform: scale(0.82);
+    }
+
+    60% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: none;
+    }
 }
 
 .sv-mode-name {
     font-weight: 500;
 }
 
-/* A chevron on the modes that are not open, pointing to the page they open on. */
+/* A chevron on the modes that are not open, pointing to the page they open on. It leans
+   forward on hover and fades out as its mode opens. */
 .sv-mode::after {
     content: "";
     grid-area: 1 / 3;
@@ -3967,6 +4021,13 @@ body {
     border-right: 1.5px solid currentColor;
     transform: rotate(45deg);
     opacity: 0.45;
+    transition:
+        opacity 180ms ease-out,
+        transform 180ms var(--sv-enter);
+}
+
+.sv-mode:hover::after {
+    transform: translateX(2px) rotate(45deg);
 }
 
 .sv-mode[aria-selected="true"]::after {
@@ -3975,13 +4036,44 @@ body {
 
 .sv-mode-text {
     grid-area: 2 / 2 / 3 / 4;
+    height: auto;
+    padding-top: 4px;
+    overflow: hidden;
     color: var(--sv-soft);
     font-size: 0.9375rem;
     line-height: 1.45;
+    transition:
+        height 260ms var(--sv-enter),
+        padding-top 260ms var(--sv-enter),
+        opacity 220ms ease-out 60ms,
+        visibility 0s;
 }
 
+/* Closed lines are folded away and hidden from screen readers too, as they were. */
 .sv-mode[aria-selected="false"] .sv-mode-text {
-    display: none;
+    height: 0;
+    padding-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        height 200ms ease-in,
+        padding-top 200ms ease-in,
+        opacity 120ms ease-in,
+        visibility 0s 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sv-mode,
+    .sv-mode::after,
+    .sv-mode-icon,
+    .sv-mode-text,
+    .sv-mode[aria-selected="false"] .sv-mode-text {
+        transition: none;
+    }
+
+    .sv-mode[aria-selected="true"] .sv-mode-icon {
+        animation: none;
+    }
 }
 
 /* The desk: the things to try in a panel on the left and the real window beside them.
@@ -4199,9 +4291,9 @@ body {
         .sv-line {
             animation: sv-line-in linear both;
             animation-timeline: view();
-            /* Done while the line is still in the bottom quarter of the screen, so text near
-               the end of the page, which cannot scroll higher, still finishes. */
-            animation-range: cover 4% cover 22%;
+            /* Done within 150px of entering, the same on any screen height, so text near the
+               end of the page, which cannot scroll higher, still finishes. */
+            animation-range: cover 16px cover 150px;
         }
     }
 }
@@ -4226,7 +4318,7 @@ body {
     --sv-book-plate: #22201d;
     --sv-book-text: #f3efe6;
     --sv-book-soft: #b9b3a9;
-    padding: 120px var(--sv-gutter) 140px;
+    padding: 120px var(--sv-gutter) 180px;
     background-color: var(--sv-book-ink);
     background-image: conic-gradient(at 2px 2px, transparent 0 75%, rgb(255 255 255 / 0.07) 0);
     background-size: 28px 28px;
