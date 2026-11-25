@@ -445,8 +445,9 @@ export function initEditorHero(root) {
     });
 
     root.querySelector('[role="tablist"]').addEventListener("keydown", (event) => {
-        const move = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
+        const move = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
         if (!move) return;
+        event.preventDefault();
         const next = tabs[(tabs.indexOf(document.activeElement) + move + tabs.length) % tabs.length];
         next.focus();
         select(next);

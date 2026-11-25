@@ -51,6 +51,10 @@ export function initLinks() {
             path.setAttribute("d", linkPath(sourceBox, targetBox));
             return [path];
         });
+        // The layer counts toward the page's size, so it shrinks away before the page is
+        // measured; otherwise a page that got shorter would keep its old height.
+        layer.setAttribute("width", 0);
+        layer.setAttribute("height", 0);
         layer.setAttribute("width", document.documentElement.scrollWidth);
         layer.setAttribute("height", document.documentElement.scrollHeight);
         layer.replaceChildren(...paths);

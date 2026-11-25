@@ -22,7 +22,7 @@
             <a href="/" class="sv-nav-logo" aria-label="Feldar home"><img src="../../assets/logo-nav.svg" alt="Feldar" width="59" height="17" /></a>
             <nav class="sv-nav-links" aria-label="Main">
                 <a href="/features">Features</a>
-                <a href="/pricing">Pricing</a>
+                <a href="#plans">Pricing</a>
                 <a href="#sage">Sage</a>
             </nav>
             <div class="sv-nav-end">
@@ -56,15 +56,15 @@
                         </svg>
                         <div class="app-card app-card--item" style="left: 0; top: 18px" data-link-source="ledger">
                             <p class="app-card-title">The ledger</p>
-                            <div class="app-card-surface"><p class="app-card-body">Green cloth, black at the corners. Thirty years of rates, wages and sulphur, and on the first of every month: M.P., two pounds.</p></div>
+                            <div class="app-card-surface"><p class="app-card-body">Green cloth, black at the corners. Two pounds to M.P. on the first of every month.</p></div>
                         </div>
                         <div class="app-card is-selected" style="left: 336px; top: 0">
                             <p class="app-card-title">Nell Ashby</p>
-                            <div class="app-card-surface"><p class="app-card-body">Thirty-one. Teaches in Bristol. Came home for the funeral and stayed for the frost. Carries her father's ledger in her coat and reads it like a letter.</p></div>
+                            <div class="app-card-surface"><p class="app-card-body">Thirty-one. Teaches in Bristol. Carries her father’s ledger and reads it like a letter.</p></div>
                         </div>
                         <div class="app-card" style="left: 336px; top: 236px">
                             <p class="app-card-title">Agnes Pryce</p>
-                            <div class="app-card-surface"><p class="app-card-body">Daniel's mother, behind the gate at the end of the lane. Sent a cake on the day of the funeral, and no card.</p></div>
+                            <div class="app-card-surface"><p class="app-card-body">Daniel’s mother. Sent a cake on the day of the funeral, and no card.</p></div>
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                             <button type="button" class="sv-mode" role="tab" id="sage-tab-memories" aria-controls="sage-view-memories" aria-selected="false" tabindex="-1" data-sage-mode="memories">
                                 <span class="sv-mode-icon" aria-hidden="true"><svg class="sg-icon"><use href="#sg-memory" /></svg></span>
                                 <span class="sv-mode-name">Memories</span>
-                                <span class="sv-mode-text">Review what Sage remembers, forget a single memory, or turn learning off. Right-click Sage for its menu.</span>
+                                <span class="sv-mode-text">Review what Sage remembers, forget a single memory, or turn learning off, all from Sage’s menu.</span>
                             </button>
                         </div>
                     </div>
@@ -169,14 +169,14 @@
 
                                 <!-- Follow me: Sage has read along and left a reaction in the margin. -->
                                 <div class="sg-view" id="sage-view-follow" role="tabpanel" aria-labelledby="sage-tab-follow" data-sage-view="follow" data-state="left" hidden>
-                                    <button type="button" class="sg-margin-mark" aria-label="Sage's reaction: and waited." aria-expanded="false" aria-controls="sage-reaction" data-sage-mark data-unseen hidden>
+                                    <button type="button" class="sg-margin-mark" aria-label="Sage's reaction: The ledger’s two pounds again." aria-expanded="false" aria-controls="sage-reaction" data-sage-mark data-unseen hidden>
                                         <svg class="sg-icon"><use href="#sg-reaction" /></svg>
                                     </button>
                                     <div class="sg-card" id="sage-reaction" role="dialog" aria-label="Sage's reaction" data-sage-card hidden>
                                         <div class="sg-thread">
                                             <div class="sg-bubble">
                                                 <p class="sg-kind">Sage’s reaction</p>
-                                                <p>I held my breath at this line.</p>
+                                                <p>The ledger’s two pounds again.</p>
                                             </div>
                                             <div class="sg-actions">
                                                 <button type="button" class="sg-action" aria-label="Done" title="Done" data-sage-done><svg class="sg-icon"><use href="#sg-check" /></svg></button>
@@ -253,12 +253,12 @@
 
             <!-- Plans, as on feldar.com/pricing (docs/seo/product-facts.md section 2). Price and
                  credits only, no model names. plans.js switches the billing period. -->
-            <section class="sv-plans" aria-labelledby="plans-title" data-plans data-billing="monthly">
+            <section class="sv-plans" id="plans" aria-labelledby="plans-title" data-plans data-billing="monthly">
                 <div class="sv-plans-inner">
                     <div class="sv-plans-head">
                         <h2 class="sv-h2" id="plans-title" data-line-reveal>The same workspace on every plan.</h2>
                         <div class="sv-plans-side">
-                            <p class="sv-plans-lead" data-line-reveal>Plans differ in the credits you get for AI help each month. Writing, editing and organizing your book use none.</p>
+                            <p class="sv-plans-lead" data-line-reveal>Plans differ in the credits you get for AI help each month and in the AI models you can choose. Writing, editing and organizing your book use no credits.</p>
                             <div class="sv-billing" role="group" aria-label="Billing period">
                                 <button type="button" class="sv-billing-option" aria-pressed="true" data-billing-option="monthly">Monthly</button>
                                 <button type="button" class="sv-billing-option" aria-pressed="false" data-billing-option="yearly">Yearly</button>
@@ -269,7 +269,9 @@
                     <ul class="sv-plan-list">
                         <li class="sv-plan">
                             <h3 class="sv-plan-name">Starter</h3>
-                            <p class="sv-plan-price"><span class="sv-plan-amount">Free</span></p>
+                            <div class="sv-plan-cost">
+                                <p class="sv-plan-price"><span class="sv-plan-amount">Free</span></p>
+                            </div>
                             <ul class="sv-plan-points">
                                 <li>500 credits, given once</li>
                                 <li>Full editor access</li>
@@ -279,7 +281,10 @@
                         </li>
                         <li class="sv-plan">
                             <h3 class="sv-plan-name">Core</h3>
-                            <p class="sv-plan-price" data-monthly="$20" data-yearly="$180"><span class="sv-plan-amount">$20</span><span class="sv-plan-period">a month</span></p>
+                            <div class="sv-plan-cost">
+                                <p class="sv-plan-price" data-monthly="$20" data-yearly="$180"><span class="sv-plan-amount">$20</span><span class="sv-plan-period">a month</span></p>
+                                <p class="sv-plan-equivalent">$15 a month, billed yearly</p>
+                            </div>
                             <ul class="sv-plan-points">
                                 <li>20,000 credits a month</li>
                                 <li>Full workspace access</li>
@@ -290,7 +295,10 @@
                         </li>
                         <li class="sv-plan sv-plan--popular">
                             <h3 class="sv-plan-name">Pro <span class="sv-plan-badge">Most popular</span></h3>
-                            <p class="sv-plan-price" data-monthly="$40" data-yearly="$400"><span class="sv-plan-amount">$40</span><span class="sv-plan-period">a month</span></p>
+                            <div class="sv-plan-cost">
+                                <p class="sv-plan-price" data-monthly="$40" data-yearly="$400"><span class="sv-plan-amount">$40</span><span class="sv-plan-period">a month</span></p>
+                                <p class="sv-plan-equivalent">$33.33 a month, billed yearly</p>
+                            </div>
                             <ul class="sv-plan-points">
                                 <li>45,000 credits a month</li>
                                 <li>Full workspace access</li>
@@ -301,7 +309,10 @@
                         </li>
                         <li class="sv-plan">
                             <h3 class="sv-plan-name">Ultra</h3>
-                            <p class="sv-plan-price" data-monthly="$200" data-yearly="$2,220"><span class="sv-plan-amount">$200</span><span class="sv-plan-period">a month</span></p>
+                            <div class="sv-plan-cost">
+                                <p class="sv-plan-price" data-monthly="$200" data-yearly="$2,220"><span class="sv-plan-amount">$200</span><span class="sv-plan-period">a month</span></p>
+                                <p class="sv-plan-equivalent">$185 a month, billed yearly</p>
+                            </div>
                             <ul class="sv-plan-points">
                                 <li>250,000 credits a month</li>
                                 <li>High-volume drafting</li>
@@ -311,9 +322,115 @@
                             <a href="/login" class="sv-button sv-button--quiet" rel="nofollow">Choose Ultra</a>
                         </li>
                     </ul>
+                    <p class="sv-plans-note">You can cancel at any time. A first subscription can be refunded in full within 14 days.</p>
+                </div>
+            </section>
+
+            <!-- Common questions, answered from feldar.com/pricing and the refund policy. Native
+                 disclosures, one open at a time. -->
+            <section class="sv-questions" aria-labelledby="questions-title">
+                <div class="sv-questions-inner">
+                    <h2 class="sv-h2" id="questions-title" data-line-reveal>Common questions</h2>
+                    <div class="sv-question-list">
+                        <details class="sv-question" name="questions">
+                            <summary class="sv-question-ask">Is Starter free?</summary>
+                            <p class="sv-question-answer">Yes. Starter is free, comes with 500 credits given once and needs no credit card. It has the same workspace as every other plan.</p>
+                        </details>
+                        <details class="sv-question" name="questions">
+                            <summary class="sv-question-ask">What uses credits?</summary>
+                            <p class="sv-question-answer">Credits measure the AI help you ask for, such as rewrites, chat, checks, scene generation and drafting. Writing, editing and organizing your book use none. Longer work uses more credits than a short rewrite.</p>
+                        </details>
+                        <details class="sv-question" name="questions">
+                            <summary class="sv-question-ask">What happens if I run out?</summary>
+                            <p class="sv-question-answer">AI help pauses until your plan renews or you add more. Your book, notes and drafts stay where they are. On a paid plan you can buy 5,000, 10,000 or 15,000 credits for $5, $10 or $15, and they last 12 months.</p>
+                        </details>
+                        <details class="sv-question" name="questions">
+                            <summary class="sv-question-ask">Does Feldar train AI on my writing?</summary>
+                            <p class="sv-question-answer">No. Feldar does not train AI on your writing, and the work you create in Feldar is yours.</p>
+                        </details>
+                        <details class="sv-question" name="questions">
+                            <summary class="sv-question-ask">Does the AI write my book for me?</summary>
+                            <p class="sv-question-answer">Only when you ask. Feldar suggests a line, a rewrite or a set of scenes and marks what it wrote, and you accept it, revise it or dismiss it. Planning, writing and organizing all work without AI.</p>
+                        </details>
+                        <details class="sv-question" name="questions">
+                            <summary class="sv-question-ask">Can I use Feldar on a Mac?</summary>
+                            <p class="sv-question-answer">Yes. Feldar runs in your browser and as a Mac app, native on Apple silicon. Intel Macs keep the earlier app.</p>
+                        </details>
+                        <details class="sv-question" name="questions">
+                            <summary class="sv-question-ask">Can I cancel?</summary>
+                            <p class="sv-question-answer">Yes. When you cancel, your plan stays active until the end of the period you paid for. A first subscription can be refunded in full within 14 days.</p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- The close: the page's one action again, for the visitor who read to the end. -->
+            <section class="sv-close" aria-labelledby="close-title">
+                <div class="sv-close-inner">
+                    <h2 class="sv-close-title" id="close-title" data-line-reveal>Start your novel in Feldar.</h2>
+                    <p class="sv-close-lead" data-line-reveal>Starter is free, comes with 500 credits and needs no credit card.</p>
+                    <div class="sv-actions">
+                        <a href="/login" class="sv-button" rel="nofollow">Start writing free</a>
+                        <a href="/download" class="sv-button sv-button--quiet">
+                                <img src="../../assets/icons/apple.svg" alt="" width="13" height="16" />
+                                Download for Mac
+                            </a>
+                    </div>
                 </div>
             </section>
         </main>
+
+        <!-- The links of feldar.com's own footer, and the legal pages. -->
+        <footer class="sv-footer">
+            <div class="sv-footer-inner">
+                <a href="/" class="sv-footer-logo" aria-label="Feldar home"><img src="../../assets/logo-nav.svg" alt="" width="59" height="17" /></a>
+                <nav class="sv-footer-columns" aria-label="Footer">
+                        <div class="sv-footer-column">
+                            <p class="sv-footer-title">Product</p>
+                            <ul class="sv-footer-links">
+                                <li><a href="/download">Download</a></li>
+                                <li><a href="/pricing">Pricing</a></li>
+                                <li><a href="/features">Features</a></li>
+                                <li><a href="/changelog">Changelog</a></li>
+                            </ul>
+                        </div>
+                        <div class="sv-footer-column">
+                            <p class="sv-footer-title">For writers</p>
+                            <ul class="sv-footer-links">
+                                <li><a href="/novel-writing-software">Novel writing software</a></li>
+                                <li><a href="/ai-for-novelists">AI for novelists</a></li>
+                                <li><a href="/compare">Compare</a></li>
+                                <li><a href="/guides/how-to-outline-a-novel">Outline a novel</a></li>
+                                <li><a href="/tools">Free tools</a></li>
+                            </ul>
+                        </div>
+                        <div class="sv-footer-column">
+                            <p class="sv-footer-title">Company</p>
+                            <ul class="sv-footer-links">
+                                <li><a href="/about">About</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/careers">Careers</a></li>
+                                <li><a href="mailto:support@feldar.com">Support</a></li>
+                            </ul>
+                        </div>
+                        <div class="sv-footer-column">
+                            <p class="sv-footer-title">Connect</p>
+                            <ul class="sv-footer-links">
+                                <li><a href="https://x.com/feldarai">X</a></li>
+                                <li><a href="https://www.linkedin.com/company/feldar">LinkedIn</a></li>
+                            </ul>
+                        </div>
+                </nav>
+                <div class="sv-footer-legal">
+                    <p>© 2026 Feldar LLC</p>
+                    <ul class="sv-footer-legal-links">
+                        <li><a href="/terms">Terms of Use</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/refund-policy">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
 
         <script type="module" src="site.js"></script>
     </body>
