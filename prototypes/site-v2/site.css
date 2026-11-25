@@ -3806,7 +3806,9 @@ button.app-rewrite-tool:hover {
     --sv-sans: "Inter Variable", Inter, system-ui, sans-serif;
     --sv-gutter: clamp(16px, 4.44vw, 64px);
     --sv-max: 1312px;
-    --sv-window: 1282px;
+    /* The app's window at the narrowest width that keeps its sidebar (1024px inside its 3px
+       padding), so beside the tries it is zoomed as little as it can be. */
+    --sv-window: 1028px;
     --sv-quick: 160ms;
     /* The left column the hero's tries and Sage's copy share, so the editor window and the
        Sage page start on the same line. */
@@ -4160,10 +4162,9 @@ body {
     }
 }
 
-/* The desk: the real window across the whole container, so it stands at the app's own
-   size beside the Canvas cards above it, and the things to try in one row under it.
-   The window keeps the app's width and proportions; site.js zooms it to its column only
-   where the container is narrower than the app. */
+/* The desk: the things to try in a panel on the left and the real window beside them.
+   The window keeps the app's layout; site.js zooms it to its column only where the
+   column is narrower than the app. */
 .sv-desk {
     position: relative;
     z-index: 1;
@@ -4174,20 +4175,19 @@ body {
 .sv-stage {
     --app-height: var(--sv-window-height);
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, var(--sv-side)) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
     grid-template-areas:
-        "window"
-        "parts"
-        "foot";
-    row-gap: 20px;
+        "parts window"
+        "foot window";
+    gap: 14px var(--sv-side-gap);
+    align-items: start;
     max-width: var(--sv-max);
     margin-inline: auto;
 }
 
 .sv-stage .eh-parts {
     grid-area: parts;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    align-items: start;
 }
 
 .sv-stage .eh-foot {
@@ -4232,14 +4232,21 @@ body {
     box-shadow: 0 0 0 1px rgb(0 0 0 / 0.06), 0 40px 80px -40px rgb(30 25 15 / 0.35);
 }
 
-/* Four across leaves each try too narrow for its line, so they stand one row each. */
-@media (max-width: 1240px) {
+/* Beside the panel the window would fall below three quarters of its size, so there it
+   comes first at the full width and the things to try follow under it, one row each. */
+@media (max-width: 1300px) {
     .sv-desk {
         margin-top: 32px;
     }
 
-    .sv-stage .eh-parts {
+    .sv-stage {
         grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: none;
+        grid-template-areas:
+            "window"
+            "parts"
+            "foot";
+        row-gap: 20px;
     }
 }
 

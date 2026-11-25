@@ -8,7 +8,7 @@ const EDGE_INSET = 24;
 
 const LINKS = [
     { from: "[data-link-source='ledger']", to: ".sv-window-cell", media: "(min-width: 1241px)" },
-    { from: ".sv-stage", to: ".sg-page", media: "(min-width: 961px)" },
+    { from: ".sv-window-cell", to: ".sg-page", media: "(min-width: 1301px)" },
 ];
 
 function pageBox(element) {
