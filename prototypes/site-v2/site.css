@@ -4172,6 +4172,52 @@ body {
     }
 }
 
+/* A statement between Sage and the connected book. */
+.sv-statement {
+    padding: 80px var(--sv-gutter) 160px;
+}
+
+.sv-statement-text {
+    max-width: 62rem;
+    margin-inline: auto;
+    font-family: var(--sv-serif);
+    font-size: clamp(1.625rem, 3.1vw, 2.75rem);
+    line-height: 1.32;
+    letter-spacing: -0.015em;
+}
+
+/* Line reveal, on the statement and the section headings: reveal.js splits the text into
+   its rendered lines, and each line inks in on its own scroll timeline as it rises from the
+   bottom of the screen, so the text reads in at the pace of the scroll. Without scroll-driven
+   animations, or with reduced motion asked for, the text simply stands. */
+.sv-line {
+    display: block;
+}
+
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .sv-line {
+            animation: sv-line-in linear both;
+            animation-timeline: view();
+            /* Done while the line is still in the bottom quarter of the screen, so text near
+               the end of the page, which cannot scroll higher, still finishes. */
+            animation-range: cover 4% cover 22%;
+        }
+    }
+}
+
+@keyframes sv-line-in {
+    from {
+        opacity: 0.14;
+        transform: translateY(0.35em);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 /* The connected book, on an ink band so the page changes key after the two light
    sections. The board's dots carry on in a light ink, and each plate holds a piece of the
    app at its own size, cut where the plate ends. */

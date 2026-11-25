@@ -2,6 +2,7 @@
 // the page under it, and the pieces of the app in the connected book section.
 import { mountPieces } from "./app-pieces.js";
 import { mountEditor } from "./editor-window.js";
+import { initLineReveal } from "./reveal.js";
 import { initSage } from "./sage.js";
 
 const ICONS = new URL("../editor-hero/app-icons.svg", import.meta.url).href;
@@ -60,6 +61,7 @@ function dressTries(stage) {
 }
 
 initSage(document.querySelector("[data-sage-stage]").closest("section"));
+initLineReveal(document);
 
 const stage = document.querySelector("[data-editor-mount]");
 
