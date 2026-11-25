@@ -3474,6 +3474,9 @@ body {
     position: relative;
     max-width: var(--sv-max);
     margin-inline: auto;
+    /* Tall enough to hold the Canvas cards (32px down, 440px tall, less this padding), so
+       the window under it never runs into them. */
+    min-height: 448px;
     padding: 24px var(--sv-gutter) 0;
     box-sizing: content-box;
 }
@@ -3507,12 +3510,6 @@ body {
     margin-top: 22px;
 }
 
-.sv-terms {
-    margin-top: 14px;
-    color: var(--sv-soft);
-    font-size: 0.8125rem;
-}
-
 .sv-board {
     position: absolute;
     top: 32px;
@@ -3531,101 +3528,180 @@ body {
     overflow: visible;
 }
 
-/* The desk holds the real window at the app's own size. On screens narrower than the
-   window, site.js zooms the window to fit, so it keeps the app's proportions. */
+/* Modes: the things to try in a section, in one white panel as the app's own menus are,
+   so every one reads as something to press. Each carries an icon from the app, and the
+   open one shows its line. The hero's tries and Sage's modes both use it. */
+.sv-modes {
+    display: grid;
+    gap: 2px;
+    padding: 6px;
+    border: 1px solid var(--sv-rule);
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: var(--app-shadow-raised);
+}
+
+.sv-mode {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) 16px;
+    column-gap: 12px;
+    row-gap: 4px;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 12px;
+    color: var(--sv-ink);
+    text-align: left;
+    transition: background-color var(--sv-quick) ease-out;
+}
+
+.sv-mode:hover {
+    background: var(--sv-well);
+}
+
+.sv-mode[aria-selected="true"] {
+    background: var(--sv-well);
+}
+
+.sv-mode-icon {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--sv-well);
+    color: var(--sv-ink);
+}
+
+.sv-mode[aria-selected="true"] .sv-mode-icon {
+    background: var(--sv-ink);
+    color: #ffffff;
+}
+
+.sv-mode-name {
+    font-weight: 500;
+}
+
+/* A chevron on the modes that are not open, pointing to the page they open on. */
+.sv-mode::after {
+    content: "";
+    grid-area: 1 / 3;
+    width: 7px;
+    height: 7px;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    opacity: 0.45;
+}
+
+.sv-mode[aria-selected="true"]::after {
+    opacity: 0;
+}
+
+.sv-mode-text {
+    grid-area: 2 / 2 / 3 / 4;
+    color: var(--sv-soft);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+}
+
+.sv-mode[aria-selected="false"] .sv-mode-text {
+    display: none;
+}
+
+/* The desk: the things to try in a panel on the left and the real window beside them.
+   The window keeps the app's width and proportions; site.js zooms it to its column. */
 .sv-desk {
     position: relative;
     z-index: 1;
-    margin-top: 24px;
+    margin-top: 56px;
     padding-inline: var(--sv-gutter);
 }
 
-/* The things to try and the status line share the row above the window while they fit,
-   and the status line drops under the things to try when they do not. */
 .sv-stage {
     --app-height: var(--sv-window-height);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px 24px;
-    width: min(100%, var(--sv-window));
+    display: grid;
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "parts window"
+        "foot window";
+    gap: 14px 32px;
+    align-items: start;
+    max-width: var(--sv-max);
     margin-inline: auto;
 }
 
 .sv-stage .eh-parts {
-    order: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.sv-stage .eh-part {
-    padding: 8px 16px;
-    border-radius: 50px;
-    color: var(--sv-ink);
-    background: var(--sv-paper);
-    box-shadow: inset 0 0 0 1px var(--sv-rule);
-    font-size: 0.875rem;
-    line-height: 1.2;
-    transition:
-        background-color var(--sv-quick) ease-out,
-        color var(--sv-quick) ease-out;
-}
-
-.sv-stage .eh-part:hover {
-    background: var(--sv-well);
-}
-
-.sv-stage .eh-part[aria-selected="true"] {
-    background: var(--sv-ink);
-    color: var(--sv-paper);
-    box-shadow: none;
+    grid-area: parts;
 }
 
 .sv-stage .eh-foot {
-    order: 2;
-    display: flex;
-    flex: 1 1 20rem;
-    justify-content: flex-end;
-    align-items: baseline;
-    gap: 16px;
-    color: var(--sv-soft);
-    font-size: 0.8125rem;
+    grid-area: foot;
+    padding-left: 20px;
 }
 
-.sv-stage .eh-status {
-    max-width: 30rem;
-    text-align: right;
+/* What just happened in the window is told to screen readers only; the page shows it. */
+.sv-stage .eh-status,
+.sg-note {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.sv-stage .eh-sample {
+    display: none;
 }
 
 .sv-stage .eh-reset {
-    flex-shrink: 0;
-    white-space: nowrap;
     color: var(--sv-ink);
+    font-size: 0.875rem;
     font-weight: 500;
     text-decoration: underline;
     text-underline-offset: 0.2em;
 }
 
-/* The sample note repeats what the status line already makes plain. */
-.sv-stage .eh-sample {
-    display: none;
+.sv-window-cell {
+    grid-area: window;
+    min-width: 0;
 }
 
-.sv-stage .app {
-    /* The window keeps the app's width and is the container it measures itself against;
-       site.js zooms it down on narrower screens. */
+.sv-window-cell .app {
+    /* The container the window measures itself against, at the app's own width. */
     width: var(--sv-window);
     container-type: inline-size;
-    order: 3;
     border-radius: 14px;
     box-shadow: 0 0 0 1px rgb(0 0 0 / 0.06), 0 40px 80px -40px rgb(30 25 15 / 0.35);
+}
+
+/* Beside the panel the window falls to about 60% of its size on narrower screens, so
+   there the window comes first at the full width and the things to try follow under it,
+   one row each. */
+@media (max-width: 1300px) {
+    .sv-desk {
+        margin-top: 32px;
+    }
+
+    .sv-stage {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: none;
+        grid-template-areas:
+            "window"
+            "parts"
+            "foot";
+        row-gap: 20px;
+    }
 }
 
 @media (max-width: 1240px) {
     .sv-board {
         display: none;
+    }
+
+    .sv-hero-top {
+        min-height: 0;
     }
 }
 
@@ -3638,13 +3714,6 @@ body {
         display: none;
     }
 
-    .sv-stage .eh-foot {
-        justify-content: flex-start;
-    }
-
-    .sv-stage .eh-status {
-        text-align: left;
-    }
 }
 
 /* Sage. The board ground runs on from the hero, and a held link leaves the editor's page
@@ -3652,6 +3721,10 @@ body {
 .sv-sage {
     position: relative;
     padding: 120px var(--sv-gutter) 140px;
+}
+
+.sv-sage-copy .sv-modes {
+    margin-top: 32px;
 }
 
 .sv-sage-stage {
@@ -3696,18 +3769,7 @@ body {
     margin-inline: auto;
 }
 
-.sv-tag {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 50px;
-    background: color-mix(in oklab, var(--app-board-line-held) 12%, white);
-    color: var(--app-board-line-held);
-    font-size: 0.8125rem;
-    font-weight: 500;
-}
-
 .sv-h2 {
-    margin-top: 18px;
     font-family: var(--sv-serif);
     font-size: clamp(2rem, 3.2vw, 2.75rem);
     line-height: 1.18;
@@ -3720,86 +3782,6 @@ body {
     color: var(--sv-soft);
     font-size: 1.125rem;
     line-height: 1.5;
-}
-
-/* The modes sit in one white panel, as the app's own menus do, so every one reads as
-   something to press. Each carries its icon from Sage's menu; the open one shows its line. */
-.sv-sage-modes {
-    display: grid;
-    gap: 2px;
-    margin-top: 32px;
-    padding: 6px;
-    border: 1px solid var(--sv-rule);
-    border-radius: 18px;
-    background: #ffffff;
-    box-shadow: var(--app-shadow-raised);
-}
-
-.sv-sage-mode {
-    display: grid;
-    grid-template-columns: 28px minmax(0, 1fr) 16px;
-    column-gap: 12px;
-    row-gap: 4px;
-    align-items: center;
-    padding: 12px 14px;
-    border-radius: 12px;
-    color: var(--sv-ink);
-    text-align: left;
-    transition: background-color var(--sv-quick) ease-out;
-}
-
-.sv-sage-mode:hover {
-    background: var(--sv-well);
-}
-
-.sv-sage-mode[aria-selected="true"] {
-    background: var(--sv-well);
-}
-
-.sv-sage-mode-icon {
-    display: grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    background: var(--sv-well);
-    color: var(--sv-ink);
-}
-
-.sv-sage-mode[aria-selected="true"] .sv-sage-mode-icon {
-    background: var(--sv-ink);
-    color: #ffffff;
-}
-
-.sv-sage-mode-name {
-    font-weight: 500;
-}
-
-/* A chevron on the modes that are not open, pointing to the page they open on. */
-.sv-sage-mode::after {
-    content: "";
-    grid-area: 1 / 3;
-    width: 7px;
-    height: 7px;
-    border-top: 1.5px solid currentColor;
-    border-right: 1.5px solid currentColor;
-    transform: rotate(45deg);
-    opacity: 0.45;
-}
-
-.sv-sage-mode[aria-selected="true"]::after {
-    opacity: 0;
-}
-
-.sv-sage-mode-text {
-    grid-area: 2 / 2 / 3 / 4;
-    color: var(--sv-soft);
-    font-size: 0.9375rem;
-    line-height: 1.45;
-}
-
-.sv-sage-mode[aria-selected="false"] .sv-sage-mode-text {
-    display: none;
 }
 
 @media (max-width: 960px) {
@@ -3842,10 +3824,6 @@ body {
     gap: 24px 64px;
 }
 
-.sv-book-head .sv-h2 {
-    margin-top: 0;
-}
-
 .sv-book-lead {
     color: var(--sv-book-soft);
     font-size: 1.125rem;
@@ -3869,6 +3847,11 @@ body {
     background: var(--sv-book-plate);
 }
 
+/* A piece narrower than its plate sits in the middle of it. */
+.sv-plate-frame > .app-piece {
+    margin-inline: auto;
+}
+
 .sv-plate-title {
     margin-top: 20px;
     font-family: var(--sv-serif);
@@ -3885,9 +3868,10 @@ body {
     line-height: 1.5;
 }
 
-/* Stacked, each plate becomes a row: the piece, with its title and line beside it, so a
+/* Three plates side by side need about 1400px before the Checks panel fits its plate.
+   Below that each plate becomes a row: the piece, with its title and line beside it, so a
    piece narrower than the row does not leave the plate half empty. */
-@media (max-width: 1100px) {
+@media (max-width: 1400px) {
     .sv-plates {
         grid-template-columns: minmax(0, 1fr);
         gap: 40px;
