@@ -425,11 +425,16 @@ export function initEditorHero(root) {
         showView(onScreen());
     };
 
-    // The Scenes panel opens and closes from the header and from its own close button,
-    // on the chapter that has one.
+    // The Scenes panel opens and closes from the header and from its own close button, on
+    // the chapter that has one. Only Plan scenes shows one, so from any other page the
+    // header's button opens that try with its panel showing.
     const toggleScenes = () => {
         const view = onScreen();
-        if (!view.dataset.panel) return;
+        if (!view.dataset.panel) {
+            views.get("plan").dataset.panel = "open";
+            select(tabFor("plan"));
+            return;
+        }
         view.dataset.panel = view.dataset.panel === "open" ? "closed" : "open";
         showView(view);
     };
