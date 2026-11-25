@@ -2460,7 +2460,7 @@ button.app-rewrite-tool:hover {
 .app-record-column {
     width: min(712px, 100% - 96px);
     margin-inline: auto;
-    padding-top: 72px;
+    padding-block: 72px 120px;
 }
 
 .app-record-book {
@@ -2558,6 +2558,382 @@ button.app-rewrite-tool:hover {
 .app-record-stats dd {
     margin-top: 4px;
     font-weight: 500;
+}
+
+/* Below the stats, from docs/seo/app-ui/production-record-spec.md: Models used inside the
+   summary, then Writing activity and the Evidence log 56px apart. */
+.app-record-models {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--app-border-subtle);
+}
+
+.app-record-models-title {
+    font: 500 14px/20px var(--app-font);
+    letter-spacing: -0.056px;
+}
+
+.app-record-models-list {
+    display: grid;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.app-record-model {
+    display: grid;
+    grid-template-columns: minmax(180px, 5fr) minmax(120px, 7fr);
+    gap: 20px;
+    align-items: center;
+}
+
+.app-record-model-copy {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0;
+}
+
+.app-record-model-copy > span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.app-record-model-count {
+    flex-shrink: 0;
+    color: var(--app-text-tertiary);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.app-record-model-bar {
+    display: block;
+    height: 4px;
+    overflow: hidden;
+    border-radius: 9999px;
+    background: var(--app-tertiary);
+}
+
+.app-record-model-bar i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--app-accent);
+}
+
+.app-record-heading {
+    font: 500 16px/22px var(--app-font);
+    letter-spacing: -0.128px;
+}
+
+.app-record-activity {
+    margin-top: 56px;
+}
+
+.app-record-activity .app-record-heading {
+    padding-bottom: 24px;
+}
+
+.app-record-chart {
+    display: flex;
+    gap: 8px;
+    padding: 6px 0 8px;
+}
+
+.app-record-scale,
+.app-record-axis,
+.app-record-end-label {
+    font: 500 12px/16px var(--app-font);
+    letter-spacing: 0.12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.app-record-scale {
+    display: flex;
+    flex: 0 0 34px;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 176px;
+    color: var(--app-text-tertiary);
+    text-align: right;
+}
+
+.app-record-plot-column {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.app-record-plot {
+    position: relative;
+    height: 176px;
+}
+
+.app-record-grid i {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: 1px solid var(--app-border-subtle);
+}
+
+.app-record-grid i:nth-child(1) { top: 0; }
+.app-record-grid i:nth-child(2) { top: 25%; }
+.app-record-grid i:nth-child(3) { top: 50%; }
+.app-record-grid i:nth-child(4) { top: 75%; }
+
+.app-record-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.app-record-area {
+    fill: url(#app-record-fade);
+}
+
+.app-record-line {
+    fill: none;
+    stroke-width: 1.5px;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.app-record-line--total {
+    stroke: var(--app-accent);
+}
+
+.app-record-line--typed {
+    stroke: var(--app-text);
+}
+
+.app-record-end-dot {
+    position: absolute;
+    right: -4px;
+    width: 8px;
+    height: 8px;
+    border: 2px solid var(--app-surface);
+    border-radius: 9999px;
+    background: var(--app-accent);
+    transform: translateY(-50%);
+}
+
+.app-record-end-label {
+    position: absolute;
+    right: 0;
+    color: var(--app-text);
+    white-space: nowrap;
+}
+
+.app-record-axis {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 12px;
+    margin-top: 6px;
+    color: var(--app-text-tertiary);
+}
+
+.app-record-log {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 56px;
+}
+
+.app-record-log-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 26px;
+}
+
+.app-record-log-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.app-record-model-filter,
+.app-record-sources > span {
+    font: 500 12px/16px var(--app-font);
+    letter-spacing: 0.12px;
+    white-space: nowrap;
+}
+
+.app-record-model-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 26px;
+    padding: 2px 6px 2px 8px;
+    border: 1px solid var(--app-border);
+    border-radius: 9999px;
+    background: var(--app-surface);
+}
+
+.app-record-model-filter svg {
+    width: 12px;
+    height: 12px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.app-record-sources {
+    display: inline-flex;
+    gap: 2px;
+    height: 26px;
+    padding: 2px;
+    border-radius: 9999px;
+    background: var(--app-tertiary);
+}
+
+.app-record-sources > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    min-width: 40px;
+    padding: 2px 6px;
+    border-radius: 9999px;
+    color: var(--app-text-tertiary);
+}
+
+.app-record-sources > .is-pressed {
+    background: var(--app-surface);
+    color: var(--app-text);
+}
+
+.app-record-log-card {
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--app-surface);
+    box-shadow: var(--app-shadow-raised);
+}
+
+.app-record-day + .app-record-day {
+    border-top: 1px solid var(--app-border-subtle);
+}
+
+.app-record-day-head {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 16px;
+}
+
+.app-record-day-date {
+    font-size: 14px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.app-record-day-sum,
+.app-record-day-time,
+.app-record-detail,
+.app-record-when,
+.app-record-log-foot {
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.app-record-day-sum {
+    overflow: hidden;
+    color: var(--app-text-tertiary);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.app-record-day-time {
+    margin-left: auto;
+    color: var(--app-text-secondary);
+    white-space: nowrap;
+}
+
+.app-record-receipt {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) max-content;
+    column-gap: 8px;
+    align-items: center;
+    min-height: 44px;
+    padding: 6px 16px;
+    border-top: 1px solid var(--app-border-subtle);
+}
+
+.app-record-receipt i {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--app-accent);
+}
+
+.app-record-feature {
+    white-space: nowrap;
+}
+
+.app-record-detail {
+    overflow: hidden;
+    color: var(--app-text-tertiary);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.app-record-when {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    color: var(--app-text-secondary);
+    white-space: nowrap;
+}
+
+.app-record-when > span {
+    color: var(--app-text-tertiary);
+    line-height: 1;
+}
+
+.app-record-log-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 44px;
+    padding: 6px 16px;
+    border-top: 0.5px solid var(--app-border-subtle);
+    color: var(--app-text-tertiary);
+}
+
+.app-record-pager {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.app-record-pager > span {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    font: 500 14px/18px var(--app-font);
+}
+
+.app-record-pager > .is-disabled {
+    color: var(--app-text-disabled);
 }
 
 @keyframes app-arrive {

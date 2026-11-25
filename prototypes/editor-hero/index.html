@@ -411,6 +411,86 @@
                                                     <div><dt>Active time</dt><dd>20h 42m</dd></div>
                                                     <div><dt>Current saved manuscript</dt><dd>5,210 words</dd></div>
                                                 </dl>
+
+                                                <!-- Below the stats, as on master: Models used, Writing activity and the
+                                                     Evidence log. See docs/seo/app-ui/production-record-spec.md. -->
+                                                <section class="app-record-models" aria-label="Models used">
+                                                    <p class="app-record-models-title">Models used</p>
+                                                    <ul class="app-record-models-list">
+                                                        <li class="app-record-model">
+                                                            <span class="app-record-model-copy"><span>Claude 5.5 Opus</span><span class="app-record-model-count">478 words · 11 operations</span></span>
+                                                            <span class="app-record-model-bar" aria-hidden="true"><i style="width: 78.4%"></i></span>
+                                                        </li>
+                                                        <li class="app-record-model">
+                                                            <span class="app-record-model-copy"><span>GPT-6 Sol</span><span class="app-record-model-count">132 words · 4 operations</span></span>
+                                                            <span class="app-record-model-bar" aria-hidden="true"><i style="width: 21.6%"></i></span>
+                                                        </li>
+                                                    </ul>
+                                                </section>
+
+                                                <section class="app-record-activity" aria-label="Writing activity">
+                                                    <p class="app-record-heading">Writing activity</p>
+                                                    <div class="app-record-chart">
+                                                        <div class="app-record-scale" aria-hidden="true"><span>10,000</span><span>0</span></div>
+                                                        <div class="app-record-plot-column">
+                                                            <div class="app-record-plot">
+                                                                <div class="app-record-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                                                                <svg class="app-record-lines" viewBox="0 0 680 176" preserveAspectRatio="none" role="img" aria-label="Words entered from Oct 1 to Oct 22, rising to 8,375 in all and 7,645 typed">
+                                                                    <defs>
+                                                                        <linearGradient id="app-record-fade" x1="0" x2="0" y1="0" y2="1">
+                                                                            <stop offset="0%" stop-color="#e9edff" stop-opacity="0.7" />
+                                                                            <stop offset="100%" stop-color="#e9edff" stop-opacity="0" />
+                                                                        </linearGradient>
+                                                                    </defs>
+                                                                    <path class="app-record-area" d="M0 176.0 L30.9 172.4 L61.8 172.4 L92.7 163.3 L123.6 163.3 L154.5 157.1 L185.5 146.3 L216.4 146.3 L247.3 138.6 L278.2 125.9 L309.1 125.9 L340.0 116.4 L370.9 110.0 L401.8 110.0 L432.7 97.9 L463.6 92.1 L494.5 92.1 L525.5 81.6 L556.4 74.0 L587.3 74.0 L618.2 61.9 L649.1 48.6 L680.0 33.6 L680 176 L0 176 Z" />
+                                                                    <path class="app-record-line app-record-line--total" d="M0 176.0 L30.9 172.4 L61.8 172.4 L92.7 163.3 L123.6 163.3 L154.5 157.1 L185.5 146.3 L216.4 146.3 L247.3 138.6 L278.2 125.9 L309.1 125.9 L340.0 116.4 L370.9 110.0 L401.8 110.0 L432.7 97.9 L463.6 92.1 L494.5 92.1 L525.5 81.6 L556.4 74.0 L587.3 74.0 L618.2 61.9 L649.1 48.6 L680.0 33.6" />
+                                                                    <path class="app-record-line app-record-line--typed" d="M0 176.0 L30.9 172.4 L61.8 172.4 L92.7 163.3 L123.6 163.3 L154.5 157.8 L185.5 147.4 L216.4 147.4 L247.3 139.8 L278.2 128.1 L309.1 128.1 L340.0 119.2 L370.9 112.8 L401.8 112.8 L432.7 101.9 L463.6 96.8 L494.5 96.8 L525.5 87.3 L556.4 80.3 L587.3 80.3 L618.2 70.3 L649.1 59.6 L680.0 46.0" />
+                                                                </svg>
+                                                                <span class="app-record-end-dot" style="top: 33.6px" aria-hidden="true"></span>
+                                                                <span class="app-record-end-label" style="top: 9.6px" aria-hidden="true">8,375 total</span>
+                                                            </div>
+                                                            <div class="app-record-axis" aria-hidden="true"><span>Oct 1</span><span>Oct 22</span></div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                                <section class="app-record-log" aria-label="Evidence log">
+                                                    <div class="app-record-log-head">
+                                                        <p class="app-record-heading">Evidence log</p>
+                                                        <div class="app-record-log-controls" aria-hidden="true">
+                                                            <span class="app-record-model-filter">All models<svg viewBox="0 0 14 14"><path d="M3.5 5.25L7 8.75L10.5 5.25" /></svg></span>
+                                                            <span class="app-record-sources"><span class="is-pressed">All</span><span>Typed</span><span>Pasted</span><span>Feldar</span></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="app-record-log-card">
+                                                        <div class="app-record-day">
+                                                            <p class="app-record-day-head"><span class="app-record-day-date">Oct 22, 2026</span><span class="app-record-day-sum">800 typed · 80 Feldar</span><span class="app-record-day-time">1h 12m active</span></p>
+                                                            <ol class="app-record-receipts">
+                                                                <li class="app-record-receipt"><i></i><span class="app-record-feature">Caret assist</span><span class="app-record-detail">+46 words · Page 3: Pryce's Gate</span><span class="app-record-when">4:12 PM<span>›</span></span></li>
+                                                                <li class="app-record-receipt"><i></i><span class="app-record-feature">Rewrite</span><span class="app-record-detail">+34 words · 28 replaced · Page 2: The Ledger</span><span class="app-record-when">2:31 PM<span>›</span></span></li>
+                                                            </ol>
+                                                        </div>
+                                                        <div class="app-record-day">
+                                                            <p class="app-record-day-head"><span class="app-record-day-date">Oct 21, 2026</span><span class="app-record-day-sum">625 typed · 110 Feldar · 50 pasted</span><span class="app-record-day-time">1h 28m active</span></p>
+                                                            <ol class="app-record-receipts">
+                                                                <li class="app-record-receipt"><i></i><span class="app-record-feature">Rewrite</span><span class="app-record-detail">+38 words · 31 replaced · Page 2: The Ledger</span><span class="app-record-when">5:47 PM<span>›</span></span></li>
+                                                                <li class="app-record-receipt"><i></i><span class="app-record-feature">Caret assist</span><span class="app-record-detail">+42 words · Page 3: Pryce's Gate</span><span class="app-record-when">3:10 PM<span>›</span></span></li>
+                                                                <li class="app-record-receipt"><i></i><span class="app-record-feature">Chat</span><span class="app-record-detail">+30 words · Page 3: Pryce's Gate</span><span class="app-record-when">11:05 AM<span>›</span></span></li>
+                                                            </ol>
+                                                        </div>
+                                                        <div class="app-record-day">
+                                                            <p class="app-record-day-head"><span class="app-record-day-date">Oct 20, 2026</span><span class="app-record-day-sum">590 typed · 90 Feldar · 30 pasted</span><span class="app-record-day-time">1h 5m active</span></p>
+                                                            <ol class="app-record-receipts">
+                                                                <li class="app-record-receipt"><i></i><span class="app-record-feature">Checks</span><span class="app-record-detail">+12 words · 14 replaced · Page 2: The Ledger</span><span class="app-record-when">6:20 PM<span>›</span></span></li>
+                                                                <li class="app-record-receipt"><i></i><span class="app-record-feature">Caret assist</span><span class="app-record-detail">+48 words · Page 3: Pryce's Gate</span><span class="app-record-when">4:02 PM<span>›</span></span></li>
+                                                            </ol>
+                                                        </div>
+                                                        <div class="app-record-log-foot">
+                                                            <p>Typed and pasted entry is aggregated by UTC day, not recorded per keystroke or paste.</p>
+                                                            <span class="app-record-pager" aria-hidden="true">1–10 of 30<span class="is-disabled">‹</span><span>›</span></span>
+                                                        </div>
+                                                    </div>
+                                                </section>
                                             </div>
                                         </div>
                                     </div>
