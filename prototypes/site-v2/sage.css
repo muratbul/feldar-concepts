@@ -127,13 +127,8 @@
     margin-top: 19px;
 }
 
-/* A saying beside Sage and Sage's menu are placed out of the flow, so the space under
-   the text keeps room for them: three lines of a saying, and the menu's five rows, divider
-   and three rows (5.2) less the 11px it rises above Sage's point. */
-.sg-view[data-sage-view="follow"] .sg-under {
-    min-height: 72px;
-}
-
+/* Sage's menu is placed out of the flow, so the space under the text keeps room for it:
+   five rows, divider and three rows (5.2) less the 11px it rises above Sage's point. */
 .sg-view[data-sage-view="memories"] .sg-under {
     min-height: 236px;
 }
@@ -231,15 +226,6 @@
     100% {
         background-position: 0 0;
     }
-}
-
-/* 2.5: a brief saying beside Sage, 8px right of the body box, its top 11px above the
-   point, here at the body box's top. */
-.sg-bubble--beside {
-    position: absolute;
-    left: calc(var(--sg-point) + 24px + 8px);
-    top: -11px;
-    max-width: 192px;
 }
 
 /* 3: the field under an answer, and the answer's actions. */
@@ -379,6 +365,63 @@
     }
 }
 
+/* Follow me: Sage walks from under the text to the reaction, its tip coming to rest on the
+   mark's lower right corner, and says so in a brief bubble under it (2.5, 2.7). The bubble's
+   corner nearest Sage, its top right, is squared. */
+.sg-walker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    pointer-events: none;
+    transform: translate(var(--walk-x, 0), var(--walk-y, 0));
+}
+
+.sg-walker.is-walking {
+    transition: transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* The walker has no width of its own, so the site reset's max-width on svg would collapse
+   Sage to nothing. */
+.sg-walker .sg-mark {
+    left: -24px;
+    top: -24px;
+    max-width: none;
+}
+
+.sg-walk-saying {
+    position: absolute;
+    left: var(--say-x, 0);
+    top: var(--say-y, 0);
+    z-index: 3;
+    /* Placed near the column's edge, so it is sized to its words rather than the room left. */
+    width: max-content;
+    max-width: 192px;
+    border-radius: 16px 4px 16px 16px;
+    translate: -100% 0;
+}
+
+/* Until the reaction is first opened, a ring in Sage's light breathes around the mark. This
+   is the marketing page's cue, not the app's. */
+.sg-margin-mark[data-unseen]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    pointer-events: none;
+    animation: sg-pulse 1.8s ease-out infinite;
+}
+
+@keyframes sg-pulse {
+    from {
+        box-shadow: 0 0 0 0 rgb(95 176 255 / 0.6);
+    }
+
+    to {
+        box-shadow: 0 0 0 10px rgb(95 176 255 / 0);
+    }
+}
+
 /* 4.2: the open card. With no room to the mark's right it opens to its left, 8px clear. */
 .sg-card {
     position: absolute;
@@ -446,6 +489,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .sg-margin-mark[data-unseen]::after {
+        animation: none;
+        box-shadow: 0 0 0 3px rgb(95 176 255 / 0.4);
+    }
+
     .sg-view:not([hidden]),
     .sg-view:not([hidden]) .sg-under,
     .sg-bubble,

@@ -8,6 +8,19 @@ const SAY_WORD_MS = 90;
 const READING_MS = 1600;
 const ANSWER_WORD_MS = 26;
 const FIELD_MAX_HEIGHT = 120;
+// 4.3, Read this page: Sage walks to a reaction, and its mark appears once Sage is there.
+const WALK_DELAY_MS = 300;
+const WALK_MS = 720;
+// Sage's tip rests on the mark's lower right corner: 4px in from its right edge, 2px up.
+const MARK_SIZE = 24;
+const TIP_INSET = { x: 4, y: 2 };
+// Sage's body box reaches 24px right of its point, and a bubble below it sits 33px down (2.5).
+const BODY_RIGHT = 24;
+const BUBBLE_BELOW = 33;
+// The bubble keeps this far inside the page's right edge.
+const PAGE_EDGE_GAP = 8;
+// Under the text, Sage's point sits 32px in and 19px below the last line (2.5).
+const UNDER = { x: 32, y: 19 };
 // 3.1: past one line the field squares its corners.
 const FIELD_TALL_PX = 28;
 
@@ -37,7 +50,8 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const pause = (milliseconds) =>
     new Promise((resolve) => setTimeout(resolve, reducedMotion.matches ? 0 : milliseconds));
 
-async function speak(target, text, firstMs, wordMs) {
+// Stops early, leaving what it has said, once isCurrent says the moment has moved on.
+async function speak(target, text, firstMs, wordMs, isCurrent = () => true) {
     target.textContent = "";
     if (reducedMotion.matches) {
         target.textContent = text;
@@ -45,6 +59,7 @@ async function speak(target, text, firstMs, wordMs) {
     }
     await pause(firstMs);
     for (const word of text.match(/\s*\S+\s*/g) ?? []) {
+        if (!isCurrent()) return;
         target.append(word);
         await pause(wordMs);
     }
@@ -107,7 +122,7 @@ function initAsk(view, setState) {
         if (thisRun !== run) return;
         status.hidden = true;
         answer.hidden = false;
-        await speak(answerText, ANSWER, 0, ANSWER_WORD_MS);
+        await speak(answerText, ANSWER, 0, ANSWER_WORD_MS, () => thisRun === run);
         if (thisRun !== run) return;
         input.value = "";
         input.placeholder = "Follow up";
@@ -134,18 +149,77 @@ function initAsk(view, setState) {
 function initFollow(view, column, setState) {
     const mark = view.querySelector("[data-sage-mark]");
     const card = view.querySelector("[data-sage-card]");
+    const walker = view.querySelector("[data-sage-walker]");
+    const saying = view.querySelector("[data-sage-follow-saying]");
     const about = column.querySelector("[data-sage-about]");
+    const prose = column.querySelector(".sg-prose");
+    const line = saying.textContent;
+    // Leaving the mode or starting again ends a walk; a walk checks it is still current.
+    let walk = 0;
 
-    // 4.1: the mark sits on the line it is about, centred on a line up to 24px tall.
+    const columnTop = () => column.getBoundingClientRect().top;
+
+    // 4.1: the mark sits 8px right of the column, on the line it is about, centred on a line
+    // up to 24px tall. Returns where Sage's tip rests on it.
     const placeMark = () => {
-        const line = about.getClientRects()[0];
-        const top = Math.round(line.top - column.getBoundingClientRect().top + Math.min(line.height, 24) / 2 - 12);
+        const lineBox = about.getClientRects()[0];
+        const top = Math.round(lineBox.top - columnTop() + Math.min(lineBox.height, MARK_SIZE) / 2 - MARK_SIZE / 2);
         column.style.setProperty("--sg-mark-top", `${top}px`);
+        return { x: column.clientWidth + 8 + MARK_SIZE - TIP_INSET.x, y: top + MARK_SIZE - TIP_INSET.y };
+    };
+
+    const underText = () => ({ x: UNDER.x, y: prose.getBoundingClientRect().bottom - columnTop() + UNDER.y });
+
+    const moveWalker = ({ x, y }) => {
+        walker.style.setProperty("--walk-x", `${x}px`);
+        walker.style.setProperty("--walk-y", `${y}px`);
+    };
+
+    // The bubble lines up with Sage's body box, but never runs past the page's edge, which
+    // on a phone is close to the margin.
+    const placeSaying = ({ x, y }) => {
+        const pageRight = column.closest(".sg-page").getBoundingClientRect().right - column.getBoundingClientRect().left - PAGE_EDGE_GAP;
+        saying.style.setProperty("--say-x", `${Math.min(x + BODY_RIGHT, pageRight)}px`);
+        saying.style.setProperty("--say-y", `${y + BUBBLE_BELOW}px`);
+    };
+
+    const arrive = (point, thisWalk) => {
+        mark.hidden = false;
+        placeSaying(point);
+        saying.hidden = false;
+        speak(saying, line, SAY_FIRST_MS, SAY_WORD_MS, () => thisWalk === walk);
+    };
+
+    const enter = async () => {
+        if (view.dataset.state !== "left") return;
+        const thisWalk = ++walk;
+        const target = placeMark();
+        mark.hidden = true;
+        saying.hidden = true;
+        walker.classList.remove("is-walking");
+        if (reducedMotion.matches) {
+            moveWalker(target);
+            arrive(target, thisWalk);
+            return;
+        }
+        moveWalker(underText());
+        await pause(WALK_DELAY_MS);
+        if (thisWalk !== walk) return;
+        walker.classList.add("is-walking");
+        moveWalker(target);
+        await pause(WALK_MS);
+        if (thisWalk !== walk) return;
+        walker.classList.remove("is-walking");
+        arrive(target, thisWalk);
     };
 
     const setOpen = (open) => {
         card.hidden = !open;
         mark.setAttribute("aria-expanded", String(open));
+        if (open) {
+            mark.removeAttribute("data-unseen");
+            saying.hidden = true;
+        }
         setState(open ? "open" : "left");
     };
 
@@ -153,16 +227,25 @@ function initFollow(view, column, setState) {
     view.querySelector("[data-sage-done]").addEventListener("click", () => {
         setOpen(false);
         mark.hidden = true;
-        view.querySelector("[data-sage-follow-saying]").hidden = true;
         setState("done");
     });
-    new ResizeObserver(placeMark).observe(column);
 
-    return () => {
+    // Once Sage is at the mark, a change of width moves both with the line.
+    new ResizeObserver(() => {
+        const target = placeMark();
+        if (walker.classList.contains("is-walking") || mark.hidden) return;
+        moveWalker(target);
+        placeSaying(target);
+    }).observe(column);
+
+    const reset = () => {
+        walk += 1;
         setOpen(false);
-        mark.hidden = false;
-        view.querySelector("[data-sage-follow-saying]").hidden = false;
+        mark.setAttribute("data-unseen", "");
+        enter();
     };
+
+    return { enter, reset };
 }
 
 export function initSage(root) {
@@ -185,9 +268,10 @@ export function initSage(root) {
         showState();
     };
 
+    const follow = initFollow(views.get("follow"), column, stateSetter(views.get("follow")));
     const resets = {
         ask: initAsk(views.get("ask"), stateSetter(views.get("ask"))),
-        follow: initFollow(views.get("follow"), column, stateSetter(views.get("follow"))),
+        follow: follow.reset,
         memories: () => {},
     };
 
@@ -199,6 +283,7 @@ export function initSage(root) {
             other.tabIndex = selected ? 0 : -1;
         }
         for (const [name, view] of views) view.hidden = name !== mode;
+        if (mode === "follow") follow.enter();
         showState();
     };
 

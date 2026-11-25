@@ -169,7 +169,7 @@
 
                                 <!-- Follow me: Sage has read along and left a reaction in the margin. -->
                                 <div class="sg-view" id="sage-view-follow" role="tabpanel" aria-labelledby="sage-tab-follow" data-sage-view="follow" data-state="left" hidden>
-                                    <button type="button" class="sg-margin-mark" aria-label="Sage's reaction: and waited." aria-expanded="false" aria-controls="sage-reaction" data-sage-mark>
+                                    <button type="button" class="sg-margin-mark" aria-label="Sage's reaction: and waited." aria-expanded="false" aria-controls="sage-reaction" data-sage-mark data-unseen hidden>
                                         <svg class="sg-icon"><use href="#sg-reaction" /></svg>
                                     </button>
                                     <div class="sg-card" id="sage-reaction" role="dialog" aria-label="Sage's reaction" data-sage-card hidden>
@@ -183,10 +183,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="sg-under">
-                                        <svg class="sg-mark" aria-hidden="true"><use href="#sg-mark" /></svg>
-                                        <p class="sg-bubble sg-bubble--saying sg-bubble--beside" data-sage-follow-saying>I left you a reaction in the margin. Press it to see what I felt.</p>
-                                    </div>
+                                    <!-- Sage walks from under the text to the reaction and says so beside it, as
+                                         Read this page does in the app (spec 4.3). -->
+                                    <span class="sg-walker" aria-hidden="true" data-sage-walker><svg class="sg-mark"><use href="#sg-mark" /></svg></span>
+                                    <p class="sg-bubble sg-bubble--saying sg-walk-saying" data-sage-follow-saying hidden>I left you a reaction in the margin. Press it to see what I felt.</p>
                                 </div>
 
                                 <!-- Memories: Sage's menu, opened with a right-click on Sage. -->
