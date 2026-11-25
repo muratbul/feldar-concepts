@@ -3759,6 +3759,10 @@ button.app-rewrite-tool:hover {
     --sv-max: 1312px;
     --sv-window: 1282px;
     --sv-quick: 160ms;
+    /* The left column the hero's tries and Sage's copy share, so the editor window and the
+       Sage page start on the same line. */
+    --sv-side: 380px;
+    --sv-side-gap: 40px;
     --sv-enter: cubic-bezier(0.16, 1, 0.3, 1);
     /* The window runs taller than the 600px capture, about as tall as the app stands on a
        laptop screen. It is never faded: its footers hold controls the tries use. */
@@ -4088,12 +4092,12 @@ body {
 .sv-stage {
     --app-height: var(--sv-window-height);
     display: grid;
-    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, var(--sv-side)) minmax(0, 1fr);
     grid-template-rows: auto 1fr;
     grid-template-areas:
         "parts window"
         "foot window";
-    gap: 14px 32px;
+    gap: 14px var(--sv-side-gap);
     align-items: start;
     max-width: var(--sv-max);
     margin-inline: auto;
@@ -4230,8 +4234,8 @@ body {
 
 .sv-sage-inner {
     display: grid;
-    grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
-    gap: 64px;
+    grid-template-columns: minmax(0, var(--sv-side)) minmax(0, 1fr);
+    gap: var(--sv-side-gap);
     align-items: start;
     max-width: var(--sv-max);
     margin-inline: auto;
@@ -4252,12 +4256,15 @@ body {
     line-height: 1.5;
 }
 
-@media (max-width: 960px) {
-    /* Stacked, the copy sits between the window and the page, so the link would cross it. */
+/* The link only joins the window to the Sage page when the window sits right above it, beside
+   the hero's panel. Below that the hero stacks and the link would start in empty space. */
+@media (max-width: 1300px) {
     .sv-sage-stage::before {
         display: none;
     }
+}
 
+@media (max-width: 960px) {
     .sv-sage-inner {
         grid-template-columns: minmax(0, 1fr);
         gap: 40px;
@@ -4269,9 +4276,14 @@ body {
     padding: 80px var(--sv-gutter) 160px;
 }
 
+.sv-statement-inner {
+    max-width: var(--sv-max);
+    margin-inline: auto;
+}
+
+/* It starts on the page's left edge, with the headings, at a reading measure. */
 .sv-statement-text {
     max-width: 62rem;
-    margin-inline: auto;
     font-family: var(--sv-serif);
     font-size: clamp(1.625rem, 3.1vw, 2.75rem);
     line-height: 1.32;
@@ -4351,14 +4363,52 @@ body {
     margin-top: 56px;
 }
 
+/* Each piece sits whole inside its plate, a card with its corners showing. Where a piece's
+   content runs on past the card, the content fades into the card's own white. */
 .sv-plate-frame {
+    --sv-plate-height: 26rem;
+    --sv-plate-pad: 28px;
     position: relative;
-    height: 26rem;
-    padding: 28px 28px 0;
+    height: var(--sv-plate-height);
+    padding: var(--sv-plate-pad);
     overflow: hidden;
     border: 1px solid rgb(255 255 255 / 0.08);
     border-radius: 16px;
     background: var(--sv-book-plate);
+}
+
+.sv-plate-frame > .app-piece {
+    max-height: 100%;
+}
+
+.sv-plate-frame > .app-piece--scenes {
+    display: flex;
+    flex-direction: column;
+}
+
+.sv-plate-frame .app-scenes {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 72px), transparent);
+}
+
+/* The board keeps the app's coordinates, drawn from 44px above the piece, so its fade is
+   placed by the height the plate shows. */
+.sv-plate-frame .app-board {
+    --sv-board-shown: calc(var(--sv-plate-height) - 2 * var(--sv-plate-pad) + 44px);
+    mask-image: linear-gradient(to bottom, #000 calc(var(--sv-board-shown) - 72px), transparent var(--sv-board-shown));
+}
+
+/* The Checks plate shows the Checks panel itself, which floats over the page in the app,
+   with the piece's own type and colour. */
+.sv-plate-frame > .app-checks-panel {
+    position: static;
+    margin-inline: auto;
+    color: var(--app-text);
+    font: 400 14px/20px var(--app-font);
+    letter-spacing: -0.056px;
+    text-align: left;
 }
 
 /* A piece narrower than its plate sits in the middle of it. */
@@ -4423,8 +4473,8 @@ body {
     }
 
     .sv-plate-frame {
-        height: 22rem;
-        padding: 20px 20px 0;
+        --sv-plate-height: 22rem;
+        --sv-plate-pad: 20px;
     }
 
     .sv-plate-title {
