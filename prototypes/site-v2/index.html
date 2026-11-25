@@ -251,6 +251,69 @@
                     </ul>
                 </div>
             </section>
+
+            <!-- Plans, as on feldar.com/pricing (docs/seo/product-facts.md section 2). Price and
+                 credits only, no model names. plans.js switches the billing period. -->
+            <section class="sv-plans" aria-labelledby="plans-title" data-plans data-billing="monthly">
+                <div class="sv-plans-inner">
+                    <div class="sv-plans-head">
+                        <h2 class="sv-h2" id="plans-title" data-line-reveal>The same workspace on every plan.</h2>
+                        <div class="sv-plans-side">
+                            <p class="sv-plans-lead" data-line-reveal>Plans differ in the credits you get for AI help each month. Writing, editing and organizing your book use none.</p>
+                            <div class="sv-billing" role="group" aria-label="Billing period">
+                                <button type="button" class="sv-billing-option" aria-pressed="true" data-billing-option="monthly">Monthly</button>
+                                <button type="button" class="sv-billing-option" aria-pressed="false" data-billing-option="yearly">Yearly</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="sv-plan-list">
+                        <li class="sv-plan">
+                            <h3 class="sv-plan-name">Starter</h3>
+                            <p class="sv-plan-price"><span class="sv-plan-amount">Free</span></p>
+                            <ul class="sv-plan-points">
+                                <li>500 credits, given once</li>
+                                <li>Full editor access</li>
+                                <li>No credit card</li>
+                            </ul>
+                            <a href="/login" class="sv-button" rel="nofollow">Start writing free</a>
+                        </li>
+                        <li class="sv-plan">
+                            <h3 class="sv-plan-name">Core</h3>
+                            <p class="sv-plan-price" data-monthly="$20" data-yearly="$180"><span class="sv-plan-amount">$20</span><span class="sv-plan-period">a month</span></p>
+                            <ul class="sv-plan-points">
+                                <li>20,000 credits a month</li>
+                                <li>Full workspace access</li>
+                                <li>Regular drafting and revision</li>
+                                <li>Email support</li>
+                            </ul>
+                            <a href="/login" class="sv-button sv-button--quiet" rel="nofollow">Choose Core</a>
+                        </li>
+                        <li class="sv-plan sv-plan--popular">
+                            <h3 class="sv-plan-name">Pro <span class="sv-plan-badge">Most popular</span></h3>
+                            <p class="sv-plan-price" data-monthly="$40" data-yearly="$400"><span class="sv-plan-amount">$40</span><span class="sv-plan-period">a month</span></p>
+                            <ul class="sv-plan-points">
+                                <li>45,000 credits a month</li>
+                                <li>Full workspace access</li>
+                                <li>Longer drafting sessions</li>
+                                <li>Priority support</li>
+                            </ul>
+                            <a href="/login" class="sv-button sv-button--paper" rel="nofollow">Choose Pro</a>
+                        </li>
+                        <li class="sv-plan">
+                            <h3 class="sv-plan-name">Ultra</h3>
+                            <p class="sv-plan-price" data-monthly="$200" data-yearly="$2,220"><span class="sv-plan-amount">$200</span><span class="sv-plan-period">a month</span></p>
+                            <ul class="sv-plan-points">
+                                <li>250,000 credits a month</li>
+                                <li>High-volume drafting</li>
+                                <li>Large manuscripts and context</li>
+                                <li>Priority support and billing</li>
+                            </ul>
+                            <a href="/login" class="sv-button sv-button--quiet" rel="nofollow">Choose Ultra</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
         </main>
 
         <script type="module" src="site.js"></script>

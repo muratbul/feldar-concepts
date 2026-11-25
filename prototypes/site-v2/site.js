@@ -2,6 +2,7 @@
 // the page under it, and the pieces of the app in the connected book section.
 import { mountPieces } from "./app-pieces.js";
 import { mountEditor } from "./editor-window.js";
+import { initPlans } from "./plans.js";
 import { initLineReveal } from "./reveal.js";
 import { initSage } from "./sage.js";
 
@@ -62,6 +63,7 @@ function dressTries(stage) {
 
 initSage(document.querySelector("[data-sage-stage]").closest("section"));
 initLineReveal(document);
+initPlans(document.querySelector("[data-plans]"));
 
 const stage = document.querySelector("[data-editor-mount]");
 
