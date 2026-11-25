@@ -655,6 +655,11 @@ select {
     display: flex;
     height: var(--app-height);
     padding: 3px 3px 3px 0;
+    /* The app fills its own screen, but this window sits in a scrolling page. Without this
+       the browser keeps a row in place by scrolling the page whenever a scene's Add here
+       slot opens or closes, which moves another row under the pointer and opens its slot
+       in turn, so the page shakes. Nothing inside the window anchors the page's scroll. */
+    overflow-anchor: none;
     background: var(--app-canvas);
     color: var(--app-text);
     font: 400 14px/20px var(--app-font);
